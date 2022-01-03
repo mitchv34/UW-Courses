@@ -1,0 +1,273 @@
+\documentclass[12pt]{article}
+
+\input{imports}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+
+{\scshape FIN-971} \hfill {\scshape \Large Problem Set \#4} \hfill {\scshape Fall 2021}\\
+{\scshape Author(s): \hfill Mitchell Valdes-Bobes\\  \phantom{This text will be invisible} \hfill Alex von Hafften}\\
+{\scshape Date: \hfill \texttt{12/12/21}}\\
+\medskip
+
+\hrule
+
+\bigskip
+
+\bigskip
+    
+\begin{exercise}[Exercise $5.5$ of Tirole (liquidity needs and pricing of liquid assets).]
+    Consider the liquidity needs model with a fixed investment $I$ and only two possible liquidity shocks $\ell \in\left\{\ell_{L}, \ell_{H}\right\}$ with $\ell_{L}<\ell_{H}$. The borrower has cash $A$ and wants to finance $I>A$ at date 0 . At date 1 , a cash infusion of size $\ell$ is needed in order for the project to continue. If $\ell$ is not invested at date 1 , the project stops and yields nothing. If $\ell$ is invested, the borrower chooses between working (no private benefit with success probability $p_H$ ) and shirking (private benefit $B$ with success probability $\left.p_L=p_H-\Delta p\right)$. The project then yields, at date $2, R$ in the case of success and 0 in the case of failure.
+
+The liquidity shock is equal to $\ell_{L}$ with probability $(1-\lambda)$ and to $\ell_{H}$ with probability $\lambda$, where
+\[
+\ell_{L}<p_H(R-B / \Delta p)<\ell_{H}<p_H R .
+\]
+Assume further that
+\[
+p_H(R-B / \Delta p)-\ell_{L}>I-A
+\]
+
+There is a single liquid asset, Treasury bonds. A treasury bond yields 1 unit of income for certain at date 1 (and none at dates 0 and 2 ). It is sold at date 0 at price $q \geq 1$. The investors' rate of time preference is equal to 0 (i.e. there is no discounting between periods).
+\end{exercise}
+\begin{subexercise}
+    Suppose that the firm has the choice between buying enough Treasury bonds to withstand the high liquidity shock and buying none. Show that it chooses to hoard liquidity if
+    \begin{equation}\label{eq:liquidity-needs-5.5-1}
+    \begin{aligned}
+    (q-1)\left(\ell_{H}-p_H(R-B / \Delta p) \leq\right.&(1-\lambda)\left(p_H(R-B / \Delta p)-\ell_{L}\right) \\
+    &-\lambda\left(\ell-p_H(R-B / \Delta p)-I+A\right.
+    \end{aligned}
+    \end{equation}
+    and
+    \begin{equation}\label{eq:liquidity-needs-5.5-2}
+        (q-1)\left(\ell_{H}-p_H(R-B / \Delta p) \leq \lambda\left(p_H R-\ell_{H}\right) .\right.
+    \end{equation}
+\end{subexercise}
+\begin{answer}
+Consider the following timing of events:
+\begin{itemize}
+    \item $t=0$
+    \begin{itemize}
+        \item Firm buys $T$ Treasury bonds at price $q$ at date $t=0$.
+        \item Lender post a contract $(R_b, R_\ell)$, loan size $I-(A-qT)$.
+        \item If contract is accepted, there is investment.
+    \end{itemize}
+    \item $t=1$
+    \begin{itemize}
+        \item $\ell$ is realized (and observed).
+        \item If $\ell > T$, there is a cash infusion of size $\ell - T$ otherwise there is no cash infusion.
+        \item Effort is realized. 
+    \end{itemize}
+    \item $t=2$
+    \begin{itemize}
+        \item $R$ is realized.
+    \end{itemize}
+\end{itemize}
+
+To ensure high effort the borrower $(IC)$ must hold:
+
+$$p_HR_b\geq p_L R_b + B \qquad \implies \qquad R_b \geq B/\Delta p $$
+
+This means that the most that the lender share is $$R_\ell \leq R - B/\Delta p$$
+
+The lender can choose to inject cash only if the continuation value is not negative, reasoning by backwards induction this is:
+
+$$0 \leq p_H R_\ell -(\ell - T) \leq  p_H(R - B/\Delta p) - (\ell - T) \qquad \implies \qquad T\geq \ell - p_H(R - B/\Delta p) $$
+
+In particular $$T \geq \ell_H - p_H(R - B/\Delta p) > 0$$
+
+Note that we can re-write \eqref{eq:liquidity-needs-5.5-1} as:
+
+\[
+    0 \leq p_H(R-B/\Delta p) - \mathbb{E}[\ell] - (I-A) - (q- 1) (\ell_H - p_H(R-B/\Delta p)) \leq  p_H(R-B/\Delta p) - \mathbb{E}[\ell] - (I-A) - (q- 1) T
+\]
+
+Therefore for any rationalizable selection of $T$ by the borrower, \eqref{eq:liquidity-needs-5.5-1} is enough to ensure that the lender will invest in the project.
+
+
+Consider a firm choosing to hoard liquidit $T = \ell_H - p_H(R - B/\Delta p)>0$ or not $T = 0$. 
+
+The lender will only continue the project if one of the following is true at $t=1$:
+
+\begin{itemize}
+    \item  $\ell = \ell_L$ 
+    \item  $\ell = \ell_H$ and $\ell_H - p_H R_\ell \leq T$.
+\end{itemize}
+
+Since the lender observes $T$ before proposing the contract then we can think of two possible contracts conditional on the choice of $T$, denote
+
+\begin{itemize}
+    \item $R_b^{T=0}$ the lender's share if not hoardign liquidity
+    \item $R_b^{T>0}$ the borrower's share in if hoardign liquidity.
+\end{itemize}
+
+$R_\ell^{T=0}=R - R_b^{T=0}$ and $R_\ell^{T>0}= R -R_b^{T>0} $) is the lender's share in each case.
+
+
+
+Assume that both projects are continued.
+Reasoning by backward induction the lender will invest if the exprect value is not negative. 
+If $T=0$ the condition for investment is\footnote{We can asume zero proffits for the lender since the market is competitive} 
+$$(1-\lambda)[p_H R_\ell^{T=0} - \ell_L] = I-A$$
+If $T>0$ the condition for investment is 
+\begin{align*}
+    &(1-\lambda)[p_H R_\ell^{T>0} - \ell_L] + \lambda[p_H R_\ell^{T>0} - \ell_H] - (q-1)T = I-A\\
+    \implies  &(1-\lambda)[p_H R_\ell^{T>0} - \ell_L] + \lambda[p_H R_\ell^{T>0} - \ell_H] - (q-1) (\ell_H - p_H R_\ell) = I-A
+\end{align*}
+Subtracting both conditions we get and using \eqref{eq:liquidity-needs-5.5-2} we get:
+\begin{align*}
+    (1-\lambda)p_H[R^{T>0} - R^{T=0}] + \lambda[p_H R^{T>0}-\ell_H] &=  (q-1) (\ell_H - p_H R_\ell)\\
+    &\leq \lambda[p_H R - \ell_H]
+\end{align*}
+Simplifying the above we get:
+\[R_\ell^{T>0}-(1-\lambda)R_\ell^{T=0} \leq \lambda R \]
+Writing in terms of the borrower's share in each case we get:
+\[
+    R - R_b^{T>0}-(1-\lambda)(R - R_\ell^{T=0}) \leq \lambda R \qquad \implies R_b^{T>0} \geq (1 - \lambda) R_b^{T=0}
+\]
+\textbf{Note} that we have showed that if \eqref{eq:liquidity-needs-5.5-2} holds then the borrower will be better of by setting $T > 0 $.
+
+We have showed that if \eqref{eq:liquidity-needs-5.5-1} and \eqref{eq:liquidity-needs-5.5-2} holds then the firm will hoard liquidity.
+
+\end{answer}
+
+\begin{subexercise}
+    Suppose that the economy is composed of a continuum, with mass $1$, of identical firms with characteristics as described above.
+    The liquidity shocks of the firms are perfectly correlated. There are $T$ Treasury bonds in the economy with
+    $T<\ell-p_H(R-B / \Delta p)$. Show that when $\lambda$ is small, the liquidity premium $(q-1)$ commanded by Treasury bonds is proportional
+to the probability of a high liquidity shock.
+\end{subexercise}
+
+\begin{answer}
+    Suppose that neither \eqref{eq:liquidity-needs-5.5-1} nor \eqref{eq:liquidity-needs-5.5-2} are not binding, then each firm will hoard liquidity:
+    $$\ell_H - p_H(R - B/\Delta p)$$ 
+
+    Then the total demand $T<\ell-p_H(R-B / \Delta p)$ will exceed the supply of bonds. Therefore either \eqref{eq:liquidity-needs-5.5-1} or \eqref{eq:liquidity-needs-5.5-2} must bind. Note that iif $\lambda$ is very small then only \eqref{eq:liquidity-needs-5.5-2} will bind therfroe:
+    $$q  - 1 = \lambda \frac{p_H R - \ell_H}{\ell_H - p_H(R - B/\Delta p)}$$
+\end{answer}
+
+\begin{subexercise}
+    Suppose that, in the economy considered in the previous subquestion, the government issues at date 0 not only the $T$ Treasury bonds, but also a security that yields at date 1 a payoff equal to 1 in the good state (where the firms experience the low liquidity shock $\ell_{L}$ ) and 0 in the bad state (where the firms experience the high liquidity shock $\ell_{H}$ ). What is the equilibrium date 0 price $q$ of this new asset? Note that prices of the Treasury bonds and of this new asset must clear markets.
+\end{subexercise}
+
+\begin{answer}
+    Since the neqw asset does not yeild a payoff in the bad state, the equilibrium price of the new asset is $q_{new}-1 = \lambda$.
+\end{answer}
+
+\begin{exercise}
+    Consider a simple version of the Townsend costly state verification model in which the cash flow $R$ obtained by the borrower can take only two values: a high value $R_{H}$ with probability $p_H$ and a low value $R_{L}$ with probability $p_L=1-p_H$. The loan size is $I$. The lender and borrower are risk neutral. Unlike the case presented in class, assume lender has market power so that the optimal contract will be found by maximizing expected repayment to the lender $U_{L}$ (net of auditing costs) subject to incentive compatibility and individual rationality of the borrower. The outside option for the borrower is $U_{B}$ and the audit cost is $K$. The borrower has limited liability. The maximum penalty that can be inflicted on the borrower if he lies (reports $y_{L}$ when $y_{H}$ has occurred) is confiscation of $y_{H}$.
+\end{exercise}
+\begin{subexercise}
+    Compute the optimal deterministic contract $(y(\widehat{R}), r(\widehat{R}))$ as a function of $U_{B}$. Represent the pareto frontier in the $\left(U_{B}, U_{L}\right)$ plane. Hint: you only need consider two cases $r \leq R_{L}$ and $R_{L}<r \leq R_{H}$ since $r>R_{H}$ is inefficient because an audit would take place in state $H$, which is clearly dominated by the debt with $r=R_{H}$.
+\end{subexercise}
+\begin{answer}
+    First note that it is never optimal to audit when the borrower reports $R_{H}$. Since the lender is maximizing the expected repayment then the optinmal contract wile make the borrower's participation contraint binding:
+    $$p_H(R_H-\hat{r}_H) + (1-p_H)(R - \hat{r}_L) = U_{B} \qiq  p_h \hat{r}_H + (1-p_H)(R_L - \hat{r}_L) =p_H R_H + (1-p_H)R_L - U_{B}$$
+
+    Where $\hat{r}_i$ si the lender share. This means that in expectation the optimal contract will give the lender a fixed value of $p_H R_H + (1-p_H)R_L - U_{B}$ impl;iying that the lender will want to audit as less as possible.
+
+    To achieve this the punishment $\tilde{r}$ for reporting $R_L$ when the true state is $R_L$ must be high, this is capture by the borrowers $IC$ constraint:
+
+    $$ R_H - r_H \geq R_H - \tilde{r} \qiq r_H \leq \tilde{r}$$
+
+    On the other hand if the lender sets $r_L = r_H = p_H R_H + (1-p_H)R_L$ and never audits she can save on audit cost and still get $U_L = p_H R_H + (1-p_H)R_L - U_{B}$, therefore those are the optimal contract and the Pareto Frontier.
+
+
+\end{answer}
+\begin{subexercise}
+    Suppose the lender can credibly commit to a stochastic auditing policy; audit with probability $q \in[0,1]$ when the borrower reports $R_{L}$. Show that the incentive compatibility constraint is equivalent to
+    $$
+    q \geq q^{*}=1-\frac{U_{B}}{p_H\left(R_{H}-R_{L}\right)}
+    $$
+    Represent the new Pareto Frontier. Comment.
+\end{subexercise}
+\begin{answer}
+
+\end{answer}
+
+\begin{exercise}[Exercise $6.1$ of Tirole (privately known private benefit and market breakdown).]
+    In Chapter 3 of Tirole on moral hazard, the type or "benefit $B$ " of the entrepreneur (borrower) was known 
+    by the investor (lender). In this question, we will assume that there is a unit measure of two types $\{b, g\}$ 
+    of entrepreneurs and their type is unknown by the investor. The fraction of type $g$ entrepreneurs is $\alpha$ 
+    and type $b$ entrepreneurs is $(1-\alpha)$. The entrepreneur want to finance a fixed-size project costing $I$ and
+     for simplicity has no equity $(A=0)$ so must borrow $I$. As in Section $3.2 .1$ of Tirole, the probability of success 
+     is $p_H$ if the entrepreneur exerts high effort and $p_L$ if the entrepreneur shirks where 
+     $\Delta p \equiv p_H-p_L>0$. There is no private benefit $B=0$ when exerting high effort. 
+     The private benefit when shirking is either $B_{b}$ or $B_{g}$ depending on the entrepreneur's type where $B_{b}>B_{g}>0$. Thus a "bad type" has higher private benefit when shirking. Entrepreneurs and investors are risk neutral. Except for knowing the type of entrepreneur, all other parameters are common knowledge. Assume that under asymmetric information lenders are uncertain about whether the project should be funded:
+     $$
+     p_H\left(R-\frac{B_{b}}{\Delta p}\right)<I<p_H\left(R-\frac{B_{g}}{\Delta p}\right)
+     $$
+     and that lenders cannot break even if the entrepreneur shirks:
+     $$
+     p_L R<I.
+     $$
+     Since the entrepreneurs type is unknown, the lender cannot finance only good borrowers. Due to the notational changes, denote $R_{e}$ and $R_{l}$ the entrepreneur and lender "returns" in the event of success and assume the entrepreneur receives no return in event of failure (this can be shown to be optimal).
+    \end{exercise}
+
+    \begin{subexercise}
+        Show that there exists $\alpha^{*} \in(0,1)$ such that no financing occurs if $\alpha<\alpha^{*}$ and financing a pooling equilibrium
+        exists if $\alpha \geq \alpha^{*}$.
+    \end{subexercise}
+    \begin{answer}
+        Let $i \in\{b, g\}$ then $IC_{i}$ is
+            \[ 
+                p_H R_{c}>p_L R_{\ell}+B_{i} \Rightarrow R_{e} \geqslant B_{i} / \Delta p
+            \]
+        Assume:       
+                $$ R_{\ell} \geqslant R-R_{e}$$
+        and consider the following cases:
+        \begin{enumerate}
+            \item If $R_{e} \geqslant B_{b} / \Delta p  \Rightarrow$ No type shinks.
+            \item If $B_b / \Delta p > R_{e} \geqslant B_{g} / \Delta p \Rightarrow$ Only tgre $b$ shirks
+            \item If $B_{g} / \Delta p \geqslant r_{e} \Rightarrow$ Both tynos shirks
+        \end{enumerate}
+    
+        \textbf{Case 1:} Let $R_{e} \geqslant B_{b} / \Delta p$ then the expected return is:
+        $$
+        p_H R_{\ell} - I \leq p_H\left(R-R_{e}\right)-I=p_H\left(R-B_{b} / \Delta P\right)-I<0
+        $$
+        $\Rightarrow$ Not an equilibrium.
+
+        \textbf{Case 3:} Let $R_{e}<B_{g} / \Delta p \Rightarrow$ both tyres shirk, and the axpected return is:
+        $p_L R_{\ell}-I \leq p_L R-I < 0 \Rightarrow $ not an equilibrium.
+        
+        \textbf{Case 2:} Suppose $R \in\left[B_{g} / \Delta p, B_{b} / \Delta p\right)$ then only bad tyme will shirk and the exprected return is:
+
+        \begin{align*}
+            &=\alpha\left(p_H\left(R-R_{e}\right)-I\right)+(1-\alpha)\left(p_L\left(R+R_{e}\right)-I\right) \\
+            &=\alpha p_L\left(R-R_{e}\right)+(1-\alpha) p_L\left(R+R_{e}\right)-I \\
+            &=\left(R-R_{e}\right)\left[\alpha p_H+(1-\alpha) p_L\right]-I \\
+        \end{align*}
+        
+        Recall $$R  \geqslant \frac{B_{g}}{\Delta P} \qiq \left(R-R_{C}\right) \leqslant R-\frac{B_{g}}{\Delta P} $$
+
+        \begin{align*}
+        \Rightarrow& \left(R-R_{e}\right)\left[\alpha p_H+(1-\alpha) p_L\right]-I \leqslant\left(R-\frac{B_{g}}{\Delta P}\right)\left[\alpha p_H+(1-\alpha) p_L\right]-I \\
+        &=\alpha[\underbrace{\left.\left[R-\frac{B_{g}}{\Delta p}\right) p_H-I\right]}_{>0}+(1-\alpha)[\underbrace{\left.\left[R-\frac{B_{g}}{\Delta{p}}\right) p_L-I\right]}_{< 0}
+        \end{align*}
+
+        \begin{align*}
+            &\Rightarrow \exists \alpha^{*} \text { such that }\left(R-\frac{B_{g}}{\Delta p}\right)\left[\alpha^{*} P_{A}+(1-\alpha) D_{L}\right)-I=0 \\
+            &\Rightarrow\left(R-R_{e}\right)\left[\alpha^* p_{H}+(1-a) P_{L}\right]-I \leq 0 \qquad \left(\text { Binds whin } R-R_{c}=R-\frac{D_{8}}{A_{p}}\right) \\
+            &\Rightarrow \forall \alpha \in\left[\alpha^{*},1 \right] \text { The project is funded. } \\
+            &\Rightarrow \forall \alpha \in\left[0, \alpha^{*}\right) \text { The project is not funded. }
+        \end{align*}
+
+    \end{answer}
+
+    \begin{subexercise}
+        Describe the cross subsidies between types when borrowing arises in equilibrium.
+    \end{subexercise}
+    \begin{answer}
+        Suppose that theres is lending in a pooling equilibrium, then $R_e$ is pinned down by the lender's participation constraint:
+        $$ (R - R_e) \left[ \alpha p_H + (1-\alpha p_L)\right] - I = 0 \qiq R_e = R - \frac{I}{\alpha p_H + (1-\alpha p_L)} $$
+
+        If there where full information thene the lender could solve both problem separately, this implies that only a borrower of type $g$ is funded and $$R^G_e = R - I / p_H$$
+
+        To calculate the cross subsidy:
+        $$R^G_e - R_e = \frac{I(1-\alpha)\Delta p]}{p_H(p_H +  \alpha \Delta p ) }$$
+    \end{answer} 
+    
+\end{document}

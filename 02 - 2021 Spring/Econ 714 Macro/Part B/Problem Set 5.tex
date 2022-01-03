@@ -1,0 +1,192 @@
+
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[left=3cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}e}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{apacite}
+\usepackage[round]{natbib}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{svg}
+\usepackage[margin = 1in, top=2cm]{geometry}% Margins
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.2em}
+\usepackage{setspace} % Setting the spacing between lines
+\usepackage{soul}
+\usepackage{amsthm, amsmath, amsfonts, mathtools, amssymb, bm} % Math packages 
+\usepackage{svg}
+\usepackage{graphicx}
+% \usepackage{pgfplots}
+\usepackage{epstopdf}
+\usepackage{subfig} % Manipulation and reference of small or sub figures and tables
+\usepackage{hyperref} % To create hyperlinks within the document
+\spacing{1.15}
+\usepackage{appendix}
+\usepackage{xcolor}
+\usepackage{cancel}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{optidef}
+\usepackage{etoolbox}
+
+\usepackage[round]{natbib}
+%\bibliographystyle{plainnat}
+\bibliographystyle{apacite}
+
+
+\newtheorem{defin}{Definition.}
+\newtheorem{teo}{Theorem. }
+\newtheorem{lema}{Lemma. }
+\newtheorem{coro}{Corolary. }
+\newtheorem{prop}{Proposition. }
+\theoremstyle{definition}
+\newtheorem{examp}{Example. }
+\newtheorem{problem}{Problem}
+\newtheorem{subproblem}{}[problem]
+% \numberwithin{problem}{subsection} 
+
+% \AtBeginEnvironment{problem}{\color{gray}}
+% \AtBeginEnvironment{subproblem}{\color{gray}}
+\AtBeginEnvironment{proof}{\color{red}}
+
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\qiq}{\qquad \implies \qquad}
+\newcommand{\qiffq}{\qquad \iff \qquad}
+\newcommand{\qaq}{\qquad \textbf{and} \qquad}
+\newcommand{\qoq}{\qquad \textbf{or} \qquad}
+\newcommand{\settf}{\text{ \emph{:} }}
+\newcommand{\chbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{.9em}}}
+\newcommand{\cchbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\checkmark$}}
+
+\title{Problem Set 4}
+\author{Mitchell Valdés-Bobes}
+\date{\today}
+\title{Problem Set 4}
+\author{Mitchell Valdés-Bobes}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{problem}[50 points] 
+Problem 1 (50 points) Consider the following economy. A unit mass continuum of households lives for two periods $t=1$ and $t=2$. In the first period, there are two kinds of households: high and low productivity, with half the population being of each type. For high productivity households, one unit of labor produces 1 unit of output. For low productivity households, one unit of labor produces 0 units of output. In the second period, all households are identical, cannot produce, and receive a zero endowment. There exists an ability to store resources across dates at the rate ${R}$. (One unit saved today produces ${R}$ units tomorrow.) The utility function for high productivity households is ${U}\left({c}_{1}, {c}_{2}, {y}\right)={u}\left({c}_{1}\right)-v({y})+\beta {u}\left({c}_{2}\right)$, where ${c}_{1}$ is their consumption in the first period
+and $c_{2}$ is their consumption in the second period. For low productivity households, their utility function is ${U}\left({c}_{1}, {c}_{2}\right)={u}\left({c}_{1}\right)+\beta {u}\left({c}_{2}\right) .$ Assume $\beta=\frac{1}{{R}}$ and ${u}$ and $v$ have the appropriate properties necessary for solutions to be characterized by first order conditions.
+
+\end{problem}
+
+\begin{subproblem}
+Characterize as fully as you can the solution to the utilitarian planner's problem when household type is private.
+\end{subproblem}
+
+\begin{proof}[Answer]
+Consider problem of the social planner under the full information benchmark. Note that the planner chooses $(c_1^j,c_2^j, v^j)$ for $j\in\{L,H\}$. Since the low productivity type does not produce and doesn't have dis-utility from work then any $y^L \in \mathbb{R}$ can be in a possible solution. 
+
+The utilitarian planner solves:
+$$\max_{c_1^H, c_2^H, y^H. c_1^L, c_2^L} \qquad u(c_1^H) + \beta u(c_2^H) - v(y^H) + u(c_1^L) + \beta u(c_2^L)$$
+
+Subject to the resource constraint:
+
+$$c_1^H + c_1^L + \frac{c_2^H+ c_2^L}{R} \leq y^H$$
+
+and the participation constraint of the high type:
+$$u(c_1^H) + \beta u(c_2^H) \geq v(y^H)$$
+
+Let $\lambda$ and $\mu$ be the Lagrange multiplier associated with the Resource and Participation Constraints, then the First Order Conditions for this problem are:
+
+\begin{align*}
+    (c_1^H):&\quad u'(c_1^H) = \frac{\lambda}{1-\mu} &\qquad (c_2^H):&\quad \beta u'(c_1^H) = \frac{1}{R}\frac{\lambda}{(1-\mu)} \\   (c_1^L):&\quad u'(c_1^L) = \lambda &\qquad (c_2^L):&\quad \beta u'(c_2^L) = \frac{1}{R}\lambda
+    \\ (y^H):&\quad v'(y^H) = \lambda 
+\end{align*}
+
+Using the fact that $\beta = 1/R$ and the above conditions we get that:
+
+$$c_1^H = c_2^H\geq c_1^L = c_2^L \qaq u'(c^H) = v'(y^H)$$
+
+Now suppose that the planner cannot observe the types. Note that since work is cost-less for the low type the planner cannot enforce any allocation where $c^H > c^L$ then, it must be the case that $c^H=c^L =c^*$. Note that the planner is free to choose any level for $y^L$, in particular:
+
+\begin{align*}
+\cancel{u(c^*)} + \cancel{\beta u(c^*)} - v(y^H) \geq \cancel{u(c^*)} + \cancel{\beta u(c^*)} - v(y^L) &\qiq v(y^H) \leq  v(y^L) \\ &\qiq y^H \leq  y^L \end{align*} 
+
+Then the solution for the utilitarian  planner is the pair of consumption/labor allocations $(c_1^H,c_2^H, v^H)$ and $(c_1^L,c_2^L, v^L)$.
+
+$$c_1^H = c_2^H = c_1^L = c_2^L = c^* \qaq u'(c^*) = v'(y^H) \qaq y^H \leq  y^L$$
+
+ 
+\end{proof}
+
+\begin{subproblem}
+Suppose a government faces the following constraints: First, it cannot borrow, so expenditures in the first period must equal taxes in the first period. Second, its only tax instrument in the first period is a linear tax on first period production $\tau$. The government can pay a possibly nonlinear retirement payment to households in the second period, b, which is allowed to be a function of anything the government can observe. Can the government implement your answer to part 1, and, if so, how?
+\end{subproblem}
+
+\begin{proof}[Answer]
+Note that if if the planner sets a tax $\tau$ and offers a retirement plan $(c_2^H, c_2^L)$, note that the planner also have to take care low type agent first period consumption $c_1^L$. From now on we will refer to the labor supply of the high type as $y$ an $y^H$ will denote the solution obtained in the previous question. The planner have the following constraints:
+
+\begin{align*}
+    c_1^H &= (1-\tau)y\\c_1^L + c_2^H + c_1^L &= \tau y
+\end{align*}
+
+To implement the solution obtained in the previous question the planner needs:
+
+$$c^* = (1-\tau)y \qaq c^* = \frac{\tau}{3}y \qiq \tau = \frac{3}{4}$$
+
+In order to ensure that the high type will supply the adequate level of labor the planner can offer thew following non-linear retirement plan:
+
+$$(c_2^H, c_2^L) =\left\{ \begin{array}{cc}
+    (c^*, c^*) & \text{if } y = y^H \\
+    (0, \tau y ) & \text{if } y \not= y^H
+\end{array}
+
+\end{proof}
+
+\begin{problem}[50 points] 
+Consider the following variant of the static version of Mirrlees' optimal taxation problem. Each of a continuum of individuals is characterized by two numbers, $\theta$ for productivity which is privately observed and $s$ for a signal of $\theta$ which is public information. Productivity and the signals take on one of two values $\theta_{{H}}$ and $\theta_{{L}}$. The proportion of the population with productivity $\theta_{H}$ is $p .$ Conditional on productivity $\theta$, the signal takes on the same value with \st{productivity} \textcolor{red}{probability?} $q>1 / 2$. Preferences are given by
+${u}({c})-v\left(\frac{y}{\theta}\right)$ where ${c}$ is consumption and ${y}$ is observed output. The resource constraint is that aggregate consumption cannot exceed aggregate output. Assume the planner weighs all households equally.
+\end{problem}
+
+\begin{subproblem}
+ Set up the mechanism design problem for the planner.
+\end{subproblem}
+
+\begin{proof}[Answer]
+The social planner solves:
+
+\begin{equation}\label{planprob}
+    \max_{\left\{c_{ij}, y_{ij}\right\}} \quad \sum_{i,j\in\{H,L\}}  \left(u(c_{ij}) - v\left(\frac{y_{ij}}{\theta_i} \right) \right)\mathbb{P}(\theta = \theta_i \land S = S_j)
+\end{equation}
+
+Where $(c_{ij}, y_{ij})$ is the consumption/output allocation for a individual with productivity $\theta_i$ and observable signal $S_j$. Note that since individuals can fake report any type they want, since the signal is observable, they cannot lie about it, this giver the following \textbf{Incentive Compatibility} constraints for $j\in \{L,H\}$:
+$$u(c_{ij}) - v\left(\frac{v_{j}}{\theta_i} \right) \geq u(c_{kj}) - v\left(\frac{v_{kj}}{\theta_i} \right)\quad i,k\in \{L,H\}$$
+
+The planner also faces the following resource constraint: 
+
+$$ \sum_{i,j\in\{H,L\}} c_{ij} \mathbb{P}(\theta = \theta_i \land S = S_j)  \leq \sum_{i,j\in\{H,L\}} y_{ij} \mathbb{P}(\theta = \theta_i \land S = S_j) $$
+
+\end{proof}
+
+\begin{subproblem}
+ Which household's allocations are ex-post efficient?
+\end{subproblem}
+
+\begin{proof}[Answer]
+
+Consider the value of the allocation for the  high type individuals:
+\begin{align*}
+p\left( q\left(u(c_{HH}) - v\left( \frac{y_{HH}}{\theta_H} \right)\right) +  (1-q)\left(u(c_{HL}) - v\left( \frac{y_{HL}}{\theta_H} \right)\right)\right)
+\end{align*}
+Note that since the utility function is concave we have that this value is lower than $$p\left(u(c_H^*) - v\left( \frac{y_H^*}{\theta_H} \right)\right)$$
+
+Where
+
+$$ c_H^* = q c_{HH} + (1-q)c_{HL} \qaq y_H^* = q y_{HH} + (1-q)y_{HL} $$
+
+A similar argument can be made for the low types.
+
+This means that the planner can simply ignore the signal and give a contract for each type and the \textbf{Incentive Compatibility} constraints will guarantee that each type will select the "correct" contract.
+
+We have transformed the problem to the one we saw in class so we can conclude that: The allocation for the high types is the efficient one while the low types will have their allocation distorted.
+
+\end{proof}
+
+\end{document}

@@ -1,0 +1,317 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\documentclass[12pt]{article}
+%\usepackage[left=3cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}e}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{apacite}
+\usepackage[round]{natbib}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{svg}
+\usepackage[margin = 1in, top=2cm]{geometry}% Margins
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.2em}
+\usepackage{setspace} % Setting the spacing between lines
+\usepackage{amsthm, amsmath, amsfonts, mathtools, amssymb, bm} % Math packages 
+\usepackage{svg}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{epstopdf}
+\usepackage{subfig} % Manipulation and reference of small or sub figures and tables
+\usepackage{hyperref} % To create hyperlinks within the document
+\spacing{1.15}
+\usepackage{appendix}
+\usepackage{xcolor}
+\usepackage{cancel}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{optidef}
+
+\usepackage[round]{natbib}
+%\bibliographystyle{plainnat}
+\bibliographystyle{apacite}
+
+
+\newtheorem{defin}{Definition.}
+\newtheorem{teo}{Theorem. }
+\newtheorem{lema}{Lemma. }
+\newtheorem{coro}{Corolary. }
+\newtheorem{prop}{Proposition. }
+\theoremstyle{definition}
+\newtheorem{examp}{Example. }
+\newtheorem{problem}{Problem}
+\newtheorem{subproblem}{}[problem]
+% \numberwithin{problem}{subsection} 
+
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\qiq}{\qquad \implies \qquad}
+\newcommand{\qiffq}{\qquad \iff \qquad}
+\newcommand{\qaq}{\qquad \textbf{and} \qquad}
+\newcommand{\qoq}{\qquad \textbf{or} \qquad}
+\newcommand{\settf}{\text{ \emph{:} }}
+\newcommand{\chbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{.9em}}}
+\newcommand{\cchbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\checkmark$}}
+
+\title{Problem Set 1}
+\author{Mitchell Valdés-Bobes}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{problem}
+Consider a neoclassical growth model with preferences $\sum_{t=0}^{\infty} \beta^{t} U\left(C_{t}\right),$ production technology $F\left(K_{t}\right),$ and the initial capital endowment $K_{0} .$ Both $U(\cdot)$ and $F(\cdot)$ are strictly increasing, strictly concave and satisfy standard Inada conditions. The capital law of motion is
+$$
+K_{t+1}=(1-\delta) K_{t}+I_{t}-D_{t}
+$$
+where $D_{t}$ is a natural disaster shock that destroys a fixed amount of the accumulated capital.
+\end{problem}
+
+\begin{subproblem}
+Write down the social planner's problem and derive the inter-temporal optimality condition (the Euler equation).
+\end{subproblem}
+\begin{proof}[Answer]
+The Social Planner solves:
+
+\begin{maxi*}|s|
+{C_t, K_{t+1}}{\sum_{t=0}^\infty \beta^t u(C_t)}
+{}{}
+\addConstraint{C_t + K_{t+1} +D_t - (1-\delta)K_t = F(K_t)}{}
+\end{maxi*}
+Since this problem is well defined\footnote{ Both $U(\cdot)$ and $F(\cdot)$ are strictly increasing and strictly concave.} there is an interior solution. We can write the Lagrangian and the First Order conditions:
+
+$$\mathcal{L}(\cdot) = \sum_{t=0}^\infty \beta^t u(C_t) - \lambda_t\left( C_t + K_{t+1} +D_t - (1-\delta)K_t - F(K_t)\right)$$
+
+\begin{align*}
+    \textbf{FOC:} \quad  C_t:\:& \beta^t u'(C_t) = \lambda_t\\
+     K_{t+1}:\:& \lambda_t = \lambda_{t+1}\left((1-\delta) + F'(K_{t+1})\right)\\
+\end{align*}
+
+Plugging First Order Condition associated with consumption in periods $t$ and $t+1$ in to the condition associated with $K_{t+1}$ we get the Euler Equation:
+
+\begin{equation}\label{euler}\tag{EE}
+    u'(C_t) = \beta u'(C_{t+1})\left((1-\delta) + F'(K_{t+1})\right)
+\end{equation}
+
+\end{proof}
+\begin{subproblem}
+Given the steady-state value of $D \geq 0$, write down the system of equations that determines the values of capital $\bar{K}(D)$ and consumption $\bar{C}(D)$ in the steady state. Draw a phase diagram with capital in the horizontal axis and consumption in the
+vertical axis, show the steady states, draw the arrows representing the direction of change, and the saddle path.
+\end{subproblem}
+\begin{proof}[Answer]
+
+Now we consider the steady state (SS) where $C_t=C_{t+1} = \overline{C}$, $K_t=K_{t+1} = \overline{K}$ and $D_t=D>0$. From \eqref{euler} we get:
+
+$$\cancel{u'(\overline{C})} = \beta \cancel{u'(\overline{C})}\left((1-\delta) + F'(\overline{C})\right) \qiq \boxed{F'(\overline{K}) = \frac{1}{\beta} - (1-\delta)}$$
+
+From the feasibility constraint:
+
+$$\overline{C} + \cancel{\overline{K}} + D - (\cancel{1}-\delta)\overline{K} = F(\overline{K}) \qiq \boxed{
+\overline{C} = F(\overline{K}) - D - \delta\overline{K}
+}$$
+
+From capital law of motion it follows:
+$$
+\Delta K_{t+1}=K_{t+1}-K_t= F(K_t) - C_t - D_t -\delta K_t  \qiq \Delta K_{t+1}>0 \text { iff } C_{t}<F(K_t) - D_t -\delta K_t
+$$
+while the \eqref{euler} implies
+$$
+ \frac{u'(C_t)}{u'(C_{t+1})} = \beta \left((1-\delta) + F'(K_{t+1})\right) $$
+Since $u''(\cdot)<0$ then $u'(\cdot)$ is decreasing therefore  
+$$\Delta C_{t+1}>0 \text { iff }  \frac{u'(C_t)}{u'(C_{t+1})} > 1 \qiq F'(K_{t+1}) > \frac{1}{\beta} - (1-\delta) 
+$$
+        
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Axis 2D [id:dp5251229658996264] 
+\draw  (19,253.84) -- (313.5,253.84)(48.45,19.71) -- (48.45,279.86) (306.5,248.84) -- (313.5,253.84) -- (306.5,258.84) (43.45,26.71) -- (48.45,19.71) -- (53.45,26.71)  ;
+%Straight Lines [id:da5037948874752385] 
+\draw    (157,41) -- (157,211) -- (157,250) ;
+%Straight Lines [id:da6635184813213286] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (253,223) -- (253.45,242.33) ;
+\draw [shift={(253.5,244.33)}, rotate = 268.65999999999997] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da4797603282885159] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (253,223) -- (272.83,223) ;
+\draw [shift={(274.83,223)}, rotate = 180] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da8097306621623508] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (80.48,242.81) -- (80.06,222.98) ;
+\draw [shift={(80.02,220.98)}, rotate = 448.79] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da8526315017902897] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (264.71,54.87) -- (245.37,55.11) ;
+\draw [shift={(243.37,55.13)}, rotate = 359.31] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da5149645315690454] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (264.71,54.87) -- (264.48,74.7) ;
+\draw [shift={(264.46,76.7)}, rotate = 270.65] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da19637589707990188] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (93.06,64.34) -- (92.63,45.01) ;
+\draw [shift={(92.59,43.01)}, rotate = 448.72] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da737399226679238] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (93.06,64.34) -- (73.23,64.32) ;
+\draw [shift={(71.23,64.32)}, rotate = 360.06] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Curve Lines [id:da441221474873873] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]  [dash pattern={on 4.5pt off 4.5pt}]  (109.45,218.06) .. controls (118.36,163.28) and (132.97,156.3) .. (156.9,122.56) ;
+\draw [shift={(158,121)}, rotate = 485] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+\draw [shift={(125.27,166.35)}, rotate = 477.15] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+\draw [shift={(109.45,218.06)}, rotate = 458.82] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Curve Lines [id:da6689830308165423] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]  [dash pattern={on 4.5pt off 4.5pt}]  (159.38,119.28) .. controls (174.05,101.12) and (180.67,93.55) .. (195.91,81.47) .. controls (199.19,78.88) and (202.86,76.08) .. (207.09,72.91) .. controls (210.76,70.17) and (214.86,67.16) .. (219.48,63.78) ;
+\draw [shift={(219.48,63.78)}, rotate = 323.88] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+\draw [shift={(176.46,99.13)}, rotate = 312.15] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+\draw [shift={(201.48,77.15)}, rotate = 322.23] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+\draw [shift={(213.3,68.31)}, rotate = 323.51] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+\draw [shift={(158,121)}, rotate = 308.86] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da594993896529205] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (80.48,242.81) -- (100.32,242.81) ;
+\draw [shift={(102.32,242.81)}, rotate = 180] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Curve Lines [id:da3940584965138725] 
+\draw    (50,278) .. controls (131.5,48.43) and (258.5,86.43) .. (290.5,253.43) ;
+
+% Text Node
+\draw (306,265) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle K$};
+% Text Node
+\draw (19,13) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle C$};
+\end{tikzpicture}
+
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
+
+\end{proof}
+\begin{subproblem}
+The scientists forecast an earthquake $T$ periods from now that will destroy $D>0$
+units of capital. Assuming that economy starts from a steady state with $D=0$, draw a phase diagram that shows the optimal transition path. Make two separate graphs
+showing the evolution of capital and consumption in time.
+\end{subproblem}
+\begin{proof}[Answer]
+
+This is an anticipated one-period shock that destroys and amount $D$ of capital. The explanation for the proposed dynamics are is the following:
+
+\begin{itemize}
+    \item The economy start at the steady state before hearing the news of the anticipated shock.
+    \item At the moment of hearing the forecast the agents prepare to increase investment in the next period, decreasing sharply the consumption in $t=0$. 
+    \item Investment increases and consumption decreases steadily until $t=T$. 
+    \item At $t=T$ there is a shock that destroys an amount $D$ of capital thus taking the system to the saddle path.
+    \item From $t=T+1$ on-wards the system converges to the initial steady state.
+\end{itemize}
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+\begin{figure}[h]
+    \centering
+    
+    
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Axis 2D [id:dp2682852383370746] 
+\draw  (15,259.58) -- (292.3,259.58)(42.73,20) -- (42.73,286.2) (285.3,254.58) -- (292.3,259.58) -- (285.3,264.58) (37.73,27) -- (42.73,20) -- (47.73,27)  ;
+%Curve Lines [id:da7584213333906309] 
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ]   (45,313) .. controls (93.73,199.85) and (139.04,155.81) .. (175.46,154.79) .. controls (218.48,153.58) and (249.09,212.38) .. (258.3,288.2) ;
+%Curve Lines [id:da6767585015537481] 
+\draw    (42.73,259.58) .. controls (148.3,-9.8) and (245.3,56.2) .. (270.3,259.2) ;
+%Straight Lines [id:da6064950033649679] 
+\draw    (139,37.2) -- (139,258) ;
+%Curve Lines [id:da35813823326858296] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]  [dash pattern={on 4.5pt off 4.5pt}]  (90.45,194.06) .. controls (99.36,139.28) and (113.97,132.3) .. (137.9,98.56) ;
+\draw [shift={(139,97)}, rotate = 485] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+\draw [shift={(106.27,142.35)}, rotate = 477.15] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+\draw [shift={(90.45,194.06)}, rotate = 458.82] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Curve Lines [id:da18879463936997043] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]  [dash pattern={on 4.5pt off 4.5pt}]  (140.48,95.22) .. controls (156.59,76.19) and (193.93,45.78) .. (210.06,32.94) ;
+\draw [shift={(210.06,32.94)}, rotate = 321.59] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+\draw [shift={(174.46,62.45)}, rotate = 318.76] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+\draw [shift={(139,97)}, rotate = 308.86] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da3303403540405627] 
+\draw [color={rgb, 255:red, 155; green, 155; blue, 155 }  ,draw opacity=1 ] [dash pattern={on 4.5pt off 4.5pt}]  (174.42,145.9) -- (128,145.9) -- (105,144.46) ;
+%Shape: Circle [id:dp8880007982850928] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (174.42,144.9) .. controls (174.37,143.2) and (175.7,141.78) .. (177.4,141.72) .. controls (179.1,141.67) and (180.52,143) .. (180.58,144.7) .. controls (180.63,146.4) and (179.3,147.82) .. (177.6,147.88) .. controls (175.9,147.93) and (174.48,146.6) .. (174.42,144.9) -- cycle ;
+%Curve Lines [id:da25396708302768123] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (105,144.46) .. controls (114,131.46) and (112.81,130.9) .. (117,125.46) .. controls (120.66,120.69) and (133.57,103.93) .. (137.78,98.54) ;
+\draw [shift={(139,97)}, rotate = 489.21] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (6.56,-1.97) .. controls (4.17,-0.84) and (1.99,-0.18) .. (0,0) .. controls (1.99,0.18) and (4.17,0.84) .. (6.56,1.97)   ;
+\draw [shift={(111.14,135.03)}, rotate = 482.17] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (6.56,-1.97) .. controls (4.17,-0.84) and (1.99,-0.18) .. (0,0) .. controls (1.99,0.18) and (4.17,0.84) .. (6.56,1.97)   ;
+\draw [shift={(127.44,111.91)}, rotate = 487.64] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (6.56,-1.97) .. controls (4.17,-0.84) and (1.99,-0.18) .. (0,0) .. controls (1.99,0.18) and (4.17,0.84) .. (6.56,1.97)   ;
+\draw [shift={(105,144.46)}, rotate = 304.7] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][fill={rgb, 255:red, 208; green, 2; blue, 27 }  ,fill opacity=1 ][line width=0.75]      (0, 0) circle [x radius= 2.01, y radius= 2.01]   ;
+%Straight Lines [id:da6088363790937326] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (147.24,124.78) -- (175.66,140.74) ;
+\draw [shift={(177.4,141.72)}, rotate = 209.32999999999998] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (6.56,-1.97) .. controls (4.17,-0.84) and (1.99,-0.18) .. (0,0) .. controls (1.99,0.18) and (4.17,0.84) .. (6.56,1.97)   ;
+\draw [shift={(161.45,132.76)}, rotate = 209.32999999999998] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (6.56,-1.97) .. controls (4.17,-0.84) and (1.99,-0.18) .. (0,0) .. controls (1.99,0.18) and (4.17,0.84) .. (6.56,1.97)   ;
+\draw [shift={(147.24,124.78)}, rotate = 209.32999999999998] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (6.56,-1.97) .. controls (4.17,-0.84) and (1.99,-0.18) .. (0,0) .. controls (1.99,0.18) and (4.17,0.84) .. (6.56,1.97)   ;
+%Shape: Axis 2D [id:dp9685647230390042] 
+\draw  (317,119.87) -- (647.5,119.87)(350.05,21) -- (350.05,130.86) (640.5,114.87) -- (647.5,119.87) -- (640.5,124.87) (345.05,28) -- (350.05,21) -- (355.05,28)  ;
+%Straight Lines [id:da1151014693953738] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (351,75) -- (639.5,74.86) ;
+%Straight Lines [id:da3762386440053975] 
+\draw    (430.83,120) -- (430.83,131) ;
+%Straight Lines [id:da04219313249929657] 
+\draw    (351,75) -- (428.06,41.51) ;
+\draw [shift={(430.21,40.57)}, rotate = 336.51] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da546012444536361] 
+\draw [color={rgb, 255:red, 155; green, 155; blue, 155 }  ,draw opacity=1 ][line width=0.75]  [dash pattern={on 0.84pt off 2.51pt}]  (430.21,40.57) -- (430.83,120) ;
+%Curve Lines [id:da5161081854757807] 
+\draw    (431.21,113.57) .. controls (475.21,74.57) and (547.93,80.29) .. (638.21,77.57) ;
+\draw [shift={(431.21,113.57)}, rotate = 318.45] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Shape: Axis 2D [id:dp6118658536664932] 
+\draw  (317,259.87) -- (647.5,259.87)(350.05,161) -- (350.05,270.86) (640.5,254.87) -- (647.5,259.87) -- (640.5,264.87) (345.05,168) -- (350.05,161) -- (355.05,168)  ;
+%Straight Lines [id:da126362676703196] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (351,215) -- (639.5,214.86) ;
+%Straight Lines [id:da24854272760115514] 
+\draw    (430.83,260) -- (430.83,271) ;
+%Straight Lines [id:da19879033281689296] 
+\draw    (350.21,227.71) -- (431.21,253.57) ;
+\draw [shift={(350.21,227.71)}, rotate = 17.7] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da1713345230655372] 
+\draw [color={rgb, 255:red, 155; green, 155; blue, 155 }  ,draw opacity=1 ][line width=0.75]  [dash pattern={on 0.84pt off 2.51pt}]  (430.21,180.57) -- (430.83,260) ;
+%Curve Lines [id:da15811290651142595] 
+\draw    (431.21,253.57) .. controls (475.21,214.57) and (547.93,220.29) .. (638.21,217.57) ;
+%Straight Lines [id:da7765381248188195] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (112,134) -- (115.99,127.18) ;
+\draw [shift={(117,125.46)}, rotate = 480.34] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (6.56,-1.97) .. controls (4.17,-0.84) and (1.99,-0.18) .. (0,0) .. controls (1.99,0.18) and (4.17,0.84) .. (6.56,1.97)   ;
+
+% Text Node
+\draw (326,15) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle K$};
+% Text Node
+\draw (436.83,125) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle T$};
+% Text Node
+\draw (636,128) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle t$};
+% Text Node
+\draw (326,155) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle C$};
+% Text Node
+\draw (436.83,265) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle T$};
+% Text Node
+\draw (636,268) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle t$};
+% Text Node
+\draw (276,265) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle K$};
+% Text Node
+\draw (19,13) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle C$};
+% Text Node
+\draw (325,59) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle \overline{K}$};
+% Text Node
+\draw (325,196) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle \overline{C}$};
+
+
+\end{tikzpicture}
+
+
+
+
+
+    \caption{Dynamics of Consumption and Investment responses to an anticipated shock.}
+    \label{fig:my_label}
+\end{figure}
+
+
+The next problem, attached in another document shows a numerical simulation of such an scenery.
+
+\end{proof}
+
+
+\end{document}

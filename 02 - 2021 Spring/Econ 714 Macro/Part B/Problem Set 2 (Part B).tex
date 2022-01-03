@@ -1,0 +1,215 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[left=3cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}e}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{apacite}
+\usepackage[round]{natbib}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{svg}
+\usepackage[margin = 1in, top=2cm]{geometry}% Margins
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.2em}
+\usepackage{setspace} % Setting the spacing between lines
+\usepackage{amsthm, amsmath, amsfonts, mathtools, amssymb, bm} % Math packages 
+\usepackage{svg}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{epstopdf}
+\usepackage{subfig} % Manipulation and reference of small or sub figures and tables
+\usepackage{hyperref} % To create hyperlinks within the document
+\spacing{1.15}
+\usepackage{appendix}
+\usepackage{xcolor}
+\usepackage{cancel}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{optidef}
+\usepackage{etoolbox}
+
+\usepackage[round]{natbib}
+%\bibliographystyle{plainnat}
+\bibliographystyle{apacite}
+
+
+\newtheorem{defin}{Definition.}
+\newtheorem{teo}{Theorem. }
+\newtheorem{lema}{Lemma. }
+\newtheorem{coro}{Corolary. }
+\newtheorem{prop}{Proposition. }
+\theoremstyle{definition}
+\newtheorem{examp}{Example. }
+\newtheorem{problem}{Problem}
+\newtheorem{subproblem}{}[problem]
+% \numberwithin{problem}{subsection} 
+
+% \AtBeginEnvironment{problem}{\color{gray}}
+% \AtBeginEnvironment{subproblem}{\color{gray}}
+\AtBeginEnvironment{proof}{\color{red}}
+
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\qiq}{\qquad \implies \qquad}
+\newcommand{\qiffq}{\qquad \iff \qquad}
+\newcommand{\qaq}{\qquad \textbf{and} \qquad}
+\newcommand{\qoq}{\qquad \textbf{or} \qquad}
+\newcommand{\settf}{\text{ \emph{:} }}
+\newcommand{\chbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{.9em}}}
+\newcommand{\cchbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\checkmark$}}
+
+\title{Problem Set 2}
+\author{Mitchell Valdés-Bobes}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{problem}
+Consider the single good alternating endowment example we studied in class.
+
+\begin{subproblem}
+Prove that the constrained efficient allocation can be decentralized as an equilibrium of an environment in which agents trade a risk free bond subject to endogenous debt constraints.
+\end{subproblem}
+\begin{proof}[Answer]
+Each agent solves
+$$
+\max \sum_{t=0}^{\infty} \beta^{t} u\left(c_{i, t}\right)
+$$
+subject to $\forall \mathrm{t}$
+$$
+\begin{array}{l}
+c_{i, t}+b_{i, t+1} \leqslant e_{i, t}+R_{t} b_{i, t} \\
+b_{i, t+1} \geqslant \Bar{B}_{t}
+\end{array}
+$$
+
+Note that now the borrowing constraint is not an equilibrium object, it is defined endogenously by the prices and the endowment process. 
+
+We can obtain the same allocation if we choose prices $R_t$ such that $\Bar{B}_{t} = \phi_t$ for all $t$.
+
+\end{proof}
+
+\begin{subproblem}
+Prove that this environment also has another equilibrium and characterize it.
+\end{subproblem}
+
+\begin{proof}[Answer]
+There is another equilibrium if  $\Bar{B}_{t} = 0$ for all $t$. Note that if prices are chosen low enough the the high endowment agent wont want to save and the low endowment agent does not have a choice.
+
+In this case agents are optimizing and markets are clearing therefore this is an equilibrium.
+\end{proof}
+
+\end{problem}
+
+\begin{problem}
+Lets consider a slightly different assumption about the consequences of default. Now suppose that after default, agents are allowed to save in arrow securities (but not borrow). Mechanically, the punishment after default is less severe. Let's consider the alternating endowment example we saw in class with log utility and endowments
+$\left(e_{\mathrm{h}}, e_{\mathrm{l}}\right)$.
+\begin{subproblem}
+If $\mathrm{R}$ is the equilibrium interest rate define the value of default for the high type. How much will the agent choose to save?
+\end{subproblem}
+\begin{proof}[Answer]
+Suppose that $b_h$ and $b_l$ are savings of the high and low type respectively the value of defaulting is therefore:
+
+$$V^{d}(h) = \log{(e_h-b_h)} + \log{(e_l+Rb_h - b_l)}\sum_{n=1}^{\infty}\beta^{2n+1} + \log{(e_h+Rb_l - b_h)}\sum_{n=1}^{\infty}\beta^{2n}$$
+
+Since the agent wants to smooth consumption it makes no sense to save when endowment is low therefore $b_l = 0$ re writing the above we get:
+
+$$V^{d}(h) =\frac{\log{(e_h-b_h)} }{1-\beta^2} + \frac{\beta\log{(e_l+R b_h)} }{1-\beta^2}$$
+
+Maximizing with respect to $b_h$ we arrive to:
+
+$$b_h = \frac{R\beta e_h - e_l}{R(1+\beta)}$$
+
+\end{proof}
+
+\begin{subproblem}
+Define a equilibrium with not-too-tight debt constraints under this assumption (\cite{alvarez2000efficiency} which is posted on canvas for a precise definition in the case in which the default punishment is autarky)
+\end{subproblem}
+\begin{proof}[Answer]
+An equilibrium with solvency constraints $\left\{\phi_{i,t}\right\}$ for initial conditions $\left\{b_{i, 0}\right\}$ is a set allocations $\left\{c_{i}, b_{i}\right\}$ and price system $R$ such that:
+\begin{enumerate}[(i)]
+    \item Agents solve:
+    \begin{align*}
+    \max_{c_i,b_i}&\quad\sum_{t=1}^{\infty}\beta^{t}\log{(c_{i,t})}    \\
+    \text{subject to:} & \quad c_{i,t} + b_{i,t+1} = e_{i,t} + Rb_{i,t}\\
+    & b_{i,t}\geq \phi_{i,t}
+    \end{align*}
+    \item Markets clear.
+    \item Constraints are chosen to not to tight:
+    $$
+\frac{\log (e_h-\phi(1+\mathrm{R}))}{1-\beta^{2}}+\beta \frac{\log (e_l+\phi(1+\mathrm{R}))}{1-\beta^{2}}=V^{d}(h)
+$$
+where $V^{d}(h)$ is the value of defaulting for the high type.
+\end{enumerate}
+\end{proof}
+
+\begin{subproblem}
+Derive the two equations that characterize an equilibrium with not-too-tight debt constraints
+\end{subproblem}
+\begin{proof}[Answer]
+The equilibrium is characterized by the following equations, the first from the not too tight requirement:
+
+\begin{equation}\label{eq1}
+   \log (e_h-\phi(1+\mathrm{R}))+\beta \log (e_l+\phi(1+\mathrm{R})) = \log{(e_h-b_h)}  + \beta\log{(e_l+R b_h)}
+\end{equation}
+
+And the second from the Euler Equation in $b_h = -\phi$ and $b_l = \phi$:
+
+\begin{equation}\label{eq2}
+\frac{1}{e^{h}-\phi(1+R)}=\frac{\beta R}{e^{l}+\phi(1+R)}
+\end{equation}
+
+\end{proof}
+
+\begin{subproblem}
+Solve for the equilibrium level of debt and interest rate given some $\left(e_{h}, e_{l}\right)$.
+\end{subproblem}
+\begin{proof}[Answer]
+
+We can find $\phi$ from \eqref{eq2}:
+
+\begin{equation}
+\phi=\frac{\beta R e_{h}-e_{l}}{(1+R)+\beta R(1+R)}
+\end{equation}
+
+And then plug it back in \eqref{eq1} to get:
+
+$$
+ \log \left(e_h-\frac{\beta R e_{h}-e_{l}}{1+\beta R}\right)+\beta \log \left(e_l+\frac{\beta R e_{h}-e_{l}}{1+\beta R} \right) = \log \left(e_{h}-\frac{\beta R e_{h}-e_{l}}{R(1+\beta)}\right) + \beta \log \left(e_{l}+\frac{\beta R e_{h}-e_{l}}{1+\beta}\right)
+ $$
+
+This equation holds for $R = 1$ therefore 
+
+$$\phi = \frac{\beta  e_{h}-e_{l}}{2(1+\beta)} \qaq c_h = \frac{e_h + e_l}{1+\beta} \qaq c_h = \frac{e_h + e_l}{2(1+\beta)} $$
+
+\end{proof}
+
+\begin{subproblem}
+Compare the level of consumption smoothing to the case in which the default punishment is autarky.
+\end{subproblem}
+
+\begin{proof}[Answer]
+Using the values from the class example: $e^{h}=15, e^{l}=4, \beta=0.5 $  we get: $(c_h,c_l)=(12.66,6.33)$. Therefore comparing with the pure autarky example seen in class :
+
+$$\frac{c_l}{c_h} = \frac{1}{2} < \frac{9}{10}$$
+
+So there is less consumption smoothing in this case than when the punishment is autarky.
+
+\end{proof}
+
+\begin{subproblem}
+What does this suggest about the relation between default punishment and the level of consumption smoothing?
+\end{subproblem}
+\begin{proof}[Answer]
+
+The conclusion is is that a more severe punishment will induce agents to smooth consumption even more.
+
+\end{proof}
+
+\end{problem}
+
+
+
+\bibliography{references}
+\end{document}

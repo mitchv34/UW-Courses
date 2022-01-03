@@ -1,0 +1,223 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\documentclass[12pt]{article}
+%\usepackage[left=3cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}e}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{apacite}
+\usepackage[round]{natbib}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{svg}
+\usepackage[margin = 1in, top=2cm]{geometry}% Margins
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.2em}
+\usepackage{setspace} % Setting the spacing between lines
+\usepackage{amsthm, amsmath, amsfonts, mathtools, amssymb, bm} % Math packages 
+\usepackage{svg}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{epstopdf}
+%\usepackage{subfig} % Manipulation and reference of small or sub figures and tables
+\usepackage{hyperref} % To create hyperlinks within the document
+\spacing{1.15}
+\usepackage{appendix}
+\usepackage{xcolor}
+\usepackage{cancel}
+\usepackage{enumerate}
+\usepackage{subcaption}
+\usepackage[shortlabels]{enumitem}
+
+
+\usepackage[round]{natbib}
+%\bibliographystyle{plainnat}
+\bibliographystyle{apacite}
+
+
+\newtheorem{defin}{Definition.}
+\newtheorem{teo}{Theorem. }
+\newtheorem{lema}{Lemma. }
+\newtheorem{coro}{Corolary. }
+\newtheorem{prop}{Proposition. }
+\theoremstyle{definition}
+\newtheorem{examp}{Example. }
+\newtheorem{problem}{Problem}
+% \numberwithin{problem}{subsection} 
+
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\qiq}{\qquad \implies \qquad}
+\newcommand{\qiffq}{\qquad \iff \qquad}
+\newcommand{\qaq}{\qquad \textbf{and} \qquad}
+\newcommand{\qoq}{\qquad \textbf{or} \qquad}
+\newcommand{\settf}{\text{ \emph{:} }}
+\newcommand{\chbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{.9em}}}
+\newcommand{\cchbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\checkmark$}}
+
+\title{Problem Set 1}
+\author{Mitchell Valdés-Bobes}
+\date{September 14, 2020}
+
+\begin{document}
+
+\maketitle
+\begin{problem}[Rationalizing Demand]
+Suppose you observe the following data on prices, wealth, and chosen consumption bundles for a
+certain consumer at four points in time:
+$$
+\begin{array}{ccc}
+w & p & x \\
+\hline w_1 = 100 & p_1= (5,5,5) & x_1 = (12,4,4) \\
+w_2 = 100 & p_2= (7,4,5) & x_2 = (9,3,5) \\
+w_3 =  100 & p_3= (2,4,1) & x_3 = (27,9,10) \\
+w_4 = 150 & p_4= (7,4,5) & x_4 = (15,5,5)
+\end{array}
+$$
+\begin{enumerate}[(a)]
+    \item Are the data consistent with Walras law?
+    \item Can these data be rationalized by a continuous, monotonic and concave utility function? (Hint: you don't need to calculate the cost of every bundle at every price; if $x^{i}>x^{j},$ then $p \cdot x^{i}>p \cdot x^{j}$ for any $\left.p \gg 0 .\right)$
+\end{enumerate}
+
+\end{problem}
+
+\begin{proof}[Answer]
+\textbf{Part (a)} To check if the data is consistent with Walras law we need to see if the following holds:
+$$p_i \cdot x_i = w_i \qquad \forall i=1,2,3,4$$
+after making the calculations we get that the equality holds for all $i$ therefore the data is consistent with Walras Law.
+
+\textbf{Part (b)}
+We will use the Afriat Theorem, that says that the data is rationalizable if and only if it satisfy GARP.
+\begin{itemize}
+    \item Since $x_1>x_2$ then we can conclude that $x_1\succ^D x_2$ and since $x_3, x_4$ are not feasible at $(p_1,w_1)$ we cannot say anything about those bundles.
+    \item By Walras law we know that $p_2\cdot x_2 = w_2 < w_4$ therefore $x_4\succ^D x_2$ and since $x_4>x_1$ then $x_4\succ^D x_1$ and since $x_3$ is not feasible at $(p_4,w_4)$ then we cannot say anything about it.
+    \item Since $x_3>x_1$,  $x_3>x_2$ and  $x_3>x_4$ we have that $x_3 \succ^D x_1$, $x_3 \succ^D x_2$ and $x_3\succ^D x_4$.
+\end{itemize}
+
+Then:
+$$x_4 \succ^D x_3 \succ^D x_1 \succ^D x_2$$
+
+So this data satisfies GARP therefore it is rationalizable.
+
+\end{proof}
+
+\begin{problem}[Aggregating Demand]
+Suppose there are $n$ consumers, and consumer $i \in\{1,2, \ldots, n\}$ has indirect utility function
+$$
+v^{i}\left(p, w_{i}\right)=a_{i}(p)+b(p) w_{i}
+$$
+where $\left\{a_{i}\right\}_{i=1}^{n}$ and $b$ are differentiable functions from $\mathbb{R}_{+}^{k}$ to $\mathbb{R}$.
+\begin{enumerate}[(a)]    
+    \item Use Roy's Identity to calculate each consumer's Marshallian demand $x^{i}\left(p, w_{i}\right)$.
+    \item Calculate the Marshallian demand $X(p, W)$ of a "representative consumer" with wealth $W$
+and indirect utility function
+$$
+V(p, W)=\sum_{i=1}^{n} a_{i}(p)+b(p) W
+$$
+and show that $X\left(p, \sum_{i=1}^{n} w_{i}\right)=\sum_{i=1}^{n} x^{i}\left(p, w_{i}\right)$
+\end{enumerate}
+\end
+
+\begin{proof}[Answer]
+\textbf{Part (a)}
+We will use Roy's identity to find consumer $i$ demand for good $j$:
+$$x^i_j(p,w) = \frac{\partial v^i_j(p,w)}{\patial p_j} \bigg/\frac{\partial v^i_j(p,w)}{\patial w } = \frac{\frac{\partial }{\partial p_j} a_i(p) + \frac{\partial }{\partial p_j w} b(p)}{b(p)}$$
+\textbf{Part (b)} Now we use the aditivity of the derivative operator and Roy's identity:
+$$X^i_j(p,W) = \frac{\partial V^i_j(p,W)}{\patial p_j} \bigg/\frac{\partial V^i_j(p,W)}{\patial W } = \frac{\sum_{i=1}^n\frac{\partial }{\partial p_j} a_i(p) + \frac{\partial }{\partial p_j} b(p) W}{b(p)}$$
+if $W = \sum_{i=1}^n w_i$ then we can plug it in the above equation to get:
+$$X^i_j(p,W) =  \frac{\sum_{i=1}^n\frac{\partial }{\partial p_j} a_i(p) + \frac{\partial }{\partial p_j} b(p) \sum_{i=1}^n w_i}{b(p)} = \sum_{i=1}^n\frac{1}{b(p)}\left(\frac{\partial }{\partial p_j} a_i(p) + \frac{\partial }{\partial p_j} b(p) w_i\right)=\sum_{i=1}^n x^i_j(p,w_i)$$
+\end{proof}
+
+\begin{problem}[Homothetic Preferences]
+Complete, transitive preferences $\succsim$ on $\mathbb{R}_{+}^{k}$ are called homothetic if for all $x, y \in \mathbb{R}_{+}^{k}$ and all $t>0$,
+$$
+x \succsim y \quad \leftrightarrow \quad t x \succsim t y
+$$
+
+\begin{enumerate}[(a)]
+    \item Show that if preferences are homothetic, Marshallian demand is homogeneous of degree 1 in wealth: for any $t>0, x(p, t w)=t x(p, w)$
+    \item  Show that if preferences are homothetic, monotone, and continuous, they can be represented
+    by a utility function which is homogeneous of degree $1 .$ (Hint: try the utility function we
+    used to prove existence of a utility function in class!)
+    \item Show that given (a) and (b), the indirect utility function takes the form $v(p, w)=b(p) w$ for
+    some function $b$.
+\end{enumerate}
+
+\end{problem}
+
+\begin{proof}[Answer]
+\textbf{Part (a)}
+Let
+$$x'\in x(p,w) \qaq  x''\in x(p,tw)$$
+then:
+$$x'\succeq y \: \forall y \: \text{ s.th. } py\leq w \qaq  x''\succeq y \: \forall y \: \text{ s.th. } py\leq tw$$
+But since $x'$ and $x''$ must be feasible then:
+$$p x' \leq w \qaq p x'' \leq tw $$
+then
+$$p(t x') \leq t w \qaq p \left(\frac{x''}{t}\right) \leq w $$
+This means that:
+$$x'' \succeq t x' \qaq x'\succeq \frac{x''}{t} \qiq tx' \succeq x''$$
+therefore:
+$$x''\succeq y \: \forall y \: \text{ s.th. } py\leq w \qaq  x'\succeq y \: \forall y \: \text{ s.th. } py\leq tw$$
+This is:
+$$x(p,tw) \subseteq tx(p,w) \qaq tx(p,w) \subseteq x(p,tw) \qiq tx(p,w) = x(p,tw)$$
+\textbf{Part (b)}
+Suppose that a preference relation $ \succsim $ is continuous and homothetic. By the theorem of the existence of a utility function we have that there exists a utility function $u$ such that 
+$$ x \geq y \qiq u(x) \geq u(y) $$
+
+Let $x$ be a bundle in $\mathbb{R}_{+}^{k}$ y and let $\alpha>0 $ By construction, $u(\cdot )$ is such that $$u(y) \alpha \sim y $$ for every feasible basket, in particular this is true for the baskets $ x $ and $ t x, $ so we have $$u(x) \alpha \sim x \qaq \ u(t x)\alpha \sim  tx $$ Now, since $ \succsim $ is homothetic, $$ u(x) \alpha \sim x \qiq t u (x) \alpha \sim tx $$ Then, by transitivity of the relation $ \sim $ it follows that $$ t u (x) \alpha \sim u (t x) \alpha$$ from which it follows that 
+$$ u(t x) = tu(x) $$
+
+Now suppose that the preference relation $\succeq$ is represented by a utility function which is homogeneous of degree 1. Then for any two bundles $x,y$ such that $x\succeq y$ and $t>0$ we have:
+$$u(x)\geq u(y) \qiq tu(x)\geq tu(y)  \qiq u(tx)\geq u(ty) \qiq tx \succeq ty$$
+then the preferences are homotetic.
+\textbf{Part (c)} Since $w> 0$
+$$v(p,w) = u(x(p,w)) = u(wx(p,1))=w \underbrace{u(x(p,1))}_{b(p)}$$
+\end{proof}
+
+\begin{problem}[Quasilinear Utility]
+Let $X=\mathbb{R} \times \mathbb{R}_{+}^{k-1}$ (allow positive or negative consumption of the first good), suppose utility
+$$
+u(x)=x_{1}+U\left(x_{2}, \ldots, x_{k}\right)
+$$
+is quasilinear, and fix the price of the first good $p_{1}=1$.
+\begin{enumerate}[(a)]
+    \item  Show that Marshallian demand for goods 2 through $k$ does not depend on wealth.
+    \item Show that indirect utility can be written as $v(p, w)=w+\tilde{v}(p)$ for some function $\tilde{v}$.
+ \item Show the expenditure function can be written as $e(p, u)=u-f(p)$ for some function $f$.
+ \item Show that the Hicksian demand for goods 2 through $k$ does not depend on target utility.
+ \item Show that Compensating Variation and Equivalent Variation are the same when the price of
+    good $i \neq 1$ changes, and also equal to Consumer Surplus.
+\end{enumerate}
+\end{problem}
+\begin{proof}[Answer]
+\textbf{Part (a)}
+Assuming that $U(x_2,..,x_k)$ is increasing then we can take the constraint with equality and re-write the maximization problem as:
+$$\max \: w - \sum_{i=2}^kx_i + U(x_2,..,x_k) $$
+which is equivalent to
+$$\max \: U(x_2,..,x_k)  - \sum_{i=2}^kx_i $$
+since the demand for each $x_i$ with $i=2,..,k$ is the solution to the previous problem, it does not depend on $w$.
+
+\textbf{Part (b)}
+\begin{align*}
+    v(p,w)&=\max_x\left\{x_1 + U(x_2,...,x_k)\right\} \quad \text{ s.t. } x_1 + \sum_{i=2}^kp_ix_i = w \\
+          &=\max_x\left\{x_1 + U(x_2,...,x_k)\right\} \quad \text{ s.t. } x_1  = w -\sum_{i=2}^kp_ix_i\\
+          &=\max_x\left\{w -\sum_{i=2}^kp_ix_i + U(x_2,...,x_k)\right\}\\
+          &= w + \underbrace{\max_x\left\{ U(x_2,...,x_k) -\sum_{i=2}^kp_ix_i\right\}}_{\Bar{v}(p)}\\
+          & = w+\tilde{v}(p)
+\end{align*}
+\textbf{Part (c)}
+We known that
+$$v(p,e(p,u)) = u $$
+therefore:
+$$e(p,u)+\tilde{v}(p) = u \qiq e(p,u) = u \underbrace{-\tilde{v}(p)}_{f(p)}$$
+\textbf{Part (d)}
+$$h(p,u) = x(p, e(p, u)) = x(p, u - f(p))$$
+which we show in \textbf{Part (a)} that does not depend on wealth therefore $x(p, u - f(p))$ does not depend on target utility $u$.
+
+\textbf{Part (e)} From \textbf{Part (c)} we know $e(p,u) = u -\tilde{v}(p)$. Let $p^0$ and $u^0$ be the initial price and utility, and a change from $p^0$ to $p^1$ that leds to a new utility $u^1$, then:
+\begin{align*}
+    EV &= e(p^0,u^1)-e(p^0,u^0)= u_1 - \tilde{v}(p^0)-(u_0 -\tilde{v}(p^0))=u_1-u_0\\
+    CV &= e(p^1,u^1)-e(p^1,u^0)= u_1 - \tilde{v}(p^1)-(u_0 -\tilde{v}(p^1))=u_1-u_0
+\end{align*}
+Therefore $EV = CV$.
+\end{proof}
+\end{document}

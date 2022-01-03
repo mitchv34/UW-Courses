@@ -1,0 +1,293 @@
+
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[left=3cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}e}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{apacite}
+\usepackage[round]{natbib}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{svg}
+\usepackage[margin = 1in, top=2cm]{geometry}% Margins
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.2em}
+\usepackage{setspace} % Setting the spacing between lines
+\usepackage{amsthm, amsmath, amsfonts, mathtools, amssymb, bm} % Math packages 
+\usepackage{svg}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{epstopdf}
+\usepackage{subfig} % Manipulation and reference of small or sub figures and tables
+\usepackage{hyperref} % To create hyperlinks within the document
+\spacing{1.15}
+\usepackage{appendix}
+\usepackage{xcolor}
+\usepackage{cancel}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{optidef}
+\usepackage{etoolbox}
+
+\usepackage[round]{natbib}
+%\bibliographystyle{plainnat}
+\bibliographystyle{apacite}
+
+
+\newtheorem{defin}{Definition.}
+\newtheorem{teo}{Theorem. }
+\newtheorem{lema}{Lemma. }
+\newtheorem{coro}{Corolary. }
+\newtheorem{prop}{Proposition. }
+\theoremstyle{definition}
+\newtheorem{examp}{Example. }
+\newtheorem{problem}{Problem}
+\newtheorem{subproblem}{}[problem]
+% \numberwithin{problem}{subsection} 
+
+% \AtBeginEnvironment{problem}{\color{gray}}
+% \AtBeginEnvironment{subproblem}{\color{gray}}
+\AtBeginEnvironment{proof}{\color{red}}
+
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\qiq}{\qquad \implies \qquad}
+\newcommand{\qiffq}{\qquad \iff \qquad}
+\newcommand{\qaq}{\qquad \textbf{and} \qquad}
+\newcommand{\qoq}{\qquad \textbf{or} \qquad}
+\newcommand{\settf}{\text{ \emph{:} }}
+\newcommand{\chbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{.9em}}}
+\newcommand{\cchbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\checkmark$}}
+
+\title{Problem Set 2}
+\author{Mitchell Valdés-Bobes}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{problem} (50 points) In the context of the environment studied in class, please prove the following proposition
+\begin{prop}
+ The allocations/price in a CE satisfy 
+\begin{equation}\label{cond1}
+{c}\left({s}^{t}\right)+{g}\left({s}^{{t}}\right)+{k}\left({s}^{{t}}\right)={F}\left({k}\left({s}^{{t}-1}\right), {l}\left({s}^{{t}}\right), {s}_{{t}}\right)+(1-\delta) {k}\left({s}^{{t}-1}\right)
+\end{equation}
+and
+\begin{equation}\label{cond2}
+\sum_{t, s^{t}} \beta^{t} \mu\left(s^{t}\right)\left[U_{c}\left(s^{t}\right) c\left(s^{t}\right)+U_{l}\left(s^{t}\right) l\left(s^{t}\right)\right]=U_{c}\left(s_{0}\right)\left[R_{k}\left(s_{0}\right) k_{-1}+R_{b}\left(s_{0}\right) b_{-1}\right]
+\end{equation}
+Furthermore given allocations/prices that satisfy these equations we can construct allocations/prices that constitute a ${CE}$
+\end{prop}
+Note: please show all the steps in detail. In class we sketched out one direction of the proof.
+\end{problem}
+\begin{defin}A Competitive Equilibrium is a policy $\pi$, an allocation $x$ and a price system $\left(w, r, R_{b}\right)$ such that:
+\begin{enumerate}[(i)]
+    \item Given the policy and price system, allocation solves:
+\begin{align*}
+    \max_{\{c(s^{t}), l(s^t)\}) }\quad &\sum_{{t}, {s}^{t}} \beta^{t} \mu\left({s}^{{t}}\right) {U}\left(c\left(s^{t}\right), l\left(s^{t}\right)\right)\\ \text{subject to: }
+    c\left(s^{t}\right)+k\left(s^{t}\right)+b\left(s^{t}\right) &\leqslant\left[1-\tau_n\left(s^{t}\right)\right] w\left(s^{t}\right) l\left(s^{t}\right)+R_{k}\left(s^{t}\right) k\left(s^{t-1}\right)+R_{b}\left(s^{t}\right) b\left(s^{t-1}\right)\\
+    \text{where }&
+R_{k}\left(s^{t}\right)=1+\left[1-\theta\left(s^{t}\right)\right]\left[r\left(s^{t}\right)-\delta\right]
+\end{align*}
+\item Firms solve:
+$$\max_{\{k(s^{t-1}), l(s^t) \}}F(k(s^{t-1}), l(s^t), s^t) - r(s^t)k(s^{t-1}) - w(s^t)l(s^t)$$
+
+\item Government Budget Constraint:
+$$
+ {b}\left( {s}^{ {t}}\right)= {R}_{ {b}}\left( {s}^{ {t}}\right)  {b}\left( {s}^{ {t}-1}\right)+ {g}\left( {s}^{ {t}}\right)-\tau_n\left( {s}^{ {t}}\right) w\left( {~s}^{ {t}}\right)  {l}\left( {s}^{ {t}}\right)-\theta\left( {s}^{ {t}}\right)\left[ {r}\left( {s}^{ {t}}\right)-\delta\right]  {k}\left( {s}^{ {t}-1}\right)
+$$
+holds.
+\end{enumerate}
+\end{defin}
+
+\begin{proof}[Answer]
+We start by proving necessity $(\implies)$:
+
+First note that since utility is increasing in consumption the household \textit{BC} will hold in equality next we can substitute the government's budget constraint in the LHS and cancel terms to get:
+
+$${c}\left({s}^{t}\right)+{g}\left({s}^{{t}}\right)+{k}\left({s}^{{t}}\right)= w(s^t)l(s^t) + r(s^t)k(s^{t+1}) +(1-\delta) {k}\left({s}^{{t}-1}\right)$$
+
+Nest, form the firms optimization problem we get the following optimallity conditions:
+\begin{equation}\label{firm1}
+r\left(s^{t}\right)=F_{k}\left(k\left(s^{t-1}\right), l\left(s^{t}\right), s_{t}\right)    
+\end{equation}
+
+\begin{equation}\label{firm2}
+w\left(s^{t}\right)=F_{l}\left(k\left(s^{t-1}\right), l\left(s^{t}\right), s_{t}\right)    
+\end{equation}
+
+
+The production function is homogeneous of degree one therefore we can use Euler's theorem on homogeneous functions to get:
+
+\begin{align*}
+F\left(k\left(s^{t-1}\right), l\left(s^{t}\right), s_{t}\right) = F_{k}\left(k\left(s^{t-1}\right), l\left(s^{t}\right), s_{t}\right)k\left(s^{t-1}\right) + F_{l}\left(k\left(s^{t-1}\right), l\left(s^{t}\right), s_{t}\right) l\left(s^{t}\right)
+\end{align*}
+
+Using the optimality conditions of the Firm we get:
+
+$$
+F\left(k\left(s^{t-1}\right), l\left(s^{t}\right), s_{t}\right) = r\left(s^{t}\right)k\left(s^{t-1}\right) + w\left(s^{t}\right)l\left(s^{t}\right) 
+$$
+
+Plugin in the above expression we get:
+
+$${c}\left({s}^{t}\right)+{g}\left({s}^{{t}}\right)+{k}\left({s}^{{t}}\right)={F}\left({k}\left({s}^{{t}-1}\right), {l}\left({s}^{{t}}\right), {s}_{{t}}\right)+(1-\delta) {k}\left({s}^{{t}-1}\right)$$
+
+Which is condition \eqref{cond1}.
+
+To show that condition \eqref{cond2} must hold, note that since allocations constitute a competitive equilibrium then the first order condition for the agent's problem must hold. Denote $p(t)$ as the Lagrange multiplier on the Budget Constraint of the household, the First Order Conditions of the agent's problem and complementary slackness are:
+
+\begin{align*}
+\beta^{ {t}} \mu\left( {s}^{ {t}}\right)  {U}_{ {c}}\left( {s}^{ {t}}\right)&= {p}\left( {s}^{ {t}}\right) \\
+\beta^{ {t}} \mu\left( {s}^{ {t}}\right)  {U}_{ {l}}\left( {s}^{ {t}}\right)&=- {p}\left( {s}^{ {t}}\right)\left(1-\tau_n\left( {s}^{ {t}}\right)\right) w\left( {~s}^{ {t}}\right) \\
+0&=\left[p\left(s^{t}\right)-\sum_{s^{t}+1} p\left(s^{t+1}\right) R_{b}\left(s^{t+1}\right)\right] b\left(s^{t}\right) \\
+0&=\left[p\left(s^{t}\right)-\sum_{s^{t+1}} p\left(s^{t+1}\right) R_{k}\left(s^{t+1}\right)\right] k\left(s^{t}\right)
+\end{align*}
+
+
+Take the budget constraint and multiply by $p(s^t):$
+
+$$
+ p(s^t)\Big[c\left( s^{t}\right)+k\left(s^{t}\right)+b\left(s^{t}\right)\Big] =p(s^t)\Big[\left[1-\tau_n\left(s^{t}\right)\right] w\left(s^{t}\right) l\left(s^{t}\right)+R_{k}\left(s^{t}\right) k\left(s^{t-1}\right)+R_{b}\left(s^{t}\right) b\left(s^{t-1}\right)\Big]
+$$
+
+Notice that if we sum over all $t$ and $s^t$ each term $p(s^t)k(s^t)$ on the left hand can equated to (and therefore canceled with) $$k\left(s^{t}\right) \sum_{s^{t+1}}p\left(s^{t+1}\right) R_{k}\left(s^{t+1}\right)$$
+this comes from the First Order condition associated with $k(s^t)$ and can be done for all $t>0$. Note that this also holds for $b(s^t)$. Therefore we get:
+
+    \begin{equation}\label{eq1_1}
+    \sum_{ {t},  {s}^{ {t}}}  {p}\left( {s}^{ {t}}\right)\left[ {c}\left( {s}^{ {t}}\right)-\left[1-\tau_n\left( {s}^{ {t}}\right)\right] w\left( {~s}^{ {t}}\right)  {l}\left( {s}^{ {t}}\right)\right]= {p}\left( {s}_{0}\right)\left[ {R}_{ {k}}\left( {s}_{0}\right)  {k}_{-1}+ {R}_{ {b}}\left( {s}_{0}\right)  {b}_{-1}\right]
+    \end{equation}
+
+from the FOC's associated to $c(s^t)$ and $l(s^t)$ we know:
+
+$$p(s^t)c(s^t) - p(s^t)[1-\tau(s^t)]w(s^t)l(s^t)  =  \beta^{ {t}} \mu\left( {s}^{ {t}}\right) {U}_{ {c}}\left( {s}^{ {t}}\right)  {c}\left( {s}^{ {t}}\right)+ \beta^{ {t}} \mu\left( {s}^{ {t}}\right){U}_{ {l}}\left( {s}^{ {t}}\right)  {l}\left( {s}^{ {t}}\right) $$
+
+plugin in \eqref{eq1_1} we obtain:
+
+$$
+\sum_{ {t},  {s}^{ {t}}} \beta^{ {t}} \mu\left( {s}^{ {t}}\right)\left[ {U}_{ {c}}\left( {s}^{ {t}}\right)  {c}\left( {s}^{ {t}}\right)+ {U}_{ {l}}\left( {s}^{ {t}}\right)  {l}\left( {s}^{ {t}}\right)\right]= {U}_{ {c}}\left( {s}_{0}\right)\left[ {R}_{ {k}}\left( {s}_{0}\right)  {k}_{-1}+ {R}_{ {b}}\left( {s}_{0}\right)  {b}_{-1}\right]
+$$
+
+which is condition \eqref{cond2} 
+
+Now we will prove sufficiency $(\:\Longleftarrow\:)$
+
+Suppose we have sequence of allocation/prices/policy such that conditions \eqref{cond1} and \eqref{cond2} hold, we need to prove that those sequences are consistent with optimizing behavior from firms (first order condition holds) and households and that those sequences are feasible (government and household budget constraint hold.).
+
+The firms optimality conditions, \eqref{firm1} and \eqref{firm2} determine the prices $r(s^t)$ and $w(s^t)$.
+
+Using the agent's first oder condition we can determine a sequence of taxes on labor $\left(\tau_{n}(s^t)\right)$ such that allocations are optimal for the agents given prices:
+
+$$\left(1-\tau_{n}(s^t)\right )w(s^t) = \frac{U_c(s^t)}{U_l(s^t)}$$
+
+Consider the following two equations:
+
+\begin{equation}\label{indent_1}
+    \mu(s^t)U_c(s^t)=\beta\sum_{s^{t+1}}U_c(s^{t+1})(1+\theta(s^{t+1}))(r(s^{t})-\delta)
+\end{equation}
+\begin{equation}\label{indent_2}
+    \mu(s^t)U_c(s^t)=\beta\sum_{s^{t+1}}U_c(s^{t+1})R_b(s^{t+1})
+\end{equation}
+
+Note that if we define a Lagrange multiplier $p(s^t)$ according to:
+
+$$\beta^{t} \mu\left(s^{t}\right) U_{c}\left(s^{t}\right)=p\left(s^{t}\right)$$
+
+Then we can select any sequence of prices $R_b(s^t)$ and taxes $\theta(s^t)$ such that \eqref{indent_1} and \eqref{indent_2} hold. Since we can recover all of the first order conditions for the households this allocation solves the household problem. 
+
+Note that the solution to \eqref{indent_1} and \eqref{indent_2} may not be unique but we won't need uniqueness.
+ 
+Now we can use the government Budget Constraint to recursively compute the sequence $\left(b(s^t)\right)$, this assumes that we know the initial distribution of wealth and consumption for $s_0$ and $s_{-1}$, the government Budget Constraint holds by construction.
+
+We have constructed allocation/prices/policy for which the first order conditions for the firm and households hold. This means that firms and households are optimizing, therefore if sequences are is feasible for the Household they'll be a Competitive Equilibrium. 
+
+To see that the this in fact is a Competitive Equilibrium we can re do the work that we did to prove necessity and the Euler Theorem for homogeneous functions to obtain the Household budget constraint.
+
+\end{proof}
+
+\begin{problem} ( 25 points) Consider the previous environment and suppose that we also have proportional consumption taxes $\left\{\tau_{{ct}}\right\}$. Derive the implementability constraint.
+\end{problem}
+\begin{proof}[Answer]
+With proportional taxes on consumption the household problem becomes:
+\begin{align*}
+    \max_{\{c(s^{t}), l(s^t)\}) }\quad &\sum_{{t}, {s}^{t}} \beta^{t} \mu\left({s}^{{t}}\right) {U}\left(c\left(s^{t}\right), l\left(s^{t}\right)\right)\\ \text{s.t:}
+    (1+\tau_c(s^t))c\left(s^{t}\right)+k\left(s^{t}\right)+b\left(s^{t}\right) &\leqslant\left[1-\tau_n\left(s^{t}\right)\right] w\left(s^{t}\right) l\left(s^{t}\right)+R_{k}\left(s^{t}\right) k\left(s^{t-1}\right)+R_{b}\left(s^{t}\right) b\left(s^{t-1}\right)\\
+    \text{where }&
+R_{k}\left(s^{t}\right)=1+\left[1-\theta\left(s^{t}\right)\right]\left[r\left(s^{t}\right)-\delta\right]
+\end{align*}
+First Order Conditions of the agent's problem and complementary slackness are:
+
+\begin{align*}
+\beta^{ {t}} \mu\left( {s}^{ {t}}\right)  {U}_{ {c}}\left( {s}^{ {t}}\right)&= {p}\left( {s}^{ {t}}\right)\left(1 + {\tau}_{c}\left( {s}^{ {t}}\right)\right) \\
+\beta^{ {t}} \mu\left( {s}^{ {t}}\right)  {U}_{ {l}}\left( {s}^{ {t}}\right)&=- {p}\left( {s}^{ {t}}\right)\left(1-\tau_n\left( {s}^{ {t}}\right)\right) w\left( {~s}^{ {t}}\right) \\
+0&=\left[p\left(s^{t}\right)-\sum_{s^{t}+1} p\left(s^{t+1}\right) R_{b}\left(s^{t+1}\right)\right] b\left(s^{t}\right) \\
+0&=\left[p\left(s^{t}\right)-\sum_{s^{t+1}} p\left(s^{t+1}\right) R_{k}\left(s^{t+1}\right)\right] k\left(s^{t}\right)
+\end{align*}
+Now expression \eqref{eq1_1} have the form:
+    \begin{multline}\label{eq2_1}
+    \sum_{ {t},  {s}^{ {t}}}  {p}\left( {s}^{ {t}}\right)\left[\left(1 + {\tau}_{c}\left( {s}^{ {t}}\right)\right) {c}\left( {s}^{ {t}}\right)-\left[1-\tau_n\left( {s}^{ {t}}\right)\right] w\left( {~s}^{ {t}}\right)  {l}\left( {s}^{ {t}}\right)\right]\\= {p}\left( {s}_{0}\right)\left[ {R}_{ {k}}\left( {s}_{0}\right)  {k}_{-1}+ {R}_{ {b}}\left( {s}_{0}\right)  {b}_{-1}\right]
+    \end{multline}
+
+from the FOC's associated to $c(s^t)$ and $l(s^t)$ we know:
+
+$$p(s^t)[1-\tau_c(s^t)]c(s^t) - p(s^t)[1-\tau_n(s^t)]w(s^t)l(s^t)  =  \beta^{ {t}} \mu\left( {s}^{ {t}}\right) {U}_{ {c}}\left( {s}^{ {t}}\right)  {c}\left( {s}^{ {t}}\right)+ \beta^{ {t}} \mu\left( {s}^{ {t}}\right){U}_{ {l}}\left( {s}^{ {t}}\right)  {l}\left( {s}^{ {t}}\right) $$
+
+plugin in \eqref{eq2_1} we obtain:
+
+$$
+\sum_{ {t},  {s}^{ {t}}} \beta^{ {t}} \mu\left( {s}^{ {t}}\right)\left[ {U}_{ {c}}\left( {s}^{ {t}}\right)  {c}\left( {s}^{ {t}}\right)+ {U}_{ {l}}\left( {s}^{ {t}}\right)  {l}\left( {s}^{ {t}}\right)\right]= {U}_{ {c}}\left( {s}_{0}\right)\left[ {R}_{ {k}}\left( {s}_{0}\right)  {k}_{-1}+ {R}_{ {b}}\left( {s}_{0}\right)  {b}_{-1}\right]
+$$
+
+which is condition \eqref{cond2}. 
+
+We have arrived to the same implementability constraint than in the case with only capital and labor taxes. 
+
+The idea is that the primal approach to the Ramsey problem eliminate taxes and prices, so that the government is choosing allocations that are consistent with optimization behavior of the firm and households \cite{ljungqvist2018recursive}.
+\end{proof}
+
+
+\begin{problem}(25 points) Consider the previous environment but suppose that the government only has access to consumption $\left\{\tau_{{ct}}\right\}$ and labor income taxes $\tau_{n t}$.
+\end{problem}
+\begin{subproblem}
+Define a competitive equilibrium for this setting.
+\end{subproblem}
+\begin{proof}[Answer]
+\begin{defin}A Competitive Equilibrium is a policy $\pi(s^t) = \left(\tau_n(s^t), \tau_c(s^t)\right)$, an allocation $x$ and a price system $\left(w, r, R_{b}\right)$ such that:
+\begin{enumerate}[(i)]
+    \item Given the policy and price system, allocation solves:
+ \begin{align*}
+     \max_{\{c(s^{t}), l(s^t)\}) }\quad &\sum_{{t}, {s}^{t}} \beta^{t} \mu\left({s}^{{t}}\right) {U}\left(c\left(s^{t}\right), l\left(s^{t}\right)\right)\\ \text{subject to: }&
+     (1+\tau_c(s^t))c\left(s^{t}\right)+k\left(s^{t}\right)+b\left(s^{t}\right) \\&\leqslant\left[1-\tau_n\left(s^{t}\right)\right] w\left(s^{t}\right) l\left(s^{t}\right)+\left(1+r\left(s^{t}\right)-\delta\right)\left(s^{t}\right) k\left(s^{t-1}\right)+R_{b}\left(s^{t}\right) b\left(s^{t-1}\right)
+ \end{align*}
+\item Firms solve:
+$$\max_{\{k(s^{t-1}), l(s^t) \}}F(k(s^{t-1}), l(s^t), s^t) - r(s^t)k(s^{t-1}) - w(s^t)l(s^t)$$
+
+\item Government Budget Constraint:
+$$
+ {b}\left( {s}^{ {t}}\right)= {R}_{ {b}}\left( {s}^{ {t}}\right)  {b}\left( {s}^{ {t}-1}\right)+ {g}\left( {s}^{ {t}}\right)-\tau_n\left( {s}^{ {t}}\right) w\left( {~s}^{ {t}}\right)  {l}\left( {s}^{ {t}}\right)-\tau_c(s^t)c\left(s^{t}\right)
+$$
+holds.
+\end{enumerate}
+\end{defin}
+\end{proof}
+\begin{subproblem}
+Show that any allocation resulting in an equilibrium of this sort can also be realized as an equilibrium in a world where the government must finance the same sequence of expenditures, but can only use labor and capital income taxes.
+\end{subproblem}
+\begin{proof}[Answer]
+Suppose that we have a Competitive Equilibrium achieved with the policy $\pi(s^t) = \left(\tau_n(s^t), \tau_c(s^t)\right)$. Consider a new policy $\hat{\pi}(s^t) = \left(\tau_n(s^t), \theta(s^t)\right)$ where the tax on labor is the same and for every state the capital tax is defined as follows:
+
+$$\theta\left(s^{t}\right)=\frac{\tau_{c}(s^t) c\left(s^{t}\right)}{\left[r\left(s^{t}\right)-\delta\right] k(s^{t-1})}$$
+
+Note that
+$$ \theta(s^{t})[r(s^t)-\delta]k(s^{t-1}) = \tau_c(s^{t})c(s^{t})$$
+therefore
+$$R_k(s^t)k(s^{t-1}) = (1+r(s^t)-\delta)k(s^{t-1}) - \tau_c(s^{t})c(s^{t})$$
+
+which means that the allocation will be Budgets Constraints for the household and the government are equivalent.
+
+Since Budget Constraint for the government and household are equivalent then \eqref{cond1} will hold.
+
+\end{proof}
+
+\bibliography{references}
+\end{document}

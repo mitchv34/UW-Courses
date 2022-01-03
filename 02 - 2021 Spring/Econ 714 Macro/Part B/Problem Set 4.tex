@@ -1,0 +1,233 @@
+
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[left=3cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}e}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{apacite}
+\usepackage[round]{natbib}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{svg}
+\usepackage[margin = 1in, top=2cm]{geometry}% Margins
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.2em}
+\usepackage{setspace} % Setting the spacing between lines
+\usepackage{amsthm, amsmath, amsfonts, mathtools, amssymb, bm} % Math packages 
+\usepackage{svg}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{epstopdf}
+\usepackage{subfig} % Manipulation and reference of small or sub figures and tables
+\usepackage{hyperref} % To create hyperlinks within the document
+\spacing{1.15}
+\usepackage{appendix}
+\usepackage{xcolor}
+\usepackage{cancel}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{optidef}
+\usepackage{etoolbox}
+
+\usepackage[round]{natbib}
+%\bibliographystyle{plainnat}
+\bibliographystyle{apacite}
+
+
+\newtheorem{defin}{Definition.}
+\newtheorem{teo}{Theorem. }
+\newtheorem{lema}{Lemma. }
+\newtheorem{coro}{Corolary. }
+\newtheorem{prop}{Proposition. }
+\theoremstyle{definition}
+\newtheorem{examp}{Example. }
+\newtheorem{problem}{Problem}
+\newtheorem{subproblem}{}[problem]
+% \numberwithin{problem}{subsection} 
+
+% \AtBeginEnvironment{problem}{\color{gray}}
+% \AtBeginEnvironment{subproblem}{\color{gray}}
+\AtBeginEnvironment{proof}{\color{red}}
+
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\qiq}{\qquad \implies \qquad}
+\newcommand{\qiffq}{\qquad \iff \qquad}
+\newcommand{\qaq}{\qquad \textbf{and} \qquad}
+\newcommand{\qoq}{\qquad \textbf{or} \qquad}
+\newcommand{\settf}{\text{ \emph{:} }}
+\newcommand{\chbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{.9em}}}
+\newcommand{\cchbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\checkmark$}}
+
+\title{Problem Set 4}
+\author{Mitchell Valdés-Bobes}
+\date{\today}
+\title{Problem Set 4}
+\author{Mitchell Valdés-Bobes}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{problem}[50 points] Suppose that an infinitely lived government has to finance a fixed stream of expenditures, $\left\{{g}_{{t}}\right\}_{{t} \geqslant 0}$ and can only use consumption taxes for this purpose. Assume that the representative consumer has the utility function:
+$$
+\sum_{t=0}^{\infty} \beta^{t}\left[\frac{c_{t}^{1-\sigma}}{1-\sigma}+v\left(l_{t}\right)\right]
+$$
+where $c_{t}$ is the consumption in period $t$ and $l_{t}$ is leisure in period $t$. Assume that $\sigma \geqslant 0$ and $v$ is an increasing function. Also assume that the production function, $F(K, L)$ satisfies all the standard assumptions (i.e., CRS, etc.), that the representative household has an initial endowment of the capital stock, $k_{0}, l_{t} \leqslant 1$ and that capital is subject to the usual law of motion, $k_{t+1}=(1-\delta) k_{t}+x_{t}$.Set up the Ramsey Problem for this economy, and show that the optimal policy is to set the consumption tax at a constant rate from period one onwards (i.e., show that $\tau_{{ct}}^{{RP}}=\tau_{{ct}+1}^{{RP}}$ for all ${t} \geqslant 1$.
+\end{problem}
+\begin{proof}[Answer]
+\begin{itemize}
+    Denote $n_t = 1-l_t$.
+    \item Households preferences $$\sum_{t=1}^{\infty}\beta^t \left[\frac{c_t^{1-\sigma}}{1-\sigma} + v(1-n_t)\right]$$
+    \item Households Budget Constraints:
+    \begin{equation}\tag{HHBC}\label{hhbc}(1+\tau^c_t)+k_t + b_t = w_tn_t+(1-\delta+r_t)k_{t-1}+R^b_t b_{t-1}\end{equation}
+    \item Firm's problem:$$\max_{k_{t-1},n_t}\quad F(k_{t-1}, n_t) + w_tn_t+r_tk_{t-1}$$
+    \item Government's Budged Constraints:\begin{equation}\tag{GBC}\label{gbc}b_t + \tau_{t}^c c_t = R^b_t b_{t-1} -g_t \end{equation}
+\end{itemize}
+
+From the Firm's Problem we know that in equilibrium:
+
+\begin{align*}
+    r_t &= F_k(k_{t-1}, n_t)\\
+    w_t &= F_n(k_{t-1}, n_t)
+\end{align*}
+
+Substituting \eqref{gbc} in to \eqref{hhbc} we obtain:
+
+ \begin{equation}\tag{RC}\label{rc}(1+\tau^c_t)c_t+k_t + g_t = \underbrace{w_tn_t+r_t k_{t-1}}_{=F(k_{t-1}, n_t)\footnotemark} + (1-\delta)k_{t-1}\end{equation}
+\footnotetext{ by Euler's Theorem for homogeneous functions}
+
+Denote $R^k_t = 1+r_t-\delta)$. From the agent problem's first order conditions we get:
+
+\begin{align*}
+    \beta^t c_t^{-\sigma} &= p_t(1+\tau_t^c)\\
+    \beta^t v'(1-n_t) &= p_tw_t\\
+    0& = (p_t - p_{t+1}R^k_t)k_t\\
+    0& = (p_t - p_{t+1}R^b_t)b_t
+\end{align*}
+
+where $p_t$ is the Lagrange multiplier associated with the $t-th$ restriction. Multiplying \eqref{hhbc} by $p_t$, summing over $t$ and using the first order conditions we obtain the following implementability constraint:
+
+\begin{equation}\tag{IC}\label{impconst}
+    \sum_{t=1}^\infty \beta^t\Big(c^{1-\sigma} - n_t v'(1-n_t)\Big) = C_0
+\end{equation}
+
+where $C_0$ is a constants that depends on the values of the allocation, the prices and the consumption capital at time $t=0$, note that I will drop this constant from the optimization problem that characterize the Ramsey Problem.
+
+\begin{defin}[Ramsey Problem] The Ramsey Problem solves:
+
+$$\max_{c_t, n_t}\quad \sum_{t=1}^\infty \beta^t\left[\frac{c^{1-\sigma}}{1-\sigma}+v(1-n_t)+\lambda((c^{1-\sigma} - n_t v'(1-n_t))\right]$$
+
+Subject to \eqref{rc}.
+\end{defin}
+
+Taking the first order conditions associated to consumption and capital on the Ramsey Problem we have:
+
+\begin{align*}
+    c_t:&\qquad \beta^tc_t^{-\sigma}(1+\lambda(1-\sigma)) = \mu_t(1+\tau_t^c)\\
+    k_t:&\qquad \mu_t = \mu_{t+1}(1-\delta r_t)
+\end{align*}
+
+Where $\mu_t$ is the Lagrange multiplier associated with the \eqref{rc} constraint. Using both conditions we arrive at the following Euler Equation:
+
+\begin{equation}\tag{EE}\label{ee}
+    \frac{1+\tau_{t+1}^c}{1+\tau_{t}^c}=\beta\frac{c_{t+1}^{-\sigma}}{c_{t}^{-\sigma}}(1-\delta+r_t)
+\end{equation}
+
+Note that if the government sets $\tau_t^c = \tau_{t+1}^1$ then the \eqref{ee} becomes:
+
+$$c_{t}^{-\sigma}=\frac{1+\tau_{t+1}^c}{1+\tau_{t}^c}=\beta c_{t+1}^{-\sigma}(1-\delta+r_t)$$
+
+which is the Euler Equation of the problem without taxes.
+
+This means that if the government chooses constant taxes on capital those taxes wont distort agents decisions, therefore this is the optimal policy.  
+
+\end{proof}
+
+\begin{problem}
+Problem 2 (50 points) Consider a cash-credit goods economy with preferences given by
+$$
+\log c_{1 {t}}+\alpha \log c_{2 {t}}+\gamma \log \left(1-n_{{t}}\right)
+$$
+where $n_{t}$ is the time spent in market activities. The resource constraint is
+$$
+{c}_{1 {t}}+{c}_{2 {t}}=n_{{t}}
+$$
+The cash-in-advance constraint is
+$$
+p_{t} c_{1 t} \leqslant M_{t}
+$$
+The budget constraint for the hhld at the beginning of the period is
+$$
+M_{{t}}+{B}_{{t}} \leqslant\left(M_{{t}-1}-{p}_{{t}-1} {c}_{1 {t}-1}\right)-{p}_{{t}-1} {c}_{2 {t}-1}+w_{{t}-1} {n}_{{t}-1}+{R}_{{t}-1} {~B}_{{t}-1}-{T}_{{t}}
+$$
+
+where $T_{t}$ denotes lump-sum taxes and all the terms are as we discussed in class. The government conducts monetary policy to keep the interest rate fixed at some level ${R}$ in all periods.
+
+\end{problem}
+
+\begin{subproblem}
+    Define a competitive equilibrium.
+\end{subproblem}
+\begin{proof}[Answer]
+\begin{defin} A Competitive Equilibrium is an allocation $\left(c_{1,t}, c_{2,t}, l_t, M_t, B\_t\right)$ and a price system $\left(p_t, R_t\right)$ such that
+
+\begin{enumerate}
+    \item Given prices the allocation solves the following household problem:
+    \begin{align*}
+        \max&\quad \sum_{t=1}^\infty{\log c_{1 {t}}+\alpha \log c_{2 {t}}+\gamma \log \left(1-n_{{t}}\right)}\\
+        \text{s.t:}&\quad M_{{t}}+{B}_{{t}} \leqslant\left(M_{{t}-1}-{p}_{{t}-1} {c}_{1 {t}-1}\right)-{p}_{{t}-1} {c}_{2 {t}-1}+w_{{t}-1} {n}_{{t}-1}+{R}_{{t}-1} {~B}_{{t}-1}-{T}_{{t}}\\
+        &\quad p_{t} c_{1 t} \leqslant M_{t}
+    \end{align*}
+    \item The following Budget Constraint for the Government Holds:
+    $$M_t-M_{t-1}+B_t=R_{t-1}B_{t-1}+p_{t-1}g_{t-1} + T_t$$
+    
+    \item The resource constraint holds:
+    $$c_{1,t}+c_{2,t} = n_t$$
+\end{enumerate}
+
+\end{defin}
+\end{proof}
+
+
+\begin{subproblem}
+    What happens to $n_{t}$ as $R$ increases. Prove your result.
+\end{subproblem}
+\begin{proof}[Answer]
+Consider the Lagrangian of the agent's problem:
+\begin{align*}
+\mathcal{L}(\cdot) &= \sum_{t=1}^\infty{\log c_{1 {t}}+\alpha \log c_{2 {t}}+\gamma \log \left(1-n_{{t}}\right)} \\&+ \lambda_t\left( M_{{t}}+{B}_{{t}}- \left(M_{{t}-1}-{p}_{{t}-1} {c}_{1 {t}-1}\right)-{p}_{{t}-1} {c}_{2 {t}-1}+w_{{t}-1} {n}_{{t}-1}+{R}_{{t}-1} {~B}_{{t}-1}-{T}_{{t}}\right)\\
+&+\mu_t( p_{t} c_{1 t} - M_{t})
+\end{align*}
+ This gives the following conditions for agent optimization:
+ 
+ \begin{align*}
+     c_{1, t}:&\quad \frac{\beta^{t}}{c_{1 t}}=\lambda_{\epsilon+1} p_{t}+\mu_{t} p_{t}\\
+     c_{2 t}:&\quad  \frac{\beta^{t} \alpha}{c_{2t}}=\lambda_{t+1} p_{t}\\
+     B_{t}:&\quad \lambda_{t}=\lambda_{t+1} R_{t}\\
+     M_{t}:&\quad \lambda_{t}-\mu_{t}=\lambda_{t+1}\\
+     n_{t}:&\quad -\frac{\beta^{t} \gamma}{1-n_{t}}=\lambda_{t+1} w_{t}
+ \end{align*}
+
+Note that the interest rate is constant, $R_t = R$. Using the FOC's we can obtain the following:
+
+$$c_{1t} = \frac{c_{2t}}{\alpha R} \qaq c_{2t} = \frac{\alpha (1-n_t)w_t}{\gamma}$$
+
+Then plug this in to the resource constraint and we get:
+
+$$ \frac{(1-n_t)w_t}{\gamma R} +  \frac{\alpha (1-n_t)w_t}{\gamma} = n_t$$
+
+Thus we get the following expression for $n_t$:
+
+$$n_t = \frac{w_t (\alpha  R+1)}{\gamma  R+\alpha  R w_t+w_t} \qiq \frac{\partial n_t}{\partial R} = -\frac{\gamma  w_t}{(\gamma  R+\alpha  R w_t+w_t)^2}<0$$
+
+Then we can conclude that as $R$ increases $n_t$ will decrease. The interpretation is that if $R$ then the household's savings in bonds will return more in the next period then the household can work less.
+
+
+\end{proof}
+
+
+
+
+% \bibliography{references}
+\end{document}

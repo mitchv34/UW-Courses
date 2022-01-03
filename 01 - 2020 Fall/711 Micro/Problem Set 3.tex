@@ -1,0 +1,182 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\documentclass[12pt]{article}
+%\usepackage[left=3cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}e}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{apacite}
+\usepackage[round]{natbib}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{svg}
+\usepackage[margin = 1in, top=2cm]{geometry}% Margins
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.2em}
+\usepackage{setspace} % Setting the spacing between lines
+\usepackage{amsthm, amsmath, amsfonts, mathtools, amssymb, bm} % Math packages 
+\usepackage{svg}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{epstopdf}
+%\usepackage{subfig} % Manipulation and reference of small or sub figures and tables
+\usepackage{hyperref} % To create hyperlinks within the document
+\spacing{1.15}
+\usepackage{appendix}
+\usepackage{xcolor}
+\usepackage{cancel}
+\usepackage{enumerate}
+\usepackage{subcaption}
+\usepackage[shortlabels]{enumitem}
+
+
+\usepackage[round]{natbib}
+%\bibliographystyle{plainnat}
+\bibliographystyle{apacite}
+
+
+\newtheorem{defin}{Definition.}
+\newtheorem{teo}{Theorem. }
+\newtheorem{lema}{Lemma. }
+\newtheorem{coro}{Corolary. }
+\newtheorem{prop}{Proposition. }
+\theoremstyle{definition}
+\newtheorem{examp}{Example. }
+\newtheorem{problem}{Problem}
+% \numberwithin{problem}{subsection} 
+
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\qiq}{\qquad \implies \qquad}
+\newcommand{\qiffq}{\qquad \iff \qquad}
+\newcommand{\qaq}{\qquad \textbf{and} \qquad}
+\newcommand{\qoq}{\qquad \textbf{or} \qquad}
+\newcommand{\settf}{\text{ \emph{:} }}
+\newcommand{\chbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{.9em}}}
+\newcommand{\cchbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\checkmark$}}
+
+\title{Problem Set 3}
+\author{Mitchell Valdés-Bobes}
+\date{September 27, 2020}
+
+\begin{document}
+
+\maketitle
+\begin{problem}[Monotone Selection Theorems]
+Consider a single-output firm facing a tax $\tau$ on revenue (not profit). The firm is not a pricetaker in input markets, but its technology is still characterized by a weakly-increasing cost function $c: \mathbb{R}_{+} \rightarrow \mathbb{R}_{+},$ with $c(q)$ the cost of producing $q$ units of output.
+\begin{enumerate}[(a)]
+    \item Suppose the firm is a price taker in its output market. Show that its objective function $(1-\tau) p q-c(q)$ has strictly increasing differences in $q$ and $-\tau .$ Prove that this implies a monotone selection rule: an increase in $\tau$ can never result in an increase in output. Explain why this is a stronger result than "baby Topkis".
+    \item Now suppose the firm is not a price-taker in the output market, but faces an inverse demand function $P(\cdot),$ where $P(q)$ is the price at which the firm can sell $q$ units of output.
+    Show that the firm's objective function $(1-\tau) P(q) q-c(q)$ does not necessarily have increasing differences in $q$ and $-\tau$
+    \item Show that if $c(\cdot)$ is strictly increasing, the firm's objective function still has strictly single crossing differences; prove that an increase in $\tau$ cannot result in an increase in output.
+\end{enumerate}
+
+\begin{proof}[Answer]
+
+\textbf{Part (a)}
+
+Set $t=-\tau$, define:
+$$g(q,t) = (1+t)pq-c(q)$$
+Consider $t<t'$ and $q<q'$ then
+ \begin{align*}
+     g(q',t')-g(q,t') &= (1+t')p(q'-q) - (c(q)-c(q'))\\
+                      &> (1+t)p(q'-q) - (c(q)-c(q')) = g(q',t)-g(q,t)
+ \end{align*}
+This means that $g$ has strictly increasing differences in $q$ and $t$ which is the same as to say that $g$ has strictly increasing differences in $q$ and $-\tau$.
+
+Now if there is an increase from $\tau$  to $\tau'$, then there is a decrease from $-\tau$  to $-\tau'$. Suppose that $q\in x^*(\tau)$ and $q'\in x^*(\tau')$ with $q'>q$. By optimality we have:
+$$g(q',t')-g(q,t')\geq 0$$
+$$g(q,t')-g(q',t)\geq 0$$
+and by strictly increasing differences (remember that $\tau<\tau'$ implies $t>t'$) we have:
+$$g(q',t)-g(q,t)>g(q',t')-g(q,t')$$
+
+Combining the above with the optimality conditions we get:
+
+$$0\geq g(q',t)-g(q,t)>g(q',t')-g(q,t')\geq0$$
+
+which is clearly a contradiction therefore an increase in $\tau$ cannot result in an increase in output.
+
+Baby Topkis tell us that if the firm is facing a tax increase and can choose an output level higher than before the increase, then it could have chosen the output level before the increase too. So this result is stronger because it tells us that the firm will not choose a higher output when the taxes increase.
+
+\textbf{Part (b)}
+
+For $g$ to have increasing differences, for any $q<q'$ the function:
+
+$$\Delta(t) = g(q', t) - g(q, t) = [P(q')q'-P(q)q](1+t)-(c(q')-c(q))$$
+
+have to be increasing in $t$. Since we know nothing about the demand curve $P(q)$ it can be decreasing and decrease faster than $q$ increase, then the factor $[P(q')q'-P(q)q]$ can be negative and $\Delta$ decreasing in $t$.
+
+\textbf{Part (c)}
+
+If we know that $c(q)$ is increasing then for any $t<t'$ ($-\tau<-\tau'$) and $q<q'$
+
+\begin{align*}
+    g(q',t)-g(q,t)\geq 0 &\qiffq [P(q')q'-P(q)q](1+t)\geq(c(q')-c(q))\\
+    &\qiffq [P(q')q'-P(q)q](1+t')>(c(q')-c(q)) \\ &\qiffq g(q',t')-g(q,t')> 0
+\end{align*}
+
+This means that $g$ has strictly single crossing differences.
+
+Now suppose $t<t'$ and $q\in x^*(t)$ and $q'\in x^*(t')$ with $q'>q$, strictly single crossing differences implies 
+
+$$\underbrace{g(q, t)-g(q',t)\geq 0} _{\text{by optimality}}\qiq \underbrace{g(q, t')-g(q',t') > 0}_{\text{contradicts optimality}}$$
+Therefore an increase in $\tau$ cannot result in an increase in output.
+\end{proof}
+
+\end{problem}
+
+\begin{problem}[Robot Carwashes]
+A firm provides car washes using four inputs: unskilled labor ( $l$ ), managers ( $m$ ), robots ( $r$ ), and engineers ( $e$ ). Managers are required to supervise unskilled labor, and engineers are required to keep the robots running; the firm's output is
+$$
+q=f(l, m, r, e) \quad=\quad\left(l^{0.5} m^{0.3}+r^{0.7} e^{0.1}\right)^{z}
+$$
+with $z=1.1 .$ Input costs are $w_{l}, w_{m}, w_{r},$ and $w_{e},$ so the firm's problem is
+$$
+\max _{l, m, r, e \geq 0}\left\{p f(l, m, r, e)-w_{l} l-w_{m} m-w_{r} r-w_{e} e\right\}
+$$
+Suppose at each input price vector, the firm's problem has a unique solution.
+\begin{enumerate}[(a)]
+    \item In an effort to encourage STEM education, a politician proposes subsidizing the wage of engineers. From the firm's point of view, this simply reduces the cost of engineers, $w_{e} .$ What effect will this have on the firm's demand for each input?
+    \item Over time, the firm's technology shifts, with $z$ changing from 1.1 to $0.9 .$ With $z=0.9,$ what effect would the subsidy on engineers' wages have on the firm's demand for each input?
+    \item If the supply of managers is fixed in the short-run, would the subsidy's effect on unskilled labor be larger in the short-run or the long-run? Explain.
+\end{enumerate}
+\end{problem}
+
+\begin{proof}[Answer]
+Let the objective function of the firm be
+$$
+g=p\left(l^{0.5} m^{0.3}+r^{0.7} e^{0.1}\right)^{z}-\left(w_{l}, w_{m}, w_{r}, w_{e}\right) \cdot(l, m, r, e) 
+$$
+\textbf{Part (a)}
+To use Topkis theorem we need to prove that $g$ is supermodular in $(l, m, r, e),$ and and has increasing differences in $(l, m, r, e)$ and $-w_{e} .$  Consider the first order derivatives of $g$:
+
+\begin{align*}
+\frac{\partial g}{\partial l}&= 0.5 p z\left(l^{0.5} m^{0.3}+r^{0.7} e^{0.1}\right)^{z-1} l^{-0.5} m^{0.3}-w_{l}\\
+\frac{\partial g}{\partial m} &=0.3 p z\left(l^{0.5} m^{0.3}+r^{0.7} e^{0.1}\right)^{z-1} l^{0.5} m^{-0.7}-w_{m} \\
+\frac{\partial g}{\partial r} &= 0.7 p z\left(l^{0.5} m^{0.3}+r^{0.7} e^{0.1}\right)^{z-1} r^{-0.3} e^{0.1}-w_{r} \\
+\frac{\partial g}{\partial e} &=0.1 p  z\left(l^{0.5} m^{0.3}+r^{0.7} e^{0.1}\right)^{z-1}  r^{0.7} e^{-0.9}-w_{c}
+\end{align}
+
+Since $z-1=0.1>0$ then, it is clear that $\partial g/\partial l$ is increasing in $m, r$ and $e$ and all of the derivatives are increasing (strictly or weakly) in all the choice variables (excluding the one associated with the derivative) and in $-w_e$ then the function $g$ meets the hypothesis of Topkis theorem.
+
+Since the optima solution is single valued then a decrease in $w_e$ (this is an increase in $(-w_e)$) will imply that the optimal choice under the new price vector will be weakly greater in each of the production inputs.
+
+
+\textbf{Part (b)}
+
+I  this case $z-1 = -0.1<0$ so the analysis is not as simple as before, in this case we can prove supermodulatiry not in $(l,m,r,e)$ but in $(l,m,-r,-e)$. We will still have increasing differences in our new choice variables and the parameter $-w_e$, again we can apply Topkis theorem to obtain the following conclusion:
+$$\text{A decrease in }w_e \text{ (i.e a decrease in }-w_e\text{) will lead to a weak increase in the choice of }(l,m,-r,-e)\text{.}$$
+
+In terms of the original choice variables this translates to: \textit{an increase of the choice for engineers and robots and a decrease in the optimal choice of unskilled labor and managers}.
+\end{align}
+\textbf{Part (c)}
+Since output is supermodular we can apply the LeChatelier principle, that tells us that effects in the long run are larger than in the short run.
+
+The logic for the feedback loop goes like this:
+
+\begin{enumerate}[(i)]
+    \item A decrease in $w_e$ will lead to an increase in $r$ (because is complement of $e$) and $e$ (because $e$ is cheaper) and a decrease in $l$ (because is a substitute of $e$) $m$ is fixed in the short run.
+    \item In the long run, $m$ is allowed to change, changes described in $(i)$ imply that $m$ will go down.
+    \item Since $m$ is lower in the long run, then it's substitutes $r$ and $e$ will go even higher while it's complement $l$ will go decrease even more.
+\end{enumerate}
+\end{proof}
+\newpage
+\end{document}|

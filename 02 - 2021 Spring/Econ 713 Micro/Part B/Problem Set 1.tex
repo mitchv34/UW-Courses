@@ -1,0 +1,397 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[left=3cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}e}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{apacite}
+\usepackage[round]{natbib}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{svg}
+\usepackage[margin = 1in, top=2cm]{geometry}% Margins
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.2em}
+\usepackage{setspace} % Setting the spacing between lines
+\usepackage{amsthm, amsmath, amsfonts, mathtools, amssymb, bm} % Math packages 
+\usepackage{svg}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{epstopdf}
+\usepackage{subfig} % Manipulation and reference of small or sub figures and tables
+\usepackage{hyperref} % To create hyperlinks within the document
+\spacing{1.15}
+\usepackage{appendix}
+\usepackage{xcolor}
+\usepackage{cancel}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{optidef}
+\usepackage{etoolbox}
+
+\usepackage[round]{natbib}
+%\bibliographystyle{plainnat}
+\bibliographystyle{apacite}
+
+
+\newtheorem{defin}{Definition.}
+\newtheorem{teo}{Theorem. }
+\newtheorem{lema}{Lemma. }
+\newtheorem{coro}{Corolary. }
+\newtheorem{prop}{Proposition. }
+\theoremstyle{definition}
+\newtheorem{examp}{Example. }
+\newtheorem{problem}{Problem}
+\newtheorem{subproblem}{}[problem]
+% \numberwithin{problem}{subsection} 
+
+% \AtBeginEnvironment{problem}{\color{gray}}
+% \AtBeginEnvironment{subproblem}{\color{gray}}
+\AtBeginEnvironment{proof}{\color{red}}
+
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\qiq}{\qquad \implies \qquad}
+\newcommand{\qiffq}{\qquad \iff \qquad}
+\newcommand{\qaq}{\qquad \textbf{and} \qquad}
+\newcommand{\qoq}{\qquad \textbf{or} \qquad}
+\newcommand{\settf}{\text{ \emph{:} }}
+\newcommand{\chbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{.9em}}}
+\newcommand{\cchbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\checkmark$}}
+
+\title{Problem Set 1}
+\author{Mitchell Valdés-Bobes}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{problem}[All Pay Auction]
+Consider a symmetric IPV (independent private values) setting with $N$ bidders. Find an equilibrium of the all-pay auction when each bidder's valuation is an iid draw from $F(x)=x^{a}$ for $a \in(0 ; \infty)$ and $x \in[0 ; 1]$.
+
+\textbf{Note:} In economics and game theory, an all-pay auction is an auction in which every bidder must pay regardless of whether they win the prize, which is awarded to the highest bidder as in a conventional auction. 
+\begin{subproblem}
+Define this auction as a Bayesian game.
+\end{subproblem}
+
+\begin{proof}[Answer]
+The normal-form representation of an $n$ -player static Bayesian game specifies:
+\begin{enumerate}
+    \item Players: $I = \{1,\ldots,N\}$
+    \item Players' action spaces $B_{1}, \ldots, B_{N}$. Each player actions space are the possible bids that she can make $b_i\in B_i=[0, \infty)$.
+    \item Player's type spaces $V_{1}, \ldots, V_{N}$. The types of players are given by their valuation of the object being auctioned: $v_i\in V_i=[0,1]$.
+    \item Player's payoff functions $u_{1}, \ldots,$ $u_{n} .$ Where $u_i:B_i\times V_i \to\mathbb{R}$ is defined by:
+    $$u_{i}\left(b_{i}, v_{i}, b_{-i}, v_{-i}\right)=\left\{\begin{array}{ll}
+v_{i}-b_{i} & \text { if } b_{i}>\max_{-i}\left\{b_{-i}\right\} \\
+\left(v_{i}-b_{i}\right) / K & \text { if } b_{i}=\max_{-i}\left\{b_{-i}\right\} \\
+-b_{i} & \text { if } b_{i}<\max_{-i}\left\{b_{-i}\right\}
+\end{array}\right.$$
+Here $b_{-i}$ and $v_{-i}$ refers to all other players bids and valuations respectively and $K$ is the number of bid equal to $\max_{i}\left\{b_{i}\right\}$.
+    \item Player's beliefs $p_{1}, \ldots, p_{n},$ where $p_i:V_i\to V_{-i}$, is a function that specify the probability that each player assigns to the types of all other players given her type. Since types are drawn from an \textit{iid} sample players do not get information about the other players types after knowing their own type therefore $p_{i}(\cdot|v_i)=p_i(\cdot)$ for all $v_i$; furthermore all beliefs are the same for all players and are given by $F(x)$. 
+\end{enumerate}
+\end{proof}
+
+\begin{subproblem}
+Find equilibrium strategies of all players.
+\end{subproblem}
+\begin{proof}[Answer]
+
+Consider the bidder with valuation $0$, for this bidder is never optimal to bid a positive quantity since any such bid will attain her a negative payoff. Therefore we can assume that in equilibrium the expected payment of a bidder with value equals to $0$ is $0$.
+
+Bidders maximize:$$\overbrace{\mathbb{E}[u_i(b_i,v_i)|v_i]}^{\text{Ex payoff given } v_i}=\underbrace{(v_i-b_i)}_{\text{Payoff if Win}} \overbrace{ \mathbb{P}\Big[b_i>b_j, j\neq i\Big]}^{\text{Probability of Wining}}  \underbrace{-b_i}_{\text{Payoff if Lose}} \overbrace{ \Big(1- \mathbb{P}\Big[b_i>b_j, j\neq i\Big]\Big)}^{\text{Probability of Lose}}$$
+
+Due to the independence of the valuations and the fact that strategies are strictly increasing therefore invertible we have:
+$$\mathbb{P}\Big[b_i>b_j, j\neq i\Big] = \mathbb{P}\Big[b^{-1}(b(v_i))>v_j\Big]^{n-1} = F\Big(b^{-1}(b(v_i))\Big)^{N-1} \equiv G\Big(b^{-1}(b(v_i))\Big)$$
+
+We can re-write the objective function of each player as:
+$$
+\mathbb{E}[u_i(b_i,v_i)|v_i]=v_i G\Big(b^{-1}(b(v_i))\Big)- b(v_i)
+$$
+Taking FOC: 
+$$
+\frac{g\left(b^{-1}(b(v_i))\right)}{b^{\prime}\left(b^{-1}(b(v_i))\right)}v_i=1
+$$
+Now we can impose symmetry: $b^{-1}(b(v_i)=v_i$ and rewrite the previous expression as:
+\begin{align*}
+b'(v_i) = v_ig(v_i) &\qiq \int_0^{v_i}b'(y)dy  = \int_0^{v_i}yg(y)dy\\ &\qiq b'(v_i) - \cancel{b(0)} = \int_0^{v_i}yg(y)dy\\
+&\qiq b(v_i) = \int_0^{v_i}yg(y)dy
+\end{align*}
+
+Now using the specific distribution for this problem:
+$$F(x) = x^a \qiq G(x) = x^{a(N-1)}  \qiq g(x) = \alpha(N-1)x^{a(N-1)-1}$$
+
+Then the equilibrium strategies are:
+
+$$\boxed{b(v_i) = \alpha(N-1)\int_0^{v_i}y^{\alpha(N-1)}dy = \frac{\alpha  (N-1) v_i^{\alpha  (N-1)+1}}{\alpha  (N-1)+1}}$$
+
+\end{proof}
+\begin{subproblem}
+Verify that the strategies that you have found do constitute an equilibrium.
+\end{subproblem}
+\begin{proof}[Answer]
+
+We want to check that there is no bidder (regardless of her valuation) that would want to deviate from the strategy profile proposed in the previous step. Note that player $i$ deviates if she bids a different amount than specified by $b(v_i)$; since any non-negative number can be written as $b(x)$ for some $x\mathbb{R}_+$. This means that a deviation can be interpreted as the bidder "lies" about her true valuation. We can write the expected payoff of this deviation as:
+
+$$\mathbb{E}[u_i(b(x),v_i)|v_i]=v_i G\Big(b^{-1}(b(x))\Big)- b(x) = v_i G(x)- b(x) = v_i G(x)- \int_0^{x}yg(y)dy  $$
+
+We can integrate by part the above and end up with a payoff for bidder0 $i$ as a function of $x$:
+
+$$\pi(x) =  v_i G(x)- xG(x)+\int_0^{x}G(y)dy$$
+
+Taking first order condition in the above we get:
+
+$$\frac{\partial \pi}{\partial x} = 0 \qiq g(x)[v_i-x] = 0$$
+
+The above implies that if $g(x)=f(x)^{N-1}\neq 0$ the expected payoff is maximized when $x = v_i $. 
+
+Because the particular functional form of the problem meets the stated condition then we can conclude that no bidder will want to deviate from the strategy profile therefore it is a Bayesian Nash Equilibrium.
+
+\end{proof}
+\begin{subproblem}
+Does the bidding become more competitive when $a$ increases? Explain.
+\end{subproblem}
+\begin{proof}[Answer]
+In general bids are not monotonic in $\alpha$, we observe that bidding is increasing for a range of $\alpha$ lower than some threshold and decreasing for alpha greater than that threshold. Furthermore the threshold varies with the $v_i$.
+\end{proof}
+\begin{subproblem}
+Compute the expected payment from each bidder before and after she learns her
+ value.
+ \end{subproblem}
+\begin{proof}[Answer]
+
+After the bidder learns her value we can find her expected (equilibrium) payoffs:
+
+$$\mathbb{E}[u_i(b(x),v_i)|v_i]=\int_0^{v_i}G(x)dx =\int_0^{v_i}x^{a(N+1)}dx = \frac{v_i^{a (N-1)+1}}{a (N-1)+1}$$
+
+To find the ex-ante expected payoff of each bidder we have to find the expected value knowing only how is the distribution of possible valuation that she could have:
+
+\begin{align*}
+  \mathbb{E}[u_i(b(x),v_i)] &= \int_0^1\mathbb{E}[u_i(b(x),v_i)|x]dx\\&=\int_0^1\left(\int_0^{x}G(t)dt\right)dx \\&=\int_0^{v_i}dx \\&=\int_0^1 \frac{v_i^{x (N-1)+1}}{x (N-1)+1} dx\\ &= \frac{1}{(a N+a+1) (a N+a+2)}  
+\end{align*}
+
+
+\end{proof}
+\end{problem} 
+
+
+\begin{problem}[Tricky Seller]
+Two people are interested in one object. Their valuations are drawn independently from $F(x)=x$ and $F(x)=x^{2},$ respectively, with $x \in[0 ; 1] .$ The seller's value (a cost, perhaps) for the object is known, $c \in[0 ; 1]$.
+\begin{subproblem}
+Describe outcome of the First-Price Auction with a reserve price $r$.
+\end{subproblem}
+\begin{proof}[Answer]
+Start by noting that the seller will not sell if the highest bid is lower than her reservation price $r$, also no bidder will bid above their own valuation therefore for all bidders with $v_i<r$ it is a weakly dominant strategy to bid $b_i(v_i) = 0$.
+
+Notice also that for the bidder such that $v_i=r$ is indifferent between wining or not so it must be true that in equilibrium $b_i(r)=r$ for $i=1,2$.
+
+Denote $F_1(x)=x$ and $F_2(x) = x^2$ the distributions functions of he valuation of each bidder respectively. The bidder $i$ maximizes expected utility given that the other bidder is using the (strictly increasing) strategy $b_j(v_j)$:
+
+$$\max_{b}\:(v_i-b_i)F_j(b_j^{-1}(b))$$
+
+we can take logarithms and solve the equivalent problem:
+
+$$\max_{b}\:\log{(v_i-b_i)} + \log{F_j(b_j^{-1}(b))}$$
+
+First order condition of this problem is:
+
+$$\frac{f_j(b_j^{-1}(b))}{F_j(b_j^{-1}(b))}(b_j^{-1}(b)' - \frac{1}{v_i - b}$$
+
+We know that at the equilibrium it must be $b_i(v_i) = b$ therefore we can plug $b_i^{-1}(b) = v_i$ in the optimal conditions:
+
+$$\frac{f_j(b_j^{-1}(b))}{F_j(b_j^{-1}(b))}(b_j^{-1}(b)' = \frac{1}{b_i^{-1}(b) - b}$$
+
+Denote $x_i = b_i^{-1}$ and substitute for the functional forms and we get the following system of non-linear differential equations:
+
+\begin{align*}
+x_1'(b) &= \frac{x_1(b)}{x_2(b)-b} \\    
+ x_2'(b) &= \frac{x_2(b)}{2(x_1(b)-b)} 
+\end{align*}
+
+
+Using the fact that $b_i(r)=r$ we can impose the following initial conditions on the system:
+
+$$x_1(r) = r \qaq x_2(r)=r$$
+
+\end{proof}
+\begin{subproblem}
+Describe outcome of the Second-Price Auction with a reserve price $r$.
+\end{subproblem}
+\begin{proof}[Answer]
+With out loss of generality, consider bidder $1$, note that:
+ \begin{itemize}
+ \item If $\min{b_i,v_i}\geq r$ then:
+ \begin{itemize}
+     \item  $u_1(v_1,b_2(v_2))=u_1(b_1,b_2(v_2))$ for any $b_1>v_1$, to see this note that if player $2$ bid is higher then $u_1(v_1,b_2(v_2))=0=u_1(b_1,b_2(v_2))$ and if player $2$ bid is lower then player $1$ will gets $u_1(v_1,b_2(v_2))=v_1 - b_2(v_2)=u_1(b_1,b_2(v_2))$.
+    \item $u_1(v_1,b_2(v_2))\geq u_1(b_1,b_2(v_2))$ for any $b_1<v_1$, to see this note that if $b_2(v_2)<b_1<v_1$ then  $u_1(v_1,b_2(v_2)) =v_1 - b_2(v_2) = u_1(b_1,b_2(v_2))$ but if  $b_1<b_2(v_2)<v_1$ then $u_1(v_1,b_2(v_2)) =v_1 - b_2(v_2) >0= u_1(b_1,b_2(v_2))$.
+\end{itemize}
+\item If $v_i<r$ then:
+\begin{itemize}
+    \item If the bidder lose the auction then gets $0$.
+    \item If the bidder wins the auction then hers is the winning bid which is lower than the reservation price so the object doesn't sell, then she gets $0$
+\end{itemize}
+\end{itemize}
+
+We can conclude therefore that in a second-price sealed-bid auction with reservation price $r$, it is a weakly dominant strategy to bid according to $$b_i(v_i) = b(v_i) =
+    v_i 
+$$
+\end{proof}
+\begin{subproblem}
+ What auction and what $r$ will the seller choose? Which player wins more often?
+\end{subproblem}
+\begin{proof}[Answer]
+
+I have the intuition that in this case it is best for seller to choose the second price auction but I'm unable to prove it without equilibrium strategies in the first price auction.
+
+If the second price auction is chosen the type $2$ bidder will win more often.
+
+\textbf{Second Price Auction:} 
+
+The distribution of the selling price is given by:
+
+\begin{align*}
+L^{SP}(p) = \mathbb{P}\Big[\min\{v_1,v_2\}\leq p\Big] &=  \mathbb{P}\Big[v_1 \leq p\Big] +  \mathbb{P}\Big[v_2\leq p\Big] -   \mathbb{P}\Big[v_1 \leq p\Big] \mathbb{P}\Big[v_2\leq p\Big]\\&= F_1(p)+F_2(p)-F_1(p)F_2(p) = p+p^2-p^3
+\end{align*}
+
+But we know that the seller will only sell the object if the price is such that $p\geq r$ therefore the expected revenue in the second price auction is:
+
+$$\mathbb{E}\Big[R^{SP}\Big] = \int_{r}^1pL(p)dp = \int_{r}^1 p^2+p^3-p^4 dp  = \frac{r^5}{5}-\frac{r^4}{4}-\frac{r^3}{3}+\frac{23}{60}$$
+
+\end{proof}
+\begin{subproblem}
+Suppose now that $c=0$ and there is no reserve price. Suppose that a seller can offer discount of $\alpha$ to one of the bidders in the second-price auction. If a bidder is offered a discount $\alpha \in[0 ; 1]$, then, if she wins, she pays only a fraction $\alpha$ of what she had to pay otherwise. Who should be offered a discount? Compute the optimal discount and expected revenues.
+\end{subproblem}
+\begin{proof}[Answer]
+
+Since in the second price auction both bid their true valuation and the second valuation is the price that is paid then the seller will want to give a discount to bidder that most often lose, the type 1 bidder, Consider a discount of $\alpha\in(0,1)$ to type 1 then their bid strategy will change to:
+
+$$b_1(v_1) = \frac{v_1}{\alpha}$$
+
+The distribution of the selling price is given by:
+
+\begin{align*}
+L^{SP}(p) = \mathbb{P}\Big[\min\left\{\frac{v_1}{\alpha},v_2 \right\}\leq p\Big] &=  \mathbb{P}\Big[v_1 \leq \alpha p\Big] +  \mathbb{P}\Big[v_2\leq p\Big] -   \mathbb{P}\Big[v_1 \leq \alpha p\Big] \mathbb{P}\Big[v_2\leq p\Big]\\&= F_1(\alpha p)+F_2(p)-F_1(\alpha p)F_2(p) = \alpha p+p^2-\alpha p^3
+\end{align*}
+
+Comparing with the expected price without a discount we can conclude that the optimal value for $\alpha$ is $\alpha=1$, therefore it is best to not give a discount to any bidder.
+
+\end{proof}
+
+\end{problem}
+
+\begin{problem}[Third Price Auction]
+Consider a third-price auction with three players: an auction in which bidder with the highest value wins, but pays only the third highest bid. Assume that valuation of players are iid from the uniform distribution on [0,1].
+\end{problem}
+
+\begin{subproblem}
+Define the auction as a Bayesian game.
+\end{subproblem}
+\begin{proof}[Answer]
+The normal-form representation of an $n$ -player static Bayesian game specifies:
+\begin{enumerate}
+    \item Players: $I = \{1,\ldots,N\}$
+    \item Players' action spaces $B_{1}, \ldots, B_{N}$. Each player actions space are the possible bids that she can make $b_i\in B_i=[0, \infty)$.
+    \item Player's type spaces $V_{1}, \ldots, V_{N}$. The types of players are given by their valuation of the object being auctioned: $v_i\in V_i=[0,1]$.
+    \item Player's payoff functions $u_{1}, \ldots,$ $u_{n} .$ Where $u_i:B_i\times V_i \to\mathbb{R}$ is defined by:
+    $$u_{i}\left(b_{i}, v_{i}, b_{-i}, v_{-i}\right)=\left\{\begin{array}{ll}
+v_{i}-b_{(3)} & \text { if } b_{i}>\max_{-i}\left\{b_{-i}\right\} \\
+-b_{i} & \text { if } b_{i}<\max_{-i}\left\{b_{-i}\right\}
+\end{array}\right.$$
+Here $b_{-i}$ and $v_{-i}$ refers to all other players bids and valuations and $b_{(3)}$ is the third highest bid.
+    \item Player's beliefs $p_{1}, \ldots, p_{n},$ about the valuation of others in this case $p_i\sim U[0,1]$
+\end{enumerate}
+\end{proof}
+
+\begin{subproblem}
+Prove that a bid of
+$$
+b_{i}\left(v_{i}\right)=\frac{n-1}{n-2} v_{i}
+$$
+is a symmetric Bayes-Nash equilibrium of the third-price auction.
+\end{subproblem}
+
+\begin{proof}[Answer]
+Suppose there is a symmetric equilibrium where strategies are strictly increasing in valuations. Consider bidder $i$, she wins if $v_i$ exceeds the highest of the other $N-1$ valuations. The price that this bidder pays depends on the second highest valuation other than hers is a random variable. 
+
+Denote $v_{(1)}$ and $v_{(2)}$ the highest and second  highest order statistic of $N-1$ draws of a random variable. We can write he density of $v_{(2)}$ conditional to $v_{(1)}<v_i$ as:
+
+$$
+f_{2}^{(N-1)}\left(y \mid v_{(1)}<v_i\right)=\frac{1}{F_{1}^{(N-1)}(v_i)}(N-1)(F(v_i)-F(y)) f_{1}^{(N-2)}(y)
+$$
+
+Denote the payment of the bidder as a random variable $b\left(v_{(2)}\right)$ and we can write the expected payment as:
+
+
+$$
+\begin{aligned}
+\overbrace{F_{1}^{(N-1)}(v_i)}^{\text{Probability of Win}} \underbrace{\mathbb{E}\left[b\left(v_{(2)}\right) \mid v_{(1)}<v_i\right]}_{\text{Expected Payment}} \\
+&=\int_{0}^{v_i} b(y)(N-1)(F(x)-F(y)) f_{1}^{(N-2)}(y) d y
+\end{aligned}
+$$
+
+Using the particular distribution that we have in this problem we get that the expected payment of this bidder is:
+
+\begin{equation}\label{pay_1}
+(n-2)(n-1)\int_{0}^{v_i}{b(y)(v_i}-y)y^{n-3}dy    
+\end{equation}
+
+
+Note that the zero valuation bidder will have an expected payment of zero. Therefore we can use the \textbf{Revenue Equivalence Theorem} to show that the expected payment of any bidder is the same that on the First-Price auction:
+
+\begin{equation}\label{pay2}
+    \int_{0}^{v_1}yg(y)dy = (n-1)\int_{0}^{v_1}y^{n-1}dy
+\end{equation}
+Equating \eqref{pay_1} and \eqref{pay2}, we obtain that
+
+\begin{align*}
+    \cancel{(n-1)}\int_{0}^{v_1}y^{n-1}dy &= (n-2)\cancel{(n-1)}\int_{0}^{v_i}{b(y)(v_i-y)y^{n-3}}dy    \\
+    &\implies \frac{\partial }{\partial v_i} \int_{0}^{v_1}y^{n-1}dy = (n-2)\frac{\partial }{\partial v_i} \int_{0}^{v_i}{b(y)(v_i-y)y^{n-3}}dy   \\
+    \footnotemark&\implies v_i^{n-1} = (n-2) \int_{0}^{v_i}{\frac{\partial }{\partial v_i}b(y)(v_i-y)y^{n-3}}dy   \\
+    &\implies v_i^{n-1} = (n-2) \int_{0}^{v_i}b(y)y^{n-3}dy\\
+    &\implies \frac{\partial}{\partial v_i}v_i^{n-1} = (n-2)\frac{\partial }{\partial v_i}\int_{0}^{v_i}b(y)y^{n-3}dy\\
+    &\implies (n-1)v_i^{n-2} = (n-2)b(v_i)v_i^{n-3}
+\end{align*}
+\footnotetext{We obtained the right hand side of the equality after applying the Leibniz's rule for differentiation under the integral sign
+$$
+\frac{d}{d x}\left(\int_{a(x)}^{b(x)} f(x, t) d t\right)=f(x, b(x)) \cdot \frac{d}{d x} b(x)-f(x, a(x)) \cdot \frac{d}{d x} a(x)+\int_{a(x)}^{b(x)} \frac{\partial}{\partial x} f(x, t) d t
+$$}
+
+Re-arranging the above we obtain:
+
+$$\boxed{b(v_i) = \frac{n-1}{n-2}v_i}$$
+
+\end{proof}
+
+\begin{subproblem}
+ Show that the expected revenue of a seller in the third-price auction is
+$$
+R_{3}=\frac{n-1}{n+1}
+$$
+\end{subproblem}
+
+\begin{proof}[Answer]
+The seller will get the third highest bid as revenue this is:
+
+\begin{equation}\label{revenue}
+\mathbb{E}[R^{TPA}] = \mathbb{E}[b(v_{(3)})] = \mathbb{E}\left[ \frac{n-1}{n-2}v_{(3)}\right] =  \frac{n-1}{n-2}\mathbb{E}[v_{(3)}]
+\end{equation}
+
+Using the fact that if $v_1,\ldots,v_n$ are a random sample of an uniform distribution we have the distribution of the $r-th$ highest order statistic:
+
+$$v_{(r)}\sim \operatorname{Beta}(n-r+1,r-1) \qiq v_{(3)}\sim \operatorname{Beta}(n-2,2)$$
+
+we also know that if $X\sim \operatorname{Beta}(\alpha,\beta)$ then $\mathbb{E}[X]=\alpha/(\alpha+\beta)$
+Substituting in \eqref{revenue} we get:
+
+$$\boxed{\mathbb{E}[R^{TPA}] = \frac{n-1}{n+1}}$$
+
+
+\end{proof}
+
+\begin{subproblem}
+What is the symmetric Bayes-Nash equilibrium strategy in a $k^{t h}$ price auction? (You need only state how each bidder bids; you need not provide a detailed analysis.)
+\end{subproblem}
+\begin{proof}[Answer]
+Following the same logic as before but now using $f_{k-1}^{N-1}(y|v_{(1)}<v_i)$ we arrive at:
+
+$$\boxed{b_(v_i) = v_i\frac{n-1}{n-k+1}}$$
+\end{proof}
+
+\end{document}

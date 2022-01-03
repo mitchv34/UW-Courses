@@ -1,0 +1,427 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\documentclass[12pt]{article}
+%\usepackage[left=3cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}e}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{apacite}
+\usepackage[round]{natbib}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{svg}
+\usepackage[margin = 1in, top=2cm]{geometry}% Margins
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.2em}
+\usepackage{setspace} % Setting the spacing between lines
+\usepackage{amsthm, amsmath, amsfonts, mathtools, amssymb, bm} % Math packages 
+\usepackage{svg}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{epstopdf}
+%\usepackage{subfig} % Manipulation and reference of small or sub figures and tables
+\usepackage{hyperref} % To create hyperlinks within the document
+\spacing{1.15}
+\usepackage{appendix}
+\usepackage{xcolor}
+\usepackage{cancel}
+\usepackage{enumerate}
+\usepackage{subcaption}
+\usepackage[shortlabels]{enumitem}
+
+
+\usepackage[round]{natbib}
+%\bibliographystyle{plainnat}
+\bibliographystyle{apacite}
+
+
+\newtheorem{defin}{Definition.}
+\newtheorem{teo}{Theorem. }
+\newtheorem{lema}{Lemma. }
+\newtheorem{coro}{Corolary. }
+\newtheorem{prop}{Proposition. }
+\theoremstyle{definition}
+\newtheorem{examp}{Example. }
+\newtheorem{problem}{Problem}
+% \numberwithin{problem}{subsection} 
+
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\qiq}{\qquad \implies \qquad}
+\newcommand{\qiffq}{\qquad \iff \qquad}
+\newcommand{\qaq}{\qquad \textbf{and} \qquad}
+\newcommand{\qoq}{\qquad \textbf{or} \qquad}
+\newcommand{\settf}{\text{ \emph{:} }}
+\newcommand{\chbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{.9em}}}
+\newcommand{\cchbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\checkmark$}}
+
+\title{Problem Set 5}
+\author{Mitchell Valdés-Bobes}
+\date{October 10, 2020}
+
+\begin{document}
+
+\maketitle
+\begin{problem}[The Consumer Problem]
+Solve the Consumer Problem and state the Marshallian demand $x(p, w)$ and indirect utility $v(p, w)$
+for the following utility functions:
+\begin{enumerate}[(a)]
+    \item $u(x)=x_{1}^{\alpha}+x_{2}^{\alpha}$ for $\alpha<1$
+    \item $u(x)=x_{1}+x_{2}$
+    \item $u(x)=x_{1}^{\alpha}+x_{2}^{\alpha}$ for $\alpha>1$
+    \item $u(x)=\min \left\{x_{1}, x_{2}\right\}$ (Leontief utility)
+    \item $u(x)=\min \left\{x_{1}+x_{2}, x_{3}+x_{4}\right\}$
+    \item $u(x)=\min \left\{x_{1}, x_{2}\right\}+\min \left\{x_{3}, x_{4}\right\}$
+\end{enumerate}
+\end{problem}
+
+\begin{proof}[Answer]
+In all problems we solve:
+\begin{align*}
+\max_{x\in \mathbb{R}^k_+}&\quad u(x)\\
+\text{subject to:} &\quad p\cdot x \leq w
+\end{align*}
+
+\textbf{Part (a)}
+Since $u(x)$ is increasing then by the Walras Law we know that the constraint binds, this is:
+$$x_1 = \frac{1}{p_1}(w-p_2x_2)$$
+Plugging in the utility function we get the following maximization problem in one variable:
+$$\max_{x_2\geq0} \frac{1}{p_1^\alpha}(w-p_2x_2)^\alpha + x_2^\alpha$$
+With the FOC:
+$$\alpha  x^{\alpha -1}-\alpha 
+   p_2 p_1^{-\alpha }
+   \left(w-p_2
+   x\right){}^{\alpha -1}=0$$
+
+Clearing and solving the demands we obtain the optimal solutions for $x_1$ and then plugging back for  $x_2$.
+\begin{align*}
+ x_2^*& = \frac{w\cdot p_2^\frac{1}{\alpha -1}}{p_1^\frac{\alpha}{\alpha -1}+p_2^\frac{\alpha}{\alpha -1}}
+\end{align*}
+
+\begin{align*}
+    x_1^* = \frac{w\cdot p_1^\frac{1}{\alpha -1}}{p_1^\frac{\alpha}{\alpha -1}+p_2^\frac{\alpha}{\alpha -1}}
+\end{align*}
+
+Since the objective function is strictly concave this are unique solutions and satisfy the nonnegativity constraints.
+
+Now the indirect utility function is 
+$$
+\begin{aligned}
+v(p, w)&=u\left(x_{1}^*, x_{2}^*\right) &=\left( \frac{w\cdot p_{1}^{\frac{1}{\alpha-1}}}{p_{1}^{\frac{\alpha}{\alpha-1}}+p_{2}^{\frac{\alpha}{\alpha-1}}}\right)^{\alpha}+\left( \frac{w\cdot p_{2}^{\frac{1}{\alpha-1}}}{p_{1}^{\frac{\alpha}{\alpha-1}}+p_{2}^{\frac{\alpha}{\alpha-1}}}\right)^{\alpha} =w^{\alpha} \cdot\frac{p_{1}^{\alpha-1}+p_{2}^{\frac{\alpha}{\alpha-1}}}{\left(p_{1}^{\frac{\alpha}{\alpha-1}}+p_{2}^{\frac{\alpha}{\alpha-1}}\right)^{\alpha}}
+\end{aligned}
+$$
+
+\textbf{Part (b)}
+In this case both goods contribute the same to the (linear) utility function therefore the consumer will consume all of hers endowment in the cheapest one and will be indifferent between any bundle if both are priced the same. This give us:
+
+$$x_1^*(p_1,p_2,w) = \left \{ \begin{array}{cc}
+     \frac{w}{p_1}&  p_1 < p_2\\
+     0 & p_1 > p_2
+\end{array} \qquad x_2^*(p_1,p_2,w) = \left \{ \begin{array}{cc}
+     0&  p_1 < p_2\\
+    \frac{w}{p_2} & p_1 > p_2
+\end{array}$$ 
+This give us the indirect utility function:
+$$v(p_1,p_2,w) = \left \{ \begin{array}{cc}
+     \frac{w}{p_1}&  p_1 \leq p_2\\
+     \frac{w}{p_2} & p_1 > p_2
+\end{array}$$
+
+\textbf{Part (c)}
+Since $u(x)$ is the sum of two convex functions then it is a convex function therefore
+the optimum will be a corner solution which means that:
+$$x_1^*(p_1,p_2,w) = \left \{ \begin{array}{cc}
+     \frac{w}{p_1}&  p_1 < p_2\\
+     0 & p_1 > p_2
+\end{array} \qquad x_2^*(p_1,p_2,w) = \left \{ \begin{array}{cc}
+     0&  p_1 < p_2\\
+    \frac{w}{p_2} & p_1 > p_2
+\end{array}$$ 
+Note that in this case (and different that \textbf{Part (b)}) when both goods are priced the same the consumer will be indifferent between consuming 0 of good and all of her endowment in the other \textbf{but} will be strictly worse off with any other feasible bundle. This give us the indirect utility function:
+$$v(p_1,p_2,w) = \left \{ \begin{array}{cc}
+     \left(\frac{w}{p_1}\left)^\alpha&  p_1 \leq p_2\\
+     \left(\frac{w}{p_2}\right)^\alpha & p_1 > p_2
+\end{array}$$
+
+\textbf{Part (d)} In this case, suppose the optimal bundle is such that $x_1\neq x_2$ without loss of generality assume $x_1<x_2$ then $u(x_1,x_2)=x_1$ this means that the consumer can decrease hers consumption of $x_2$ by a little and increase her consumption of $x_1$ while keeping the bundle feasible and be strictly better of; therefore at the optimum $x_1=x_2$. If we use this condition with the budget constraint we get
+$$x_1^*(p_1,p_2,w) = x_2^*(p_1,p_2,w) = \frac{w}{p_1+p_2}$$
+This give us the indirect utility function:
+$$v(p_1,p_2,w) = \frac{w}{p_1+p_2}$$
+
+\textbf{Part (e)}
+By the same reasoning as in \textbf{Part (d)} we know that $x_1+x_2 = x_3+x_4$ in the optimum. No if we use a reasoning similar to \textbf{Part (b)} we know that when choosing between $x_1$ and $x_2$ or between $x_3$ and $x_4$ the consumer will only consume the cheapest good. This give us the following marshalian demands:
+
+$$x_1^*(p_1,p_2,p_3,p_4,w) = \left \{ \begin{array}{cc}
+     \frac{w}{p_1+p_3}&  p_1 < p_2 \text{ and } p_3 < p_4\\
+     \frac{w}{p_1+p_4}&  p_1 < p_2 \text{ and } p_3 > p_4\\
+     0&  p_1 > p_2 \text{ and } p_3 < p_4\\
+     0&  p_1 > p_2 \text{ and } p_3 > p_4
+\end{array}$$
+$$ x_2^*(p_1,p_2,p_3,p_4,w) = \left \{ \begin{array}{cc}
+     0&  p_1 < p_2 \text{ and } p_3 < p_4\\
+     0&  p_1 < p_2 \text{ and } p_3 > p_4\\
+     \frac{w}{p_2+p_3}& p_1 > p_2 \text{ and } p_3 < p_4\\
+     \frac{w}{p_2+p_4}&  p_1 > p_2 \text{ and } p_3 > p_4
+\end{array}$$
+$$x_3^*(p_1,p_2,p_3,p_4,w) = \left \{ \begin{array}{cc}
+     \frac{w}{p_1+p_3}&  p_1 < p_2 \text{ and } p_3 < p_4\\
+     0&  p_1 < p_2 \text{ and } p_3 > p_4\\
+     \frac{w}{p_2+p_3}&  p_1 > p_2 \text{ and } p_3 < p_4\\
+     0&  p_1 > p_2 \text{ and } p_3 > p_4
+\end{array}$$
+$$ x_4^*(p_1,p_2,p_3,p_4,w) = \left \{ \begin{array}{cc}
+     0&  p_1 < p_2 \text{ and } p_3 < p_4\\
+     \frac{w}{p_1+p_4}&  p_1 < p_2 \text{ and } p_3 > p_4\\
+     0 & p_1 > p_2 \text{ and } p_3 < p_4\\
+     \frac{w}{p_2+p_4}&  p_1 > p_2 \text{ and } p_3 > p_4
+\end{array}$$
+
+This give us the indirect utility function:
+$$v(p_1,p_2,p_3,p_4,w) = \left \{ \begin{array}{cc}
+      \frac{w}{p_1+p_3}&  p_1 < p_2 \text{ and } p_3 < p_4\\
+     \frac{w}{p_1+p_4}&  p_1 < p_2 \text{ and } p_3 > p_4\\
+      \frac{w}{p_2+p_3} & p_1 > p_2 \text{ and } p_3 < p_4\\
+     \frac{w}{p_2+p_4}&  p_1 > p_2 \text{ and } p_3 > p_4
+\end{array}$$
+
+\textbf{Part (f)}
+In this case we know that the consumer will demand only $x_1$ and $x_2$ or $x_3$ and $x_4$, and will demand both goods in equal quantity; this follows from the same reasoning as in \textbf{Part (b)} and \textbf{Part (d)}. In each case their demands will be:
+
+$$x_1^* = x_2^* \frac{w}{p_1+p_2} \qaq x_3^* = x_4^* \frac{w}{p_3+p_4} $$
+
+But a rational consumer will demand only the combination which gives the highest utility (i.e. the demand with the smallest denominator) therefore the marshalian demands are:
+
+$$x_1^*(p_1,p_2,p_3,p_4,w) = x_2^*(p_1,p_2,p_3,p_4,w) = \left \{ \begin{array}{cc}
+     \frac{w}{p_1+p_2}&  p_1 + p_2 < p_3 + p_4 \\
+     0&  p_1 + p_2 > p_3 + p_4\end{array}$$ 
+ $$x_3^*(p_1,p_2,p_3,p_4,w) = x_4^*(p_1,p_2,p_3,p_4,w) = \left \{ \begin{array}{cc}
+     0&  p_1 + p_2 < p_3 + p_4 \\
+     \frac{w}{p_3+p_4}&  p_1 + p_2 > p_3 + p_4\end{array}$$
+This give us the indirect utility function:
+$$v(p_1,p_2,p_3,p_4,w) \left \{ \begin{array}{cc}
+     \frac{w}{p_1+p_2}&  p_1 + p_2 < p_3 + p_4 \\
+       \frac{w}{p_3+p_4}&  p_1 + p_2 > p_3 + p_4\end{array}$$ 
+\end{proof}
+
+\begin{problem}[CES Utility]
+Throughout this problem, let $X=\mathbb{R}_{+}^{k},$ and let $\left(a_{1}, a_{2}, \ldots, a_{k}\right)$ be a set of strictly positive coefficients
+which sum to 1. You may assume prices and wealth are strictly positive, and ignore cases where
+two or more prices are identical.
+
+\begin{enumerate}[(a)]
+    \item For each of the following utility functions, solve the consumer problem and state $x(p, w)$ :
+    \begin{enumerate}[i]
+        \item linear utility $u(x)=x_{1}+x_{2}+\ldots+x_{k}$
+        \item Cobb-Douglas utility $u(x)=x_{1}^{a_{1}} x_{2}^{a_{2}} \cdots x_{k}^{a_{k}}$
+        \item Leontief utility $u(x)=\min \left\{\frac{x_{1}}{a_{1}}, \frac{x_{2}}{a_{2}}, \ldots, \frac{x_{k}}{a_{k}}\right\}$
+    \end{enumerate}
+    \item Consider the Constant Elasticity of Substitution (CES) utility function
+    $$
+    u(x)=\left(\sum_{i=1}^{k} a_{i}^{\frac{1}{s}} x_{i}^{\frac{s-1}{s}}\right)^{\frac{s}{s-1}}
+    $$
+    with $s \in(0,1) \cup(1,+\infty) .$ Solve the consumer problem and state $x(p, w) . \quad$ (Recall that maximizing a function $(f(x))^{\frac{s}{s-1}}$ is the same as maximizing $f(x)$ when $s>1,$ and the same as minimizing $f(x)$ when $s<1 .)$
+    \item Show that $\mathrm{CES}$ utility gives the same demand as linear utility in the limit $s \rightarrow+\infty$ as Cobb-Douglas utility in the limit $s \rightarrow 1$,
+and as Leontief utility in the limit $s \rightarrow 0$.
+    \item The Elasticity of Substitution between goods 1 and 2 is defined as
+$$
+\xi_{1,2}=-\frac{\partial \log \left(x_{1} / x_{2}\right)}{\partial \log \left(p_{1} / p_{2}\right)}
+$$
+While this looks complicated, in the case of CES demand, we can actually write the ratio $\frac{x_{1}}{x_{2}}$ as a relatively simple function of the price ratio $\frac{p_{1}}{p_{2}},$ and calculate this elasticity without much difficulty. Calculate the elasticity of substitution for CES demand, and note its values as $s \rightarrow+\infty, s \rightarrow 1,$ and $s \rightarrow 0$
+\end{enumerate}
+\end{problem}
+                                                                                                                                     
+\begin{proof}[Answer]
+\textbf{Part (a).i} The consumer problem is the following:
+\begin{align*}
+\max_{x\in \mathbb{R}^k_+}&\quad x_{1}+x_{2}+\ldots+x_{k}\\
+\text{subject to:} &\quad p\cdot x \leq w
+\end{align*}
+
+
+Since all goods contribute the same to the consumer's utility then she will chose to consume only the one that is cheaper because she can consume more of that good. This means that the optimal solution (the marshalian demand for each good) is:
+
+$$x_i^*(p,w) = \left\{ \begin{array}{cc}
+    \frac{w}{p_i} & p_i >p_j \: \forall i\neq j \\
+     0 & \text{otherwise}
+\end{array}$$
+
+\textbf{Part (a).ii} The consumer problem is the following:
+\begin{align*}
+\max_{x\in \mathbb{R}^k_+}&\quad x_{1}^{a_{1}} x_{2}^{a_{2}} \cdots x_{k}^{a_{k}}  \\
+\text{subject to:} &\quad p\cdot x \leq w
+\end{align*}
+
+Now in this case it is optimal to consume a positive quantity of each good, therefore the optimal solution will be interior and we can ignore the non negativity constraint. we can also use the logarithm of the utility since it is a increasing transformation and will give us the optimal solution to the original consumer problem; in this case the Lagrangian is:
+$$
+\mathcal{L}(x, \lambda)=\sum_{i} a_{i} \log x_{i}+\lambda(w-p \cdot x)
+$$
+And the FOC of each $i=1,\hdots,x$ is
+$$
+\frac{a_{i}}{x_{i}}=\lambda p_{i} \qiq \frac{a_{i}}{\lambda}=x_{i} p_{i}
+$$
+
+Since we are maximizing an increasing function we can use the budget constraint as binding and get the marshalian demands as:
+
+$$x_j^*(p,w) = \frac{w a_j}{p_j\sum_{i=1}^k{a_i}}$$
+
+\textbf{Part (a).iii} The consumer problem is the following:
+\begin{align*}
+\max_{x\in \mathbb{R}^k_+}&\quad \min \left\{\frac{x_{1}}{a_{1}}, \frac{x_{2}}{a_{2}}, \ldots, \frac{x_{k}}{a_{k}}\right\} \\
+\text{subject to:} &\quad p\cdot x \leq w
+\end{align*}
+
+We know that at the optimum:
+
+$$\frac{x_i}{a_i} = \frac{x_j}{a_j} \qquad \forall i\neq j$$
+
+The if we fix any $i$ we can write any other $x_j$ as
+
+$$x_j = \frac{x_i a_j}{a_i}$$
+
+And taking the budget constraint as binding (by Walras Law):
+
+$$\sum_{j=1}^n{p_jx_j} = \sum_{j=1}^n{p_j \frac{x_i a_j}{a_i}}  = \frac{x_i}{a_i}\sum_{j=1}^n{p_ja_j }  = w$$
+
+Therefore the marshalian demand of each good is:
+
+$$x^*_i(p,w) = \frac{wa_i}{\sum_{j=1}^n{p_ja_j}}$$
+
+\textbf{Part (b)}
+
+$$s>1 \qiq \frac{s}{s-1}>0$$
+
+Then, we can maximize  $\sum_{i=1}^{k} a_{i}^{\frac{1}{s}} x_{i}^{\frac{s-1}{s}}$ also since $\frac{s-1}{s}<1$, the function is strictly concave, so first order conditions give us a global maximum. Taking the Lagrangian:
+
+$$
+\mathcal{L}(\cdot)=\sum_{i=1}^{k} a_{i}^{\frac{1}{s}} x_{i}^{\frac{s-1}{s}}+\lambda(w-p_1 x_1-...-p_k x_k)
+$$
+The FOC for $x_i$ are
+$$
+x_i: \qquad \frac{s-1}{s} a_{i}^{\frac{1}{x}} x_{i}^{-\frac{1}{n}}=\lambda p_{i}
+$$
+$$
+\Longrightarrowx_i =\left(\frac{s-1}{s}\right)^{s} a_{i}\left(\frac{1}{\lambda p_{i}}\right)^{s}
+$$
+Substituting in the budget constraint, which by Walras Law is binding:
+$$
+\sum_{j} p_{j} x_{j}= w \qquad \Longrightarrow \qquad \left(\frac{s-1}{s}\right)^{s} \lambda^{-s} \sum_{j} a_{j} p_{j}^{-(s-1)} = w
+$$
+$$
+\Longrightarrow \qquad \lambda^{-s} = w \frac{1}{\sum_{j} a_{j} p_{j}^{-(s-1)}} \left(\frac{s}{s-1}\right)^{s}
+$$
+Plugging $\lambda^s$ into the expression of $x_i$, we get the demands
+$$
+x_{i}^*=\frac{w a_{i} p_{i}^{-s}}{\sum_{j} a_{j} p_{j}^{(1-s)}}
+$$
+
+For the case that $s<1$ we can minimize $\sum_{i=1}^{k} a_{i}^{\frac{1}{s}} x_{i}^{\frac{\partial-1}{s}},$  or maximize its negative which give us the Lagrangian
+$$
+\mathcal{L}(\cdot)=-\sum_{i=1}^{k} a_{i}^{\frac{1}{s}} x_{i}^{\frac{s-1}{s}}+\lambda(w-p_1 x_1-...-p_k x_k)
+$$
+Since the problem is similar as before we will get the same demands:
+$$
+x_{i}^*=\frac{w a_{i} p_{i}^{-s}}{\sum_{j} a_{j} p_{j}^{(1-s)}}
+$$
+\textbf{Part (c)}
+Consider
+$$\lim_{s\to 1} x_{i}^*=\lim_{s\to 1}\frac{w a_{i} p_{i}^{-s}}{\sum_{j} a_{j} p_{j}^{(1-s)}} = \lim_{s\to 1}\frac{w a_{i} p_{i}^{-s}}{p_i^{1-s}\sum_{j} a_{j} (p_{j}/p_{i})^{(1-s)}} = \frac{w a_{i}}{p_i\sum_{j} a_{j}}$$
+and 
+$$\lim_{s\to 0} x_{i}^*=\lim_{s\to 0}\frac{w a_{i} p_{i}^{-s}}{\sum_{j} a_{j} p_{j}^{(1-s)}} = \frac{w a_{i}}{\sum_{j} a_{j} p_{j}}} $$
+which is exactly what we are looking for.
+
+The case of $s\to \infty$ is trickier consider
+$$\lim_{s\rightarrow \infty}{\frac{w a_{i} p_{i}^{-s}}{\sum_{j} a_{j} p_{j}^{(1-s)}}} =\lim_{s\rightarrow \infty}{\frac{w a_{i} p_{i}^{-1}}{\sum_{j} a_{j} \Big(\frac{p_{j}}{p_{i}}\Big)^{(1-s)}}} =\lim_{s\rightarrow \infty}{\frac{w a_{i} p_{i}^{-1}}{\sum_{j} a_{j} \frac{p_{j}}{p_{i}}\Big(\frac{p_{i}}{p_{j}}\Big)^{(s)}}} $$
+If $p_i>p_j$ then the denominator grows unbounded therefore the limit goes to $0$ and suppose that $p_i<p_j$ then we get the linear utility marshalian demand.
+
+\textbf{Part (d)}
+Consider:
+$$\frac{x_1}{x_2} =\frac{w a_{1} p_{1}^{-s}}{\sum_{j} a_{j} p_{j}^{(1-s)}} \big/ \frac{w a_{2} p_{2}^{-s}}{\sum_{j} a_{j} p_{j}^{(1-s)}} = \frac{a_{1} p_{1}^{-s}}{a_{2} p_{2}^{-s}} =  \frac{a_{1}}{a_{2}}\left(\frac{p_{1}}{p_{2}}\right)^{-s}$$
+Then
+$$
+\log \left(\frac{x_{1}}{x_{2}}\right) \quad=\quad \log a_{1}-\log a_{2}-s \log \left(\frac{p_{1}}{p_{2}}\right)
+$$
+giving
+$$
+\xi_{1,2}=-\frac{\partial \log \left(x_{1} / x_{2}\right)}{\partial \log r}=-(-s)=s
+$$
+Then:
+
+$$s= 0 \qiq \xi_{1,2} = 0$$
+$$s= 1 \qiq \xi_{1,2} = 1$$
+$$s= \to \infty \qiq \xi_{1,2} \to \infty$$
+\end{proof}
+
+
+\begin{problem}[Exchange Economies]
+We've been considering the problem facing a consumer with wealth $w$ at prices $p .$ An "exchange economy" is a different model where instead of money, each consumer is endowed with an initial bundle of goods $e \in \mathbb{R}_{+}^{k},$ and can either buy or sell any quantity of the goods at market prices $p$
+The consumer's problem is then
+$$
+\max _{x \in \mathbb{R}_{+}^{k}} u(x) \quad \text { subject to } \quad p \cdot x \leq p \cdot e
+$$
+i.e., the consumer's "budget" is the market value of the goods they start with.
+Assume preferences are locally non-satiated and the consumer's problem has a unique solution
+$x(p, e) .$ We'll say the consumer is a net buyer of good $i$ if $x_{i}(p, e)>e_{i},$ and a net seller if $x_{i}(p, e)<e_{i}$
+\begin{enumerate}[a]
+    \item Show that if $p_{i}$ increases, the consumer cannot switch from being a net seller to a net buyer.
+    \item Suppose $u$ is differentiable and concave. Use the Lagrangian and the envelope theorem to show that $\frac{\partial v}{\partial p_{i}}$ is negative if the consumer is a net buyer of good $i,$ and positive if the consumer is a net seller.
+    \item  Consider the following statement. "If the consumer is a net buyer of good $i$ and its price goes up, the consumer must be worse off." True or false? Explain.
+\end{enumerate}
+\end{problem}
+
+\begin{proof}[Answer]
+\textbf{Part (a)}
+Consider the constraint for the optimal solutions before and after the price $p_i$ change:
+\begin{equation}
+\sum_{j\neq i}(x_j-e_j)p_j + (x_i-e_i)p_i \leq 0     
+\end{equation}
+
+\begin{equation}
+\sum_{j\neq i}(x'_j-e_j)p_j + (x'_i-e_i)p'_i \leq 0    
+\end{equation}
+
+Now assume that $x_i<e_i<x'_i$ then from (1) and (2)
+\begin{equation}
+\sum_{j\neq i}(x_j-e_j)p_j > 0     
+\end{equation}
+
+\begin{equation}
+\sum_{j\neq i}(x'_j-e_j)p_j <0    
+\end{equation}
+
+Then
+\begin{align}
+\sum_{j\neq i}(x'_j-e_j)p_j &< \sum_{j\neq i}(x_j-e_j)p_j\\ &\qiq \sum_{j\neq i}(x'_j-e_j)p_j +(x'_i-e_i)p_i< \sum_{j\neq i}(x_j-e_j)p_j + (x'_i-e_i)p_i  \\
+&\qiq \sum_{j\neq i}(x'_j-e_j)p_j +(x'_i-e_i)p_i< \sum_{j\neq i}(x_j-e_j)p_j + (x_i-e_i)p_i  \leq 0
+\end{align}
+
+Which means that the optimal bundle at the new prices was feasible at the old prices.
+
+Similarly we get that the old bundle is feasible at the new prices.
+
+Now since the problem of the consumer has a unique solution at each price level, then it must be that:
+$$x\succ x' \qaq x'\succ x$$
+
+Which is impossible therefore there is a contradiction with $x_i<e_i<x'_i$.
+
+\textbf{Part (b)}
+Let 
+$$
+\mathcal{L}=u(x)+\lambda(p \cdot e-p \cdot x)+\mu \cdot x
+$$
+and
+$$
+v=\min _{\lambda, \mu \geq 0} \max _{x} \mathcal{L}(x, \lambda, \mu)
+$$
+
+By the envelope theorem twice we get
+
+$$
+\frac{\partial v}{\partial p_i} = \left\frac{\partial}{\partial p_{i}}\left(u(x)+\lambda(p \cdot e-p \cdot x)+\mu \cdot x\right)=\left.\lambda\left(e_{i}-x_{i}\right)
+$$
+
+Since $\lambda \geq 0$ then the sign of $$\frac{\partial v}{\partial p_i}$$ depends only on the signs of $e_i-x_i$. This is negative if the consumer is a net buyer of good $i$,and positive if the consumer is a net seller.
+
+\textbf{Part (c)}
+If the price is to high then the consumer can choose to be a net seller and be better off. This assumes that the consumer have a initial endowment of that good that is positive. If this is not the case then the consumer cannot make that switch and will be worse off.
+
+\end{proof}
+
+\end{document}

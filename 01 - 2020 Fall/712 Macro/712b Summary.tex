@@ -1,0 +1,369 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\documentclass[12pt]{article}
+%\usepackage[left=3cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}e}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{apacite}
+\usepackage[round]{natbib}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{svg}
+\usepackage[margin = 1in, top=2cm]{geometry}% Margins
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.2em}
+\usepackage{setspace} % Setting the spacing between lines
+\usepackage{amsthm, amsmath, amsfonts, mathtools, amssymb, bm} % Math packages 
+\usepackage{svg}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{epstopdf}
+\usepackage{subfig} % Manipulation and reference of small or sub figures and tables
+\usepackage{hyperref} % To create hyperlinks within the document
+\spacing{1.15}
+\usepackage{appendix}
+\usepackage{xcolor}
+\usepackage{cancel}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+
+
+\usepackage[round]{natbib}
+%\bibliographystyle{plainnat}
+\bibliographystyle{apacite}
+
+
+\newtheorem{defin}{Definition.}
+\newtheorem{teo}{Theorem. }
+\newtheorem{lema}{Lemma. }
+\newtheorem{coro}{Corolary. }
+\newtheorem{prop}{Proposition. }
+\theoremstyle{definition}
+\newtheorem{examp}{Example. }
+\newtheorem{problem}{Problem}
+\newtheorem{subproblem}{}[problem]
+% \numberwithin{problem}{subsection} 
+
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\qiq}{\qquad \implies \qquad}
+\newcommand{\qiffq}{\qquad \iff \qquad}
+\newcommand{\qaq}{\qquad \textbf{and} \qquad}
+\newcommand{\qoq}{\qquad \textbf{or} \qquad}
+\newcommand{\settf}{\text{ \emph{:} }}
+\newcommand{\chbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{.9em}}}
+\newcommand{\cchbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\checkmark$}}
+
+\title{712b Summary}
+\author{Mitchell Valdés-Bobes}
+\date{September 30, 2020}
+
+\begin{document}
+
+\maketitle
+
+\section{Dynamic Programming}
+\subsection{Definitions}
+\begin{defin}[Contraction Mapping]
+Let $(S, \rho)$ be a metric space and $T: S \rightarrow S$ be a function mapping $S$ into itself. $T$ is a contraction mapping (with modulus $\beta$ ) if for some $\beta \in(0, I), \rho(T x, T y) \leq \beta \rho(x, y),$ for all $x, y \in S$
+\end{defin}
+
+\begin{defin}Graph of a Correspondence]
+$A = \operatorname{graph}\Gamma = \left\{(x,y)\in X\times X \: |\:y\in \Gamma(x)\right\}$
+\end{defin}
+
+
+\subsection{Bellman Equation Conditions}
+\subsubsection{Feasible Correspondence}
+\begin{itemize}
+    \item $\Gamma_1$:  $X\subseteq \mathbb {R}^\ell$ is convex, $\Gamma:X\to X$ is non-empty, compact valued and continuous.
+    \item $\Gamma_2$:  $\Gamma:X\to X$ is monotone, i.e: $\quad x\leq x' \quad \implies \quad\Gamma(x)\subseteq \Gamma(x')$
+    \item $\Gamma_3$:  $\Gamma:X\to X$ is convex, i.e: for all $\lambda\in [0,1], \quad x,x'\in X, \quad y\in \Gamma(x),\quad  y'\in\Gamma(x')$ then: $$\lambda y + (1-\lambda)y' \in \Gamma\big(\lambda x + (1-\lambda)x'\big)$$
+\end{itemize}
+
+\subsubsection{Objective Function}
+\begin{itemize}
+    \item $\mathrm{F}_1$:  $F:A\to\mathbb{R}$  is bounded and continuous i.e. $F\in C(X)$.
+    \item $\mathrm{F}_2$:  $F:A\to\mathbb{R}$  is increasing in $x$ for all $y$ (i.e. $F(\cdot,y)$ is increasing)
+    \item $\mathrm{F}_3$: $F:A\to\mathbb{R}$  is strictly concave in $(x,y)$.
+    \item $\mathrm{F}_4$: $F:A\to\mathbb{R}$  is continuously differentiable in the interior of $A$.
+\end{itemize}
+
+\subsection{Results}
+\begin{teo}[Completeness of $C(X)$]
+Let $X \subseteq \mathbf{R}^{\ell}$, and let $C(X)$ be the set of bounded continuous functions $f: X \rightarrow \mathbf{R}$ with the sup norm, $\|f\|=\sup _{x \in X}|f(x)| .$ Then $C(X)$ is a complete normed vector space. (Note that if $X$ is compact then every continuous function is bounded. Otherwise the restriction to bounded functions must be added.)
+\end{teo}
+
+\begin{teo}[Theorem of the Maximum]
+Let $$h(x)=\max_{y\in \Gamma(x)}F(x, y)$$ and $$G(x)=\{y\in\Gamma(x)\::\:F(x,y)=h(x)\}$$
+with $x\in \mathbb{R}^\ell$ $y\in Y\subseteq\mathbb{R}^m$. If the following holds true:
+\begin{itemize}
+    \item $F:X\times Y\to \mathbb{R}$ is continuous.
+    \item $\Gamma:X \rightrightarrows Y$ is compact-valued and continuous (upper
+ hemicontinuou and lower hemicontinuous ).
+\end{itemize}
+
+Then $h$ is continuous and $G$ is non empty and compact-valued and G is upper hemicontinuous.
+\end{teo}
+
+\begin{teo}[Contraction Mapping Theorem]
+If  $(S, \rho)$  is a complete metric  space and $T: S \rightarrow S$ is a contraction mapping with modulus $\beta,$ then:
+\begin{enumerate}
+    \item $T$ has exactly one fixed point $v$ in $S$, and
+    \item for any $v_{0} \in S, \rho\left(T^{n} v_{0}, v\right) \leq \beta^{n} \rho\left(v_{0}, v\right), n=0,1,2, \ldots$
+\end{enumerate}
+\end{teo}
+
+\begin{coro}
+Let $(S, \rho)$ be a complete metric space, and let $T: S \rightarrow S$ be $a$ contraction mapping with fixed point $v \in S .$ If $S^{\prime}$ is a closed subset of $S$ and $T\left(S^{\prime}\right) \subseteq S^{\prime},$ then $v \in S^{\prime} .$ If in addition $T\left(S^{\prime}\right) \subseteq S^{\prime \prime} \subseteq S^{\prime},$ then $v \in S^{\prime \prime}$
+
+\end{coro}
+
+\begin{teo}[Blackwell's sufficient conditions for a contraction]
+Let $X \subseteq \mathbf{R}^{l},$ and let $B(X)$ be a space of bounded functions $f: X \rightarrow \mathbf{R},$ with the sup norm. Let $T: B(X) \rightarrow B(X)$ be an operator satisfying
+\begin{enumerate}
+    \item \textbf{(monotonicity)} $f$, $g \in B(X)$ and $f(x) \leq g(x),$ for all $x \in X,$ implies $(T f)(x) \leq(T g)(x),$ for all $x \in X$
+    \item \textbf{(discounting)} there exists some $\beta \in(0,1)$ such that
+\end{enumerate}
+$$
+[T(f+a)](x) \leq(T f)(x)+\beta a, \quad \text { all } f \in B(X), a \geq 0, x \in X
+$$
+Then $T$ is a contraction with modulus $\beta$.
+\end{teo}
+
+
+\begin{teo}[Theorem (Benveniste-Scheinkman)]
+Let $X \subseteq \mathbb{R}^{l}$ be convex, $V: X \rightarrow \mathbb{R}$ be concave. Take $x_{0} \in \operatorname{int} X, D$ open neighborhood of $x_{0} .$ If there exists a concave, differentiable function $W: D \rightarrow \mathbb{R}$ with $W\left(x_{0}\right)=V\left(x_{0}\right)$ and $W(x) \leq V(x) \quad \forall x \in D,$ then $V$ is differentiable at $x_{0}$ and $V_{x}\left(x_{0}\right)=W_{x}\left(x_{0}\right)$
+\end{teo}
+
+
+\begin{teo}[Theorem (FOC and Env)]
+Under $(\Gamma_1),(\Gamma_3),(\mathrm{F}_1),(\mathrm{F}_3),(\mathrm{F}_4)$ let $v$ be the value function solving $(\mathrm{FE})$
+is strictly concave, and the $g$ be the optimal policy function. If $x_{0} \in \operatorname{int} X$ and $g\left(x_{0}\right) \in$
+$\operatorname{int} \Gamma\left(x_{0}\right)$ then $v$ is continuously differentiable at $x_{0}$ with:
+$$
+V_{x}\left(x_{0}\right)=F_{x}\left(x_{0}, g\left(x_{0}\right)\right)
+$$
+\end{teo}
+
+\section{Stochastic Dynamic Programming}
+\subsection{Definitions}
+\begin{defin}[Plan]
+ A plan is a value $\pi_{0} \in X$  and a sequence of measurable functions  $$\pi_{t}: Z^{t} \rightarrow X, t=1,2, \ldots$
+\end{defin}
+
+\begin{defin}[Feasible Plan]
+A plan $\pi$ is feasible from $s_{0} \in S$ if
+\begin{itemize}
+    \item (1a) $\quad \pi_{0} \in \Gamma\left(s_{0}\right)$
+    \item  (1b) $\quad \pi_{t}\left(z^{t}\right) \in \Gamma\left[\pi_{t-1}\left(z^{t-1}\right), z_{t}\right], \quad$ all $z^{t} \in Z^{t}, t=1,2, \ldots$
+\end{itemize} 
+
+\begin{defin}[Feller Property]
+A transition function $Q(z, z')$ has the Feller property if for any $F:Z\to\mathbb{R}$ that is bounded and continuous, the function defined:
+$$f(z) = \mathbb{E}[F(z') \mid z ] = \int F(Z')Q(z, dz')$$
+is bounded and continuous.
+\end{defin}
+
+\subsection{Assumptions}
+\begin{itemize}
+    \item \textbf{Assumption 9.1} $\quad \Gamma$ is nonempty-valued and the graph of $\Gamma$ is $(\mathscr{X} \times \mathscr{X} \times \mathscr{Z})$ measurable. In addition, $\Gamma$ has a measurable selection; that is, there exists a measurable function $h: S \rightarrow X$ such that $h(s) \in \Gamma(s),$ all $s \in S .$
+
+Recall that for the case where $X$ and $Z$ are subsets of Euclidean spaces, Theorem 7.6 provides a sufficient condition for $\Gamma$ to have a measurable selection. The following result follows immediately from this assumption.
+
+is nonempty for all $s_{0} \in S .$ 
+    \item \textbf{Assumption 9.2} $F$ is A measurable and either $a$ or $b$ hold.
+\begin{enumerate}[a)]
+    \item $F \geq 0$ or $F \leq 0$
+    \item For each $\left(x_{0}, z_{0}\right)=s_{0} \in S$ and each plan $\pi \in \Pi\left(s_{0}\right)$
+    $$
+    F\left[\pi_{t-1}\left(z^{t-1}\right), \pi_{t}\left(z^{t}\right), z_{t}\right] \text { is } \mu^{t}\left(z_{0}, \cdot\right) \text { -integrable, } t=1,2, \ldots
+    $$
+    and the limit
+    $$
+    F\left[x_{0}, \pi_{0}, z_{0}\right]+\lim _{n \rightarrow \infty} \sum_{t=1}^{n} \int_{Z^{t}} \beta^{t} F\left[\pi_{t-1}\left(z^{t-1}\right), \pi_{t}\left(z^{t}\right), z_{t}\right] \mu^{t}\left(z_{0}, d z^{t}\right)
+    $$
+    exists (although it may be plus or minus infinity).
+\end{enumerate}
+    \item \textbf{Assumption 9.3} If F takes on both signs, there is a collection of nonnegative, measurable functions $L_{t}: S \rightarrow \mathbf{R}_{+}, t=0,1, \ldots,$ such that for all $\pi \in$ $\Pi\left(s_{0}\right)$ and all $s_{0} \in S$
+$$
+\begin{array}{l}
+\left|F\left(x_{0}, \pi_{0}, z_{0}\right)\right| \leq L_{0}\left(s_{0}\right) \\
+\left|F\left[\pi_{t-1}\left(z^{t-1}\right), \pi_{t}\left(z^{t}\right), z_{t}\right]\right| \leq L_{t}\left(s_{0}\right), \quad \text { all } z^{t} \in Z^{t}, t=1,2, \ldots
+\end{array}
+$$
+and
+$$
+\sum_{t=0}^{\infty} \beta^{t} L_{t}\left(s_{0}\right)<\infty
+$$
+    \item \textbf{Assumption 9.4} $X$ is a convex Borel set in $\mathbf{R}^{l}$, with its Borel subsets $\mathscr{X}$.
+    \item \textbf{Assumption 9.5} One of the following conditions holds:
+    \begin{enumerate}[a)]
+        \item $Z$ is a countable set and $\mathscr{Z}$ is the $\sigma$ -algebra containing all subsets of $Z ;$ or
+        \item $Z$ is a compact (Borel) set in $\mathbf{R}^{k}$, with its Borel subsets $\mathscr{Z}$, and the transition function $Q$ on $(Z, \mathscr{Z})$ has the Feller property.
+    \end{enumerate}
+    
+    \item \textbf{Assumption 9.6} The correspondence $\Gamma: X \times Z \rightarrow X$ is nonempty, compact-valued, and continuous.
+
+    \item \textbf{Assumption 9.7} The function $F: A \rightarrow \mathbf{R}$ is bounded and continuous, and $\beta \in(0,1)$
+    
+    \item \textbf{Assumption 9.8} For each $(y, z) \in X \times Z, F(\cdot, y, z): A_{y z} \rightarrow \mathbf{R}$ is strictly increasing.
+
+    \item \textbf{Assumption 9.9} For each $z \in Z, \Gamma(\cdot, z): X \rightarrow X$ is increasing in the sense that $x \leq x^{\prime}$ implies $\Gamma(x, z) \subseteq \Gamma\left(x^{\prime}, z\right)$
+
+    \item \textbf{Assumption 9.10} For each $z \in Z, F(\cdot, \cdot, z): A_{z} \rightarrow \mathbf{R}$ satisfies
+    
+  
+
+    \item \textbf{Assumption 9.11} For all $z 
+    \in Z$ and all $x, x'$ in 
+    $$
+    \begin{array}{l}
+    y \in \Gamma(x, z) \text { and } y^{\prime} \in \Gamma\left(x^{\prime}, z\right) \text { implies } \\
+    \qquad \theta y+(1-\theta) y^{\prime} \in \Gamma\left[\theta x+(1-\theta) x^{\prime}, z\right], \quad \text { all } \theta \in[0,1]
+    \end{array}
+    $$
+    
+    
+      \item \textbf{Assumption 9.12} For each fixed $z \in Z, F(\cdot, \cdot, z)$ is continuously differentiable in $(x, y)$ on the interior of $A_{z}$
+
+\item \textbf{Assumption 9.13}  For each $(x, y) \in X \times X, F(x, y, \cdot): A_{x y} \rightarrow \mathbf{R}$ is strictly increasing.
+
+\item \textbf{Assumption 9.14} For each $x \in X, \Gamma(x, \cdot): Z \rightarrow X$ is increasing in the sense that $z \leq z^{\prime}$ implies $\Gamma(x, z) \subseteq \Gamma\left(x, z^{\prime}\right)$
+
+\item \textbf{Assumption 9.15}  Q is monotone; that is, if $f: Z \rightarrow \mathbf{R}$ is nondecreasing, then the function $(M f)(z)=\int f\left(z^{\prime}\right) Q\left(z, d z^{\prime}\right)$ is also nondecreasing.
+$$
+F\left[\theta(x, y)+(1-\theta)\left(x^{\prime}, y^{\prime}\right), z\right] \geq \theta F(x, y, z)+(1-\theta) F\left(x^{\prime}, y^{\prime}, z\right)
+$$
+all $\theta \in(0,1), \quad$ and all $(x, y),\left(x^{\prime}, y^{\prime}\right) \in A_{z}$
+and the inequality is strict if $x \neq x^{\prime}$
+
+\end{itemize}
+
+
+
+\subsection{Results}
+
+Under Assumptions 9.1 and 9.2 , the function $u(\cdot, s)$ is well defined on the nonempty set $\Pi(s),$ for each $s \in S .$ In this case we can define the supremum function $v^{*}: S \rightarrow \overline{\mathbf{R}}$ by
+
+(2)
+$$
+v^{*}(s)=\sup _{\pi \in \Pi(s)} u(\pi, s)
+$$
+That is, $v^{*}$ is the unique function satisfying the following two conditions:
+
+$\begin{array}{ll}\text {(3) } & v^{*}(s) \geq u(\pi, s), \text { all } \pi \in \Pi(s) ;\end{array}$
+
+(4) $\quad v^{*}(s)=\lim _{k \rightarrow \infty} u\left(\pi^{k}, s\right),$ for some sequence
+$\left\{\pi^{k}\right\}_{k=1}^{\infty}$ in $\Pi(s)$
+Now consider the functional equation corresponding to the sequence problem in ( 2 ):
+
+(5)
+$$
+v(s)=v(x, z)=\sup _{y \in \Gamma(x, z)}\left[F(x, y, z)+\beta \int v\left(y, z^{\prime}\right) Q\left(z, d z^{\prime}\right)\right]
+$$
+If there exists a function $v$ satisfying $(5),$ then we can also define the associated policy correspondence $G$ by
+
+(6)
+$$
+G(x, z)=\left\{y \in \Gamma(x, z): v(x, z)=F(x, y, z)+\beta \int v\left(y, z^{\prime}\right) Q\left(z, d z^{\prime}\right)\right\}
+$$
+
+\subsubsection{Theorems}
+\begin{teo} [9.2]
+Let $(X, \mathscr{X}),(Z, \mathscr{Z}), Q, \Gamma, F,$ and $\beta$ be given. Let Assumptions
+9.1 and 9.2 hold, and let $v^{*}$ be defined by $(2) .$ Let $v$ be a measurable function satisfying the functional equation (5), and such that
+
+$$
+\lim _{t \rightarrow \infty} \int_{Z^{\prime}} \beta^{t} v\left[\pi_{t-1}\left(z^{t-1}\right), z_{t}\right] \mu^{t}\left(z_{0}, d z^{t}\right)=0
+$$
+$$
+\begin{array}{l}
+\text { all } \pi \in \Pi\left(s_{0}\right), \text { all }\left(x_{0}, z_{0}\right)=s_{0} \in S . \\
+\end{array}
+$$
+
+Let $G$ be the correspondence defined by (6), and suppose that G is nonempty and permits a measurable selection. Then $v=v^{*}$, and any plan $\pi^{*}$ generated by $G$ attains the supremum in $(2) .$
+
+\end{teo}
+
+\begin{lema}[9.3]
+Assumptions $9.1-9.3$ hold. Then for any $\left(x_{0}, z_{0}\right)=s_{0} \in S$ and any $\pi \in \Pi\left(s_{0}\right)$,
+(9)
+$$
+u\left(\pi, s_{0}\right)=F\left(x_{0}, \pi_{0}, z_{0}\right)+\beta \int_{Z} u\left[C\left(\pi, z_{1}\right),\left(\pi_{0}, z_{1}\right)\right] Q\left(z_{0}, d z_{1}\right)
+$$
+where for each $z_{1} \in Z, C\left(\pi, z_{1}\right)$ is the continuation of $\pi$ following $z_{1}$.
+\end{lema}
+
+\begin{teo}[9.4]
+$9.1-9.3$ hold, and define $v^{*}$ by $(2) .$ Assume that $v^{*}$ is measurable and satisfies
+(5), and define the correspondence $G$ by $(6) .$ Assume that $G$ is nonempty and permits a measurable selection. Let $\left(x_{0}, z_{0}\right)=s_{0} \in S,$ and let $\pi^{*} \in \Pi\left(s_{0}\right)$ be a plan that attains the supremum in (2) for initial condition $s_{0} .$ Then there exists a plan $\pi^{G}$ generated by $G$ from $s_{0}$ such that
+$$
+\begin{array}{l}
+\pi_{0}^{G}=\pi_{0}^{*}, \quad \text { and } \\
+\pi_{t}^{G}\left(z^{t}\right)=\pi_{t}^{*}\left(z^{t}\right), \quad \mu^{t}\left(z_{0}, \cdot\right)-\mathrm{a} . \mathrm{e} ., \quad t=1,2, \ldots
+\end{array}
+$$
+\end{teo}
+
+
+
+\begin{teo}[9.6] Let $(X, \mathscr{X}),(Z, \mathscr{Z}), Q, \Gamma, F,$ and $\beta$ satisfy Assumptions $9.4-$
+9.7, and define the operator $T$ on $C(S)$ by
+$$
+\text { (5) } \quad(T f)(x, z)=\sup _{y \in \Gamma(x, z)}\left\{F(x, y, z)+\beta \int f\left(y, z^{\prime}\right) Q\left(z, d z^{\prime}\right)\right\}
+$$
+Then $T: C(S) \rightarrow C(S) ; T$ has $a$ unique fixed point $v$ in $C(S)$ and for any $v_{0} \in C(S)$
+$$
+\left\|T^{n} v_{0}-v\right\| \leq \beta^{n}\left\|v_{0}-v\right\|, \quad n=1,2, \ldots
+$$
+
+Moreover, the correspondence $G: S \rightarrow X$ defined by
+(6)
+$$
+G(x, z)=\left\{y \in \Gamma(x, z): v(x, z)=F(x, y, z)+\beta \int v\left(y, z^{\prime}\right) Q\left(z, d z^{\prime}\right)\right\}
+$$
+is nonempty, compact-valued, and $u . h . c .$
+\end{teo}
+
+
+
+\begin{teo}[9.7]
+\begin{aligned}
+&\text {Under Assumptions 9.4 - 9.9, and let v be the unique fixed point of the operator } T \text { in }(5) . \text { Then for each }\\
+&z \in Z, v(\cdot, z): X \rightarrow \mathbf{R} \text { is strictly increasing.}
+\end{aligned}
+\end{teo}
+
+\begin{teo}[9.8]. Under Assumptions 9.4- 9.7 and $9.10-9.11 ;$ let $v$ be the unique fixed point of the operator $T$ in (5)$;$ and let $G$ be the correspondence defined $b y$ (6). Then for each $z \in Z, v(\cdot, z): X \rightarrow \mathbf{R}$ is strictly concave and $G(\cdot, z): X \rightarrow X$ is a continuous (single-valued) function.
+\end{teo}
+
+
+\begin{teo}[9.9] Under 9.4- 9.7 and $9.10-9.11 ;$ let $C^{\prime}(S) \subset C(S)$ be the set of bounded continuous functions on $S$ that are weakly concave jointly in their first l arguments; let $v \in C^{\prime}(S)$ be the
+unique fixed point of the operator $T$ in (5)$;$ and let $g=G$ be the (single-valued) function defined by (6). Let $v_{0} \in C^{\prime}(S),$ and define $\left\{\left(v_{n}, g_{n}\right)\right\}$ by
+$$
+\begin{array}{c}
+v_{n}=T v_{n-1}, \quad \text { and } \\
+g_{n}(x, z)=\underset{y \in \Gamma(x, z)}{\operatorname{argmax}}\left\{F(x, y, z)+\beta \int v_{n}\left(y, z^{\prime}\right) Q\left(z, d z^{\prime}\right)\right\} \\
+n=1,2, \ldots
+\end{array}
+$$
+Then $g_{n} \rightarrow g$ pointwise. If $X$ and $Z$ are both compact, then the convergence is uniform.
+\end{teo}
+
+
+
+\begin{teo}[9.10] Under 9.4-9.7 and $9.10-9.12 ;$ let $v \in C^{\prime}(S)$ be the unique fixed point of the operator $T$ in
+(5), and let $g=G$ be the function defined by (6). If $x_{0} \in$ int $X$ and $g\left(x_{0}, z_{0}\right) \in$ int $\Gamma\left(x_{0}, z_{0}\right),$ then $v\left(\cdot, z_{0}\right)$ is continuously differentiable in $x$ at $x_{0},$ with derivatives given by
+$$
+v_{i}\left(x_{0}, z_{0}\right)=F_{i}\left[x_{0}, g\left(x_{0}, z_{0}\right), z_{0}\right], \quad i=1, \ldots, l
+$$
+\end{teo}
+
+
+
+\begin{teo}[9.11] Under 9.4 -9.7 and $9.13-9.15 ;$ and let $v \in C(S)$ be the unique fixed point of the operator $T$ in (5). Then for each $x \in X, v(x, \cdot): Z \rightarrow \mathbf{R}$ is strictly increasing.
+\end{teo}
+
+
+\end{document}

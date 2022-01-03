@@ -1,0 +1,256 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[left=3cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}e}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{apacite}
+\usepackage[round]{natbib}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{svg}
+\usepackage[margin = 1in, top=2cm]{geometry}% Margins
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.2em}
+\usepackage{setspace} % Setting the spacing between lines
+\usepackage{amsthm, amsmath, amsfonts, mathtools, amssymb, bm} % Math packages 
+\usepackage{svg}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{epstopdf}
+\usepackage{subfig} % Manipulation and reference of small or sub figures and tables
+\usepackage{hyperref} % To create hyperlinks within the document
+\spacing{1.15}
+\usepackage{appendix}
+\usepackage{xcolor}
+\usepackage{cancel}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{optidef}
+\usepackage{etoolbox}
+
+\usepackage[round]{natbib}
+%\bibliographystyle{plainnat}
+\bibliographystyle{apacite}
+
+
+\newtheorem{defin}{Definition.}
+\newtheorem{teo}{Theorem. }
+\newtheorem{lema}{Lemma. }
+\newtheorem{coro}{Corolary. }
+\newtheorem{prop}{Proposition. }
+\theoremstyle{definition}
+\newtheorem{examp}{Example. }
+\newtheorem{problem}{Problem}
+\newtheorem{subproblem}{}[problem]
+% \numberwithin{problem}{subsection} 
+
+% \AtBeginEnvironment{problem}{\color{gray}}
+% \AtBeginEnvironment{subproblem}{\color{gray}}
+\AtBeginEnvironment{proof}{\color{red}}
+
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\qiq}{\qquad \implies \qquad}
+\newcommand{\qiffq}{\qquad \iff \qquad}
+\newcommand{\qaq}{\qquad \textbf{and} \qquad}
+\newcommand{\qoq}{\qquad \textbf{or} \qquad}
+\newcommand{\settf}{\text{ \emph{:} }}
+\newcommand{\chbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{.9em}}}
+\newcommand{\cchbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\checkmark$}}
+
+\title{Problem Set 2}
+\author{Mitchell Valdés-Bobes}
+\date{April 14, 2021}
+
+\begin{document}
+\maketitle
+
+\begin{problem}
+Is the following statement true or false? "The effectiveness of signaling in the model of education we studied would break down if the costs of acquiring education were equal for individuals with different abilities." Please explain your answer.
+\end{problem}
+\begin{proof}
+The statement is true.
+
+The analytic argument is the following: The existence of a separating equilibrium is conditional on the $(IC)$ constraint. Without a difference in cost we don't have an $(IC)$ constraint.
+
+Intuitively, any separating equilibrium implies that different types will select different signals but if the signal have the same cost for all types, then all types will select the \textit{"optimal"} signal. Thus it is impossible to have a separating equilibrium therefore the signal is worthless.
+
+\cite[p.~358]{spence_job_1973} argues that:
+
+"It is not difficult to see that a signal will not effectively distinguish one applicant from another, unless the costs of signaling are negatively correlated with productive capability. For if this condition fails to hold, given the offered wage schedule, everyone will invest in the signal in exactly the same way, so that they cannot be
+distinguished on the basis of the signal."
+\end{proof}
+
+
+\begin{problem}
+Consider a used-car market with 100 sellers; every seller has one car. 50 of these cars are high-quality cars, each worth $\$ 10.000$ to a buyer; the remaining 50 cars are lemons, each worth only $\$ 2.000$.
+\end{problem}
+\begin{subproblem}
+Compute a buyer's maximum willingness to pay for a car if $s /$ he cannot observe the car's quality.
+\end{subproblem}
+\begin{proof}[Answer]
+Since there are the same number of high-quality cars than lemons we can say that the probability of buying a lemon is the same as the probability of buying a high-quality car. 
+$$\mathbb{P}[H] = \mathbb{P}[L] =\frac{1}{2}$$
+
+
+The expected utility in this market of a buyer that pays a price $p$ for a car is:
+$$\mathbb{P}[H](10000 - p) +  \mathbb{P}[L](2000 - p) +  = 6000-p$$
+
+The buyers willingness to pay of a consumer if she can't observe the car's quality is the price for which her expected utility is zero:
+
+$$\boxed{p = 6000}$$
+
+\end{proof}
+
+\begin{subproblem}
+ Suppose that there are 100 buyers, so that competition among them leads cars to be sold at buyers' maximum willingness to pay. What would the equilibrium be if sellers value high-quality cars at $\$ 8.000 ?$ What would the equilibrium be if sellers value high-quality cars at $\$ 6.000 ?$
+\end{subproblem}
+
+\begin{proof}[Answer]
+\textbf{Case 1: Sellers value is 8000}
+
+Suppose that a seller is willing to sell a car at the market price of $6000$, then it must be that the seller values the car at less that or equal than that price. Then the buyers can learn from this decision that the car is not a high-value car but a Lemon. Knowing this the buyer wont buy the car since she values a Lemon, less than the market price.
+
+\textbf{Case 2: Sellers value is 6000} The sellers are then indifferent between owning the high-quality car and the market price. If we assume that when indifferent a seller will sell her car then the buyer will learn nothing from that decision and trade will happen.
+
+\end{proof}
+
+\begin{problem}
+Consider a monopolist producing a good. For reasons exogenous to the problem, the good may be of high quality $(H)$ with probability $\alpha$ or low quality $(L)$ with probability $1-\alpha$. Let $q_{i}$ be the probability that a product of quality $i$ breaks down; assume $q_{H}<q_{L}$. The monopolist's marginal production costs are constant and denoted by $c_{i}, i=\{H, L\}$.
+
+The monopolist proposes a contract $(p, w)$ to a consumer, where $p$ is the good's price and $w$ indicates whether there is a warranty $(w=0$ or $w=1)$. The consumer's utility is $(1-q) S+q S w-p$ if $\mathrm{s} /$ he accepts the offer and zero if $\mathrm{s} /$ he rejects the offer. The monopolist's profit is $p-c-q c w$ if the consumer accepts the offer and zero otherwise. Our goal is to find the conditions under which a high-quality product sells with a warranty $\left(w_{H}=1\right)$ and a low-quality product sells without warranty $\left(w_{L}=0\right)$
+\end{problem}
+\begin{subproblem}
+Write two incentive constraints capturing that a monopolist producing a high quality good does not want to mimic a monopolist producing a low-quality good and a monopolist producing a low-quality good does not want to mimic a monopolist producing a high-quality good.
+
+\end{subproblem}
+
+\begin{proof}[Answer]
+Let $\left(p_{H}, w_{H}\right),\left(p_{L}, w_{L}\right)$ be the contracts of the high-type and low-type monopolist respectively. Incentive compatibility constraints are:
+
+\begin{equation}\tag{IC_H}
+    p_H-c_H - q_H c_H w_H \geq p_L-c_H - q_H c_H w_L
+\end{equation}
+
+\begin{equation}\tag{IC_L}
+    p_L-c_L - q_L c_L w_L \geq p_H-c_L - q_L c_L w_H
+\end{equation}
+
+Which we can re-write as:
+\begin{equation}\tag{IC_H'}\label{ich}
+    p_H - q_H c_H w_H \geq p_L - q_H c_H w_L
+\end{equation}
+\begin{equation}\tag{IC_L'}\label{icl}
+   p_L - q_L c_L w_L \geq p_H - q_L c_L w_H
+ \end{equation}
+\end{proof}
+\begin{subproblem}
+Find the conditions on the parameters under which such a separating equilibrium exists.
+\end{subproblem}
+\begin{proof}[Answer]
+Suppose that $w_H = 1$ and $w_L=0$. From \eqref{ich} and \eqref{icl} we have:
+\begin{equation}\label{cond1}
+p_{L} \geqslant p_{H}-p_{L} c_{L} \qaq p_{H}+q_{H} c_{H} \geqslant p_{L} \qiq \boxed{\frac{q_H}{q_L} \leq \frac{c_L}{c_H}}\end{equation}
+
+Note that for this to be a separating equilibrium the consumer must learn the type of the monopolist from $w$. This gives the following conditions for the equilibrium prices:
+
+$$s-p_H \geq 0 \qaq (1-q_L)S - p_L \geq 0$$
+
+If the above inequalities are slack then the monopolist can profit from deviate and set a higher price then it mus be in equilibrium:
+$$S = p_H  \qaq (1-q_L)S  = p_L$$
+
+We can use this conditions on prices in the participation constraint of both types or monopolist and fin for which conditions it hold:
+
+\begin{align*}
+    -q_L S \geq - q_L c_L &\qiq S\geq c_L\\
+    -q_H c_H \geq -q_L S \qiq S \leq \frac{q_H}{q_L}c_H
+\end{align*}
+
+From \eqref{cond1} we have:
+
+$$\frac{q_H}{q_L}c_H \leq c_L \qiq  S \leq c_L$$
+
+then it must be that:
+$$\boxed{c_L = S}$$
+
+
+
+\end{proof}
+
+\begin{problem}
+A seller sells a unit of a good of quality $q$ at price $t$. The cost of producing quality $q$ is $q^{2}$. A buyer receives a utility of $\theta q-t$ when purchasing a good of quality $q$ at price $t$. If s/he decides not to buy, s/he receives zero a utility. $\theta$ can take two values, $\theta_{1}=1$ and $\theta_{2}=2$. Assume that the seller has all the bargaining power.
+\end{problem}
+$$
+\begin{array}{l}
+\text { Sellers profit: } V(q, t)=t-q^{2} \text { or } 0 \\
+\text { Buyers utility } v(q, t(\theta)=q \theta-t \text { or } 0 \\
+\left.\theta \in \left[ \theta_{1}, \theta_{2}\right], \quad \theta_{1}=1, \quad \theta_{2}=2
+\end{array}
+$$
+\begin{subproblem}
+Suppose that the seller can observe $\theta$. Derive the profit-maximizing price-quality pairs the seller offers when $\theta=1$ and when $\theta=2$. Show that the quality offered when $\theta=2$ is twice the quality offered when $\theta=1$.
+\end{subproblem}
+\begin{proof}[Answer]
+If the seller can observe $\theta$ then she knows which consumer she is dealing with and can extract all the surplus from that consumer. This is a fancy way to say that only $(IR)$ restriction will mater. Therefore:
+$$
+q=\frac{t}{\theta} \qiq q_{1}=t_{1} \qaq q_{2}=\frac{t_{2}}{2}
+$$
+
+The the seller solves the following program:
+$$\max_{t}\quad t-\left(\frac{t}{\theta}\right)^{2}$$
+
+The first order condition for this problem is:
+
+$$
+1-2\frac{t}{\theta^2} \qiq \boxed{t = \frac{\theta^2}{2}}
+$$
+
+The optimal price/quantity pairs are:
+
+\begin{align*}
+    \text{If } \theta_1: &\qquad \left( \frac{1}{2}, \frac{1}{2}\right)\\ 
+    \text{If } \theta_2: &\qquad \left(2,1\right)
+\end{align*}
+Note that $\boxed{2q_1 = q_2}$
+\end{proof}
+\begin{subproblem}
+Prove that the full-information price-quality pairs are not incentive compatible if the seller cannot observe $\theta$.
+\end{subproblem}
+\begin{proof}[Answer]
+Incentive compatibility must preclude types from mimic each other. Note that 
+
+$$\theta_{1} q_{1}-t_{3} &=0 \qaq \theta_{2} q_{2}-t_{2}=0  \\
+\theta_{2} q_{1}-t_{1} &=2 $$ 
+and
+$$ \theta_{2} q_{1}-t_{1} = \frac{1}{2}-\frac{1}{2}=\frac{1}{2}>0 }$$
+We have shown that the high type can profit from reporting that she is a low type therefore the full-information price/allocations are not incentive compatible.
+
+\end{proof}
+\begin{subproblem}
+Suppose that the seller cannot observe $\theta$. Assuming $q_{1}=\frac{1}{4}$, derive a set of price/quality pairs that satisfy incentive compatibility.
+\end{subproblem}
+\begin{proof}[Answer]
+We know that the seller will set a price for $t_1$ such that the $(IR_1)$ is binding, this means that:
+
+$$t_1 =\theta_1 q_1 = \frac{1}{4}$$
+
+We also know that $(IC_2)$ must be binding (i.e. the high type must be indifferent between her allocation and the low type's):
+
+$$\theta_{2} q_{1}-t_{1}=\theta_{2} q_{2}-t_{2} \qiq 2 q_{2}-t_{2}=\frac{1}{4} \qiq t_2 = 2q_2-\frac{1}{4}$$
+
+We also know that there will be no distortion at the top, which means that the high type will get the efficient allocation:
+
+$$q_2 = 1 \qiq t_2 = \frac{7}{4}$$
+
+The optimal price/quantity pairs are:
+
+\begin{align*}
+    \text{If } \theta_1: &\qquad \left( \frac{1}{4}, \frac{1}{4}\right)\\ 
+    \text{If } \theta_2: &\qquad \left(\frac{7}{4},1\right)
+\end{align*}
+
+
+\end{proof}
+
+\bibliography{references}
+
+\end{document}

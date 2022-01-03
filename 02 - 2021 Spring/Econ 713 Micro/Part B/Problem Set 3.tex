@@ -1,0 +1,222 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[left=3cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}e}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{apacite}
+\usepackage[round]{natbib}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{svg}
+\usepackage[margin = 1in, top=2cm]{geometry}% Margins
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.2em}
+\usepackage{setspace} % Setting the spacing between lines
+\usepackage{amsthm, amsmath, amsfonts, mathtools, amssymb, bm} % Math packages 
+\usepackage{svg}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{epstopdf}
+\usepackage{subfig} % Manipulation and reference of small or sub figures and tables
+\usepackage{hyperref} % To create hyperlinks within the document
+\spacing{1.15}
+\usepackage{appendix}
+\usepackage{xcolor}
+\usepackage{cancel}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{optidef}
+\usepackage{etoolbox}
+
+\usepackage[round]{natbib}
+%\bibliographystyle{plainnat}
+\bibliographystyle{apacite}
+
+
+\newtheorem{defin}{Definition.}
+\newtheorem{teo}{Theorem. }
+\newtheorem{lema}{Lemma. }
+\newtheorem{coro}{Corolary. }
+\newtheorem{prop}{Proposition. }
+\theoremstyle{definition}
+\newtheorem{examp}{Example. }
+\newtheorem{problem}{Problem}
+\newtheorem{subproblem}{}[problem]
+% \numberwithin{problem}{subsection} 
+
+% \AtBeginEnvironment{problem}{\color{gray}}
+% \AtBeginEnvironment{subproblem}{\color{gray}}
+\AtBeginEnvironment{proof}{\color{red}}
+
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\qiq}{\qquad \implies \qquad}
+\newcommand{\qiffq}{\qquad \iff \qquad}
+\newcommand{\qaq}{\qquad \textbf{and} \qquad}
+\newcommand{\qoq}{\qquad \textbf{or} \qquad}
+\newcommand{\settf}{\text{ \emph{:} }}
+\newcommand{\chbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{.9em}}}
+\newcommand{\cchbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\checkmark$}}
+
+\title{Problem Set 3}
+\author{Mitchell Valdés-Bobes}
+\date{\today}
+
+\begin{document}
+\maketitle
+\begin{problem}
+A risk-neutral principal hires an agent to work on a project at wage $w$. The agent exerts effort $e$. The agent's utility function is: $v(w, e)=\sqrt{w}-g(e)$, where $g(e)$ is the disutility associated with the effort $e$. The agent can choose one of two possible effort levels $e_{1}$ or $e_{2}$ with associated disutility levels $g\left(e_{1}\right)=1$ and $g\left(e_{2}\right)=\frac{1}{2}$. If the agent chooses effort level $e_{1}$, the project yields 8 with probability $\frac{1}{2}$, and 0 with probability $\frac{1}{2}$. If he chooses $e_{2}$, the project yields 8 with probability $\frac{1}{4}$ and 0 with probability $\frac{3}{4}$. The reservation utility of the agent is 0 .
+\end{problem}
+\begin{subproblem}
+Suppose the effort level chosen by the agent is observable by the principal. A wage contract then specifies an effort level $\left(e_{1}\right.$ or $e_{2}$ ), and an output-contingent wage schedule $\left\{w_{H}, w_{L}\right\}$. Here $w_{H}$ is the wage paid if the project yields 8 , and $w_{L}$ is the wage paid if the project yields $0 .$ If effort is observable, it is optimal for the principal to choose a fixed wage contract (that is, set $\left.w_{H}=w_{L}\right)$ for each effort level. Informally, explain the intuition for this result.
+\end{subproblem}
+\begin{proof}[Answer]
+The principal is risk-neutral while the agent is \textit{strictly} risk-averse, therefore, the principal will bear all the risk. The optimal contract must fully insure the agent.
+\end{proof}
+\begin{subproblem}
+If effort is observable, which effort level should the principal implement? What is the best wage contract that implements this effort?
+\end{subproblem}
+\begin{proof}[Answer]
+Let $w^*$ be the optimal wage, then the principal must choose an effort level between $e_1$ and $e_2$. The principal will pay as low as possible regardless of effort such that the participation constraint of the agents holds, this is:
+$$\sqrt{w_H^*}-g(e_1)=\sqrt{w_H^*}-g(e_2)=\sqrt{w_H^*}-1 = 0 \qiq w_H^* = 1$$
+and
+$$\sqrt{w_L^*}-g(e_2)=\sqrt{w_L^*}-g(e_1)=\sqrt{w_L^*}-\frac{1}{2} = 0 \qiq w_L^* = \frac{1}{4}$$
+
+Given the optimal salaries, the principal will choose effort to maximize profits:
+
+\begin{align*}
+    e_2:&\qquad (x_H-w_L^*)P(x_H\mid e_2) + (x_L-w_L^*)P(x_L\mid e_2) = \frac{1}{4}(8-w_L^*)-w_L^*\frac{3}{4}=2-\frac{1}{4} 
+    \\e_1:&\qquad (x_H-w_H^*)P(x_H\mid e_1) + (x_L-w_H^*)P(x_L\mid e_1) = \frac{1}{2}(8-w_H^*)-w_H^*\frac{1}{2}=4-1
+\end{align*}
+This means that the expected profits are higher when effort $e_2$ is exerted, therefore, the optimal contract is:
+
+$$\boxed{w^* = 4} \qaq \boxed{e^* = e_1}$$
+\end{proof}
+\begin{subproblem}
+If effort is not observable, which effort level should the principal implement? What is the best wage contract that implements this effort?
+\end{subproblem}
+\begin{proof}[Answer]
+We know that the optimal level of effort is $e_2$, now that effort is not observable, the principal must design a scheme of output dependent wages such that the agent is induced to exert the desired level of effort.
+
+On the one hand the Incentive Compatibility constraint is:
+
+$$\sqrt{w_H}\mathbb{P}[x_H\mid e_1] + \sqrt{w_L}\mathbb{P}[x_L\mid e_1] - g(e_1) \geq  \sqrt{w_H}\mathbb{P}[x_H\mid e_2] + \sqrt{w_L}\mathbb{P}[x_L\mid e_2] - g(e_2)$$
+
+This is:
+\begin{equation}\tag{IC}\label{IC1}
+    \frac{1}{2}\sqrt{w_H} + \frac{1}{2}\sqrt{w_L} - 1\geq\frac{1}{4}\sqrt{w_H} + \frac{3}{4}\sqrt{w_L} - \frac{1}{2} \qiq \sqrt{w_H} - \sqrt{w_L}\geq 2
+\end{equation}
+
+On the other hand the Individual Rationality Constraint is:
+
+$$\sqrt{w_H}\mathbb{P}[x_H \mid e_2] + \sqrt{w_L}\mathbb{P}[x_L\mid e_2] - g(e_2) \geq 0 $$
+
+this is:
+
+\begin{equation}\tag{IR}\label{IR1}
+    \sqrt{w_H} + \sqrt{w_L} \geq 2
+\end{equation}
+
+Note that the Principal is always better off by paying the lowest possible salary, this means that at the optimal \eqref{IC1} and \eqref{IR1} will bind. Then the optimal salary level is characterized by the following system of equations:
+
+$$\left\{\begin{array}{cc}
+     \sqrt{w_H} - \sqrt{w_L}=2 \\
+     \sqrt{w_H} + \sqrt{w_L} = 2
+\end{array}\qiq \boxed{w_H = 4}\right. \qaq \boxed{w_L = 0}$$
+
+\end{proof}
+\begin{problem}
+Consider a cashless entrepreneur who wants to borrow and carry out the following project. If he exerts an effort level of $e_{1}$ he will get an output of $z$ with probability $P_{1} \geq 0$ and 0 with probability $1-P_{1}$. If he exerts an effort level of $e_{2}$ he will get output $z$ with probability $P_{2}\left(P_{2}<P_{1}\right)$ and 0 with probability $1-P_2$. Let $c_{1}>0$ be the cost of effort $e_{1}$ for the entrepreneur and $c_{2}=0$ be the cost of low effort $e_{2} .$ A monopolistic bank with cost of fund $r$ offers a loan of 1 unit for a reimbursement of $z-x$ when the project is successful, where $x$ is the share of production retained by the agent. Assume that the entrepreneur's utility with no project is 0 and that54
+$P_{2} z<r .$ Determine the optimal loan contract of a bank which maximizes its expected profit under the incentive and participation constraints of the entrepreneur.
+\end{problem}
+\begin{proof}[Answer]
+
+It is not clear but I will assume that in case of failure of the project everybody gets $0$ utility.
+
+The bank will compensate the agent with a share $x$ of production note that this compensation must satisfy the participation constraint of the agent:
+
+\begin{equation}\label{ir2}\tag{IR}
+    x\mathbb{P}[z\mid e] - c(e) \geq 0
+\end{equation}
+
+Since $e_2$ is cost-less for the agent we can think of it as the \textit{default}, therefore the bank only need to consider the incentive compatibility constraint is she want to induce $e_1$. 
+
+\begin{equation}\label{ic2}\tag{IC}
+     x\mathbb{P}[z\mid e_1] - c(e_1) \geq x\mathbb{P}[z\mid e_2] - c(e_2) \qiq x P_1 -  c_1 \geq xP_2
+\end{equation}
+
+Note that $xP_2 \geq 0$ therefore \eqref{ic2} implies \eqref{ir2}; this means that the share of $z$ that the bank have to promise the agent in order to induce $e_1$ is determined by taking \eqref{ic2} with equality:
+$$x P_1 -  c_1 \geq xP_2 \qiq x^1 = \frac{c_1}{P_1 - P_2}$$
+ Naturally if the bank wants to induce $e_2$ she will offer $x^2 = 0$.
+ 
+ Finally to analyze what is the best possible contract that the bank can offer we need to compare the expected profits of induce $e_1$ or $e_2$:
+ 
+ \begin{align*}
+    (z-x^1)\mathbb{P}[z\mid e_1] - r \geq (z-x^2)\mathbb{P}[z\mid e_2] - r &\qiq z P_1 - \frac{c_1}{P_1 - P_2} \geq z P_2 \\ &\qiq z \geq \frac{c_1 P_1}{(P_1 - P_2)^2} 
+ \end{align*}
+ 
+ Then we can conclude that the optimal contract for the bank is to offer $x^*$ according to:
+ 
+ $$x^* = \left\{ \begin{array}{cc}
+     \frac{c_1}{P_1 - P_2}  & \text{if } z \geq \frac{c_1 P_1}{(P_1 - P_2)^2}  \\
+     0 &  \text{if } z < \frac{c_1 P_1}{(P_1 - P_2)^2} 
+ \end{array} \right.$$ 
+ 
+  
+\end{proof}
+\begin{problem}
+Consider a monopoly, producing a good of quality $q .$ The quality can be either "high" $\left(q=1\right.$, marginal cost is $c_{1}>0$ ) or "low" $\left(q=0\right.$ marginal cost $c_{0}=0$ ). There is a mass one of identical consumers with preferences $U=q-p$ if they buy one unit of a quality $q$ product at price $p$. Assume $c_{1}<1$ so that producing the high quality is socially efficient.
+\end{problem}
+\begin{subproblem}
+In this part consumers do not observe quality before purchasing. The timing of the game is the following:
+\begin{enumerate}[(a)]
+    \item the monopoly chooses the quality
+    \item the monopoly chooses the price
+    \item consumers observe the price (but not the quality) and decide whether to buy one unit.
+\end{enumerate}
+
+Find the subgame-perfect pure-strategy Nash equilibria of the game.
+\end{subproblem}
+\begin{proof}[Answer]
+The Best Response of the consumer to any price and quality level is given by the following:
+
+$$BR(q,p) = \left\{\begin{array}{cc}
+    \text{Buy} & \text{if } q=1,\: p< 1  \\
+    \text{Not Buy} &  \text{otherwise}
+\end{array}\right.$$
+
+Suppose that there is an equilibrium where the consumer Buy, then it must be $q=1$, but then the Monopolist is better off by deviating for hat strategy and choosing $q=0$ regardless of the price.
+
+Then the subgame-perfect pure-strategy Nash equilibria of the game is:
+\begin{itemize}
+    \item Monopolist sets $q=0$, $p\in [0, 1]$.
+    \item Consumer does not buy.
+\end{itemize}
+
+\end{proof}
+\begin{subproblem}
+ Suppose now that a proportion $\alpha$ of the consumers is able to observe quality before purchasing the good. The remaining $1-\alpha$ consumers observe product quality only after they purchase. The timing of the game is modified with respect to the previous question: in the third stage the informed consumers observe $q$ and decide whether to buy or not, while the uninformed consumers only decide whether to buy or not. Find a pure-strategy equilibrium of the game, in which all consumers end up buying a high-quality good.
+\end{subproblem}
+
+\begin{proof}[Answer]
+
+Consider an equilibrium where the Monopolist produces $q=1$, note that the monopolist will never sell in equilibrium at a price lower than 1, so we will set the equilibrium price at $p=1$.
+
+Consider the following strategies:
+\begin{itemize}
+    \item Informed agent will buy if $q=1$ and $p\leq 1$.
+    \item Un-informed buyer will buy if $p\leq1$. 
+\end{itemize}
+
+Note that by construction consumers will not profit by deviate if the Monopolist sets $q=1$ and $p=1$. We need to analyze if the Monopolist can profit by deviate, note that if the Monopolist deviates and chooses $q=0$ only un-informed buyer will buy. Therefore she will not deviate if:
+
+$$1-c_1 \geq 1- \alpha \qiq c_1 \leq \alpha$$
+
+If the above condition holds then the strategies described are an equilibrium in pure strategies where all consumers buy a high-quality good.
+
+
+\end{proof}
+
+
+% \bibliography{references}
+
+\end{document}

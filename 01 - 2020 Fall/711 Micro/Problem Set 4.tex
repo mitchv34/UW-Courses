@@ -1,0 +1,198 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\documentclass[12pt]{article}
+%\usepackage[left=3cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}e}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{apacite}
+\usepackage[round]{natbib}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{svg}
+\usepackage[margin = 1in, top=2cm]{geometry}% Margins
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.2em}
+\usepackage{setspace} % Setting the spacing between lines
+\usepackage{amsthm, amsmath, amsfonts, mathtools, amssymb, bm} % Math packages 
+\usepackage{svg}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{epstopdf}
+%\usepackage{subfig} % Manipulation and reference of small or sub figures and tables
+\usepackage{hyperref} % To create hyperlinks within the document
+\spacing{1.15}
+\usepackage{appendix}
+\usepackage{xcolor}
+\usepackage{cancel}
+\usepackage{enumerate}
+\usepackage{subcaption}
+\usepackage[shortlabels]{enumitem}
+
+
+\usepackage[round]{natbib}
+%\bibliographystyle{plainnat}
+\bibliographystyle{apacite}
+
+
+\newtheorem{defin}{Definition.}
+\newtheorem{teo}{Theorem. }
+\newtheorem{lema}{Lemma. }
+\newtheorem{coro}{Corolary. }
+\newtheorem{prop}{Proposition. }
+\theoremstyle{definition}
+\newtheorem{examp}{Example. }
+\newtheorem{problem}{Problem}
+% \numberwithin{problem}{subsection} 
+
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\qiq}{\qquad \implies \qquad}
+\newcommand{\qiffq}{\qquad \iff \qquad}
+\newcommand{\qaq}{\qquad \textbf{and} \qquad}
+\newcommand{\qoq}{\qquad \textbf{or} \qquad}
+\newcommand{\settf}{\text{ \emph{:} }}
+\newcommand{\chbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{.9em}}}
+\newcommand{\cchbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\checkmark$}}
+
+\title{Problem Set 4}
+\author{Mitchell Valdés-Bobes}
+\date{October 5, 2020}
+
+\begin{document}
+
+\maketitle
+\begin{problem}[Choice rules from preferences]
+Let $X$ be a choice set and $\succsim$ a complete and transitive preference relation on $X .$ Show that the
+choice rule induced by $\succsim$
+$$
+C(A, \succsim) \quad=\quad\{x \in A: x \succsim y \quad \forall y \in A\}
+$$
+must satisfy the Weak Axiom of Revealed Preference (WARP).
+\end{problem}
+
+\begin{proof}[Answer]
+Let  $A,B \subseteq X$ and $x,y\in A\cap B$. If:
+
+$$x\in C(A, \succsim) \qaq  y\in C(B, \succsim)$$
+
+Then since $\succsim$ is complete:
+
+$$x\succsim z \: \forall z\in A \qaq y\succsim z \: \forall z\in B$$
+
+since $A\cup B \subseteq A$$ and $A\cup B \subseteq B$$ then
+
+$$x\succsim z \: \forall z\in A\cup B \qaq y\succsim z \: \forall z\in A \cup B$$
+
+in particular
+
+$$x\succsim y  \qaq y\succsim x$$
+
+By transitivity:
+
+$$x\succsim z \: \forall z\in B \qaq y\succsim z \: \forall z\in A$$
+
+Therefore
+
+$$x\in C(B, \succsim) \qaq  y\in C(A, \succsim)$$
+
+Thus proving that the choice rule $C(\cdot, \succsim)$ satisfies the Weak Axiom of Revealed Preference (WARP).
+
+\end{proof}
+
+\begin{problem}[Preferences from choice rules]
+Let $X$ be a choice set and $C: \mathcal{P}(X) \rightarrow \mathcal{P}(X)$ a nonempty choice rule. Show that if $C$ satisfies WARP, then the preference relation $\succsim_C$ defined on $X$ by
+$$x \succsim_C y \quad \text{ if and only if there exists a set } A \subseteq X \text{ such that } x, y \in A \text{ and } x \in C(A)$
+is complete and transitive, and that the choice rule it induces, $C(\cdot, \succsim_C)$, is equal to $C$.
+\end{problem}
+
+\begin{proof}[Answer]
+We start by proving that $\succsim_C$ is \textbf{complete:}
+
+Pick any $x,y\in X$ let $A=\{x,y\}$ since $C(A)\neq \emptyset$ and $C(A)\subseteq A$ then:
+
+$$ x\in C(A) \qoq y\in C(A)$$
+
+Therefore
+
+$$x \succsim_C y \qoq y \succsim_C x$$
+
+Then $\succsim_C$ is \textbf{complete}.
+
+To prove that $\succsim_C$ is \textbf{transitive}, pick any $x,y,z \in X$ such that $x\succsim_C y$ and $y\succsim_C z$ then:
+
+$$\exists A \in  \mathcal{P}(X) \text{ such that } x,y\in A \qaq x \in C(A)$$
+$$\exists B \in  \mathcal{P}(X) \text{ such that } y,z\in A \qaq y \in C(B)$$
+
+Let $D=\{x,y,z\}$, we know that $C(D)\neq \emptyset$ and $C(D)\subseteq D$ then at least one of the following must be true:
+\begin{enumerate}[(a)]
+    \item $x \in C(D)$ then $x\succsim_C z$.
+    \item $y \in C(D)$ which implies $x,y \in D\cup A$ and by WARP, then $x \in C(D)$ then $x\succsim_C z$.
+    \item $z \in C(D)$ which implies $y,z \in D\cup B$ by WARP, then $y \in C(D)$ then $y\succsim_C z$ by (b), then $x \in C(D)$ then $x\succsim_C z$..
+\end{enumerate}
+
+therefore $\succsim_C$ is \textbf{transitive}.
+
+Finally we need to prove that the choice rule $C(\cdot, \succsim_C)$, is equal to $C$, this is:
+
+$$\forall A\in\mathcal{P}(x) \qquad C(A, \succsim_C)=C(A)$$
+
+Pick any $x\in C(A)$ then
+$$\forall y\in A \quad x\succsim_C y \qiq x \in C(A, \succsim_C) \qiq \boxed{C(A)\subseteq C(A, \succsim_C)}$$
+
+Pick any $x\in C(A, \succsim_C)\subseteq A$ suppose that $x\not \in C(A)$ since $C(A)\neq \emptyset$ there is $y\in C(A)$ then but by definition of $C(A, \succsim_C) $ then $x\succsim_C y$, then:
+
+$$\exists B \in \mathcal{P}(X) \text{ such that } x,y\in B\qaq x\in C(B)$
+
+Since $x,y\in A\cup B $ then by WARP $x \in C(A)$ therefore $\boxed{C(A, \succsim_C)\subseteq C(A)}$
+
+Then 
+$$\boxed{C(A, \succsim_C) = C(A)}$$
+
+\end{proof}
+
+\begin{problem}[Choice over finite sets]
+Let $X$ be a finite set, and $\succsim$ a complete and transitive preference relation on $X$.
+\begin{enumerate}[(a)]
+    \item Show that the induced choice rule $C(\cdot, \succsim)$ is nonempty $-$ that $C(A, \succsim) \neq \emptyset$ if $A \neq \emptyset$
+    \item Show that a utility representation exists.
+\end{enumerate}
+\end{problem}
+\begin{proof}[Answer]
+\textbf{Part (a)}
+Consider $X$ finite and $A \subseteq X$, $A=\{x\}$ since preferences are complete then $x\succsim x$ therefore $x\in C(A, \succsim)$ therefore $C(A, \succsim)\neq \emptyset$.
+ Now suppose that for every set $A_n$ with $n$ elements $C(A_n, \succsim)\neq \emptyset$ we will prove that this implies that for every set $A_{n+1}$ with $n+1$ elements $C(A_{n+1}, \succsim)\neq \emptyset$. Let
+ 
+ $$A_{n+1} = \{x_1, ...,x_n, x_{n+1}\} = \underbrace{\{x_1, ...,x_n\}}_{A_n} \cup \{x_{n+1}\}
+
+Since $C(A_n, \succsim)\neq \emptyset$ there is $x\in  A_{n}$ such that $x\succsim X_i$ for $i =1,...,n$ since $\succsim$ is complete, then either 
+$$x\succsim x_{n+1} \qiq x \in C(A_{n+1}, \succsim) \qiq C(A_{n+1}, \succsim) \neq \emptyset$$
+or
+$$x_{n+1}\succsim x \qiq x_{n+1}\succsim\footnote{by transitivity}x_i \:\forall i=1,..,n\qiq  x_{n+1}\in C(A_{n+1}, \succsim) \qiq C(A_{n+1}, \succsim)\neq \emptyset$$
+ 
+\textbf{Part (b)}
+\begin{itemize}
+    \item If $|X| = 1$ this is $X=\{x\}$ and let $u:X \to \{1\}$ then $u(x)=1$ it is trivial that $u$ is a utility representation of $\succsim$.
+    \item Assume that if $|X| < n$ then there is $u:X \to \{1,..,|X|\}$ that is a utility representation of $\succsim$.
+    \item Consider $X$ a set with $|X|=n+1$ By \textbf{Part (a)} we know that $|C(X, \succsim)|\geq 1$ therefore the complement of $C(X, \succsim)$ has at most $n$ elements. We can guarantee then that there is a utility representation $u$ of $\succsim$ on $C(X, \succsim)^c$ then we can define the function:
+    $$\hat{u}(x)=\left\{ \begin{array}{cc}
+        |C(X, \succsim)^c| + 1 & x\in C(X, \succsim) \\
+        u(x) & \text{otherwise}
+    \end{array}$$
+    We need to prove that this is in fact a utility representation of $\succsim$ i.e:
+    $$x\succsim y \qiffq \hat{u}(x)\geq \hat{u}(y)$$
+    Suppose that $x,y \in C(X, \succsim)^c$ then since $u$ is a utility representation of $\succsim$ in $C(X, \succsim)^c$:
+    $$x\succsim y \qiffq u(x)\geq u(y) \qiffq \hat{u}(x)\geq \hat{u}(y)$$
+    Suppose that $x\in C(X, \succsim)$ and $,y \in C(X, \succsim)^c$ then $x\succsim y$ and $\hat{u}(x)=|C(X, \succsim)^c|>u(y)=\hat{u}(y)$.
+    Finally suppose that $x,y \in C(X, \succsim)$
+    $$\hat{u}(x)=|C(X, \succsim)^c|=\hat{u}(y) \qiffq x\succsim y \qaq y \succsim x$$
+\end{itemize}
+
+Then using \textit{strong} induction we have proved that if $X$ is a finite set and $\succsim$ is complete and transitive then the utility representation always exist. 
+
+
+
+
+
+
+\end{proof}
+
+\end{document}

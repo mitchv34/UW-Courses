@@ -1,0 +1,187 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\documentclass[12pt]{article}
+%\usepackage[left=3cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}e}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{apacite}
+\usepackage[round]{natbib}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{svg}
+\usepackage[margin = 1in, top=2cm]{geometry}% Margins
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.2em}
+\usepackage{setspace} % Setting the spacing between lines
+\usepackage{amsthm, amsmath, amsfonts, mathtools, amssymb, bm} % Math packages 
+\usepackage{svg}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{epstopdf}
+\usepackage{subfig} % Manipulation and reference of small or sub figures and tables
+\usepackage{hyperref} % To create hyperlinks within the document
+\spacing{1.15}
+\usepackage{appendix}
+\usepackage{xcolor}
+\usepackage{cancel}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{optidef}
+
+\usepackage[round]{natbib}
+%\bibliographystyle{plainnat}
+\bibliographystyle{apacite}
+
+
+\newtheorem{defin}{Definition.}
+\newtheorem{teo}{Theorem. }
+\newtheorem{lema}{Lemma. }
+\newtheorem{coro}{Corolary. }
+\newtheorem{prop}{Proposition. }
+\theoremstyle{definition}
+\newtheorem{examp}{Example. }
+\newtheorem{problem}{Problem}
+\newtheorem{subproblem}{}[problem]
+% \numberwithin{problem}{subsection} 
+
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\qiq}{\qquad \implies \qquad}
+\newcommand{\qiffq}{\qquad \iff \qquad}
+\newcommand{\qaq}{\qquad \textbf{and} \qquad}
+\newcommand{\qoq}{\qquad \textbf{or} \qquad}
+\newcommand{\settf}{\text{ \emph{:} }}
+\newcommand{\chbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{.9em}}}
+\newcommand{\cchbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\checkmark$}}
+
+\title{Problem Set 1}
+\author{Mitchell Valdés-Bobes}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{problem}
+Consider a growth model with preferences $\sum_{t=0}^{\infty} \beta^{t} \log C_{t},$ production function $Y_{t}=A K_{t}^{\alpha}$, the capital law of motion $K_{t+1}=K_{t}^{1-\delta} I_{t}^{\delta},$ and the resource constraint $Y_{t}=C_{t}+I_{t}$
+\begin{subproblem}
+    Write down the social planner's problem and derive the Euler equation. Provide the intuition to this optimality condition using the perturbation argument.
+\end{subproblem}
+\begin{proof}[Answer]
+ The social planner solves the following problem:
+\begin{maxi*}|s|
+{C_t, I_t, K_{t+1}}{\sum_{t=0}^\infty \beta^t \log C_t}
+{}{}
+\addConstraint{C_t + I_t = AK_t^\alpha}{}
+\addConstraint{K_{t+1}=K_t^{1-\delta} I^{\delta}}{}
+\end{maxi*}
+\end{proof}
+
+\textbf{Note:} This problem have a superfluous constraint and optimization variable, since $K_{t+1}$ and $I_t$ are determined jointly given $K_t$. I took this approach since I found that the algebra was easier.
+
+Since the objective function is concave, we can use the Lagrangian to solve:
+
+$$\mathcal{L}(\cdot) = \sum_{t=0}^\infty \beta^t \log C_t - \lambda_t\left(C_t + I_t - AK_t^\alpha \right) - \mu_t\left(K_{t+1} - K_t^{1-\delta} I^{\delta} \right)$$
+
+
+Taking first order conditions we get:
+
+\begin{align*}
+    C_t:&\qquad  \frac{\beta^t}{C_t} = \lambda_t \\
+    I_t:&\qquad \delta\mu_t\left( \frac{K_t}{I_t}\right)^{1-\delta}=\lambda_t\\
+    K_{t+1}:&\qquad \mu_t = \alpha A \lambda_{t+1}K_{t+1}^{\alpha-1}+\mu_{t+1}(1-\delta)\left( \frac{I_t}{K_t}\right)^{\delta}
+\end{align*}
+
+Combining the $C_t$ and  $I_t$ FOC's we get:
+
+$$\mu_t = \frac{\beta^t}{\delta C_t} \left( \frac{I_t}{K_t}\right)^{1-\delta}$$
+
+And plugging the value of $\mu_t$ and $\lambda_t$ in the FOC associated with $K_{t+1}$:
+
+$$\frac{\beta^t}{\delta C_t} \left( \frac{I_t}{K_t}\right)^{1-\delta} = \alpha A \frac{\beta^{t+1}}{C_{t+1}}K_t^{\alpha-1}+\frac{\beta^{t+1}}{\delta C_{t+1}} \left( \frac{I_{t+1}}{K_{t+1}}\right)^{1-\delta}(1-\delta)\left( \frac{I_t}{K_t}\right)^{\delta}
+
+Simplifying the above expression:
+
+\begin{equation}\label{euler}\tag{EE}
+    \frac{C_{t+1}}{C_t} = \delta\beta\left[ 
+    \alpha A K_{t+1}^{\alpha-1}+\frac{(1-\delta)}{\delta}\left( \frac{I_{t+1}}{K_{t+1}} \right)
+    \right]
+\end{equation}
+
+Note that:
+
+\begin{align*}
+    K_{t+2} = K_{t+1}^\delta I_{t+1}^{1-\delta}\qiq & \frac{\partial K_{t+2}}{\partial I_{t+1}} = \delta K_{t+1}^{1-\delta}I_{t+1}^{\delta-1} \\
+    & \frac{\partial K_{t+2}}{\partial K_{t+1}} = (1-\delta) K_{t+1}^{-\delta}I_{t+1}^{\delta}
+\end{align*}
+
+Therefore we can write the Euler equation as:
+
+\begin{equation}\label{euler}\tag{EE'}
+    \frac{U'(C_t)}{U'(C_{t+1})} = \delta\beta\left[ 
+    F'(K_{t+1})+\frac{\partial K_{t+2}/\partial K_{t+1}}{\partial K_{t+2}/\partial I_{t+1}} 
+    \right]
+\end{equation}
+
+
+\begin{subproblem}
+    Derive the system of equations that pins down the steady state of the model.
+\end{subproblem}
+\begin{proof}[Answer]
+
+To find steady state we set:
+
+$$C_t = C_{t+1} = \overline{C} \qquad K_t = K_{t+1} = \overline{K} \qquad I_t = I_{t+1} = \overline{I}$
+
+After some algebra we get:
+
+\begin{align*}
+    \overline{K}&=\left( \frac{\alpha \beta \delta A}{1-\beta(1-\delta)} \right)^{\frac{1}{1-\alpha}}\\
+    \overline{I}&=\overline{K}\\
+    \overline{C}&=A\overline{K}^\alpha - \overline{K}
+\end{align*}
+\end{proof}
+\begin{subproblem}
+    Log-linearize the equilibrium conditions around the steady state.
+\end{subproblem}
+\begin{proof}[Answer]
+
+\end{proof}
+\begin{subproblem}
+    Write down a dynamic system with one state variable and one control variable. Use the Blanchard-Kahn method to solve this system for a saddle path.
+\end{subproblem}
+\begin{proof}[Answer]
+
+\end{proof}
+\begin{subproblem}
+    Show that the obtained solution is not just locally accurate, but is in fact the exact solution to the planner's problem.
+\end{subproblem}
+\begin{proof}[Answer]
+
+\end{proof}
+\begin{subproblem}
+    Generalize the (global) solution to the case of stochastic productivity shocks $A_{t}$.
+\end{subproblem}
+\begin{proof}[Answer]
+
+\end{proof}
+\begin{subproblem}
+    The analytical tractability of the model is due to special functional form assumptions, which however, have strong economic implications. What is special about consumption behavior in this model? Provide economic intuition.
+\end{subproblem}
+\begin{proof}[Answer]
+
+\end{proof}
+\begin{subproblem}
+    Bonus task: can you introduce labor into preferences and production function without compromising the analytical tractability of the model?
+\end{subproblem}
+\begin{proof}[Answer]
+\begin{align}
+0 &= \alpha k_t - \sigma c_t - (\phi+\alpha)\ell_t + a_t +\psi_{lt}\\
+\sigma \mathbb{E}t[c{t+1}] + \alpha(1-\alpha) \beta \theta k_{t+1} - \alpha(1-\alpha) \beta \theta \mathbb{E}t[\ell{t+1}] &= \sigma c_t + \beta\alpha\theta \mathbb{E}_t[a{t+1}]+\beta(1-\delta)\mathbb{E}t\psi{it+1}- \psi_{it}\\
+0 &=k_{t+1}+ (\theta(1-\gamma)-\delta)c_t -\theta y_t - (1-\delta) k_t+\theta \gamma g_t\\
+y_t &= (1-\alpha) \ell_t + \alpha k_t + a_t
+\end{align}
+\end{proof}
+\end{problem}
+
+
+\end{document}

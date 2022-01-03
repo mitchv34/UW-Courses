@@ -1,0 +1,81 @@
+\documentclass[12pt]{amsart}
+\input{imports}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+
+{\scshape FIN-971} \hfill {\scshape \Large Problem Set \#1} \hfill {\scshape Fall 2021}\\
+{\scshape Author(s): \hfill Mitchell Valdes-Bobes\\
+{\scshape Date: \hfill \texttt{11/10/21}
+\medskip
+
+\hrule
+
+\bigskip
+
+\bigskip
+
+\date{\today}
+
+\begin{exercise}
+  Following tables and figures are the result of computations using the code included in \href{https://github.com/mitchv34/FIN-971/blob/main/PS1/src/source.jl}{this repository}.
+
+
+\section{Data}
+\begin{center}
+  \input{tables/sum_table.tex}
+\end{center}
+
+\section{Plots}
+
+\begin{figure}[h!]
+  
+  \centering
+  
+  \includegraphics[scale=0.7]{figures/fig_1.pdf}
+
+\end{figure}
+\newpage
+\begin{figure}[h!]\caption{EMS Technologies Inc.}
+  
+  \centering
+  
+  \includegraphics[scale=0.5]{figures/fig_2_EMS Technologies Inc.pdf}
+
+\end{figure}
+
+
+\begin{figure}[h!]\caption{Atwood Oceanics Inc.}
+  
+  \centering
+  
+  \includegraphics[scale=0.5]{figures/fig_2_Atwood Oceanics Inc..pdf}
+
+\end{figure}
+
+\begin{figure}[h!]\caption{Raytheon Technologies Corp.}
+  
+  \centering
+  
+  \includegraphics[scale=0.5]{figures/fig_2_Raytheon Technologies Corp.pdf}
+
+\end{figure}
+
+\newpage
+\section{Regressions}
+\subsection{$\beta_2 = 0$}
+\begin{center}
+  \input{tables/reg_table_1.tex}
+\end{center}
+\subsection{$\beta_2 \neq 0$}
+\begin{center}
+\input{tables/reg_table_2.tex}
+\end{center}
+
+\end{exercise}
+
+
+
+\end{document}

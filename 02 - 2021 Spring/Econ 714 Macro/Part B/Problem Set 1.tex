@@ -1,0 +1,607 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[left=3cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}e}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{apacite}
+\usepackage[round]{natbib}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{svg}
+\usepackage[margin = 1in, top=2cm]{geometry}% Margins
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.2em}
+\usepackage{setspace} % Setting the spacing between lines
+\usepackage{amsthm, amsmath, amsfonts, mathtools, amssymb, bm} % Math packages 
+\usepackage{svg}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{epstopdf}
+\usepackage{subfig} % Manipulation and reference of small or sub figures and tables
+\usepackage{hyperref} % To create hyperlinks within the document
+\spacing{1.15}
+\usepackage{appendix}
+\usepackage{xcolor}
+\usepackage{cancel}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{optidef}
+\usepackage{etoolbox}
+
+\usepackage[round]{natbib}
+%\bibliographystyle{plainnat}
+\bibliographystyle{apacite}
+
+
+\newtheorem{defin}{Definition.}
+\newtheorem{teo}{Theorem. }
+\newtheorem{lema}{Lemma. }
+\newtheorem{coro}{Corolary. }
+\newtheorem{prop}{Proposition. }
+\theoremstyle{definition}
+\newtheorem{examp}{Example. }
+\newtheorem{problem}{Problem}
+\newtheorem{subproblem}{}[problem]
+% \numberwithin{problem}{subsection} 
+
+% \AtBeginEnvironment{problem}{\color{gray}}
+% \AtBeginEnvironment{subproblem}{\color{gray}}
+\AtBeginEnvironment{proof}{\color{red}}
+
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\qiq}{\qquad \implies \qquad}
+\newcommand{\qiffq}{\qquad \iff \qquad}
+\newcommand{\qaq}{\qquad \textbf{and} \qquad}
+\newcommand{\qoq}{\qquad \textbf{or} \qquad}
+\newcommand{\settf}{\text{ \emph{:} }}
+\newcommand{\chbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{.9em}}}
+\newcommand{\cchbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\checkmark$}}
+
+\title{Problem Set 1}
+\author{Mitchell Valdés-Bobes}
+\date{\today}
+
+\begin{document}
+\maketitle
+\begin{problem}[Exercise 8.1| Existence of representative consumer
+Suppose households 1 and 2 have one-period utility functions $u\left(c^{1}\right)$ and $w\left(c^{2}\right)$, respectively, where $u$ and $w$ are both increasing, strictly concave, twice differentiable functions of a scalar consumption rate. Consider the Pareto problem:
+$$
+v_{\theta}(c)=\max _{\left\{c^{1}, c^{2}\right\}}\left[\theta u\left(c^{1}\right)+(1-\theta) w\left(c^{2}\right)\right]
+$$
+subject to the constraint $c^{1}+c^{2}=c .$ Show that the solution of this problem has the form of a concave utility function $v_{\theta}(c),$ which depends on the Pareto weight $\theta .$ Show that $v_{\theta}^{\prime}(c)=\theta u^{\prime}\left(c^{1}\right)=(1-\theta) w^{\prime}\left(c^{2}\right)$.
+The function $v_{\theta}(c)$ is the utility function of the representative consumer. Such a representative consumer always lurks within a complete markets competitive equilibrium even with heterogeneous preferences. At a competitive equilibrium, the marginal utilities of the representative agent and each and every agent are proportional.
+\end{problem}
+\begin{proof}[Answer]
+Let $\bar{c}=\left(c^{1}, c^{2}\right)$, we can define the set:
+$$
+\bar{C}(c) \equiv\left\{x=\left(c^{1}, c^{2}\right):, c^{1} \geq 0, c^{2} \geq 0, c^{1}+c^{2} \leq c\right\}
+$$
+And the function:
+
+$$\tilde{v}(\bar{c})=\theta u\left(c^{1}\right)+(1-\theta) w\left(c^{2}\right)$$
+
+which is continuous, strictly concave and increasing function. We are interested in the solution of the optimization problem:
+
+$$
+v(c)=\max _{\bar{c} \in \bar{C}(c)} \tilde{v}(\bar{c})
+$$
+Since $\bar{C}(c)$ is compact for all $c$ and $\tilde{v}(\bar{c})$ is continuous. Thus $\tilde{v}(\bar{c})$ achieves its maximum on $\bar{C}$. Since the function is strictly concave, this maximum is unique we will denote this optimal point as $x^{*}(c)$. 
+Then for any two $c, c^{\prime} \geq 0$ and $\lambda \in[0,1]:$
+
+\begin{align*}
+\lambda v(c)+(1-\lambda) v\left(c^{\prime}\right)&=\lambda \tilde{v}\left(x^{*}(c)\right)+(1-\lambda) \tilde{v}\left(x^{*}\left(c^{\prime}\right)\right)\\ \text{Concavity}\qiq   &\leq \tilde{v}\left(\lambda x^{*}(c)+(1-\lambda) x^{*}\left(c^{\prime}\right)\Big)\\
+&\leq \max_{\hat{c} \in \hat{C}} v\left(\lambda c+(1-\lambda) c^{\prime}\right) \\
+&= v\left(\lambda c+(1-\lambda) c^{\prime}\right)
+\end{align*}
+
+First order condition for the optimization problem gives:
+
+$$\theta u'(c_^1) = (1-\theta)w'(c^2)$$
+
+Envelope Theorem gives the last equality.
+
+\end{proof}
+
+\begin{problem}[Exercise 8.3] An economy consists of two infinitely lived consumers named $i=1,2$. There is one nonstorable consumption good. Consumer $i$ consumes $c_{t}^{i}$ at time $t$. Consumer $i$ ranks consumption streams by
+$$
+\sum_{t=0}^{\infty} \beta^{t} u\left(c_{t}^{i}\right)
+$$
+where $\beta \in(0,1)$ and $u(c)$ is increasing, strictly concave, and twice continuously differentiable. Consumer 1 is endowed with a stream of the consumption good $y_{t}^{i}=1,0,0,1,0,0,1, \ldots$ Consumer 2 is endowed with a stream of the consumption good $0,1,1,0,1,1,0, \ldots$. Assume that there are complete markets with time 0 trading.
+\begin{subproblem}
+Define a competitive equilibrium.
+\end{subproblem}
+\begin{proof}[Answer]
+The agent's problem is the following:
+	$$ \begin{align}
+			\max_{\{c^i\}} &\quad \sum_{t=0}^{\infty} \sum_{s^{t}} \beta^{t} u\left[c_{t}^{i}\left(s^{t}\right)\right] \pi_{t}\left(s^{t}\right)\\
+			\text{s.t}&\quad \ \sum_{t=0}^{\infty} \sum_{s^{t}} Q_t(s^t) c_{t}^{i}\left(s^{t}\right) \leq \sum_{t=0}^{\infty} \sum_{s^{t}} Q_t(s^t) e_{i,t}\left(s^{t}\right) \qquad \text{(BC)}
+		\end{align}
+	$$
+	
+where $Q_t(s^t)$ and $Y^{i}(s^t)$ are the prices and endowments given a history $s^t$. \textit{Notation: Even if prices are indexed by $t$ they are determined at date $t=0$.}
+
+\textbf{Note} that this is a deterministic problem, which is a special case when there is only one story with positive probability. We can therefore re-write (BC) as:
+
+$$\sum_{t=0}^\infty Q_t c_t^i \leq \sum_{t=0}^\infty Q_t y_t^i $$
+
+With:
+$$\begin{array}{cc}
+     y^1 = 1,0,0,1,0,0,1,\ldots  \\
+     y^1 = 0,1,1,0,1,1,0,\ldots 
+\end{array}
+
+
+Here I am are abusing notation, what I really mean is that there there is only a story $\tilde{s^t}$ that generates those endowment sequences and $Q_t{s^t} = 0$ for all $s^t\neq \tilde{s^t}$ therefore (BC) holds trivially.
+
+\begin{defin}[Competitive Equilibrium]
+A competitive equilibrium is a sequence of prices $\{Q_t\}_{y=0}^\infty$ and allocations $\{c_t^1,c_t^2\}_{t=0}^\infty$ such that:
+\begin{enumerate}[(i)]
+    \item Given prices, agents optimize.
+    \item Markets clear.
+\end{enumerate}
+\end{defin}
+\end{proof}
+\begin{subproblem}
+Compute a competitive equilibrium.
+\end{subproblem}
+\begin{proof}[Answer]
+From the first order conditions of the general problem:
+$$\beta^t u'(c^i_t) \pi_t(s^t) = \mu Q_t(s^t)\qquad i = 1,2$$
+Since we only assign positive probability to one story this is:
+$$Q_t = \frac{\beta^t u'(c^i_t) }{\mu_i} \qquad i = 1,2$$
+
+We know that the competitive allocation only depends on the realized endowment \cite[Chapter~8 Proposition~2]{ljungqvist2018recursive} which in this problem is $Y_t = y^1_t + y^2_t = 1$ for all $t=0,\ldots,\infty$ therefore $c^i_t = c^i$. 
+
+Normalize $Q_0 = 1$ making consumption in the first period the numeraire and get the equilibrium prices:
+
+$$Q_t(s^t) = \left\{\begin{array}{cc}
+    \beta^t & \text{if }s^t = \tilde{s}^t \\
+    0 & \text{otherwise} 
+\end{array}
+
+Using the fact that utility is increasing in consumption:
+
+$$\sum_{t=0}^\infty Q_t c^i_t = \sum_{t=0}^\infty Q_t y^i_t \qiq c^i\sum_{t=0}^\infty \beta^t = \sum_{t=0}^\infty \beta^t y^i_t \qiq c^i = (1-\beta)\sum_{t=0}^\infty \beta^t y^i_t$$
+
+Therefore:
+
+\begin{align*}
+    c^1 &= (1-\beta)\sum_{t=0}^\infty \beta^{3t} = \frac{1-\beta}{1-\beta^3}\\
+     c^2 &= (1-\beta)\left(\sum_{t=0}^\infty \beta^{t} - \sum_{t=0}^\infty \beta^{3t}\right) = \frac{\beta(1+\beta)}{1+\beta + \beta^2}
+\end{align}
+
+\end{proof}
+\begin{subproblem}
+Suppose that one of the consumers markets a derivative asset that promises to pay .05 units of consumption each period. What would the price of that asset be?
+\end{subproblem}
+\begin{proof}[Answer]
+Consider the following risk-less asset $\{d_t(s^t)\}_{t=0}^\infty$ that pays $0.05$ at every period for every possible history. The price of such an asset is:
+
+$$P_0 = \sum_{t=0}^\infty \sum_{s^t} Q_t(s^t)d_t(s^t) = 0.05 \sum_{t=0}^\infty \beta^{t} = \frac{5}{100(1-\beta)}$$ 
+
+\end{proof}
+\end{problem}
+
+\begin{problem}[Exercise 8.4] Consider a pure endowment economy with a single representative consumer; $\left\{c_{t}, d_{t}\right\}_{t=0}^{\infty}$ are the consumption and endowment processes, respectively. Feasible allocations satisfy
+$$
+c_{t} \leq d_{t}
+$$
+The endowment process is described by $^{20}$
+$$
+d_{t+1}=\lambda_{t+1} d_{t}
+$$
+The growth rate $\lambda_{t+1}$ is described by a two-state Markov process with transition probabilities
+$$
+P_{i j}=\operatorname{Prob}\left(\lambda_{t+1}=\bar{\lambda}_{j} \mid \lambda_{t}=\bar{\lambda}_{i}\right)
+$$
+Assume that
+$$
+P=\left[\begin{array}{ll}
+.8 & .2 \\
+.1 & .9
+\end{array}\right]
+$$
+and that
+$$
+\bar{\lambda}=\left[\begin{array}{c}
+.97 \\
+1.03
+\end{array}\right]
+$$
+In addition, $\lambda_{0}=.97$ and $d_{0}=1$ are both known at date 0 . The consumer has preferences over consumption ordered by
+$$
+E_{0} \sum_{t=0}^{\infty} \beta^{t} \frac{c_{t}^{1-\gamma}}{1-\gamma},
+$$
+where $E_{0}$ is the mathematical expectation operator, conditioned on information known at time $0, \gamma=2, \beta=.95$.
+
+\textbf{Part I}
+At time $0,$ after $d_{0}$ and $\lambda_{0}$ are known, there are complete markets in date- and history-contingent claims. The market prices are denominated in units of time $0$ consumption goods.
+
+\begin{subproblem}
+    Define a competitive equilibrium, being careful to specify all the objects composing an equilibrium.
+\end{subproblem}
+\begin{proof}[Answer]
+\begin{defin}
+A price system is a sequence of functions $\left\{Q^0_t(s^t)\right\}_{t=0}^{\infty} .$ 
+\end{defin}
+\begin{defin}
+An allocation is a list of of functions $c=\left\{c_{t}\left(\lambda^{t}\right)\right\}_{t=0}^{\infty},$ that specifies the agent consumption in each possible story.
+\end{defin}
+\begin{defin}
+A competitive equilibrium is a feasible allocation and a price system such that, given the price system, the allocation:
+\begin{enumerate}[(i)]
+    \item The allocation solves the agent's problem:
+    \begin{align}
+			\max_{\{c\}} &\quad \sum_{t=0}^{\infty} \sum_{\lambda^{t}} \beta^{t} \frac{c_{t}(\lambda^t)^{1-\gamma}}{1-\gamma} \pi_{t}\left(\lambda^{t}\right)\\
+			\text{s.t}&\quad \ \sum_{t=0}^{\infty} \sum_{\lambda^t} Q_t(\lambda^t) c_{t}^{i}\left(\lambda^t\right) \leq \sum_{t=0}^{\infty} \sum_{\lambda^t} Q_t(s^t) d_{t}(\lambda^t)\left(s^{t}\right)
+\end{align}
+
+Here $\pi_{t}\left(\lambda^{t}\right)$ is the probability of occurrence of story $\lambda^t$. And markets clear.
+\item Markets clear.
+\end{enumerate}
+
+\end{defin}
+
+\end{proof}
+Writing the First Order Condition of the agent's problem we get the following relation in terms $\mu$, the Lagrange multiplier:
+
+ $$\beta^{t} c_{t}\left(\lambda^{t}\right)^{-\gamma} \pi_{t}\left(\lambda^{t}\right)=\mu Q^0_t(\lambda^t)$$
+
+ We can write the relation of prices in terms of period 0:
+
+$$ \frac{Q^0_t(\lambda^t)}{Q^0_0(\lambda_0)} =  \frac{\beta^{t} c_{t}\left(\lambda^{t}\right)^{-\gamma} \pi_{t}\left(\lambda^{t}\right)}{ c_{0}\left(\lambda_0\right)^{-\gamma} \pi_{0}\left(\lambda_0\right)} $$
+
+Using market clearing conditions $c_t(\lambda^t) = d_t(\lambda^t)$, normalizing $Q^0_0(\lambda_0)=1$ and the fact that $\lambda_0$ is already realized at time $0$ so $\pi_{0}\left(\lambda_0\right) =1$ and $d_0= 1$ we get:
+
+\begin{equation}\tag{1}\label{prices}
+Q^0_t(\lambda^t) =  \beta^{t} d_{t}\left(\lambda^{t}\right)^{-\gamma} \pi_{t}\left(\lambda^{t}\right)
+\end{equation}
+ 
+\begin{subproblem}
+Compute the equilibrium price of a claim to one unit of consumption at date 5 , denominated in units of time 0 consumption, contingent on the following history of growth rates: $\left(\lambda_{1}, \lambda_{2}, \ldots, \lambda_{5}\right)=(.97, .97,1.03, .97,1.03) .$ Please give a numerical answer.
+\end{subproblem}
+
+\begin{proof}[Answer]
+We can use the Markov property to find the probability of a particular history:
+
+$$\pi(\lambda^t) = \pi(\lambda_t|\lambda^{t-1})=\dots=\pi(\lambda_t|\lambda_{t-1})\dots\pi(\lambda_1|\lambda_{0})$$
+
+In this case:
+
+\begin{align*}
+    \pi(.97, .97,1.03, .97, 1.03) &= \pi(\lambda = 1.03|\lambda = 0.97)^2\pi(\lambda = 0.97|\lambda = 1.03)\pi(\lambda = 0.97|\lambda = 0.97)^2\\
+    & \approx 0.8^2 \times 0.1 \times 0.2^2 = 0.00256
+\end{align*}
+
+Similarly we can find the endowment at time $t$ for any particular history:
+
+$$d_{t} = \lambda_{t}d_{t-1}=\ldots=\lambda_t\ldots\lambda_1d_0$$
+
+In this case:
+$$d_{5} = 0.97 \times 0.97 \times 1.03 \times 0.97 \times 1.03  \approx 0.968$$
+
+Putting all this together:
+
+$$Q^0_5(\lambda^5)  \approx 0.95^{5}\times0.00256\times 0.968^{-2} = 0.00211$$
+
+\end{proof}
+\begin{subproblem}
+Compute the equilibrium price of a claim to one unit of consumption at date 5 , denominated in units of time 0 consumption, contingent on the following history of growth rates: $\left(\lambda_{1}, \lambda_{2}, \ldots, \lambda_{5}\right)=(1.03,1.03,1.03,1.03, .97)$.
+\end{subproblem}
+\begin{proof}[Answer]
+This is the same as question (1.2) just change the numbers and get:
+
+$$Q^0_5(\lambda^5) \approx 0.009$
+
+\end{proof}
+
+\begin{subproblem}
+Give a formula for the price at time 0 of a claim on the entire endowment sequence.
+\end{subproblem}
+\begin{proof}[Answer]
+The time $0$ price of a claim on the entire endowment sequence is the expected value as of time $0$ of the value of the endowment. For every possible history $\lambda^t$ given that $\lambda_0 = \overline{\lambda}^i$ for $i=1,2$, denote this price as $P(\overline{\lambda}^i)$. We can substitute the prices obtained in \eqref{prices}:
+
+\begin{align*}
+    P_0(\overline{\lambda}^i) & = \mathbb{E}_0\left[ \sum_{t=1}^\infty \sum_{\lambda^t} Q_t^t(\lambda^t|\lambda_0 = \overline{\lambda}^i)d_t(\lambda^t|\lambda_0 = \overline{\lambda}^i) \right]\\
+    &= \mathbb{E}_0\left[ \sum_{t=1}^\infty \sum_{\lambda^t}  \beta^{t} d_{t}\left(\lambda^t|\lambda_0 = \overline{\lambda}^i)^{1-\gamma} \pi_{t}\left(\lambda^{t}|\lambda_0 = \overline{\lambda}^i\right) \right]
+\end{align*}
+
+
+Let's analyze the infinite sum:
+
+$$P_0(\overline{\lambda}^i) = 1 + \beta[P_{i1}\overline{\lambda}^1 + P_{i2}\overline{\lambda}^2] + \sum_{t=2}^\infty \sum_{\lambda^t}  \beta^{t} d_{t}\left(\lambda^t|\lambda_0 = \overline{\lambda}^i\right)^{1-\gamma} \pi_{t}\left(\lambda^{t}|\lambda_0 = \overline{\lambda}^i\right)$$
+
+But the infinite sum that spans from the third term onwards can be re-written as:
+\begin{align*}
+&\sum_{t=2}^\infty \sum_{\lambda^t|\lambda_2 = \overline{\lambda}^1}  \beta^{t} d_{t}\left(\lambda^t|\lambda_0 = \overline{\lambda}^i\right)^{1-\gamma} \pi_{t}\left(\lambda^t|\lambda_0 = \overline{\lambda}^i\right) + \sum_{t=2}^\infty \sum_{\lambda^t|\lambda_2 = \overline{\lambda}^2}  \beta^{t} d_{t}\left(\lambda^t|\lambda_0 = \overline{\lambda}^i\right)^{1-\gamma} \pi_{t}\left(\lambda^t|\lambda_0 = \overline{\lambda}^i\right)\\
+& \qquad  = \beta P_{i1}\overline{\lambda}^1^{1-\gamma}\sum_{t=1}^\infty \sum_{\lambda^t}  \beta^{t} d_{t}\left(\lambda^t|\lambda_1 = \overline{\lambda}^1\right)^{1-\gamma} \pi_{t}\left(\lambda^t|\lambda_1 = \overline{\lambda}^1\right) \\&\qquad +\qquad \beta P_{i2}\overline{\lambda}^2^{1-\gamma}\sum_{t=1}^\infty \sum_{\lambda^t}  \beta^{t} d_{t}\left(\lambda^t|\lambda_1 = \overline{\lambda}^2\right)^{1-\gamma} \pi_{t}\left(\lambda^t|\lambda_1 = \overline{\lambda}^2\right)
+\end{align*}
+
+We plug in the formula for $P_0(\overline{\lambda}^i)$, re arrange and we get:
+
+\begin{align*}
+    P_0 &= 1 + \beta P_{i1}\overline{\lambda}^1^{1-\gamma}\underbrace{\left(1 + \sum_{t=1}^\infty \sum_{\lambda^t}  \beta^{t} d_{t}\left((\lambda^t|\lambda_1 = \overline{\lambda}^1\right)^{1-\gamma} \pi_{t}\left((\lambda^t|\lambda_1 = \overline{\lambda}^1\right) \right)}_{P(\overline{\lambda}^1)} \\& + \beta P_{i2}\overline{\lambda}^2^{1-\gamma}\underbrace{\left(1+\sum_{t=1}^\infty \sum_{\lambda^t}  \beta^{t} d_{t}\left((\lambda^t|\lambda_1 = \overline{\lambda}^2\right)^{1-\gamma} \pi_{t}\left((\lambda^t|\lambda_1 = \overline{\lambda}^2\right)}_{P_0(\overline{\lambda}^2)} \right)
+\end{align*}
+
+
+More succinctly:
+$$ P_0(\overline{\lambda}^i)  = 1 + \beta P_{i1}\overline{\lambda}^1^{1-\gamma} P_0(\overline{\lambda}^1) + \beta P_{i2}\overline{\lambda}^2^{1-\gamma} P_0(\overline{\lambda}^2)$$
+
+Writing the system of equations in matrix form:
+
+$$\boxed{\left[\begin{array}{cc}
+    P_0(\overline{\lambda}^1)  \\
+    P_0(\overline{\lambda}^2) 
+\end{array}\right] =\left[\begin{array}{cc}
+    1  \\
+    1
+\end{array}\right] +\beta  \left[\begin{array}{cc}
+    P_{11} & P_{12}  \\
+    P_{21} & P_{22}  
+\end{array}\right]
+  \left[\begin{array}{cc}
+    \overline{\lambda}^1^{1-\gamma} & 0  \\
+    0 & \overline{\lambda}^2^{1-\gamma}
+\end{array}\right]
+ \left[\begin{array}{cc}
+    P_0(\overline{\lambda}^1)  \\
+    P_0(\overline{\lambda}^2) 
+\end{array}\right]}$$
+
+This is the formula to find the total value of the entire endowment sequence starting from any particular realization of the first state $\lambda_0$. 
+
+If we plug in the actual values we get:
+
+$$P_0(\lambda_0 = 0.97) = 18.9332 \qaq P_0(\lambda_0 = 1.03) = 16.7995$$ 
+
+\end{proof}
+\begin{subproblem}
+Give a formula for the price at time 0 of a claim on consumption in period 5 , contingent on the growth rate $\lambda_{5}$ being .97 (regardless of the intervening growth rates).
+\end{subproblem}
+\begin{proof}[Answer]
+Denote $P^0_t(\lambda_t=\overline{\lambda}^i)$ the price of a claim to one unit of consumption at time $t$ given that growth rate at the terminal period is $\overline{\lambda}^i$. We can find this price as:
+
+\begin{align*}
+P^0_t(\lambda_t=\overline{\lambda}^i) &= \sum_{\lambda^t | \lambda_t = \overline{\lambda}^i } \beta^t\pi(\lambda^t)d_t(\lambda^t)^{-\gamma}\\ &=
+\sum_{\lambda^t} \beta^t\pi(\lambda^t | \lambda_t = \overline{\lambda}^i )d_t(\lambda^t | \lambda_t = \overline{\lambda}^i )^{-\gamma}\\
+& =\sum_{\lambda^t } \beta^t\pi(\lambda_t = \overline{\lambda}^i | \lambda_{t-1})\overline{\lambda}^{i}^{-\gamma}d_{t-1}(\lambda^{t-1})^{-\gamma}\\
+\end{align*}
+we sum separately conditioning on the terminal value of $\lambda^{t-1}$:
+\begin{multline*}
+P^0_t(\lambda_t=\overline{\lambda}^i) = \beta P_{i1}\overline{\lambda}^{i}^{-\gamma}\left( \sum_{\lambda^{t-1} | \lambda_{t-1} = \overline{\lambda}^1 } \beta^{t-1}\pi(\lambda^t)d_{t-1}(\lambda^{t-1})^{-\gamma}\right) \\+ \beta P_{i2}\overline{\lambda}^{i}^{-\gamma}\left( \sum_{\lambda^{t-1} | \lambda_{t-1} = \overline{\lambda}^2 } \beta^{t-1}\pi(\lambda^t)d_{t-1}(\lambda^{t-1})^{-\gamma}\right)    
+\end{multline*}
+Which reduces to:
+
+$$P_t^{0}(\lambda_t=\overline{\lambda}^i) = \beta \overline{\lambda}^{i}^{-\gamma}\left(P_{i1}P_{t-1}^{0}(\lambda_{t-1}=\overline{\lambda}^1) + P_{i2}P_{t-1}^{0}(\lambda_{t-1}=\overline{\lambda}^2)\right)$$
+
+This leads to the following system of equations:
+
+$$
+\left[
+\begin{array}{c}
+    P_t^{0}(\lambda_t=\overline{\lambda}^1) \\
+    P_t^{0}(\lambda_t=\overline{\lambda}^2)
+\end{array}
+\right]= \beta
+\left[
+\begin{array}{cc}
+    \overline{\lambda}^1^{-\gamma} & 0 \\
+    0 & \overline{\lambda}^2^{-\gamma}  
+\end{array}
+\right]
+\left[
+\begin{array}{cc}
+    P_{11} & P_{12} \\
+    P_{21} & P_{22}
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+    P_{t-1}^{0}(\lambda_{t-1}=\overline{\lambda}^1) \\
+    P_{t-1}^{0}(\lambda_{t-1}=\overline{\lambda}^2)
+\end{array}
+\right]
+$$
+
+We can iterate back and use the fact that that $P_0^{0}(\lambda_0=\overline{\lambda}^i) = \pi(\lambda_0=\overline{\lambda}^i)$ which will be $1$ or $0$ depending on the realized initial value:
+
+$$
+\left[
+\begin{array}{c}
+    P_t^{0}(\lambda_t=\overline{\lambda}^1) \\
+    P_t^{0}(\lambda_t=\overline{\lambda}^2)
+\end{array}
+\right]= \left(\beta
+\left[
+\begin{array}{cc}
+    \overline{\lambda}^1^{-\gamma} & 0 \\
+    0 & \overline{\lambda}^2^{-\gamma}  
+\end{array}
+\right]
+\left[
+\begin{array}{cc}
+    P_{11} & P_{12} \\
+    P_{21} & P_{22}
+\end{array}
+\right]
+\right)^t
+$$
+
+In particular to find $ P_t^{0}(\lambda_t=\overline{\lambda}^1))$ we use the fact that:
+
+$$ P_t^{0}(\lambda_t=\overline{\lambda}^1) = \left[\begin{array}{cc}
+    1 & 0 \\
+\end{array}\right] \left[
+\begin{array}{c}
+    P_t^{0}(\lambda_t=\overline{\lambda}^1) \\
+    P_t^{0}(\lambda_t=\overline{\lambda}^2)
+\end{array}
+\right]$$
+
+Condition on the initial value being $\overline{\lambda}^1$ and we get the final formula:
+
+$$ P_t^{0}(\lambda_t=\overline{\lambda}^1)) =  \left[\begin{array}{cc}
+    1 & 0
+\end{array}\right] \left(\beta
+\left[
+\begin{array}{cc}
+    \overline{\lambda}^1^{-\gamma} & 0 \\
+    0 & \overline{\lambda}^2^{-\gamma}  
+\end{array}
+\right]
+\left[
+\begin{array}{cc}
+    P_{11} & P_{12} \\
+    P_{21} & P_{22}
+\end{array}
+\right]
+\right)^t\left[\begin{array}{cc}
+    1 \\ 0
+\end{array}\right] 
+
+We plug in the numbers and get:
+
+$$ P_5^{0} =  \left[\begin{array}{cc}
+    1 & 0
+\end{array}\right] \left(0.95
+\left[
+\begin{array}{cc}
+    0.97^{-2} & 0 \\
+    0 & 1.03^{-2}  
+\end{array}
+\right]
+\left[
+\begin{array}{cc}
+   0.8 & 0.2 \\
+    0.1} & 0.9
+\end{array}
+\right]
+\right)^5\left[\begin{array}{cc}
+    1 \\ 0
+\end{array}\right] = 0.4402$$
+
+\end{proof}
+\textbf{Part II}
+
+Now assume a different market structure. Assume that at each date $t \geq 0$ there is a complete set of one-period forward Arrow securities.
+
+\begin{subproblem}
+Define a (recursive) competitive equilibrium with Arrow securities, being careful to define all of the objects that compose such an equilibrium.
+\end{subproblem}
+
+\begin{proof}[Answer]
+
+\begin{defin}
+A recursive competitive equilibrium is an initial distribution of wealth $\vec{a}_{0},$ a of borrowing limit function $\bar{A}^{i}(\lambda),$ a pricing kernel $Q\left(\lambda^{\prime} \mid \lambda\right),$ a value function $v(a, \lambda),$ and decision rules $\left\{h(a,\lambda), g\left(a, \lambda, \lambda^{\prime}\right)$ such that:
+\begin{enumerate}[(i)]
+    \item The state-by-state borrowing constraint satisfy the recursion
+$$
+\bar{A}(\lambda)=d(\lambda)+\sum_{\lambda^{\prime}} Q\left(\lambda^{\prime} \mid \lambda\right) \bar{A}\left(\lambda^{\prime} \mid \lambda\right)
+$$
+\item  Given $a_{0}^{i}, \bar{A}^{i}(\lambda),$ and the pricing kernel, the value function and decision rule solve the agent problem:
+
+\begin{align*}
+v(a, \lambda)&=\max _{c, \hat{a}\left(\lambda^{\prime}\right)}\left\{u(c)+\beta \sum_{\lambda^{\prime}} v\left[\hat{a}\left(\lambda^{\prime}\right), \lambda^{\prime}\right] \pi\left(\lambda^{\prime} \mid \lambda\right)\right\} \\
+\text{subject to:} & \quad
+c+\sum_{\lambda^{\prime}} \hat{a}\left(\lambda^{\prime}\right) Q\left(\lambda^{\prime} \mid \lambda\right) \leq d(\lambda)+a\\
+& \quad c \geq 0 \\
+& \quad -\hat{a}\left(\lambda^{\prime}\right)  \leq \bar{A}^{i}\left(\lambda^{\prime}\right), \quad \forall \lambda^{\prime}
+\end{align*}
+
+\item  For all realizations of $\left\{\lambda_{t}\right\}_{t=0}^{\infty},$ the consumption and asset portfolios $ \left\{c_t, \left\{\hat{a}_{t+1}\right\}_{s\prime}\right\}_t$ implied by the decision rules satisfy $ c_{t}=d_{t}\right)$ and $ \hat{a}_{t+1}=0$ for all $t$ and $\lambda^{\prime}$.
+\end{enumerate}
+\end{defin}
+\end{proof}
+
+\begin{subproblem}
+For the representative consumer in this economy, for each state compute the "natural debt limits" that constrain state-contingent borrowing.
+\end{subproblem}
+\begin{proof}[Answer]
+As stated in the definition of the recursive competitive equilibrium:
+$$\bar{A}(\lambda)=d(\lambda)+\sum_{\lambda^{\prime}} Q\left(\lambda^{\prime} \mid \lambda\right) \bar{A}\left(\lambda^{\prime} \mid \lambda\right)$$
+
+Since the endowment are function of a Markov process then natural debt limit exhibits history independence \cite[p.~278]{ljungqvist2018recursive}, this is:
+$$\bar{A}(\lambda^\prime|\lambda) = \bar{A}(\lambda^\prime)$$
+
+Using the first-order conditions for the recursive problem and the Benveniste-
+Scheinkman formula we can get the pricing kernel:
+
+$$
+ Q\left(\lambda^{\prime} \mid \lambda\right) = \frac{\beta  c\left(\lambda^{\prime})^{-\gamma} \pi\left(\lambda^{\prime} \mid \lambda\right)  }{c\left(\lambda)^{-\gamma}}
+$$
+
+Using market clearing conditions $c(\lambda) = d(\lambda)$ for any $\lambda$ we get and the particular structure of the endowment $d(\lambda^\prime|\lambda) = d(\lambda)\lambda^\prime$:
+
+$$
+ Q\left(\lambda^{\prime} \mid \lambda\right) = \frac{\beta  (d(\lambda)\lambda^\prime)^{-\gamma} \pi\left(\lambda^{\prime} \mid \lambda\right)  }{d(\lambda)^{-\gamma}} = \beta  \lambda^\prime^{-\gamma} \pi\left(\lambda^{\prime} \mid \lambda\right)
+$$
+
+Then we can obtain the natural debt limits as a system of equations:
+
+$$\left[\begin{array}{c}
+    \bar{A}(\overline{\lambda}^1)\\
+    \bar{A}(\overline{\lambda}^2)\\
+\end{array}\right] =\left[\begin{array}{cc}
+    d(\overline{\lambda}^1)\\
+    d(\overline{\lambda}^2)\\
+\end{array}\right] +\beta  \left[\begin{array}{cc}
+    P_{11} & P_{12}  \\
+    P_{21} & P_{22}  
+\end{array}\right]
+  \left[\begin{array}{cc}
+    \overline{\lambda}^1^{1-\gamma} & 0  \\
+    0 & \overline{\lambda}^2^{1-\gamma}
+\end{array}\right]
+\left[\begin{array}{c}
+    \bar{A}(\overline{\lambda}^1)\\
+    \bar{A}(\overline{\lambda}^2)\\
+\end{array}\right]$$
+
+\end{proof}
+\begin{subproblem}
+Compute a competitive equilibrium with Arrow securities. In particular, compute both the pricing kernel and the allocation.
+\end{subproblem}
+\begin{proof}[Answer]
+See problem $3.7$ for price kernel the allocations follow from the market clearing conditions in the definition of equilibrium.
+\end{proof}
+\begin{subproblem}
+An entrepreneur enters this economy and proposes to issue a new security each period, namely, a risk-free two-period bond. Such a bond issued in period $t$ promises to pay one unit of consumption at time $t+1$ for sure. Find the price of this new security in period $t,$ contingent on $\lambda_{t} .$
+\end{subproblem}
+\begin{proof}[Answer]
+consider the asset that pays $1$ regardless of state $t+1$, we can calculate the price of this asset contingent on $\lambda_t = \overline{\lambda}^i$:
+\begin{align*}
+\hat{P}_t(\overline{\lambda}^i) &= \sum_{\lambda_{t+1}}Q\left(\lambda_{t+1} \mid \lambda_{t}=\overline{\lambda}^i\right) = Q\left(\overline{\lambda}^1 \mid \lambda_{t}=\overline{\lambda}^i\right) + Q\left(\overline{\lambda}^2 \mid \lambda_{t}=\overline{\lambda}^i\right)\\
+&= \beta \left[ \overline{\lambda}^1^{-\gamma} \pi\left(\lambda_{t+1}=\overline{\lambda}^1 \mid \lambda_=\overline{\lambda}^i\right) + \overline{\lambda}^2^{-\gamma} \pi\left(\lambda_{t+1}=\overline{\lambda}^2 \mid \lambda_=\overline{\lambda}^i\right)\right]\\
+&=\beta \left[ \overline{\lambda}^1^{-\gamma} P_{i1} + \overline{\lambda}^2^{-\gamma} P_{i2}\right]
+\end{align*}
+In matrix form:
+$$\left[\begin{array}{c}
+    \hat{P}_t(\overline{\lambda}^1)\\
+    \hat{P}_t(\overline{\lambda}^2)\\
+\end{array}\right] =\beta  \left[\begin{array}{cc}
+    P_{11} & P_{12}  \\
+    P_{21} & P_{22}  
+\end{array}\right]
+  \left[\begin{array}{c}
+    \overline{\lambda}^1^{1-\gamma}\\
+    \overline{\lambda}^2^{1-\gamma}
+\end{array}\right]=0.95\left[\begin{array}{cc}
+    0.8 & 0.2  \\
+    0.1 & 0.9
+\end{array}\right]
+  \left[\begin{array}{cc}
+    0.97^{-1}  \\
+    1.03^{-1}
+\end{array}\right]=\left[\begin{array}{c}
+    0.967971\\
+    0.928035\\
+\end{array}\right]
+$$
+\end{proof}
+
+
+
+\end{problem}
+
+\bibliography{references}
+\end{document}

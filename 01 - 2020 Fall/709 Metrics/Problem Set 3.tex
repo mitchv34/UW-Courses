@@ -1,0 +1,327 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\documentclass[12pt]{article}
+%\usepackage[left=3cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}e}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{apacite}
+\usepackage[round]{natbib}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{svg}
+\usepackage[margin = 1in, top=2cm]{geometry}% Margins
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.2em}
+\usepackage{setspace} % Setting the spacing between lines
+\usepackage{amsthm, amsmath, amsfonts, mathtools, amssymb, bm} % Math packages 
+\usepackage{svg}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{epstopdf}
+\usepackage{subfig} % Manipulation and reference of small or sub figures and tables
+\usepackage{hyperref} % To create hyperlinks within the document
+\spacing{1.15}
+\usepackage{appendix}
+\usepackage{xcolor}
+\usepackage{cancel}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+
+
+\usepackage[round]{natbib}
+%\bibliographystyle{plainnat}
+\bibliographystyle{apacite}
+
+
+\newtheorem{defin}{Definition.}
+\newtheorem{teo}{Theorem. }
+\newtheorem{lema}{Lemma. }
+\newtheorem{coro}{Corolary. }
+\newtheorem{prop}{Proposition. }
+\theoremstyle{definition}
+\newtheorem{examp}{Example. }
+\newtheorem{problem}{Problem}
+% \numberwithin{problem}{subsection} 
+
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\qiq}{\qquad \implies \qquad}
+\newcommand{\qiffq}{\qquad \iff \qquad}
+\newcommand{\qaq}{\qquad \textbf{and} \qquad}
+\newcommand{\qoq}{\qquad \textbf{or} \qquad}
+\newcommand{\settf}{\text{ \emph{:} }}
+\newcommand{\chbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{.9em}}}
+\newcommand{\cchbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\checkmark$}}
+
+\title{Problem Set 3}
+\author{Mitchell Valdés-Bobes}
+\date{September 14, 2020}
+
+\begin{document}
+
+\maketitle
+
+\begin{problem}
+A random point $(X, Y)$ is distributed uniformly on the square with vertices $(1,1),(1,-1),$ $(-1,1),$ and $(-1,-1) .$ That is, the joint PDF is $f(x, y)=1 / 4$ on the square and $f(x, y)=0$
+outside the square. Determine the probability of the following events:
+\begin{enumerate}[(a)]
+    \item $X^{2}+Y^{2}<1$
+    \item $|X+Y|<2$
+\end{enumerate}
+\end{problem}
+
+\begin{proof}[Answer]
+\textbf{Part(a)}
+Since the random point $(X, Y)$ is distributed uniformly, then the probability of any set will be its area weighed by the probability density in this case we need to find the area of the circle $X^{2}+Y^{2}<1$, this is:
+
+$$P\left(X^{2}+Y^{2}<1\right) = \frac{1}{4}\left\pi * r^2 = \boxed{\frac{1}{4}\left\pi}$$
+
+\textbf{Part(b)} Since $|X|< 1$ and $|Y|< 1$ then:
+$$|X+Y|\leq |X|+|Y|< 2 \qiq P\left(|X+Y|<2\right) = 1$$
+
+\end{proof}
+
+\begin{problem}
+Let the joint PDF of $X$ and $Y$ be given by
+$$
+f(x, y)=g(x) h(y) \forall x, y \in R
+$$
+for some functions $g(x)$ and $h(y) .$ Let $a$ denote $\int_{-\infty}^{\infty} g(x) d x$ and $b$ denote $\int_{-\infty}^{\infty} h(x) d x$
+\begin{enumerate}[(a)]
+\item What conditions $a$ and $b$ should satisfy in order for $f(x, y)$ to be a bivariate PDF?
+\item Find the marginal PDF of $X$ and $Y$.
+\item Show that $X$ and $Y$ are independent.
+\end{enumerate}
+
+\end{problem}
+
+\begin{proof}[Answer]
+\textbf{Part(a)}
+$$\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f(x,y)dxdy=1 \qiffq \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}g(x)h(y)dxdy = \boxed{ab = 1}$$
+\textbf{Part(b)}
+$$f_X(x)=\int_{-\infty}^{\infty}f(x,y)dy = g(x)\int_{-\infty}^{\infty}h(y)dy \boxed{= bg(x)}$$
+$$f_Y(y)=\int_{-\infty}^{\infty}f(x,y)dy = h(y)\int_{-\infty}^{\infty}g(x)dx \boxed{= ah(x)}$$
+\textbf{Part(c)}
+$$f_X(x)f_Y(y) = ag(x)bh(y) = ab g(x)h(y) = g(x)h(y) = f(x,y) \qiq X\text{ and }Y\text{ are independent.}$$
+\end{proof}
+
+\begin{problem}
+Let the joint PDf of $X$ and $Y$ be given by
+$$
+f(x, y)=\left\{\begin{array}{ll}
+c x y & \text { if } x, y \in[0,1], x+y \leq 1 \\
+0 & \text { otherwise }
+\end{array}\right.
+$$
+\begin{enumerate}[(a)]
+    \item Find the value of $c$ such that $f(x, y)$ is a joint PDF.
+    \item Find the marginal distributions of $X$ and $Y$.
+    \item Are $X$ and $Y$ independent? Compare your answer to Problem 2 and discuss.
+\end{enumerate}
+
+\end{problem}
+
+\begin{proof}[Answer]
+\textbf{Part (a)}
+\begin{align*}
+    c\int_{0}^1\int_{0}^{1-x}xy\:\mathrm{d}y\mathrm{d}x &= \frac{c}{2}\int_{0}^1x\big(y^2|_0^{1-x}\big)\mathrm{d} x \\
+    &= \frac{c}{2}\int_{0}^1x\big(1-x\big)^2\mathrm{d}x \\
+    &= \frac{c}{2}\int_{0}^1\big(x^3-2x^2+x\big)\mathrm{d}x \\
+&= \frac{c}{2}\left(\frac{1}{4}-\frac{2}{3}+\frac{2}{4} \right) = \frac{c}{24}
+\end{align*}
+Then
+
+$$\frac{c}{24}=1 \qiffq \boxed{c = 24}$$
+
+\textbf{Part (b)}
+Following the integration process in \textbf{Part (a)} and by the symmetry of $f(x,y)$ is clear that:
+
+$$f_X(x) = 12 x(1-x)^2$$
+$$f_Y(y) = 12 y(1-y)^2$$
+
+\textbf{Part (c)}
+Multiplying marginal distributions we get:
+
+$$f_X(x)f_Y(y) = 12 x(1-x)^2\times 12 y(1-y)^2 \neq f(x,y)$$
+
+therefore the variables are not independent. The difference with \textbf{Problem 2} is that in this case the limits of integration fore each variable are in terms of the other, thus making independence impossible.
+
+\end{proof}
+
+\begin{problem}
+\text { Show that any random variable is uncorrelated with a constant. }
+\end{problem}
+
+\begin{proof}[Answer]
+Let $X$ be a random variable and $c\in \mathbb{R}$
+\begin{align*}
+\operatorname{Cov}(X,c) &= \mathbb{E}(X - \mathbb{E}(X))(c - \mathbb{E}(c))   \\
+&=\mathbb{E}(Xc) - \mathbb{E}c\\
+&=c\mathbb{E}(X) -c\mathbb{E}c = 0
+\end{align}
+Therefore $X$ and $c$ are un-correlated.
+\end{proof}
+
+\begin{problem}
+Let $X$ and $Y$ be independent random variables with means $\mu_{X}, \mu_{Y},$ and variances $\sigma_{X}^{2}, \sigma_{Y}^{2}$ Find an expression for the correlation of $X Y$ and $Y$ in terms of these means and variances.
+\end{problem}
+
+\begin{proof}[Answer]
+\begin{align*}
+\operatorname{Cov}(XY,Y) &= \mathbb{E}(XY - \mathbb{E}(XY))(Y - \mathbb{E}(Y))   \\
+&= \mathbb{E}(XYY - \mathbb{E}(XY)Y  - XY\mathbb{E}(Y)) + \mathbb{E}(XY))
+\mathbb{E}(Y))) \\
+&=\mathbb{E}(XYY)-\mathbb{E}(X)\mathbb{E}(Y)^2\\
+&=\mathbb{E}(X)[\mathbb{E}(YY)-\mathbb{E}(Y)^2] = \mu_X\sigma^2_Y
+\end{proof}
+
+\begin{align*}
+    \operatorname{Var}(XY) &= \mathbb{E}(XY - \mathbb{E}(XY))^2 \\
+    & = \mathbb{E}(X^2Y^2) - \mathbb{E}(XY)^2\\
+    & = \mathbb{E}(X^2)\mathbb{E}(Y^2) - \mathbb{E}(X)\mathbb{E}(Y)^2 = (\sigma_X^2-\mu_X)(\sigma_Y^2-\mu_Y) - \mu_X^2\mu_Y^2
+\end{align*}
+
+$$\boxed{\operatorname{Corr}(XY,X) = \frac{\operatorname{Cov}(XY,Y)}{\sqrt{\operatorname{Var}(XY) \operatorname{Var}(Y)}} = \frac{\mu_X\sigma^2_Y}{\sqrt{\sigma_Y^2((\sigma_X^2-\mu_X)(\sigma_Y^2-\mu_Y) - \mu_X^2\mu_Y^2))}}}
+
+\begin{problem}
+Prove the following: For any random vector $\left(X_{1}, X_{2}, \ldots, X_{n}\right)$
+$$
+\operatorname{Var}\left(\sum_{i=1}^{n} X_{i}\right)=\sum_{i=1}^{n} \operatorname{Var}\left(X_{i}\right)+2 \sum_{1 \leq i<j \leq n} \operatorname{Cov}\left(X_{i}, X_{j}\right)
+$$
+\end{problem}
+
+\begin{proof}[Answer]
+We start by proving that the covariance is additive in each argument:
+
+\begin{align*}
+    \operatorname{Cov}(X+Y,Z) &= \mathbb{E}(X+Y - \mathbb{E}(X+Y))(Z - \mathbb{E}(Z))\\
+    &=\mathbb{E}((X-\mathbb{E}(X))+(Y - \mathbb{E}(Y))(Z - \mathbb{E}(Z))\\&=\mathbb{E}(((X-\mathbb{E}(X))(Z - \mathbb{E}(Z)))+(Y - \mathbb{E}(Y))(Z - \mathbb{E}(Z)))\\
+    &=\mathbb{E}((X-\mathbb{E}(X))(Z - \mathbb{E}(Z)))+\mathbb{E}(Y - \mathbb{E}(Y))(Z - \mathbb{E}(Z))\\
+    &=\operatorname{Cov}(X,Z) +\operatorname{Cov}(Y,Z) 
+\end{align*}
+Now we will use induction to prove the result.
+
+\textit{Base Case} $n=2$:
+\begin{align*}
+    \operatorname{X_1 + X_2} &= \mathbb{E}(X_1 + X_2)^2 - (\mathbb{E}(X_1)+\mathbb{E}(X_2))^2\\
+    &= \mathbb{E}(X_1^2 + 2X_1X_2 + X_2^2) - \mathbb{E}(X_1)^2 - 2\mathbb{E}(X_1X_2) - \mathbb{E}(X_2)^2\\
+    &= (\mathbb{E}(X_1^2)-\mathbb{E}(X_1)^2)+ (\mathbb{E}(X_2^2)-\mathbb{E}(X_2)^2) +  2(\mathbb{E}(X_1X_2)-\mathbb{E}(X_1X_2)^2)\\
+    &= \operatorname{Var}(X_1) + \operatorname{Var}(X_2) +2\operatorname{Cov}(X_1,X_2)
+\end{align*}
+
+Assume that the result holds for $n=k$:
+$$
+\operatorname{Var}\left(\sum_{i=1}^{k} X_{i}\right)=\sum_{i=1}^{k  } \operatorname{Var}\left(X_{i}\right)+2 \sum_{1 \leq i<j \leq k} \operatorname{Cov}\left(X_{i}, X_{j}\right)
+$$
+
+We will prove that this implies that the result holds for $n=k+1$:
+\begin{align*}
+\operatorname{Var}\left(\sum_{i=1}^{k+1} X_{i}\right)   &=\operatorname{Var}\left(\sum_{i=1}^{k} X_{i} + X_{k+1}\right)\\
+&=\operatorname{Var}\left(\sum_{i=1}^{k} X_{i}\right) + \operatorname{Var}(X_{k+1}) +2\operatorname{Cov}\left(\sum_{i=1}^{k} X_{i},X_2\right)\\
+&=\operatorname{Var}\left(\sum_{i=1}^{k} X_{i}\right) + \operatorname{Var}(X_{k+1}) +2\sum_{i=1}^{k} \operatorname{Cov}\left(X_{i},X_{k+1}\right)
+\\&=\sum_{i=1}^{k  } \operatorname{Var}\left(X_{i}\right)+2 \sum_{1 \leq i<j \leq k} \operatorname{Cov}\left(X_{i}, X_{j}\right) + \operatorname{Var}(X_{k+1}) +2\sum_{i=1}^{k} \operatorname{Cov}\left(X_{i},X_{k+1}\right)\\
+&=\sum_{i=1}^{k+1} \operatorname{Var}\left(X_{i}\right)+2 \sum_{1 \leq i<j \leq k+1} \operatorname{Cov}\left(X_{i}, X_{j}\right)
+\end{align}
+Therefore the proof is complete.
+\end{proof}
+
+\begin{problem}
+Suppose that $X$ and $Y$ are joint normal, i.e. they have the joint $\mathrm{PDF}$ :
+$$
+f(x, y)=\frac{1}{2 \pi \sigma_{X} \sigma_{Y} \sqrt{1-\rho^{2}}} \exp \left(-\left(2\left(1-\rho^{2}\right)\right)^{-1}\left(x^{2} / \sigma_{X}^{2}-2 \rho x y / \sigma_{X} \sigma_{Y}+y^{2} / \sigma_{Y}^{2}\right)\right)
+$$
+
+\begin{enumerate}[(a)]
+    \item Derive the marginal distribution of $X$ and $Y,$ and observe that both are normal distributions.
+    \item Derive the conditional distribution of $Y$ given $X=x .$ Observe that it is also a normal distribution.
+    \item Derive the joint distribution of $(X, Z)$ where $Z=\left(Y / \sigma_{Y}\right)-\left(\rho X / \sigma_{X}\right),$ and then show that $X$ and $Z$ are independent.
+\end{enumerate}
+
+\end{problem}
+
+\begin{proof}[Answer]
+\textbf{Part (a)}
+For $f_X(x)$:
+
+$$f_{X}(x)=\int_{-\infty}^{\infty} f(x, y) d y=\frac{\exp \left\{-\frac{x^{2}}{2 \sigma_{X}^{2}\left(1-\rho^{2}\right)}\right\}}{2 \pi \sigma_{X} \sigma_{Y} \sqrt{1-\rho^{2}}} \int_{-\infty}^{\infty} \exp \left\{-\frac{y^{2}}{2 \sigma_{Y}^{2}\left(1-\rho^{2}\right)}+\frac{x y \rho}{\sigma_{X} \sigma_{Y}\left(1-\rho^{2}\right)}\right\} d y$$
+Since
+
+$$\int_{-\infty}^{\infty} \exp \left\{-\frac{y^{2}}{2 \sigma_{Y}^{2}\left(1-\rho^{2}\right)}+\frac{x y \rho}{\sigma_{X} \sigma_{Y}\left(1-\rho^{2}\right)}\right\} d y=\exp \left\{\frac{x^{2} \rho^{2}}{2 \sigma_{X}^{2}\left(1-\rho^{2}\right)}\right\} \sqrt{2 \pi \sigma_{Y}^{2}\left(1-\rho^{2}\right)}$$
+We have:
+
+$$f_X(x) = \frac{1}{\sqrt{2 \pi \sigma_{X}^{2}}} \exp \left\{-\frac{x^{2}}{2 \sigma_{X}^{2}}\right\} \qiq X\sim\mathcal{N}\big(0, \sigma_X^2\big)$$
+
+By symmetry of the joint distribution:
+
+$$f_Y(y) = \frac{1}{\sqrt{2 \pi \sigma_{Y}^{2}}} \exp \left\{-\frac{y^{2}}{2 \sigma_{Y}^{2}}\right\} \qiq Y\sim\mathcal{N}\big(0, \sigma_Y^2\big)$$
+
+\textbf{Part (b)}
+The conditional distribution of $Y$ is:
+\begin{align*}
+f(Y|x) = \frac{f(x,y)}{f_X(x)} &= \frac{\frac{1}{2 \pi \sigma_{X} \sigma_{Y} \sqrt{1-\rho^{2}}} \exp \left(-\left(2\left(1-\rho^{2}\right)\right)^{-1}\left(x^{2} / \sigma_{X}^{2}-2 \rho x y / \sigma_{X} \sigma_{Y}+y^{2} / \sigma_{Y}^{2}\right)\right)}{\frac{1}{\sqrt{2 \pi \sigma_{X}^{2}}} \exp \left\{-\frac{x^{2}}{2 \sigma_{X}^{2}}\right\} } \\ &= \frac{1}{\sqrt{2 \pi \sigma_{Y}^{2}\left(1-\rho^{2}\right)}} \exp \left\{-\frac{\left(y-\frac{x \rho}{\sigma_{X}}\right)}{2 \sigma_{Y}^{2}\left(1-\rho^{2}\right)}\right\}
+\end{align*}
+
+\textbf{Part (c)}
+$$X\sim\mathcal{N}\big(0, \sigma_X^2\big) \qiq \rho\frac{X}{\sigma_X} \sim \mathcal{N}(0,\rho^2)$$
+$$Y\sim\mathcal{N}\big(0, \sigma_Y^2\big) \qiq \frac{Y}{\sigma_Y} \sim \mathcal{N}(0,1)$$
+Then
+$$Z = \frac{Y}{\sigma_Y} - \rho\frac{X}{\sigma_X} \qiq Z \sim \mathcal{N}(0,1-\rho^2) \qaq f_Z(z) = \frac{1}{\sqrt{2 \pi\left(1-\rho^{2}\right)}} \exp \left\{-\frac{z^{2}}{2\left(1-\rho^{2}\right)}\right\}$$
+
+
+We have the following multivariate transformation:
+
+$$g(X, Y) = (X, Y / \sigma_{Y}\right)-\left(\rho X / \sigma_{X}\right))$$
+
+with inverse:
+
+$$g^{-1}(X,Z) = (X, \sigma_y Z + \sigma_Y\rho X/\sigma_X)$$
+
+The determinant of the Jacobian of this transformation is:
+$$
+|J| = \left|\left(\begin{array}{cc}
+1 & 0 \\
+\rho \frac{\sigma_{Y}}{\sigma_{X}} & \sigma_{Y}
+\end{array}\right)\right|=\sigma_{Y}
+$$
+then 
+
+$$f(x,z)=f\left(g^{-1}(x,z)\right)|J| = \underbrace{\frac{1}{\sqrt{2 \pi \sigma_{X}^{2}}} \exp \left\{-\frac{x^{2}}{2 \sigma_{X}^{2}}\right\}}_{f_X(x)}\underbrace{ \frac{1}{\sqrt{2 \pi\left(1-\rho^{2}\right)}} \exp \left\{-\frac{z^{2}}{2\left(1-\rho^{2}\right)}\right\}}_{f_Z(z)}$$
+
+thus showing that $X$ and $Z$ are independent.
+
+\end{proof}
+
+\begin{problem}
+Consider a function $g: R \rightarrow R .$ Recall that the inverse image of a set $A,$ denoted $g^{-1}(A),$ is
+$$
+g^{-1}(A)=\{x \in R: g(x) \in A\}
+$$
+Let there be two functions $g_{1}: R \rightarrow R$ and $g_{2}: R \rightarrow R .$ Let $X$ and $Y$ be two random variables
+that are independent. Suppose that $g_{1}$ and $g_{2}$ are both Borel-measurable, which means that $g_{1}^{-1}(A)$ and $g_{2}^{-1}(A)$ are both in the Borel $\sigma$ -fied whenever $A$ is in the Borel $\sigma$ -field. Show that the two random variables $Z:=g_{1}(X)$ and $W:=g_{2}(Y)$ are independent. (Hint: use the
+1st or the 2 nd definition of independence.
+
+Almost all functions that we will ever encounter in econometric are Borel-measurable. That
+includes continuous functions and functions that are discontinuous at finite or countably
+infinite number of points. So in general, measurability is not something we need to worry
+about.
+\end{problem}
+
+\begin{proof}[Answer]
+We will use the following characterization of independece:
+
+$$X \text{ and } Y \text{ are independent}\qiffq P(X\in A,Y\in B) = P(X\in A)P(Y\in B)$$
+Define
+
+$$P(Z\in A) = P(g_1(X)\in A)=P(X\in g_1^{-1}( A))$$
+$$P(W\in B) = P(g_2(Y)\in B)=P(Y\in g_1^{-1}(B))$$
+
+then:
+
+\begin{align*}
+    P(Z\in A, W\in B) &= P(X\in g_1^{-1}(A), Y\in g_1^{-1}( B)) \\&=  P(X\in g_1^{-1}( A))P( Y\in g_1^{-1}( B)) = P(Z\in A)P(W\in B)
+\end{align*}
+
+Therefore, $Z$ and $W$ are independent.
+
+\end{proof}
+
+\end{document}

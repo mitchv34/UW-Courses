@@ -1,0 +1,323 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\documentclass[12pt]{article}
+%\usepackage[left=3cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}e}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{apacite}
+\usepackage[round]{natbib}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{svg}
+\usepackage[margin = 1in, top=2cm]{geometry}% Margins
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.2em}
+\usepackage{setspace} % Setting the spacing between lines
+\usepackage{amsthm, amsmath, amsfonts, mathtools, amssymb, bm} % Math packages 
+\usepackage{svg}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{epstopdf}
+\usepackage{subfig} % Manipulation and reference of small or sub figures and tables
+\usepackage{hyperref} % To create hyperlinks within the document
+\spacing{1.15}
+\usepackage{appendix}
+\usepackage{xcolor}
+\usepackage{cancel}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+
+
+\usepackage[round]{natbib}
+%\bibliographystyle{plainnat}
+\bibliographystyle{apacite}
+
+
+\newtheorem{defin}{Definition.}
+\newtheorem{teo}{Theorem. }
+\newtheorem{lema}{Lemma. }
+\newtheorem{coro}{Corolary. }
+\newtheorem{prop}{Proposition. }
+\theoremstyle{definition}
+\newtheorem{examp}{Example. }
+\newtheorem{problem}{Problem}
+% \numberwithin{problem}{subsection} 
+
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\qiq}{\qquad \implies \qquad}
+\newcommand{\qiffq}{\qquad \iff \qquad}
+\newcommand{\qaq}{\qquad \textbf{and} \qquad}
+\newcommand{\qoq}{\qquad \textbf{or} \qquad}
+\newcommand{\settf}{\text{ \emph{:} }}
+\newcommand{\chbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{.9em}}}
+\newcommand{\cchbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\checkmark$}}
+
+\title{Problem Set 1}
+\author{Mitchell Valdés-Bobes}
+\date{September 14, 2020}
+
+\begin{document}
+
+\maketitle
+
+\begin{problem}
+For two events $A, B \subseteq S,$ prove that $A \cup B=(A \cap B) \cup\left(\left(A \cap B^{c}\right) \cup\left(B \cap A^{c}\right)\right)$.
+
+\end{problem}
+
+\begin{proof}[Answer]
+
+By associativity of the union of sets we know that:
+
+\begin{equation}\label{eq1}
+(A \cap B) \cup\left(\left(A \cap B^{c}\right) \cup\left(B \cap A^{c}\right)\right) = ((A \cap B) \cup \left(A \cap B^{c}\right)) \cup\left(B \cap A^{c}\right)    
+\end{equation}
+
+we also know from class that:
+\begin{equation}\label{eq2}
+A = (A\cap B) \cup (A\cap B^c)    
+\end{equation}
+
+plugin \eqref{eq2} in \eqref{eq1} we get:
+
+\begin{equation}\label{eq3}
+    (A \cap B) \cup\left(\left(A \cap B^{c}\right) \cup\left(B \cap A^{c}\right)\right) = A \cup\left(B \cap A^{c}\right)
+\end{equation}
+
+then applying the distributive property of unions and intersections to \eqref{eq3} we get:
+
+$$(A \cap B) \cup\left(\left(A \cap B^{c}\right) \cup\left(B \cap A^{c}\right)\right) = (A \cup B) \cap( A \cup A^{c}) = (A\cup B) \cap (A\cup A^c)=(A\cup B) \cap S = A\cup B$$
+
+\end{proof}
+
+\begin{problem}
+Prove that $P(A \cup B)=P(A)+P(B)-P(A \cap B)$
+
+\end{problem}
+
+\begin{proof}[Answer]
+By \textbf{Problem 1} we know:
+ $A \cup B=(A \cap B) \cup\left(\left(A \cap B^{c}\right) \cup\left(B \cap A^{c}\right)\right)$ and we also know that $(A \cap B),\: (\left(A \cap B^{c}\right)$ and $\left(B \cap A^{c}\right)\right)$ are disjoint, therefore:
+ \begin{equation}\label{eq4}
+     P(A \cup B)=P(A \cap B) +P\left(A \cap B^{c}\right) + P\left(B \cap A^{c}\right)
+ \end{equation}
+ 
+ Using the same idea as in \eqref{eq2} we have:
+ 
+ \begin{align*}\label{eq5}\tag{5}
+     A = (A\cap B) \cup (A\cap B^c)  &\qiq  P(A) = P(A\cap B) + P(A\cap B^c) \\ &\qiq   P(A\cap B^c)  = P(A) - P(A\cap B)
+\end{align*}
+
+and
+
+\begin{align*}\label{eq6}\tag{6}
+     B = (B\cap A) \cup (B\cap A^c)  &\qiq  P(B) = P(B\cap A) + P(B\cap A^c) \\ &\qiq   P(B\cap A^c)  = P(B) - P(B\cap A)
+\end{align*}
+
+then, plugin \eqref{eq5} and \eqref{eq6} in \eqref{eq4} we get:
+\begin{equation*}
+    P(A \cup B)= \cancel{P(A \cap B)} +P(A) - \cancel{P(A\cap B)} + P(B) - P(B\cap A) = P(A) + P(B) - P(B\cap A)
+\end{equation}
+
+
+\end{proof}
+\begin{problem}
+Suppose that the unconditional probability of a disease is $0.0025 .$ A screening
+test for this disease has a detection rate of $0.9,$ and has a false positive rate
+of $0.01 .$ Given that the screening test returns positive, what is the conditional
+probability of having the disease?
+
+\end{problem}
+
+\begin{proof}[Answer]
+
+Let event $A$ be have the disease and event $B$ be screening test is positive. We know the following about the probabilities of those events:
+
+$$P(A) = 0.0025 \qquad P(A^c) = 1-0.0025=0.9975$$
+$$P(B|A) = 0.9 \qquad P(B|A^c) = 0.01$$
+
+We are interested in $P(A|B)$, we can use the Bayes rule:
+
+$$P(A \mid B)=\frac{P(B \mid A) P(A)}{P(B \mid A) P(A)+P\left(B \mid A^{c}\right) P\left(A^{c}\right)} = \frac{0.9 \times 0.0025}{0.9 \times 0.0025 + 0.01\times0.9975}=0.184049$$
+
+\end{proof}
+
+\begin{problem}
+Suppose that a pair of events $A$ and $B$ are mutually exclusive, i.e., $A \cap B=\emptyset$,
+and that $P(A)>0$ and $P(B)>0 .$ Prove that $A$ and $B$ are not independent.
+\end{problem}
+
+\begin{proof}[Answer]
+We will prove the result by way of contradiction; suppose that $A$ and $B$ are independent, then:
+
+$$P(A\cap B) = P(A)P(B)$$
+
+but we have that:
+
+$$A\cap B=\emptyset \qiq P(A\cap B)=P(\emptyset)=0$$
+
+then
+
+$$P(A)P(B)=0 \qiif P(A)=0 \: \lor \: P(B)=0$$
+
+but this is a contradiction with the hypothesis that $P(A)>0$ and $P(B)>0$.
+
+\end{proof}
+
+\begin{problem}
+(Conditional Independence) Sometimes, we may also use the concept of conditional
+independence. The definition is as follows: let $A, B, C$ be three events with positive probabilities. Then $A$ and $B$ are independent given $C$ if $P(A \cap B \mid C)=$
+$P(A \mid C) P(B \mid C) . \quad$ Consider the experiment of tossing two dice. Let $A=$
+$\{$ First die is 6$\}, B=\{$ Second die is 6$\},$ and $C=\{$ Both dice are the same $\} .$
+\begin{enumerate}[(a)]
+    \item  Show that $A$ and $B$ are independent (unconditionally), but $A$ and $B$ are dependent given $C$.
+    \item Consider the following experiment: let there be two urns, one with 9
+black balls and 1 white balls and the other with 1 black ball and 9 white
+balls. First randomly (with equal probability) select one urn. Then then
+take two draws with replacement from the selected urn. Let $A$ and $B$ be
+drawing a black ball in the first and the second draw, respectively, and
+let $C$ be the event that urn 1 is selected. Show that $A$ and $B$ are not
+independent, but are conditionally independent given $C$.
+\end{enumerate}
+
+\end{problem}
+
+\begin{proof}[Answer]
+\textbf{Part (a)} We start by writing down explicitly the events:
+$$A = \{(6, 1), (6, 2), (6, 3), (6, 4), (6, 5), (6, 6)\}$$
+$$B = \{(1, 6), (2, 6), (3, 6), (4, 6), (5, 6), (6, 6)\}$$
+$$C = \{(1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6)\}$$
+
+then
+
+$$P(A\cap B) = P(\{6,6\}) = \frac{1}{6^2}$$
+
+$$P(A) = P(B) = P(C) = \frac{6}{6^2}=\frac{1}{6} \qiq P(A)P(B) = \frac{1}{6^2} = P(A\cap B)$$
+
+then $A$ and $B$ must be independent events.
+
+Now,
+$$P(A\cap B|C) = \frac{P((A\cap B)\cap C)}{C}$$
+
+$$P((A\cap B)\cap C) = P(\{(6,6)\}) \qiq P((A\cap B)\cap C)=\frac{1}{6^2} \qiq P(A\cap B|C) = \frac{\frac{1}{6^2}}{\frac{1}{6}}=\frac{1}{6}$$
+
+and 
+
+$$P(A|C)= P(B|C) = P(\{(6,6)\})=\frac{1}{6^2} \qiq P(A|C)P(B|C)\neq P((A\cap B)|C)$$
+
+thus proving that $A$  and $B$ are conditionally dependent given $C$.
+
+\textbf{Part (b)}
+We start by saying that 
+
+$$P(A|C) = \frac{9}{10} = P(B|C)$$
+$$P(A|C^c) = \frac{1}{10} = P(B|C^c)$$
+
+and since draws are taken with replacement
+
+$$P(A\cap B|C) = \frac{81}{100} \qaq P(A\cap B|C^c) = \frac{1}{100}$$
+
+then
+
+$$P(A) = P(A|C)P(C) + P(A|C^c)P(C^c)=\frac{1}{2}(P(A|C)P(C) + P(A|C^c))=\frac{1}{2}$$
+
+$$P(B) = P(B|C)P(C) + P(B|C^c)P(C^c)=\frac{1}{2}(P(B|C)P(C) + P(B|C^c))=\frac{1}{2}$$
+
+and
+
+$$P(A\cap B) = P(A\cap B|C)P(C) + P(A\cap B|C^c)P(C^c)=\frac{1}{2}(P(A\cap B|C)P(C) + P(A\cap B|C^c))=\frac{41}{100}$$
+
+then
+
+$$P(A\cap B )\neq P(A)P(B) \qqad A\text{and }B\text{ are not independent.}$$
+
+To see that $A$ and $B$ are independent given $C$:
+
+$$P(A\cap B | C) = \frac{81}{100} = \frac{9}{10}\frac{9}{10} = P(A)P(B)$$
+
+
+
+\end{proof}
+
+
+\begin{problem}
+A CDF $F_{X}$ is stochastically greater than a CDF $F_{Y}$ if $F_{X}(t) \leq F_{Y}(t)$ for all $t$ and $F_{X}(t)<$ $F_{Y}(t)$ for some $t .$ Prove that if $X \sim F_{X}$ and $Y \sim F_{Y},$ then
+$$
+P(X>t) \geq P(Y>t) \text { for every } t
+$$
+and
+$$
+P(X>t)>P(Y>t) \text { for some } t
+$$
+that is, $X$ tends to be bigger than $Y$.
+\end{problem}
+
+\begin{proof}[Answer]
+
+\begin{align*}
+    P(X>t) \geq P(Y>t) &\qiffq 1 - P(X\leq t) \geq 1 -  P(Y\leq t)\\
+    &\qiffq - P(X\leq t) \geq -  P(Y\leq t)\\
+    &\qiffq  P(X\leq t) \leq  P(Y\leq t)\\
+    &\qiffq F_{X}(t) \geq F_{Y}(t)
+\end{align*}
+
+Note that this have to happen for every $t$ and that for some $t$ the inequality is strict, thus proving the result. 
+
+\end{proof}
+
+\begin{problem}
+Show that the function $F_{X}(x)=\left\{\begin{array}{ll}0 & \text { if } x<0 \\ 1-\exp (-x) & \text { if } x \geq 0\end{array}\right.$ is a CDF, and find $f_{X}(x)$ and $F_{X}^{-1}(y)$
+\end{problem}
+
+\begin{proof}[Answer]
+To show that $F_X$ is a CDF we will pro the following properties:
+\begin{enumerate}[(i)]
+    \item $\lim_{x\to -\infty}F_X(x) = \lim_{x\to -\infty}0 = 0$
+    \item $\lim_{x\to -\infty}F_X(x) = \lim_{x\to -\infty} 1-\exp (-x) = 1 - \lim_{x\to -\infty}\exp (-x) = 1-0 = 1$
+    \item Take $x<y$ then:
+    \begin{align*}
+        \text{if } x<y< 0 &\qiq F_X(x)=F_X(y)\\
+        \text{if } x< 0 \leq y &\qiq F_X(x) =  0 \leq 1 - \exp(-y) = F_X(y)\\
+        \text{if }  0 \leq x < y &\qiq F_X(x)-F_X(y) = \exp(-x)-\exp(-y) < 0 \qiq F_X(x)<F_X(y)
+    \end{align*}
+    therefore $F_X$ is not decreasing.
+    \item For $x<0$ and $x>0$ $F_X$ is a continuous function, then it must be right-continuous, the only point that we need to check is $x=0$:
+    $$\lim_{x\to -0^+}F_X(x) = \lim_{x\to 0^+} 1-\exp (-x) = 1 - \lim_{x\to -0^+}\exp (-x) = 1-1 = 0=F_X(0)$$
+    then $F_X(x)$ is right-continuous.
+\end{enumerate}
+
+To fin the PDF $f_X$ we use the fact that in general, when $F_X$ is continuous, $f_X(x)$ is the function which satisfies
+$$
+F_X(x)=\int_{\infty}^{x} f_X(t) d t
+$$
+using calculus fundamental theorem
+
+$$
+f_X = \frac{\partial}{\partial x}F_X(x) = \begin{cases} 0 & \text{if } x<0\\\exp(-x) &\text{if } x\geq0
+\end{cases}$$
+
+To obtain the inverse CDF $F_X^{-1}(x)$ we need to find a function that satisfies that
+
+$$x = F_X(F_X^{-1}(x))$$
+
+The problem is that $F_X(x)$ has flat portions then we need to restrict $F_X$ to it's support set:
+
+$$\mathcal{X} = \{x \settf f(x)> 0 \} = [0,\infty)$$
+
+in this set the function is inyective and surjective therefore invertible, with inverse:
+
+$$F_X^{-1}(x) = -\log{(1-x)} \quad \forall x \in [0,1)$$
+
+\end{proof}
+
+\!\(TraditionalForm\`
+\*FractionBox[\(\[DifferentialD]\), \("\[DifferentialD]" x\)] \((\*
+TagBox[
+RowBox[{
+RowBox[{"cos", "(", "x", ")"}], " ", 
+RowBox[{"exp", "(", "x", ")"}]}],
+HoldForm])\) == 
+\*SuperscriptBox[\(E\), \(x\)]\ \((cos(x) - sin(x))\)\)
+
+
+\end{document}

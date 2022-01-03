@@ -1,0 +1,975 @@
+
+    
+
+
+
+
+    
+\documentclass[10pt,notitlepage,onecolumn,aps,pra]{revtex4-1}
+
+    
+    
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+% We will generate all images so they have a width \maxwidth. This means
+% that they will get their normal width if they fit onto the page, but
+% are scaled down if they would overflow the margins.
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+\else\Gin@nat@width\fi}
+\makeatother
+\let\Oldincludegraphics\includegraphics
+% Set max figure width to be 80% of text width, for now hardcoded.
+\renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+% Ensure that by default, figures have no caption (until we provide a
+% proper Figure object with a Caption API and a way to capture that
+% in the conversion process - todo).
+\usepackage{caption}
+\DeclareCaptionLabelFormat{nolabel}{}
+\captionsetup{labelformat=nolabel}
+
+\usepackage{adjustbox} % Used to constrain images to a maximum size
+\usepackage{xcolor} % Allow colors to be defined
+\usepackage{enumerate} % Needed for markdown enumerations to work
+\usepackage{geometry} % Used to adjust the document margins
+\usepackage{amsmath} % Equations
+\usepackage{amssymb} % Equations
+\usepackage{textcomp} % defines textquotesingle
+% Hack from http://tex.stackexchange.com/a/47451/13684:
+\AtBeginDocument{%
+    \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+}
+\usepackage{upquote} % Upright quotes for verbatim code
+\usepackage{eurosym} % defines \euro
+\usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+\usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+\usepackage{fancyvrb} % verbatim replacement that allows latex
+\usepackage{grffile} % extends the file name processing of package graphics
+                     % to support a larger range
+% The hyperref package gives us a pdf with properly built
+% internal navigation ('pdf bookmarks' for the table of contents,
+% internal cross-reference links, web links for URLs, etc.)
+\usepackage{hyperref}
+\usepackage{booktabs}  % table support for pandoc > 1.12.2
+\usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+\usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                            % normalem makes italics be italics, not underlines
+\usepackage{braket}
+
+
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    
+    
+    
+    
+% Pygments definitions
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % For linebreaks inside Verbatim environment from package fancyvrb. 
+    \makeatletter
+        \newbox\Wrappedcontinuationbox 
+        \newbox\Wrappedvisiblespacebox 
+        \newcommand*\Wrappedvisiblespace {\textcolor{red}{\textvisiblespace}} 
+        \newcommand*\Wrappedcontinuationsymbol {\textcolor{red}{\llap{\tiny$\m@th\hookrightarrow$}}} 
+        \newcommand*\Wrappedcontinuationindent {3ex } 
+        \newcommand*\Wrappedafterbreak {\kern\Wrappedcontinuationindent\copy\Wrappedcontinuationbox} 
+        % Take advantage of the already applied Pygments mark-up to insert 
+        % potential linebreaks for TeX processing. 
+        %        {, <, #, %, $, ' and ": go to next line. 
+        %        _, }, ^, &, >, - and ~: stay at end of broken line. 
+        % Use of \textquotesingle for straight quote. 
+        \newcommand*\Wrappedbreaksatspecials {% 
+            \def\PYGZus{\discretionary{\char`\_}{\Wrappedafterbreak}{\char`\_}}% 
+            \def\PYGZob{\discretionary{}{\Wrappedafterbreak\char`\{}{\char`\{}}% 
+            \def\PYGZcb{\discretionary{\char`\}}{\Wrappedafterbreak}{\char`\}}}% 
+            \def\PYGZca{\discretionary{\char`\^}{\Wrappedafterbreak}{\char`\^}}% 
+            \def\PYGZam{\discretionary{\char`\&}{\Wrappedafterbreak}{\char`\&}}% 
+            \def\PYGZlt{\discretionary{}{\Wrappedafterbreak\char`\<}{\char`\<}}% 
+            \def\PYGZgt{\discretionary{\char`\>}{\Wrappedafterbreak}{\char`\>}}% 
+            \def\PYGZsh{\discretionary{}{\Wrappedafterbreak\char`\#}{\char`\#}}% 
+            \def\PYGZpc{\discretionary{}{\Wrappedafterbreak\char`\%}{\char`\%}}% 
+            \def\PYGZdl{\discretionary{}{\Wrappedafterbreak\char`\$}{\char`\$}}% 
+            \def\PYGZhy{\discretionary{\char`\-}{\Wrappedafterbreak}{\char`\-}}% 
+            \def\PYGZsq{\discretionary{}{\Wrappedafterbreak\textquotesingle}{\textquotesingle}}% 
+            \def\PYGZdq{\discretionary{}{\Wrappedafterbreak\char`\"}{\char`\"}}% 
+            \def\PYGZti{\discretionary{\char`\~}{\Wrappedafterbreak}{\char`\~}}% 
+        } 
+        % Some characters . , ; ? ! / are not pygmentized. 
+        % This macro makes them "active" and they will insert potential linebreaks 
+        \newcommand*\Wrappedbreaksatpunct {% 
+            \lccode`\~`\.\lowercase{\def~}{\discretionary{\hbox{\char`\.}}{\Wrappedafterbreak}{\hbox{\char`\.}}}% 
+            \lccode`\~`\,\lowercase{\def~}{\discretionary{\hbox{\char`\,}}{\Wrappedafterbreak}{\hbox{\char`\,}}}% 
+            \lccode`\~`\;\lowercase{\def~}{\discretionary{\hbox{\char`\;}}{\Wrappedafterbreak}{\hbox{\char`\;}}}% 
+            \lccode`\~`\:\lowercase{\def~}{\discretionary{\hbox{\char`\:}}{\Wrappedafterbreak}{\hbox{\char`\:}}}% 
+            \lccode`\~`\?\lowercase{\def~}{\discretionary{\hbox{\char`\?}}{\Wrappedafterbreak}{\hbox{\char`\?}}}% 
+            \lccode`\~`\!\lowercase{\def~}{\discretionary{\hbox{\char`\!}}{\Wrappedafterbreak}{\hbox{\char`\!}}}% 
+            \lccode`\~`\/\lowercase{\def~}{\discretionary{\hbox{\char`\/}}{\Wrappedafterbreak}{\hbox{\char`\/}}}% 
+            \catcode`\.\active
+            \catcode`\,\active 
+            \catcode`\;\active
+            \catcode`\:\active
+            \catcode`\?\active
+            \catcode`\!\active
+            \catcode`\/\active 
+            \lccode`\~`\~ 	
+        }
+    \makeatother
+
+    \let\OriginalVerbatim=\Verbatim
+    \makeatletter
+    \renewcommand{\Verbatim}[1][1]{%
+        %\parskip\z@skip
+        \sbox\Wrappedcontinuationbox {\Wrappedcontinuationsymbol}%
+        \sbox\Wrappedvisiblespacebox {\FV@SetupFont\Wrappedvisiblespace}%
+        \def\FancyVerbFormatLine ##1{\hsize\linewidth
+            \vtop{\raggedright\hyphenpenalty\z@\exhyphenpenalty\z@
+                \doublehyphendemerits\z@\finalhyphendemerits\z@
+                \strut ##1\strut}%
+        }%
+        % If the linebreak is at a space, the latter will be displayed as visible
+        % space at end of first line, and a continuation symbol starts next line.
+        % Stretch/shrink are however usually zero for typewriter font.
+        \def\FV@Space {%
+            \nobreak\hskip\z@ plus\fontdimen3\font minus\fontdimen4\font
+            \discretionary{\copy\Wrappedvisiblespacebox}{\Wrappedafterbreak}
+            {\kern\fontdimen2\font}%
+        }%
+        
+        % Allow breaks at special characters using \PYG... macros.
+        \Wrappedbreaksatspecials
+        % Breaks at punctuation characters . , ; ? ! and / need catcode=\active 	
+        \OriginalVerbatim[#1,codes*=\Wrappedbreaksatpunct]%
+    }
+    \makeatother
+
+    % Exact colors from NB
+    \definecolor{incolor}{HTML}{303F9F}
+    \definecolor{outcolor}{HTML}{D84315}
+    \definecolor{cellborder}{HTML}{CFCFCF}
+    \definecolor{cellbackground}{HTML}{F7F7F7}
+    
+    % prompt
+    \newcommand{\prompt}[4]{
+        \llap{{\color{#2}[#3]: #4}}\vspace{-1.25em}
+    }
+    
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \title{Problem Set 2 - ECON 712}\author{Mitchell Valdés-Bobes}\affiliation{University of Wisconsin Madison}
+
+\date{\today}
+\maketitle
+
+
+    
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}95}]:} \PY{n}{addpath}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{./Utils\PYZsq{}}\PY{p}{)}
+         \PY{n}{format} \PY{l+s}{compact}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \hypertarget{model}{%
+\section{Model}\label{model}}
+
+Consider the model presented during Friday's discussion section. Each
+period a continuum of agents is born. Agents live for \(J\) periods
+after which they die. The population growth rate is \(n\) per year
+(which is the model period length). Thus, the relative size of each
+cohort of age \(j, \psi_{j},\) is given by: \[
+\psi_{i+1}=\frac{\psi_{i}}{1+n}, \text { for } i=1, \ldots, J-1
+\] with \(\psi_{1}=\tilde{\psi}>0 .\) It is convenient to normalize
+\(\psi,\) so that it sums up to 1 across all age groups.
+
+Newly born agents (i.e.~\(j=1\) ) are endowed with no initial capital
+(i.e.~\(k_{j}=0\) ) but can subsequently save in capital which they can
+rent to firms at rate \(r .\) A worker of age \(j\) supplies labor
+\(\ell_{j} \in[0,1]\) and pays proportional social security taxes on her
+labor income \(\tau w e_{j} \ell_{j}\) until she retires at age
+\(J^{R}<J,\) where \(e_{j}\) is the age-efficiency profile. Upon
+retirement, agent receives pension benefits \(b\) The instantaneous
+utility function of a worker at age \(j=1,2, \ldots, J^{R}-1\) is given
+by: \[
+u^{W}\left(c_{j}, \ell_{j}\right)=\frac{\left(c_{j}^{\gamma}\left(1-\ell_{j}\right)^{1-\gamma}\right)^{1-\sigma}}{1-\sigma}
+\] with \(c_{j}\) denoting consumption and \(\ell_{j}\) denoting labor
+supply at age \(j .\) The weight on consumption is \(\gamma\) and the
+coefficient of relative risk aversion is \(\sigma\). The instantaneous
+utility function of a retired agent at age \(j=J^{R}, \ldots, J\) is
+given by: \[
+u^{R}\left(c_{j}\right)=\frac{c_{j}^{1-\sigma}}{1-\sigma}
+\]
+
+Preferences are then given by \[
+\sum_{j=1}^{J^{R}-1} \beta^{j-1} u^{W}\left(c_{j}, \ell_{j}\right)+\sum_{j=J^{R}}^{J} \beta^{j-1} u^{R}\left(c_{j}\right)
+\] There is a constant returns to scale production technology
+\(Y=F(K, L)=\) \(K^{\alpha} L^{1-\alpha}\) with \(\alpha\) denoting
+capital share, \(Y\) denoting aggregate output, \(K\) denoting aggregate
+capital stock and \(L\) denoting aggregate effective labor supply. The
+capital depreciates at rate \(\delta\). Capital and labor markets are
+perfectly competitive.
+
+    \hypertarget{parametrization}{%
+\subsection{Parametrization}\label{parametrization}}
+
+    \textbf{Demographics}
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{n}{J}\PY{p}{=}\PY{l+m+mi}{66}\PY{p}{;}                       \PY{c}{\PYZpc{} life\PYZhy{}span}
+         \PY{n}{JR}\PY{p}{=}\PY{l+m+mi}{46}\PY{p}{;}                      \PY{c}{\PYZpc{} age of retirement}
+         \PY{n}{tR}\PY{p}{=}\PY{n}{J}\PY{o}{\PYZhy{}}\PY{n}{JR}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{;}                  \PY{c}{\PYZpc{} length of retirement}
+         \PY{n}{tW}\PY{p}{=}\PY{n}{JR}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{;}                    \PY{c}{\PYZpc{} length of working life}
+         \PY{n}{n}\PY{p}{=}\PY{l+m+mf}{0.011}\PY{p}{;}                    \PY{c}{\PYZpc{} Population growth}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \textbf{Preferences}
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{n+nb}{beta}\PY{p}{=}\PY{l+m+mf}{0.97}\PY{p}{;}                  \PY{c}{\PYZpc{} discount factor}
+         \PY{n}{sigma}\PY{p}{=}\PY{l+m+mi}{2}\PY{p}{;}                    \PY{c}{\PYZpc{} coefficient of relative risk aversion}
+         \PY{n+nb}{gamma}\PY{p}{=}\PY{l+m+mf}{0.42}\PY{p}{;}                 \PY{c}{\PYZpc{} weight on consumption}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \textbf{Production}
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n}{alpha}\PY{p}{=}\PY{l+m+mf}{0.36}\PY{p}{;}                 \PY{c}{\PYZpc{} production elasticity of capital}
+         \PY{n}{delta}\PY{p}{=}\PY{l+m+mf}{0.06}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \textbf{Social Security tax rate}
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{n}{tau}\PY{p}{=}\PY{l+m+mf}{0.11}\PY{p}{;} \PY{c}{\PYZpc{} Use this for model with SS}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \textbf{Measure of each generation}
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{n}{mass}\PY{p}{=}\PY{n+nb}{ones}\PY{p}{(}\PY{n}{J}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+         \PY{n}{for} \PY{l+s}{ik0=2:J}
+             \PY{n}{mass}\PY{p}{(}\PY{n}{ik0}\PY{p}{)}\PY{p}{=}\PY{n}{mass}\PY{p}{(}\PY{n}{ik0}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{n}\PY{p}{)}\PY{p}{;}
+         \PY{n}{end}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \textbf{Normalized measure of each generation (sums up to 1)}
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{n}{mass}\PY{p}{=}\PY{n}{mass}\PY{o}{/}\PY{n}{sum}\PY{p}{(}\PY{n}{mass}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \textbf{Age efficiency profile}
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{n}{e} \PY{p}{=} \PY{n+nb}{zeros}\PY{p}{(}\PY{n}{tW}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+         \PY{n}{e}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{11}\PY{p}{)} \PY{p}{=} \PY{n+nb}{linspace}\PY{p}{(}\PY{l+m+mf}{0.6}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{)}\PY{p}{;}
+         \PY{n}{e}\PY{p}{(}\PY{l+m+mi}{11}\PY{p}{:}\PY{l+m+mi}{21}\PY{p}{)} \PY{p}{=} \PY{n+nb}{linspace}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{1.08}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{)}\PY{p}{;}
+         \PY{n}{e}\PY{p}{(}\PY{l+m+mi}{21}\PY{p}{:}\PY{l+m+mi}{31}\PY{p}{)} \PY{p}{=} \PY{n+nb}{linspace}\PY{p}{(}\PY{l+m+mf}{1.08}\PY{p}{,} \PY{l+m+mf}{1.12}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{)}\PY{p}{;}
+         \PY{n}{e}\PY{p}{(}\PY{l+m+mi}{31}\PY{p}{:}\PY{l+m+mi}{41}\PY{p}{)} \PY{p}{=} \PY{n+nb}{linspace}\PY{p}{(}\PY{l+m+mf}{1.12}\PY{p}{,} \PY{l+m+mf}{1.06}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{)}\PY{p}{;}
+         \PY{n}{e}\PY{p}{(}\PY{l+m+mi}{41}\PY{p}{:}\PY{l+m+mi}{45}\PY{p}{)} \PY{p}{=} \PY{n+nb}{linspace}\PY{p}{(}\PY{l+m+mf}{1.06}\PY{p}{,} \PY{l+m+mf}{1.02}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{e}\PY{p}{)}
+         \PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{age\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{FontSize\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{efficiency\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{FontSize\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Age\PYZhy{}Efficiency profile\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{FontSize\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{,}  \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{set}\PY{p}{(}\PY{n}{gca}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{TickLabelInterpreter\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Problem_Set_5_files/Problem_Set_5_17_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{questions}{%
+\section{Questions}\label{questions}}
+
+    \hypertarget{quad}{%
+\subsection{\texorpdfstring{\(\quad\)}{\textbackslash quad}}\label{quad}}
+
+Derive the below equation for labor supply, used in the solution of
+workers' recursive problem (refer to lecture notes for details): \[
+\ell=\frac{\gamma(1-\tau) e_{j} w-(1-\gamma)\left[(1+r) k-k^{\prime}\right]}{(1-\tau) e_{j} w}
+\]
+
+    \hypertarget{answer}{%
+\subsubsection{Answer}\label{answer}}
+
+From the budget constraint we have: \begin{equation}\label{eq:c}
+    c=(1-\tau) w e \ell+(1+r) k- k'
+\end{equation}
+
+And we can obtain the \textbf{FOC} of the maximization problem:
+
+\[\frac{\partial}{\partial \ell} u(c(\ell),\ell) = \frac{\partial}{\partial c} u \frac{\partial}{\partial \ell} c +\frac{\partial}{\partial \ell} u\]
+
+Which gives:
+
+\[(1-\tau) w e u'(c(\ell),\ell) \gamma c^{\gamma-1}\left(1-\ell\right)^{1-\gamma} =  u'(c(\ell),\ell)(1- \gamma) c^{\gamma}\left(1-\ell\right)^{-\gamma} \]
+
+Symplifiying we get
+
+\begin{equation}\label{eq:l_first}
+\ell =\frac{-\gamma  c+c+\gamma  e \tau  w-\gamma e w}{\gamma  e (\tau -1) w} 
+\end{equation}
+
+Plug \(\eqref{c}\) in \(\eqref{l_first}\) and simplyfing get we get:
+
+\begin{equation}\label{eq:l_not_final}
+\frac{\gamma  e (\tau -1) w-(\gamma -1) k
+   (r+1)+(\gamma -1) k'}{e (\tau -1)
+   w}
+\end{equation}
+
+And after rearranging:
+
+\begin{equation}\label{eq:l_final}
+\boxed{\ell = \frac{\gamma   (1-\tau) ew-(1-\gamma)\big(
+   (1+r)k-k'\big)}{(1-\tau)e w}}
+\end{equation}
+
+    \hypertarget{quad}{%
+\subsection{\texorpdfstring{\(\quad\)}{\textbackslash quad}}\label{quad}}
+
+Matlab code for this problem set is provided in file \texttt{ps5.m}.
+Look for areas in the code that asks you to fill in the blanks and fill
+them in. Remember, the algorithm consists of the following steps: 1.
+Make initial guesses of the steady state values of the aggregate capital
+stock \(K\) and aggregate labor \(L\) 2. Compute social security
+benefits, \(b,\) and the prices, \(w\) and \(r,\) implied by these
+guesses. 3. Compute the household's decision functions using dynamic
+programming. 4. Compute the optimal path for savings and labor supply
+for every cohort \(j\) by forward induction given that the initial
+capital stock is \(k_{1}=0\) 5. Compute the aggregate capital stock and
+aggregate labor supply. 6. Update \(K\) and \(L\) and return to step 2
+until convergence. If the guess was ``far off'' the obtained values, we
+update our initial guess with \(K^{1}=0.9 K^{0}+0.1 K^{\text {new }}\)
+and \(N^{1}=0.9 N^{0}+0.1 N^{\text {new }}\) and repeat the procedure.
+We proceed so until the guess and the updated values for \(K\) and \(N\)
+are ``sufficiently close''.
+
+    \hypertarget{answer}{%
+\subsubsection{Answer}\label{answer}}
+
+    I've adapted the loop in \texttt{ps5.m} in to a function which I called
+\texttt{dynamic\_prog} I will call this function with different
+arguments in this homework and the (attched) script
+\texttt{dynamic\_prog.m}; contains the code with the blanks filled.
+
+    \hypertarget{qquad}{%
+\subsection{\texorpdfstring{\(\qquad\)}{\textbackslash qquad}}\label{qquad}}
+
+Explain in words what each while and for loop does (lines \(102-258\) ),
+about \(1-3\) sentences per loop. Thus, write for example: The first
+while loop will iterate until both the absolute difference between the
+updated gross capital (labor) equals the initial level of capital
+(labor). The loop stops once the number if iterations equals the maximum
+number allowed. Hint: Do this before you start programming.
+
+    \hypertarget{answer}{%
+\subsubsection{Answer}\label{answer}}
+
+The external \texttt{while} runs each iteration of the main methods if
+any of the following criteria is reached: + \textbf{Criteria 1} Capital
+and Labor are not updated any more (in practice this is that the guess
+and the updated value are sufficiently small) + \textbf{Criteria 2}
+Total number of iterations is reached.
+
+First ``outer'' \texttt{for} goes from the year of death (\(J\)) to the
+year of retirement (\(JR\)) and by backward induction finds the optimal
+lever for retired generations.
+
+\begin{itemize}
+\tightlist
+\item
+  Inner \texttt{for} loops over today's (\(k\)) possible capital levels.
+  It finds the best value for \(k\) for any age \(j\).
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{while} loops over tomorrow's (\(k'\)) capital levels. Find
+    the best value for \(k'\), given \(k\) in the previous for, for any
+    age \(j\).
+  \end{itemize}
+\end{itemize}
+
+Second ``outer'' \texttt{for} goes from the year of previous to
+retirement (\(JR-1\)) to the birth (\(JR\)) and by backward induction
+finds the optimal lever for working generations. * Inner \texttt{for}
+loops over today's (\(k\)) possible capital levels. It finds the best
+value for \(k\) for any age \(j\). * \texttt{while} loops over
+tomorrow's (\(k'\)) capital levels. Find the best value for \(k'\),
+given \(k\) in the previous for, for any age \(j\).
+
+    \hypertarget{quad}{%
+\subsection{\texorpdfstring{\(\quad\)}{\textbackslash quad}}\label{quad}}
+
+Using your code, solve household optimization problem with
+\(K=3.1392, L=\) 0.3496 and social security in place (Hint: run just one
+iteration of the main loop \()\). Plot the value function over \(k\) for
+a retired agent at the model-age \(j=50, V_{50}(k) .\) Is it increasing
+and concave? Plot the savings function for a worker at the model-age
+\(j=20, k_{20}^{\prime}(k) .\) Is saving increasing in \(k ?\) What
+about net saving, \(k^{\prime}-k ?\)
+
+    \hypertarget{answer}{%
+\subsubsection{Answer}\label{answer}}
+
+We will pass our \texttt{dynamic\_prog} the parameter \texttt{nq=1} to
+specify just one iteration.
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{c}{\PYZpc{} Social Security}
+         \PY{n}{K0}\PY{p}{=}\PY{l+m+mf}{3.1392}\PY{p}{;}
+         \PY{n}{L0}\PY{p}{=}\PY{l+m+mf}{0.3496}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}79}]:} \PY{n}{nq} \PY{p}{=} \PY{l+m+mi}{1}
+         \PY{p}{[}\PY{n}{K0}\PY{p}{,} \PY{n}{L0}\PY{p}{,} \PY{n}{w0}\PY{p}{,} \PY{n}{r0}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{kgen}\PY{p}{,} \PY{n}{ikgen}\PY{p}{,} \PY{n}{kap}\PY{p}{,} \PY{n}{kapopt}\PY{p}{,} \PY{n}{v}\PY{p}{]} \PY{p}{=} \PY{n}{dynamic\PYZus{}prog}\PY{p}{(} \PY{n}{K0}\PY{p}{,} \PY{n}{L0}\PY{p}{,} \PY{n}{alpha}\PY{p}{,} \PY{n}{delta}\PY{p}{,}
+         \PY{n}{tau}\PY{p}{,} \PY{n}{J}\PY{p}{,} \PY{n}{JR}\PY{p}{,} \PY{n}{tW}\PY{p}{,} \PY{n}{mass}\PY{p}{,} \PY{n}{sigma}\PY{p}{,} \PY{n+nb}{beta}\PY{p}{,} \PY{n+nb}{gamma}\PY{p}{,} \PY{n}{e}\PY{p}{,} \PY{n}{nq}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+nq =
+     1
+      K0         L0       w         r         b
+    3.0832    0.3501    1.4048    0.0290    0.2216
+
+
+    \end{Verbatim}
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}78}]:} \PY{c}{\PYZpc{}\PYZpc{} Plots}
+         \PY{c}{\PYZpc{} Value function for a retired agent}
+         
+         \PY{n}{age}\PY{p}{=}\PY{l+m+mi}{50}\PY{p}{;}
+         \PY{n}{plot}\PY{p}{(}\PY{n}{kap}\PY{p}{,}\PY{n}{v}\PY{p}{(}\PY{p}{:}\PY{p}{,}\PY{n}{age}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+         \PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{asset holdings, k\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{FontSize\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{value function , \PYZdl{}V\PYZus{}\PYZob{}50\PYZcb{}(k)\PYZdl{}\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{FontSize\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{title}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{value function of a retired agent at age \PYZsq{}}\PY{p}{,} \PY{n}{num2str}\PY{p}{(}\PY{n}{age}\PY{p}{)}\PY{p}{]}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{FontSize\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{,}
+         \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{set}\PY{p}{(}\PY{n}{gca}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{TickLabelInterpreter\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Problem_Set_5_files/Problem_Set_5_30_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{c}{\PYZpc{} Savings of a working agent}
+         \PY{n}{age}\PY{p}{=}\PY{l+m+mi}{20}\PY{p}{;}
+         \PY{n}{plot}\PY{p}{(}\PY{n}{kap}\PY{p}{,}\PY{n}{kap}\PY{p}{(}\PY{n}{kapopt}\PY{p}{(}\PY{p}{:}\PY{p}{,}\PY{n}{age}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{k\PYZhy{}\PYZsq{}}\PY{p}{,}\PY{n}{kap}\PY{p}{,}\PY{n}{kap}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZhy{}\PYZhy{}\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{asset holdings, k\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{FontSize\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{saving, \PYZdl{}k\PYZbs{}prime\PYZdl{}\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{FontSize\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{legend}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{saving\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{45 degree line\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{Location\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{East\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{title}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{saving \PYZdl{}k\PYZbs{}prime\PYZdl{} of a working agent at age \PYZsq{}}\PY{p}{,} \PY{n}{num2str}\PY{p}{(}\PY{n}{age}\PY{p}{)}\PY{p}{]}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{FontSize\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{,}
+         \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{set}\PY{p}{(}\PY{n}{gca}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{TickLabelInterpreter\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Problem_Set_5_files/Problem_Set_5_31_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}80}]:} \PY{c}{\PYZpc{} Net Savings of a working agent}
+         \PY{n}{age}\PY{p}{=}\PY{l+m+mi}{20}\PY{p}{;}
+         \PY{n}{plot}\PY{p}{(}\PY{n}{kap}\PY{p}{,}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{kap}\PY{p}{(}\PY{n}{kapopt}\PY{p}{(}\PY{p}{:}\PY{p}{,}\PY{n}{age}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{kap}\PY{p}{)}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{k\PYZhy{}\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{asset holdings, k\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{FontSize\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{saving, \PYZdl{}k\PYZbs{}prime \PYZhy{} k\PYZdl{}\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{FontSize\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{legend}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{net saving\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{Location\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{East\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{title}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{net saving \PYZdl{}k\PYZbs{}prime\PYZhy{}k\PYZdl{} of a working agent at age \PYZsq{}}\PY{p}{,} \PY{n}{num2str}\PY{p}{(}\PY{n}{age}\PY{p}{)}\PY{p}{]}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{FontSize\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{,}
+         \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{set}\PY{p}{(}\PY{n}{gca}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{TickLabelInterpreter\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Problem_Set_5_files/Problem_Set_5_32_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{qquad}{%
+\subsection{\texorpdfstring{\(\qquad\)}{\textbackslash qquad}}\label{qquad}}
+
+Evaluate the macroeconomic consequences of eliminating social security.
+You can use Table 1 to support your answers. Note: when initially
+solving the model, lines 300 on wards will give you an error. This is
+because the last part is used to compare the two models after you have
+solved for it already. Either skip or ignore that part and use it
+afterwards. 1. Solve for the stationary competitive market equilibrium
+of the benchmark model with social security, i.e., solve the whole model
+with initial guess of \((K, L)=(3.1392,0.3496) .\) The model should
+converge after \(\approx 25\) iterations. Is this economy dynamically
+efficient (compare the interest rate with the implicit return from
+social security, which is equal to the population growth rate)?
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  Eliminate social security by setting \(\tau=0\) and solve for the new
+  stationary equilibrium, i.e., solve the model again, but this time set
+  \(\tau=0\) and use initial guess of \((K, L)=(3.9288,0.3663) .\) The
+  model should converge after \(\approx 15\) iterations.
+
+  \begin{itemize}
+  \item
+    The code should have saved the results using lines 291 . Check how
+    aggregate capital and labor supply change as a result of the tax
+    reform. Fill in the appropriate column of to following table:
+  \item
+    Plot and compare the profiles of wealth by age groups for the case
+    with and without social security. Provide intuition for observed
+    differences.
+  \item
+    Will a newborn generation prefer to start in a steady state with or
+    without social security? (Hint: lines \(332 \& 347)\)
+  \item
+    Assuming that the reform instantly takes every cohort into the new
+    steady state, will it be supported by a majority voting? (Hint:
+    Compare aggregate welfare
+    \(\left.W=\sum_{j=1}^{J} \psi_{j} V_{j}\left(k_{j}\right)\right)\)
+  \end{itemize}
+\end{enumerate}
+
+\begin{center}
+\begin{array}{|l|l|l|}
+\hline & \multicolumn{2}{|c|} {\text { Benchmark model }} \\
+\hline \hline & \text { with SS } & \text { without SS } \\
+\hline \text { capital } K & 2.9778 & 3.9115 \\
+\hline \text { labor } L &0.3511 & 0.3691\\
+\hline \text { wage } w &1.3818 & 1.4971\\
+\hline \text { interest } r &0.0316 & 0.0195 \\
+\hline \text { pension benefit } b & 0.2187 & 0 \\
+\hline \text { newborn welfare } V_{1}\left(k_{1}\right) & -54.6138 & -52.767 \\
+\hline \text { aggregate welfare } W & -35.0678 & -36.0276 \\
+\hline
+\end{array}
+\end{center}
+
+\textbf{Note:} The value in the table are from the following
+calculations:
+
+    \hypertarget{answer}{%
+\subsubsection{Answer}\label{answer}}
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}90}]:} \PY{n}{nq} \PY{p}{=} \PY{l+m+mi}{100}\PY{p}{;}
+         \PY{p}{[}\PY{n}{K0}\PY{p}{,} \PY{n}{L0}\PY{p}{,} \PY{n}{w0}\PY{p}{,} \PY{n}{r0}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{kgen}\PY{p}{,} \PY{n}{ikgen}\PY{p}{,} \PY{n}{kap}\PY{p}{,} \PY{n}{kapopt}\PY{p}{,} \PY{n}{v}\PY{p}{]} \PY{p}{=} \PY{n}{dynamic\PYZus{}prog}\PY{p}{(} \PY{n}{K0}\PY{p}{,} \PY{n}{L0}\PY{p}{,} \PY{n}{alpha}\PY{p}{,} \PY{n}{delta}\PY{p}{,}
+         \PY{n}{tau}\PY{p}{,} \PY{n}{J}\PY{p}{,} \PY{n}{JR}\PY{p}{,} \PY{n}{tW}\PY{p}{,} \PY{n}{mass}\PY{p}{,} \PY{n}{sigma}\PY{p}{,} \PY{n+nb}{beta}\PY{p}{,} \PY{n+nb}{gamma}\PY{p}{,} \PY{n}{e}\PY{p}{,} \PY{n}{nq}\PY{p}{)}\PY{p}{;}
+         \PY{n}{kgen\PYZus{}ss}\PY{p}{=}\PY{n}{kgen}\PY{p}{;}
+         \PY{n}{save}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{ss.mat\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+      K0         L0       w         r         b
+    2.9778    0.3511    1.3818    0.0316    0.2187
+
+
+    \end{Verbatim}
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}96}]:} \PY{c}{\PYZpc{} No Social Security}
+         \PY{n}{K0\PYZus{}no\PYZus{}ss} \PY{p}{=}\PY{l+m+mf}{3.9288}\PY{p}{;}
+         \PY{n}{L0\PYZus{}no\PYZus{}ss} \PY{p}{=}\PY{l+m+mf}{0.3663}\PY{p}{;}
+         
+         \PY{n}{tau\PYZus{}no\PYZus{}ss}\PY{p}{=}\PY{l+m+mi}{0}\PY{p}{;}
+         
+         \PY{n}{nq} \PY{p}{=} \PY{l+m+mi}{100}\PY{p}{;}
+         \PY{p}{[}\PY{n}{K0}\PY{p}{,} \PY{n}{L0}\PY{p}{,} \PY{n}{w0}\PY{p}{,} \PY{n}{r0}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{kgen}\PY{p}{,} \PY{n}{ikgen}\PY{p}{,} \PY{n}{kap}\PY{p}{,} \PY{n}{kapopt}\PY{p}{,} \PY{n}{v}\PY{p}{]} \PY{p}{=} \PY{n}{dynamic\PYZus{}prog}\PY{p}{(} \PY{n}{K0}\PY{p}{,} \PY{n}{L0}\PY{p}{,} \PY{n}{alpha}\PY{p}{,} \PY{n}{delta}\PY{p}{,}
+         \PY{n}{tau\PYZus{}no\PYZus{}ss}\PY{p}{,} \PY{n}{J}\PY{p}{,} \PY{n}{JR}\PY{p}{,} \PY{n}{tW}\PY{p}{,} \PY{n}{mass}\PY{p}{,} \PY{n}{sigma}\PY{p}{,} \PY{n+nb}{beta}\PY{p}{,} \PY{n+nb}{gamma}\PY{p}{,} \PY{n}{e}\PY{p}{,} \PY{n}{nq}\PY{p}{)}\PY{p}{;}
+         \PY{n}{kgen\PYZus{}noss}\PY{p}{=}\PY{n}{kgen}\PY{p}{;}
+         \PY{n}{save}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{no\PYZus{}ss.mat\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+      K0         L0       w         r         b
+    3.9115    0.3691    1.4971    0.0195         0
+
+
+    \end{Verbatim}
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}99}]:} \PY{c}{\PYZpc{}\PYZpc{} Welfare comparison}
+         \PY{n}{load}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{ss.mat\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{v\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{mass\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{ikgen\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{J\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         
+         \PY{c}{\PYZpc{} Newborn generation}
+         \PY{n}{V1\PYZus{}ss} \PY{p}{=} \PY{n}{v}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c}{\PYZpc{} Aggregate welfare}
+         \PY{n}{V\PYZus{}ss} \PY{p}{=} \PY{n+nb}{zeros}\PY{p}{(}\PY{n}{J}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+         \PY{n}{V\PYZus{}ss}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)} \PY{p}{=} \PY{n}{v}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+         \PY{n}{for} \PY{l+s}{j} \PY{l+s}{=} \PY{l+s}{2:J}
+             \PY{n}{ik0} \PY{p}{=} \PY{n}{ikgen}\PY{p}{(}\PY{n+nb}{j}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+             \PY{n}{V\PYZus{}ss}\PY{p}{(}\PY{n+nb}{j}\PY{p}{)} \PY{p}{=} \PY{n}{v}\PY{p}{(}\PY{n}{ik0}\PY{p}{,}\PY{n+nb}{j}\PY{p}{)}\PY{p}{;}
+         \PY{n}{end}
+         \PY{l+s}{W\PYZus{}ss} \PY{l+s}{=} \PY{l+s}{V\PYZus{}ss}\PY{o}{\PYZsq{}} \PY{o}{*} \PY{n}{mass}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+V1\_ss =
+  -54.6138
+W\_ss =
+  -35.0678
+
+
+    \end{Verbatim}
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}101}]:} \PY{n}{load}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{no\PYZus{}ss.mat\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{v\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{mass\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{ikgen\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{J\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          
+          \PY{c}{\PYZpc{} Newborn generation}
+          \PY{n}{V1\PYZus{}no\PYZus{}ss} \PY{p}{=} \PY{n}{v}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          
+          \PY{c}{\PYZpc{} Aggregate welfare}
+          \PY{n}{V\PYZus{}no\PYZus{}ss} \PY{p}{=} \PY{n+nb}{zeros}\PY{p}{(}\PY{n}{J}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+          \PY{n}{V\PYZus{}no\PYZus{}ss}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)} \PY{p}{=} \PY{n}{v}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+          \PY{n}{for} \PY{l+s}{j} \PY{l+s}{=} \PY{l+s}{2:J}
+              \PY{n}{ik0} \PY{p}{=} \PY{n}{ikgen}\PY{p}{(}\PY{n+nb}{j}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+              \PY{n}{V\PYZus{}no\PYZus{}ss}\PY{p}{(}\PY{n+nb}{j}\PY{p}{)} \PY{p}{=} \PY{n}{v}\PY{p}{(}\PY{n}{ik0}\PY{p}{,}\PY{n+nb}{j}\PY{p}{)}\PY{p}{;}
+          \PY{n}{end}
+          \PY{l+s}{W\PYZus{}no\PYZus{}ss} \PY{l+s}{=} \PY{l+s}{V\PYZus{}no\PYZus{}ss}\PY{o}{\PYZsq{}} \PY{o}{*} \PY{n}{mass}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+V1\_no\_ss =
+  -52.7671
+W\_no\_ss =
+  -36.0276
+
+
+    \end{Verbatim}
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}97}]:} \PY{n}{load}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{ss.mat\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{kgen\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{J\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{load}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{no\PYZus{}ss.mat\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{kgen\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{J\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}98}]:} \PY{n}{plot1}\PY{p}{=}\PY{n}{plot}\PY{p}{(}\PY{l+m+mi}{20}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{20}\PY{o}{+}\PY{n}{J}\PY{p}{,}\PY{n}{kgen\PYZus{}ss}\PY{p}{,}\PY{l+m+mi}{20}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{20}\PY{o}{+}\PY{n}{J}\PY{p}{,}\PY{n}{kgen\PYZus{}noss}\PY{p}{)}\PY{p}{;}
+         \PY{n}{set}\PY{p}{(}\PY{n}{plot1}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{LineWidth\PYZsq{}}\PY{p}{,}\PY{l+m+mf}{1.5}\PY{p}{)}
+         \PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{(real\PYZhy{}life) age\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{FontSize\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{wealth\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{FontSize\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{AX}\PY{p}{=}\PY{n}{legend}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{with Social Security\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{without Social Security\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{Location\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{NorthWest\PYZsq{}}\PY{p}{,}
+         \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{LEG}\PY{p}{=}\PY{n}{findobj}\PY{p}{(}\PY{n}{AX}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{type\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{text\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{set}\PY{p}{(}\PY{n}{LEG}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{FontSize\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{set}\PY{p}{(}\PY{n}{gca}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{TickLabelInterpreter\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Problem_Set_5_files/Problem_Set_5_41_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  Capital increases because in the absence of pension benefits people
+  have tom save more to retirement.
+\item
+  Labor supply increases because in the absence of taxes, wages (after
+  taxes) are higher.
+\item
+  Wages go up because when capital increases the marginal productivity
+  of labor increases and dominates the rise in labor supply.
+\item
+  Interest \(r\) goes down because the increase in the marginal
+  productivity of capital caused an increase in labor is not enough to
+  compensate for the increase in capital supply (and the production
+  function is concave).
+\end{itemize}
+
+\begin{center}
+\begin{array}{|l|l|l|}
+\hline & \multicolumn{2}{|c|} {\text { Benchmark model }} \\
+\hline \hline & \text { with SS } & \text { without SS } \\
+\hline \text { capital } K & 2.9778 & 3.9115 \\
+\hline \text { labor } L &0.3511 & 0.3691\\
+\hline \text { wage } w &1.3818 & 1.4971\\
+\hline \text { interest } r &0.0316 & 0.0195 \\
+\hline \text { pension benefit } b & 0.2187 & 0 \\
+\hline \text { newborn welfare } V_{1}\left(k_{1}\right) & -54.6138 & -52.767 \\
+\hline \text { aggregate welfare } W & -35.0678 & -36.0276 \\
+\hline
+\end{array}
+\end{center}
+
+
+
+    \begin{itemize}
+\tightlist
+\item
+  The new born generation will be better off so they will prefer the
+  economy without social security.
+\item
+  The population as a whole is worse off in a world without social
+  security therefore in a majority voting removing social security will
+  not be approved.
+\end{itemize}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+\bibliography{references}
+
+    
+    \end{document}

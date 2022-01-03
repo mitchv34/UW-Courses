@@ -1,0 +1,296 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\documentclass[12pt]{article}
+%\usepackage[left=3cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}e}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{apacite}
+\usepackage[round]{natbib}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{svg}
+\usepackage[margin = 1in, top=2cm]{geometry}% Margins
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.2em}
+\usepackage{setspace} % Setting the spacing between lines
+\usepackage{amsthm, amsmath, amsfonts, mathtools, amssymb, bm} % Math packages 
+\usepackage{svg}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{epstopdf}
+\usepackage{subfig} % Manipulation and reference of small or sub figures and tables
+\usepackage{hyperref} % To create hyperlinks within the document
+\spacing{1.15}
+\usepackage{appendix}
+\usepackage{xcolor}
+\usepackage{cancel}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+
+
+\usepackage[round]{natbib}
+%\bibliographystyle{plainnat}
+\bibliographystyle{apacite}
+
+
+\newtheorem{defin}{Definition.}
+\newtheorem{teo}{Theorem. }
+\newtheorem{lema}{Lemma. }
+\newtheorem{coro}{Corolary. }
+\newtheorem{prop}{Proposition. }
+\theoremstyle{definition}
+\newtheorem{examp}{Example. }
+\newtheorem{problem}{Problem}
+% \numberwithin{problem}{subsection} 
+
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\qiq}{\qquad \implies \qquad}
+\newcommand{\qiffq}{\qquad \iff \qquad}
+\newcommand{\qaq}{\qquad \textbf{and} \qquad}
+\newcommand{\qoq}{\qquad \textbf{or} \qquad}
+\newcommand{\settf}{\text{ \emph{:} }}
+\newcommand{\chbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{.9em}}}
+\newcommand{\cchbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\checkmark$}}
+
+\title{Problem Set 4}
+\author{Mitchell Valdés-Bobes}
+\date{October 1, 2020}
+
+\begin{document}
+
+\maketitle
+
+Most of the problems assume a random sample $\left\{X_{1}, X_{2}, \ldots, X_{n}\right\}$ from a common distribution $F$ with density $f$ such that $E(X)=\mu$ and $\operatorname{Var}(X)=\sigma^{2}$ for a generic random variable $X \sim F .$ The sample mean and variances are denoted $\overline{X}_{n}$ and $\hat{\sigma}^{2}=n^{-1} \sum_{i=1}^{n}\left(X_{i}-\overline{X}_{n}\right)^{2},$ with the bias-corrected variance $s_{n}^{2}=(n-1)^{-1} \sum_{i=1}^{n}\left(X_{i}-\overline{X}_{n}\right)^{2}$
+
+\begin{problem}
+Suppose that another observation $X_{n+1}$ becomes available. Show that
+\begin{enumerate}[(a)]
+    \item $\overline{X}_{n+1}=\left(n \overline{X}_{n}+X_{n+1}\right) /(n+1)$
+    \item  $s_{n+1}^{2}=\left((n-1) s_{n}^{2}+(n /(n+1))\left(X_{n+1}-\overline{X}_{n}\right)^{2}\right) / n$
+\end{enumerate}
+
+\end{problem}
+
+\begin{proof}[Answer]
+\textbf{Part (a)}
+\begin{align*}
+\overline{X}_{n+1} &=\frac{1}{n+1} \sum_{i=1}^{n+1} X_{i} \\
+&=\frac{1}{n+1}\left(n \frac{1}{n} \sum_{i=1}^{n} X_{i}+X_{n+1}\right) \\
+&=\frac{1}{n+1}\left(n \overline{X}_{n}+X_{n+1}\right)
+\end{align*}
+
+\textbf{Part (b)}
+\begin{align*}
+\sum_{i=1}^{n+1}\left(x_{i}-\overline{X}_{n+1}\right)^2&=\sum_{i=1}^{n+1} x_{i}^{2}-2 \sum_{i=1}^{n+1} \overline{X}_{n+1} x_{i}+(n+1) \overline{X}_{n+1}^{2} \\
+&=\sum_{i=1}^{n+1} x_{i}^{2}-2 \overline{X}_{n+1} \sum_{i=1}^{n+1} x_{i}+(n+1) \overline{X}_{n+1}^{2} \\
+&=\sum_{i=1}^{n+1} x_{i}^{2}-2(n+1) \overline{X}_{n+1}^{2}+(n+1) \overline{X}_{n+1}^{2}\\
+&=\sum_{i=1}^{n+1} x_{i}^{2}-(n+1) \overline{X}_{n+1}^{2}\\
+&= \sum_{i=1}^{n+1} x_{i}^{2}-(n+1) \left(\frac{1}{n+1}\left(n \overline{X}_{n}+X_{n+1}\right)\right)^{2}\\
+&=\sum_{i=1}^{n+1} x_{i}^{2}-(n+1) \left(\frac{1}{n+1}\left(n^2\overline{X}_{n}+2n x_{n+1}\overline{X}_{n}+x^2_{n+1}\right)\right)\\
+&=\frac{(n-1)}{(n-1)}\left[\sum_{i=1}^{n}\left(x_{i}-\bar{x}_{n}\right)^{2}+2 \bar{x}_{n} \sum_{i=1}^{n} x_{i}-n \overline{X}_{n}^{2}\right]+x_{n+1}^{2}-\frac{1}{n+1} + \left(n^2\overline{X}_{n}+2n x_{n+1}\overline{X}_{n}+x^2_{n+1}\right)\\
+&=(n-1) S_{n}^{2}+\frac{1}{n+1} n\left[\overline{X}_{n}^{2}-2 \overline{X}_{n} x_{n+1}+x_{n+1}\right]\\
+&=(n-1) S_{n}^{2}+\frac{n}{n+1}\left(\overline{X}_{n}-x_{n+1}\right)^2
+\end{align*}
+
+Therefore:
+
+$$S_{n+1}^2 = \frac{1}{n}\left(\sum_{i=1}^{n+1}\left(x_{i}-\overline{X}_{n+1}\right)^2\right) = \frac{1}{n}\left(n-1) S_{n}^{2}+\frac{n}{n+1}\left(\overline{X}_{n}-x_{n+1}\right)^2\right)$$
+\end{proof}
+\begin{problem}
+For some integer $k,$ set $\mu_{k}=E\left(X^{k}\right)$. Construct an unbiased estimator $\hat{\mu}_{k}$ for $\mu_{k},$ and show its unbiasedness.
+\end{problem}
+\begin{proof}[Answer]
+We can use the estimator $$\hat{\mu}_{k}=\frac{1}{n} \sum_{i=1}^{n} X_{i}^{k}$$
+
+To prove that $\hat{\mu}_{k}$ is unbias consider:
+$$
+ \mathbb{E}\left(\hat{\mu}_{k}\right)= \mathbb{E}\left(\frac{1}{n} \sum_{i=1}^{n} X_{i}^{k}\right) = \frac{1}{n} \sum_{i=1}^{n}  \mathbb{E}\left(X_{i}^{k}\right)=\frac{1}{n}n\mu_k = \mu_{k}
+$$
+\end{proof}
+
+\begin{problem}Consider the central moment $m_{k}=E\left((X-\mu)^{k}\right)$. Construct an estimator $\hat{m}_{k}$ for $m_{k}$ without
+assuming a known $\mu .$ In general, do you expect $\hat{m}_{k}$ to be biased or unbiased
+\end{problem}
+\begin{proof}[Answer]
+Consider the estimator 
+$$\hat{m}_{k}=\frac{1}{n} \sum_{i=1}^{n}\left(X_{i}-\hat{\mu}\right)^k$$ 
+
+when $k=2,$ we know it is biased, therefore in general we cannot say it is unbiased.
+\end{proof}
+
+\begin{problem}
+Calculate the variance of $\hat{\mu}_{k}$ that you proposed above, and call it $\operatorname{Var}\left(\hat{\mu}_{k}\right)$.
+\end{problem}
+\begin{proof}[Answer]
+\begin{align*}
+    \operatorname{Var}\left(\hat{\mu}_{k}\right)
+    &=\frac{1}{n^{2}} \sum_{i=1}^{n} \operatorname{Var}\left(X_{i}^{k}\right)\\
+    &=\frac{1}{n} \operatorname{Var}\left(X_{i}^{k}\right)\\
+    &=\frac{1}{n}\left(E\left(X_{i}^{2 k}\right)-E\left(X_{i}^{k}\right)^{2}\right)\\
+    &=\frac{1}{n}\left(\mu_{2 k}-\mu_{k}^{2}\right)\\
+\end{align*}
+\end{proof}
+
+\begin{problem}
+Show that  $\mathbb{E}\left(s_{n}\right) \leq \sigma$$ . \textit { (Hint: Use Jensen's inequality, CB Theorem4.7 .7 )} 
+\end{problem}
+
+\begin{proof}[Answer]
+In the context of probability theory, it is generally stated in the following form: if $X$ is a random variable and $\varphi$ is a convex function, then
+$$
+\varphi(\mathbb{E}[X]) \leq \mathbb{E}[\varphi(X)]
+$$
+
+In particular $\varphi(X)=X^2$ is a convex function, therefore:
+
+$$
+(\mathbb{E}[s])^2 \leq \mathbb{E}[s^2]=\sigma^2 \qiq \mathbb{E}[s] \leq \sigma
+$$
+
+\end{proof}
+
+\begin{problem}
+Show algebraically that $\hat{\sigma}^{2}=n^{-1} \sum_{i=1}^{n}\left(X_{i}-\mu\right)^{2}-\left(\bar{X}_{n}-\mu\right)^{2}$
+\end{problem}
+
+\begin{proof}[Answer]
+$$
+\begin{aligned}
+&\frac{1}{n} \sum_{i=1}^{n}\left(X_{i}-\mu\right)^{2}-(\bar{X}_n-\mu)^{2} \\
+&=\frac{1}{n} \sum_{i=1}^{n} X_{i}^{2}-2 \mu\frac{1}{n} \sum_{i=1}^{n}  X_{i}+\mu^{2}-\left(\bar{X}_n^{2}-2 \mu \bar{X}_n+\mu^{2}\right) \\
+&=\frac{1}{n} \sum_{i=1}^{n} X_{i}^{2}-2 \mu\bar{X}_n+\mu^{2}-\bar{X}^{2}+2 \mu \bar{X}_n -\mu^{2} \\
+&=\frac{1}{n} \sum_{i=1}^{n} X_{i}^{2}-\bar{X}_n^{2}\\
+&= \frac{1}{n} \sum_{i=1}^{n}\big( X_{i}-\bar{X}_n \big)^2 = \hat{\sigma}^{2}
+\end{aligned}
+$$
+\end{proof}
+
+\begin{problem}
+Find the covariance of $\hat{\sigma}^{2}$ and $\bar{X}_{n}$. Under what condition is this zero. (Hint: Use the form obtained in (the previous problem). This exercise shows that the zero correlation between the numerator and
+the denominator of the $t-$ ratio does not always hold when the random sample is not from a
+normal distribution.
+\end{problem}
+
+\begin{proof}[Answer]
+$$
+\begin{aligned}
+\operatorname{Cov}\left(\bar{X}_{n}, \hat{\sigma}^{2}\right) &=E\left(\left(\bar{X}_{n}-E\left(\bar{X}_{n}\right)\right)\left(\hat{\sigma}^{2}-E\left(\hat{\sigma}^{2}\right)\right)\right) \\
+&=E\left[\left(\bar{X}_{n}-E\left(\bar{X}_{n}\right)\right)\left(\hat{\sigma}^{2}-\frac{n-1}{n}\sigma^2}\right)\right] \\
+&\left.=E\left(\left(\bar{X}_{n}-E\left(\bar{X}_{n}\right)\right) \hat{\sigma}^{2}\right)\right) \\
+\end{aligned}
+$$
+We can plug in $\hat{\sigma}^2$ from last problem.
+$$
+\begin{aligned}
+&=E\left[\left(\bar{X}_{n}-\mu\right)\left(\frac{1}{n} \sum_{i=1}^{n}\left(X_{i}-\mu\right)^{2}-\left(\bar{X}_{n}-\mu\right)^{2}\right)\right] \\
+&=E\left[\left(\bar{X}_{n}-\mu\right) \frac{1}{n} \sum_{i=1}^{n}\left(X_{i}-\mu\right)^{2}\right]-E\left(\left(\bar{X}_{n}-\mu\right)^{3}\right) \\
+\end{aligned}
+$$
+Since $X_i$ and $X_j$ are independent.
+$$
+\begin{aligned}
+&=\frac{1}{n^{2}} \sum_{i=1}^{n} E\left(\left(X_{i}-\mu\right)^{3}\right)+\frac{1}{n^{2}} \sum_{i \neq j} E\left(\left(X_{i}-\mu\right)^{2}\right) E\left(\left(X_{j}-\mu\right)\right) \\
+&=\frac{1}{n^{2}} E(X-\mu)^{3} \\
+&=\frac{n-1}{n^{2}} E\left(\left(X_{i}-\mu\right)^{3}\right)
+\end{aligned}
+$$
+The covariance of $\bar{X}_{n}$, and  $\hat{\sigma}^{2}$ is zero when the centered third moment is zero.
+\end{proof}
+
+\begin{problem}
+Suppose that $X_{i}$ are i.n.i.d. (Independent but not necessarily identically distributed) with $E\left(X_{i}\right)=\mu_{i}$ and $\operatorname{Var}\left(X_{i}\right)=\sigma_{i}^{2}$
+ \begin{enumerate}[(a)]
+     \item Find $E\left(\bar{X}_{n}\right)$.
+    \item Find $\operatorname{Var}\left(\bar{X}_{n}\right)$
+\end{enumerate}
+\end{problem}
+
+\begin{proof}[Answer]
+\textbf{Part (a)}
+$$E(\bar{X}_n) = \frac{1}{n} \sum^n_{i=1}E(X_i) = \frac{1}{n} \sum^n_{i=1}\mu_i$$
+\textbf{Part (b)}
+$$\operatorname{Var}(\bar{X}_n)=\frac{1}{n^2}\operatorname{Var}\left(\sum_{i=1}^{n}X_i\right) = \frac{1}{n^2}\left(\sum_{i=1}^{n}\operatorname{Var}\left(X_{i} \right) - 2\sum_{i\neq j}^{r} \operatorname{Cov}\left(X_{i},X_{j} \right)\right)$$
+
+Since the $X_i$ are i.i.d. then $\operatorname{Cov}\left(X_{i},X_{j} \right) = 0$ when $i\neq j$ therefore
+
+$$\operatorname{Var}(\bar{X}_n)=\frac{1}{n^2}\sum_{i=1}^{n}\operatorname{Var}(X_{i}) = \frac{1}{n^2} \sum_{i=1}^n \sigma_{i}^{2}
+
+\end{proof}
+
+\begin{problem}
+Show that if $Q \sim \chi_{r}^{2},$ then $E(Q)=r$ and $\operatorname{Var}(Q)=2 r .$ (Hint: use the representation:
+\textit{$Q=\sum_{i=1}^{r} X_{i}^{2}$ with $X_{i}$ being i.i.d. $N(0,1)$}
+\end{problem}
+
+\begin{proof}[Answer]
+If $X\sim \mathcal{N}(0,1)$
+\begin{align*}
+    \operatorname{Var}(X) &= \mathbb{E}(X^2)- \mathbb{E}(X)^2\\
+    1 &= \mathbb{E}(X^2)-0
+\end{align*}
+
+Using the MGF of the standard normal distribution:
+
+$$M(t) = \exp(t^2/2)$$
+
+Then we can obtain the forth moment of $X$:
+
+
+$$\mathbb{E}\left[X^{4}\right] = \frac{d^{4}}{d t^{4}}M(t)\right|_{t=0} \qiq 
+\mathbb{E}\left[X^{4}\right] = e^{\frac{t^2}{2}} t^4+6 e^{\frac{t^2}{2}} t^2+3 e^{\frac{t^2}{2}}|_{t=0}$$ $$ \qiq
+\mathbb{E}\left[X^{4}\right] = 3$$
+
+Then
+
+$$\mathbb{E}[Q]=\sum_{i=1}^{r} \mathbb{E}[X_{i}^{2}] = \sum_{i=1}^{n} = \mathbb{E}[X_{i}^{2}] = r$$
+
+And 
+$$\operatorname{Var}(Q)=\operatorname{Var}\left(\sum_{i=1}^{r} X_{i}^{2} \right) = \sum_{i=1}^{r} \operatorname{Var}\left(X_{i}^{2} \right) - 2\sum_{i\neq j}^{r} \operatorname{Cov}\left(X_{i},X_{j} \right)$$
+
+Since the $X_i$ are i.i.d. then $\operatorname{Cov}\left(X_{i},X_{j} \right) = 0$ when $i\neq j$ therefore
+$$\operatorname{Var}(Q)=\sum_{i=1}^{r} \operatorname{Var}\left(X_{i}^{2} \right) = \sum_{i=1}^r \left(\mathbb{E}[X_i^2] - \mathbb{E}[X_i]^2\right)=\sum_{i=1}^r \left(3 - 1) = 2r $$
+
+\end{proof}
+
+
+\begin{problem}
+Suppose that $X_{i} \sim N\left(\mu_{X}, \sigma_{X}^{2}\right): i=1, \ldots, n_{1}$ and $Y_{i} \sim N\left(\mu_{Y}, \sigma_{Y}^{2}\right), i=1, \ldots, n_{2}$ are mutually
+independent. Set $\bar{X}_{n}=n_{1}^{-1} \sum_{i=1}^{n_{1}} X_{i}$ and $\bar{Y}_{n}=n_{2}^{-1} \sum_{i=1}^{n_{2}} Y_{i}$
+
+ \begin{enumerate}[(a)]
+     \item Find $E\left(\bar{X}_{n}-\bar{Y}_{n}\right)$
+    \item Find $\operatorname{Var}\left(\bar{X}_{n}-\bar{Y}_{n}\right)$
+    \item Find the distribution of $\bar{X}_{n}-\bar{Y}_{n}$
+\end{enumerate}
+\end{problem}
+
+\begin{proof}[Answer]
+ \textbf{Part (a)}
+ $$\mathbb{E}(\bar{X}_n - \bar{Y}_n)) = \mathbb{E}(\bar{X}_n) -E(\bar{Y}_n)= \mu_X -\mu_Y$$
+
+\textbf{Part (b)}
+\begin{align*}
+    \operatorname{Var} ( \bar{X}_n - \bar{Y}_n)&= \mathbb{E}\Big(\big(\bar{X}_n - \bar{Y}_n - (\mu_X -\mu_Y)\big)^2\Big) \\
+                            &= \mathbb{E}\Big(\big( (\bar{X}_n - \mu_X)-( \bar{Y}_n -\mu_Y)\big)^2\Big)\\
+                            &= \mathbb{E}\big((\bar{X}_n - (\mu_X) ^2\big)+E\big((\bar{Y}_n - \mu_Y) ^2\big) - 2 \mathbb{E}\left(\left(\bar{X}_n - \mu_X\right) \left(\bar{Y}_n - \mu_Y) \big)\\
+                            &= \operatorname{Var}(\bar{X_n})+\operatorname{Var}(\bar{Y_n}) - \frac{2}{n_1 n_2} E\left(\left(\sum_{i=1}^{n_1} \left(X_i-\mu_X\right)\right)\sum_{i=1}^{n_2} \left(Y_i-\mu_Y\right)\right)\\
+                            &= \operatorname{Var}(\bar{X_n})+\operatorname{Var}(\bar{Y_n}) - \frac{2}{n_1 n_2} \sum_{i=1}^{n_1}\sum_{j=1}^{n_2} \operatorname{cov} (X_i,Y_j)
+\end{align*}
+If $X_i$ and $Y_i$ are mutually i.i.d, then $\operatorname{cov} (X_i,Y_j) = 0$ for all possible values of $i,j$, then: $\operatorname{Var(\bar{Y}_n)}$ 
+$$\operatorname{Var} ( \bar{X}_n - \bar{Y}_n) = \frac{\sigma_X^2}{n_1}+\frac{\sigma_Y^2}{n_2}$$
+
+\textbf{Part (c)}
+
+$$X_{i} \sim N\left(\mu_{X} \sigma_{X}^{2}\right) \qiq \sum_{i=1}^{n_1} X_{i} \sim N\left(n_1\mu_{X},n_1 \sigma_{X}^{2}\right)$$
+
+Then
+
+$$\frac{1}{n_1}\sum_{i=1}^n_1 X_{i}=\bar{X}_n \sim N\left(\mu_{X}, \sigma_{X}^{2}/n_1\right)$$
+
+Similarly, 
+$$\bar{Y}_n \sim N\left(\mu_{Y}, \sigma_{Y}^{2}/n_2\right)$$
+Then
+$$\bar{X}_n-\bar{Y}_n \sim N\left(\mu_X-\mu_{Y},  \sigma_{X}^{2}/n_1+\sigma_{Y}^{2}/n_2\right)$$
+\end{proof}
+
+\end{document}

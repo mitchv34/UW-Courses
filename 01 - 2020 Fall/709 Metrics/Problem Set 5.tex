@@ -1,0 +1,305 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\documentclass[12pt]{article}
+%\usepackage[left=3cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}e}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{apacite}
+\usepackage[round]{natbib}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{svg}
+\usepackage[margin = 1in, top=2cm]{geometry}% Margins
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.2em}
+\usepackage{setspace} % Setting the spacing between lines
+\usepackage{amsthm, amsmath, amsfonts, mathtools, amssymb, bm} % Math packages 
+\usepackage{svg}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{epstopdf}
+\usepackage{subfig} % Manipulation and reference of small or sub figures and tables
+\usepackage{hyperref} % To create hyperlinks within the document
+\spacing{1.15}
+\usepackage{appendix}
+\usepackage{xcolor}
+\usepackage{cancel}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{dsfont}
+
+\usepackage[round]{natbib}
+%\bibliographystyle{plainnat}
+\bibliographystyle{apacite}
+
+
+\newtheorem{defin}{Definition.}
+\newtheorem{teo}{Theorem. }
+\newtheorem{lema}{Lemma. }
+\newtheorem{coro}{Corolary. }
+\newtheorem{prop}{Proposition. }
+\theoremstyle{definition}
+\newtheorem{examp}{Example. }
+\newtheorem{problem}{Problem}
+% \numberwithin{problem}{subsection} 
+
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\qiq}{\qquad \implies \qquad}
+\newcommand{\qiffq}{\qquad \iff \qquad}
+\newcommand{\qaq}{\qquad \textbf{and} \qquad}
+\newcommand{\qoq}{\qquad \textbf{or} \qquad}
+\newcommand{\settf}{\text{ \emph{:} }}
+\newcommand{\chbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{.9em}}}
+\newcommand{\cchbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\checkmark$}}
+
+\title{Problem Set 5}
+\author{Mitchell Valdés-Bobes}
+\date{October 11, 2020}
+
+\begin{document}
+
+\maketitle
+\begin{problem}
+For the following sequences, show $a_{n} \rightarrow 0$ as $n \rightarrow \infty$
+\begin{enumerate}[(a)]
+    \item $a_{n}=1 / n$
+    \item $a_{n}=\frac{1}{n} \sin \left(\frac{n \pi}{2}\right)$
+\end{enumerate}
+
+\end{problem}
+
+\begin{proof}[Answer]
+\textbf{Part (a)}
+Let $\varepsilon>0$ be given. Then there is a positive integer $\mathrm{N}$ such that $\frac{1}{N}<\varepsilon$ (this is the Archimedean Property). Of course, when $n \geq N,$ we have that $\frac{1}{n} \leq \frac{1}{N}$ by dividing both sides by $n$ and $N$. This same procedure works for any $\varepsilon ;$ there is nothing special here about the one we chose (though $N$ might be different in each case; that's not a problem). Therefore, given any $\varepsilon>0,$ we can find a positive integer $N$ such that for $n \geq N,\left|\frac{1}{n}-0\right|<\varepsilon .$ That is, we showed that $a_{n}=\frac{1}{n}$ converges to 0 by definition, as desired.
+
+\textbf{Part (b)}Since $|\sin(x)| \in [0,1]$ for all $x\in \mathbb{R}$, then:
+$$|a_n| = \left|\frac{1}{n}\sin{\left\frac{n\pi}{2}}\right| = \left|\frac{1}{n}\right|\left|sin{\left\frac{n\pi}{2}}\right| \leq \left|\frac{1}{n}\right|$$
+
+By \textbf{Part (a)} then for all $\varepsilon>0$ exits an $N\in \mathbb{N}$ such that for all $n>N$ $|a_n|<\varepsilon$ which by definition implies that $a_n\to_{n\to\infty}0$.
+\end{proof}
+
+\begin{problem}
+Consider a random variable $X_{n}$ with the probability function
+$$
+X_{n}=\left\{\begin{array}{ll}
+-n & \text { with probability } 1 / n \\
+0 & \text { with probability } 1-2 / n \\
+n & \text { with probability } 1 / n
+\end{array}\right.
+$$
+\begin{enumerate}[(a)]
+    \item Does $X_{n} \rightarrow_{p} 0$ as $n \rightarrow \infty ?$
+    \item Calculate $E\left(X_{n}\right)$
+    \item Calculate $\operatorname{Var}\left(X_{n}\right)$.
+    \item Now suppose the distribution is
+        $$
+        X_{n}=\left\{\begin{array}{ll}
+        0 & \text { with probability } 1-1 / n \\
+        n & \text { with probability } 1 / n
+        \end{array}\right.
+        $$
+    Calculate $E\left(X_{n}\right)$
+    \item Conclude that $X_{n} \rightarrow_{p} 0$ as $n \rightarrow \infty$ is not sufficient for $E\left(X_{n}\right) \rightarrow 0$.
+\end{enumerate}
+\end{problem}
+
+\begin{proof}[Answer]
+\textbf{Part (a)}
+Note that for all $\varepsilon>0$ exists $N=[\varepsilon]$\footnote{$[\cdot]$ denotes the floor function}$+1$ such that for all $n>N$ $|X_n|>\varepsilon$ therefore:
+\begin{align*}
+\lim_{n\to \infty} P(|X_n|\geq \varepsilon) &= 1 - \lim_{n\to \infty} P(|X_n|\leq \varepsilon)   \\
+& = 1 - \left(1 - \frac{2}{n}\right) = \frac{2}{n}\to 0 
+\end{align*}
+This means that 
+$$X_n \to_p 0$$
+
+\textbf{Part (b)}
+$$\mathbb{E}[X_n] = (-n)\frac{1}{n} + (0)\left(1-\frac{2}{n}\right) + (n)\frac{1}{n} = 0$$
+
+\textbf{Part (c)}
+$$\operatorname{Var}(X_n) = \mathbb{E}(X - \mathbb{E}(X))^2 = \mathbb{E}(X)^2 = (-n)^2\frac{1}{n} + (0)\left(1-\frac{2}{n}\right) + (n)^2\frac{1}{n} = 2n$$ 
+
+\textbf{Part (d)}
+$$\mathbb{E}[X_n] = (n)\frac{1}{n} + (0)\left(1-\frac{1}{n}\right)= 1$$
+
+\textbf{Part (e)}
+Using a similar analysis as in \textbf{Part (a)} we get that $X_n \to_p 0$ but $\mathbb{E}(X_n) = 1 \to 1$ then we can conclude that convergence in probability is not sufficient to guarantee convergence of the expected value. 
+
+\end{proof}
+
+\begin{problem}
+A weighted sample mean takes the form $\bar{Y}^{*}=\frac{1}{n} \sum_{i=1}^{n} w_{i} Y_{i}$ for some non-negative constants $w_{i}$ satisfying $\frac{1}{n} \sum_{i=1}^{n} w_{i}=1 .$ Assume that $Y_{i}: i=1, \ldots, n$ are i.i.d.
+\begin{enumerate}[(a)]
+    \item  Show that $\bar{Y}^{*}$ is unbiased for $\mu=E\left(Y_{i}\right)$.
+    \item Calculate $\operatorname{Var}\left(\bar{Y}^{*}\right)$
+    \item Show that a sufficient condition for $\bar{Y}^{*} \rightarrow_{p} \mu$ is that $\frac{1}{n^{2}} \sum_{i=1}^{n} w_{i}^{2} \rightarrow 0 .$ (Hint: use the Markov's or Chebyshev's Inequality).
+    \item Show that the sufficient condition for the condition in part (c) is max $_{i \leq n} w_{i} / n \rightarrow 0$.
+\end{enumerate}
+\end{problem}
+
+\begin{proof}[Answer]
+\textbf{Part (a)}
+$$\mathbb{E}\left(\bar{Y}^{*}\right)=\mathbb{E}\left(\frac{1}{n} \sum_{i=1}^{n} w_{i} Y_{i}\right)=\frac{1}{n} \sum_{i=1}^{n}\mathbb{E}\left( w_{i} Y_{i}\right)=\frac{1}{n} \sum_{i=1}^{n}w_{i} \mathbb{E}\left( Y_{i}\right) = \frac{1}{n} \sum_{i=1}^{n}w_{i} \mu = \mu\left(\frac{1}{n} \sum_{i=1}^{n}w_{i}\right)=\mu$$
+\textbf{Part (b)} Since all $Y_i$ are independent then all the variables $w_iY_i$ will also be independent, then $\operatorname{Cov}(w_iY_i,w_jY_j)=0$ for all $i\neq j$, therefore 
+$$\operatorname{Var}(\bar{Y}^{*})= \frac{1}{n^2}+\sum_{i=1}^n\operatorname{Var}(w_i Y_i) + 2\sum_{i\neq j}^n\operatorname{Cov}(w_iY_i, w_jY_j) = \frac{1}{n^2}\sum_{i=1}^n\operatorname{Var}(w_iY_i) = \frac{1}{n^2}\sum_{i=1}^n w_i^2 \sigma^2$$
+Where $\operatorname{Var}(Y_i)=\sigma^2$.
+\textbf{Part (c)}
+Suppose that 
+$$\frac{1}{n^{2}} \sum_{i=1}^{n} w_{i}^{2} \rightarrow 0$$
+
+We know by Chevyshev's inequality that:
+
+$$\operatorname{P}(|\bar{Y}^{*}-\mu| \geq \lambda) \leq \frac{\operatorname{Var}(\bar{Y}^{*})}{\lambda^{2}} =  \left(\frac{1}{n^2}\sum_{i=1}^n w_i^2 \sigma^2\right)\big/\lambda ^2 = \frac{\sigma}{\lambda^2}\left(\frac{1}{n^2}\sum_{i=1}^n w_i^2\right) \to  0$$
+Therefore
+
+$$\lim_{n\to \infty}\operatorname{P}(|\bar{Y}^{*}-\mu| \geq \lambda) = 0 \qiq \bar{Y}^{*}\to_p\mu$$
+
+\textbf{Part (d)}
+Consider that 
+$$\frac{1}{n^{2}} \sum_{i=1}^{n} w_{i}^{2} \leq \frac{1}{n^{2}} \sum_{i=1}^{n} w_{i} \max _{i \leq n} w_{i}=\frac{\max _{i \leq n} w_{i}}{n} \frac{1}{n} \sum_{i=1}^{n} w_{i}=\frac{\max _{i \leq n} w_{i}}{n}$$
+Then 
+$$\max _{i \leq n}\frac{w_{i}}{ n }\rightarrow 0 \qiq \frac{1}{n^{2}} \sum_{i=1}^{n} w_{i}^{2} \rightarrow 0$$
+\end{proof}
+
+\begin{problem}
+Take a random sample $\left\{X_{1}, \ldots, X_{n}\right\} .$ Which statistic converges in probability by the weak
+law of large numbers and continuous mapping theorem, assuming the moment exists?
+\begin{enumerate}[(a)]
+    \item $\frac{1}{n} \sum_{i=1}^{n} X_{i}^{2}$
+    \item $\frac{1}{n} \sum_{i=1}^{n} X_{i}^{3}$.
+    \item $\max _{i \leq n} X_{i}$
+    \item $\frac{1}{n} \sum_{i=1}^{n} X_{i}^{2}-\left(\frac{1}{n} \sum_{i=1}^{n} X_{i}\right)^{2}$
+    \item  $\frac{\sum_{i=1}^{n} X_{i}^{2}}{\sum_{i=1}^{n} X_{i}},$ assuming $\mu=E\left(X_{i}\right)>0$
+    \item  $\mathdx{1}\left(\frac{1}{n} \sum_{i=1}^{n} X_{i}>0\right)$ where
+    $$
+    \mathds{1}(a)=\left\{\begin{array}{ll}
+    1 & \text { if } a \text { is true } \\
+    0 & \text { if } a \text { is not true }
+    \end{array}\right.
+    $$
+    is called the indicator function of event $a$.
+\end{enumerate}
+
+\end{problem}
+
+\begin{proof}[Answer]
+We will be using the Weak Law of Large Numbers in the following answers and assume that each of the moments exist:
+
+\textbf{Part (a)} 
+$$\frac{1}{n} \sum_{i=1}^{n} X_{i}^{2} \to_p \mathbb{E}\left(\frac{1}{n} \sum_{i=1}^{n} X_{i}^{2}\right) = \mathbb{E}(X_i^2)$$
+\textbf{Part (b)}
+$$\frac{1}{n} \sum_{i=1}^{n} X_{i}^{3}\to_p\mathbb{E}\left(\frac{1}{n} \sum_{i=1}^{n} X_{i}^{3}\right)=\mathbb{E}(X_i^3)$$
+\textbf{Part (c)} In this case we cannot use WLLN nor CMT.
+
+\textbf{Part (d)} Using the Continuous Mapping Theorem:
+$$\frac{1}{n} \sum_{i=1}^{n} X_{i}^{2}-\left(\frac{1}{n} \sum_{i=1}^{n} X_{i}\right)^{2} \to_p \mathbb{E}\left(\frac{1}{n} \sum_{i=1}^{n} X_{i}^{2}\right-\left(\frac{1}{n} \mathbb{E}\left(\sum_{i=1}^{n} X_{i}\right)^{2}\right) = \mathbb{E}(X_i^2)-\mathbb{E}(X_i)^2=\operatorname{Var}(X_i)$$ 
+
+\textbf{Part (e)}
+$$\frac{\sum_{i=1}^{n} X_{i}^{2}}{\sum_{i=1}^{n} X_{i}} = \frac{n\sum_{i=1}^{n} X_{i}^{2}}{n\sum_{i=1}^{n} X_{i}} = \frac{\frac{\sum_{i=1}^{n} X_{i}^{2}}{n}}{\frac{\sum_{i=1}^{n} X_{i}}{n}} \to_p \frac{\mathbb{E}(X_i^2)}{\mu}$$ 
+
+\textbf{Part (f)}
+$$\mathds{1}\left(\frac{1}{n} \sum_{i=1}^{n} X_{i}>0\right) \to_p \mathds{1}(\mu>0)$$
+\end{proof}
+
+\begin{problem}
+Take a random sample $\left\{X_{1}, \ldots, X_{n}\right\}$ where the support of $X_{i}$ is a subset of $(0, \infty) .$ Consider
+the sample geometric mean
+$$
+\widehat{\mu}=\left(\Pi_{i=1}^{n} X_{i}\right)^{1 / n}
+$$
+and population geometric mean
+$$
+\mu=\exp (\mathbb{E}(\log (X_i))
+$$
+Assuming that $\mu$ is finite, show that $\widehat{\mu} \rightarrow_{p} \mu$ as $n \rightarrow \infty$.
+\end{problem}
+
+\begin{proof}[Answer]
+Consider
+$$\log \widehat{\mu} = \log\left(\Pi_{i=1}^{n} X_{i}\right)^{1 / n}  = \frac{1}{n}\sum_{i=1}^n (\log(X_i))$$
+
+Since $X_i$ are i.i.d then $\log(X_i)$ will also be i.i.d then by WLLN
+
+$$\log \widehat{\mu} \to_p \mathbb{E}(\log X_i)$$
+
+Therefore by CMT
+
+$$\widehat{\mu} = \exp(\log \widehat{\mu}) \to_p \exp(\mathbb{E}(\log X_i))=\mu$$
+
+\end{proof}
+
+\begin{problem}
+Let $\mu_{k}=E\left(X^{k}\right)$ for some integer $k \geq 1$
+\begin{enumerate}[(a)]
+    \item Write down the natural moment estimator $\hat{\mu}_{k}$ of $\mu_{k}$.
+    \item Find the asymptotic distribution of $\sqrt{n}\left(\hat{\mu}_{k}-\mu_{k}\right)$ as $n \rightarrow \infty,$ assuming that $E\left(X^{2 k}\right)<\infty$
+\end{enumerate}
+\end{problem}
+\begin{proof}[Answer]
+\textbf{Part (a)}
+$$\hat{\mu}_k = \frac{1}{n}\sum_{i=1}^n X_i^k$$
+\textbf{Part (b)}By WLLN:
+$$\mu_k = \mathbb{E}(\widehat{\mu}_k)$$
+Then we have that
+$$\sqrt{n}(\widehat{\mu}_k - \mu_k) \sim \mathcal{N}(0,\operatorname{Var}(X_i^k))$$
+And
+$$\operatorname{Var}(X_i^k) = \mathbb{E}(X_i^{2k}) - \mathbb{E}(X_i^{k})^2 = \mu_{2k}-\mu_{k}^2$$ 
+
+\end{proof}
+\begin{problem}
+Let $m_{k}=\left(E\left(X^{k}\right)\right)^{1 / k}$ for some integer $k \geq 1$
+\begin{enumerate}[(a)]
+    \item Write down the natural moment estimator $\hat{m}_{k}$ of $m_{k}$.
+    \item Find the asymptotic distribution of $\sqrt{n}\left(\hat{m}_{k}-m_{k}\right)$ as $n \rightarrow \infty,$ assuming that $E\left(X^{2 k}\right)<\infty$
+\end{enumerate}
+\end{problem}
+\begin{proof}[Answer]
+\textbf{Part (a)}
+$$\hat{m}_k = \left(\frac{1}{n} \sum_{i=1}^nX_i^k\right)^{1/k} = \widehat{\mu}_k^{1/k}$$
+\textbf{Part (b)}
+By the previous problem
+$$\sqrt{n}(\widehat{\mu}_k - \mu_k) \sim \mathcal{N}\big(0,\:\mathbb{E}(X_i^{2k}) - \mathbb{E}(X_i^{k})^2 \big)$$
+Since the function $g(x)=x^{1/k}$ is continuous then by the Delta Method 
+
+$$\sqrt{n}(g(\widehat{\mu}_k)- g(\mu_k)) \sim \mathcal{N}\big(0,V\big)$$
+
+where
+
+$$V =\frac{1}{k^{2}} \mu_{k}^{2 \frac{1-k}{k}}\left(\mu_{2 k}-\mu_{k}^{2}\right)$$
+
+\end{proof}
+\begin{problem}
+Suppose $\sqrt{n}(\widehat{\mu}-\mu) \rightarrow_{d} N\left(0, v^{2}\right)$ and set $\beta=\mu^{2}$ and $\widehat{\beta}=\widehat{\mu}^{2}$
+\begin{enumerate}[(a)]
+    \item Use the Delta Method to obtain an asymptotic distribution for $\sqrt{n}(\widehat{\beta}-\beta)$.
+    \item Now suppose $\mu=0 .$ Describe what happens to the asymptotic distribution from the previous part.
+    \item Improve on the previous answer. Under the assumption $\mu=0,$ find the asymptotic distribution $n \widehat{\beta}$
+    \item Comment on the differences between the answers in parts (a) and (c).
+\end{enumerate}
+\end{problem}
+\begin{proof}[Answer]
+\textbf{Part (a)} Let $g(x) = x^2$ then 
+
+$$\sqrt{n}(\widehat{\beta}-\beta)=\sqrt{n}(g(\widehat{\mu})-g(\mu)) \rightarrow_{d} N\left(0, V\right)$$
+Where:
+$$V = (g'(\mu))^2v^2 = (2\mu v)^2$$
+
+\textbf{Part (b)}
+The previous asymptotic distribution collapses in to one point $0$ with probability $1$.
+
+\textbf{Part (c)}
+Since
+$$\sqrt{n} \widehat{\mu} \to_d \mathcal{N}\left(0, v^{2}\right)$$
+
+Then by the CMT
+$$\frac{\sqrt{n}}{v} \widehat{\mu} \to_d \mathcal{N}\left(0,1\right)$$
+
+Then, since the square of a standard normal distribution is a $\chi^2$ we have:
+
+$$\frac{n}{v^2} \beta \to_d \chi^2_1 \qiq n\beta \to_d v^2\chi^2_1 \quad \implies \footnote {Assuming v\in\mathbb{Z}}\quad   n\beta \to_d \chi^2_{v^2} $$
+
+\textbf{Part (d)}
+Asymptotic distributions constructed by CTM and the Delta Method does not need to coincide.
+\end{proof}
+
+\end{document}

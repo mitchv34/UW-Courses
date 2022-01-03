@@ -1,0 +1,334 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\documentclass[12pt]{article}
+%\usepackage[left=3cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}e}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{apacite}
+\usepackage[round]{natbib}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{svg}
+\usepackage[margin = 1in, top=2cm]{geometry}% Margins
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.2em}
+\usepackage{setspace} % Setting the spacing between lines
+\usepackage{amsthm, amsmath, amsfonts, mathtools, amssymb, bm} % Math packages 
+\usepackage{svg}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{epstopdf}
+\usepackage{subfig} % Manipulation and reference of small or sub figures and tables
+\usepackage{hyperref} % To create hyperlinks within the document
+\spacing{1.15}
+\usepackage{appendix}
+\usepackage{xcolor}
+\usepackage{cancel}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+
+
+\usepackage[round]{natbib}
+%\bibliographystyle{plainnat}
+\bibliographystyle{apacite}
+
+
+\newtheorem{defin}{Definition.}
+\newtheorem{teo}{Theorem. }
+\newtheorem{lema}{Lemma. }
+\newtheorem{coro}{Corolary. }
+\newtheorem{prop}{Proposition. }
+\theoremstyle{definition}
+\newtheorem{examp}{Example. }
+\newtheorem{problem}{Problem}
+% \numberwithin{problem}{subsection} 
+
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\qiq}{\qquad \implies \qquad}
+\newcommand{\qiffq}{\qquad \iff \qquad}
+\newcommand{\qaq}{\qquad \textbf{and} \qquad}
+\newcommand{\qoq}{\qquad \textbf{or} \qquad}
+\newcommand{\settf}{\text{ \emph{:} }}
+\newcommand{\chbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{.9em}}}
+\newcommand{\cchbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\checkmark$}}
+
+\title{Problem Set 2}
+\author{Mitchell Valdés-Bobes}
+\date{September 14, 2020}
+
+\begin{document}
+
+\maketitle
+
+\begin{problem}
+Suppose that $Y=X^{3}$ and $f_{X}(x)=42 x^{5}(1-x), x \in(0,1) .$ Find the PDF of $Y,$ and show
+that the PDF integrates to $1 .$
+\end{problem}
+
+\begin{proof}[Answer]
+$$Y = g(X) \qquad \text{ where } g(x) = x^3$$
+Then
+
+$$g^{-1}(y) = \sqrt[3]{y} \qaq \frac{d}{dy}g^{-1}(y)=\frac{1}{3}y^{-2/3}$$
+
+ Since $g:(0,1)\to (0,1)$ and $g^{-1}$ has continuous derivative in $(0,1)$ then
+ 
+ $$f_Y(y)= \left\{ \begin{array}{cc}
+     f_X(g^{-1}(y))\left|\frac{d}{dy} g^{-1}(y) \right| &  y \in (0,1)\\
+      0 & \text{otherwise} 
+ \end{array}
+
+This gives us
+
+$$f_Y(y)=14y(1-y^{1/3})$$
+
+Tanking the integral of $f_Y(y)$
+
+    $$\int_{-\infty}^{\infty}{f_Y(y)} = \int_{0}^1{14y(1-y^{1/3})} = 14\left(\int_{0}^1 y dy - \int_{0}^1 y ^{4/3}dy\right) = 14\left(\frac{y^2}{2} \Big|_0^1 - \frac{3y^{7/3}}{6}\Big|_0^1  \right) = 14\left(\frac{1}{2} - \frac{3}{7}\right) = 1$$
+
+
+\end{proof}
+
+\begin{problem}
+Consider the CDF $F_{X}(x)=\left\{\begin{array}{ll}1.2 x & \text { if } x \in[0,0.5) \\ 0.2+0.8 x & \text { if } x \in[0.5,1]\end{array},\right.$ and the function
+$$
+f_{X}(x)=\left\{\begin{array}{ll}
+1.2 & \text { if } x \in[0,0.5) \\
+a & \text { if } x=0.5 \\
+0.8 & \text { if } x \in(0.5,1]
+\end{array}\right.
+$$
+Show that $f_{X}$ is the density function of $F_{X}$ as long as $a \geq 0 .$ 
+\end{problem}
+
+\begin{proof}[Answer]
+
+$f_X$ is PDF of $F_X$ if and only if for all $x$
+
+$$F_X(x) = \int_{-\infty}^{x}f_X(t)dt$$
+ 
+By the definition of PDF we know that $a\geq 0$. 
+
+For any $x\in [0,0.5)$ 
+
+$$ \int_{-\infty}^{x}f_X(t)dt = \int_{0}^{x}1.2dt = 1.2x = F_X(x)$$
+
+and for any $x\in [0.5, 1]$
+
+\begin{align*}
+\int_{-\infty}^{x}f_X(t)dt &= \int_{0}^{0.5}1.2dt + \int_{0.5}^{0.5}adt + \int_{0.5}^{x}0.8dt \\& = 1.2x = 1.2\times 0.5 -0.8\times 0.5 + 0.8 x \\&= 0.2+ 0.8 x =F_X(x)
+\end{align*}
+
+\end{proof}
+
+
+\begin{problem}
+Let $X$ have PDF $f_{X}(x)=\frac{2}{9}(x+1), x \in[-1,2] .$ Find the PDF of $Y=X^{2} .$ Note that this is
+a bit different from the exercise in the lecture note.
+\end{problem}
+
+\begin{proof}[Answer]
+We start by finding the CDF of $X$:
+$$F_X(x) =\frac{1}{9}(x^2+2x+1) = \frac{1}{9}(x+1)^2$$
+
+Then
+$$P(Y\leq y) = P(X^2\leq y) = P(|X|\leq\sqrt{y}) = P(-\sqrt{y}\leq X \leq \sqrt{y})=P(X\leq \sqrt{y})-P(X\leq -\sqrt{y})$$
+
+Note first that for all $y\in[0,1}$ and that for all $y>1$ $P(X\leq \sqrt{y})=0$ therefore
+
+\begin{align*}
+y\in[1,4] &\qiq P(Y\leq y) = F_X(\sqrt{y}) \\    
+y\in[0,1] &\qiq  P(Y\leq y) = F_X(\sqrt{y}) - F_X(-\sqrt{y})
+\end{align*}
+
+Putting all this together we get the CDF of $Y$
+
+$$F_Y(y) = \left\{\begin{array}{cc}
+   \frac{4 \sqrt{y}}{9}   & \text{ when } y\in[0,1] \\
+   \frac{1}{9} \left(\sqrt{y}+1\right)^2  & \text{ when } y\in[1,4] 
+\end{array}$$
+
+To obtain the PDF of $Y$ we need to differentiate $F_Y(y)$ obtaining
+
+$$f_Y(y) = \left\{\begin{array}{cc}
+  \frac{2}{9 \sqrt{y}}  & \text{ when } y\in[0,1] \\
+  \frac{\sqrt{y}+1}{9 \sqrt{y}}  & \text{ when } y\in[1,4] 
+\end{array}$$
+
+\end{proof}
+
+\begin{problem}
+
+A median of a distribution is a value $m$ such that $P(X \leq m) \geq 1 / 2$ and $P(X \geq m) \geq 1 / 2$ Find the median of the distribution $f(x)=\frac{1}{\pi\left(1+x^{2}\right)} \quad x \in R$
+\end{problem}
+
+
+\begin{proof}[Answer]
+
+$$P(X\leq m) = \int_{-\infty}^m f(x)dx = \int_{-\infty}^m \frac{1}{\pi\left(1+x^{2}\right)} = \frac{1}{\pi}(\tan^{-1}(x)\big|_\infty^m) = \frac{\tan^-1(m)}{\pi} - \frac{1}{2}$$
+and 
+$$P(X\geq m) = 1 - P(X\leq m) 1 - \left(\frac{\tan^-1(m)}{\pi} - \frac{1}{2}\right) =  \frac{1}{2} - \frac{\tan^-1(m)}{\pi}$$
+Then
+$$P(X\leq m)\geq \frac{1}{2} \qiq \tan^{-1}(m)\geq 0$$
+$$P(X\geq m)\geq \frac{1}{2} \qiq \tan^{-1}(m)\leq 0$$
+Which means
+$$\tan^{-1}(m)=0 \qiq \tan(\tan^{-1}(m)) = \tan(0) \qiq \boxed{m = 0}$$
+\end{proof}
+
+\begin{problem}
+Show that if $X$ is a continuous random variable, then
+$$
+\min _{a} E|X-a|=E|X-m|
+$$
+where $m$ is the median of $X$.
+
+\textit{(Hint: workout the integral expression of $E|X-a|$ and notice that it is differentiable.)}
+
+\end{problem}
+
+\begin{proof}[Answer]
+
+Consider that $$f_X(x)$ is the PDF of X, then
+
+$$E|X-a| = \int_{-\infty}^\infty|x-a|f_X(x)dx = \int_{-\infty}^a(a-x)f_X(x)dx  + \int_{a}^\infty(x-a)f_X(x)dx$$
+
+This is the same as to say:
+
+$$E|X-a| = \lim_{n \to \infty}\left(  \int_{-n}^a(a-x)f_X(x)dx  + \int_{a}^n(x-a)f_X(x)dx\right)$$
+
+We wish to maximize the value of $E|X-a|$ so it is natural to think of taking derivatives with respect to $a$ in the above expression. This is:
+
+$$\frac{\partial}{\partial a}E|X-a| = \frac{\partial}{\partial a}\left(\lim_{n \to \infty}\left(  \int_{-n}^a(a-x)f_X(x)dx  + \int_{a}^n(x-a)f_X(x)dx\right)\right)$$
+
+We can check that the above function expression satisfies the hypothesis of theorem 7.17 of  \cite{rudin1964principles}
+therefore we can change the limits and the derivative to obtain
+
+$$\frac{\partial}{\partial a}E|X-a| = \lim_{n \to \infty}\frac{\partial}{\partial a}\left(  \int_{-n}^a(a-x)f_X(x)dx  + \int_{a}^n(x-a)f_X(x)dx\right)$$
+
+Using Leibniz rule we can obtain the derivative of the integral and we get
+
+$$\frac{\partial}{\partial a}E|X-a| = \lim_{n \to \infty}\left(  \int_{-n}^af_X(x)dx  + \int_{a}^nf_X(x)dx\right) = \int_{-\infty}^af_X(x)dx  + \int_{a}^{\infty}f_X(x)dx\right)$$
+
+Therefore
+
+$$\frac{\partial}{\partial a}E|X-a| = -P(X\geq a) + P(X\leq a)$$
+
+The first order condition give us:
+
+$$\frac{\partial}{\partial a}E|X-a| = 0 \qiq P(X\geq a) = P(X\leq a) \qiq \boxed{a=m}$$
+
+\end{proof}
+
+\begin{problem}
+Let $\mu_{n}$ denote the $n$ th central moment of a random variable $X .$ Two quantities of interest, in addition to the mean and variance are
+$$
+\alpha_{3}=\frac{\mu_{3}}{\mu_{2}^{3 / 2}} \text { and } \alpha_{4}=\frac{\mu_{4}}{\mu_{2}^{2}}
+$$
+The values $\alpha_{3}$ is called the skewness and $\alpha_{4}$ is called the kurtosis. The skewness measures the
+lack of symmetry in the density function. The kurtosis, althugh harder to interpret, measures
+the peakedness or flatness of the density function.
+\begin{enumerate}[(a)]
+    \item Show that if a density function is symmetric about a point $a,$ then $\alpha_{3}=0$
+    \item Calculate $\alpha_{3}$ for $f(x)=\exp (-x), x \geq 0,$ a density function that is skewed to the right.
+    \item Calculate $\alpha_{4}$ for the following density functions and comment on the peakedness of each:
+    $$
+    \begin{array}{l}
+        f(x)=\frac{1}{\sqrt{2 \pi}} \exp \left(-x^{2} / 2\right), x \in R \\
+        f(x)=1 / 2, x \in(-1,1) \\
+        f(x)=\frac{1}{2} \exp (-|x|), x \in R
+    \end{array}
+    $$
+\end{enumerate}  
+\end{problem}
+
+\begin{proof}[Answer]
+\textbf{Part (a)} 
+Define $Y = X-a$, we will prove that $Y$ is symmetric about $0$:
+
+$$P(-y\leq Y\leq y) = P(-y+a\leq Y\leq y+a) = 2 P(X\leq a+y) = 2 P(Y\leq y)$$
+
+Now consider $n\in \mathbb{Z}_+$ and $n$ odd:
+
+$$E(Y^3) =\int_{-\infty}^{\infty}y^n dF_Y = \int_{-\infty}^{0}y^n dF_Y + \int_{0}^{\infty}y^n dF_Y = \int_{0}^{\infty}(-y)^n dF_Y + \int_{0}^{\infty}y^n dF_Y = 0$$
+
+Note that for $n=1$ we get $E(Y)=0$ then $E(X)=a$:
+
+Therefore
+
+$$E(Y^3) = E(X-a)^3 = E(X-E(X))^3 = \mu_3 \qiq \boxed{\alpha_3 = 0}$$
+
+\textbf{Part (b)}
+
+Let  $f(x)=\exp (-x), x \geq 0,$ then
+
+$$\mu = \int_{0}^{\infty}xe^{-x}dx = 1$$
+
+$$\mu_3 = \int_{0}^{\infty}(x-1)^3e^{-x}dx = 2$$
+
+$$\mu_2 = \int_{0}^{\infty}(x-1)^2e^{-x}dx = 1$$
+
+Then
+
+$$\boxed{\alpha_3 = \frac{\mu_3}{m_2^{3/2}}  = 2$}$
+
+\textbf{Part (c.1)}
+$$f(x)=\frac{1}{\sqrt{2 \pi}} \exp \left(-x^{2} / 2\right), x \in R \qiq X\sim \mathcal{N}(0,1)$$
+
+Moment generating function for this distribution is
+
+$$M(t) = e^{t^2/2}$$
+
+Then 
+
+$$\mu_2 = \frac{\partial^2 }{\partial t^2}M\big |_{t=0}= e^{\frac{t^2}{2}} t^2+e^{\frac{t^2}{2}}\big |_{t=0} = 1$$
+
+$$\mu_4 = \frac{\partial^4 }{\partial t^4}M\big |_{t=0}= e^{\frac{t^2}{2}} t^4+6 e^{\frac{t^2}{2}} t^2+3 e^{\frac{t^2}{2}}\big |_{t=0} = 3$$
+
+Therefore:
+
+$$\boxed{\alpha_4 = \frac{\mu_4}{\mu_2^2}=3}$$
+
+\textbf{Part (c.2)}
+$$f(x)=1/2, x\in(-1,1) \qiq X\sim \mathcal{U}(-1,1)$$
+
+$$E(X) = \frac{1}{2}(1+(-1))=0$$
+
+Then the $n$-th moment is:
+
+$$\int_{-1}^1\frac{x^n}{2}dx = \frac{(-1)^n+1}{2 (n+1)}$$
+
+Which give us
+
+
+$$\mu_2 = \frac{1}{3}$$
+
+$$\mu_4 = \frac{1}{5}$$
+
+Therefore:
+
+$$\boxed{\alpha_4 = \frac{9}{5}}$$
+
+\textbf{Part (c.3)}
+$$f(x)=\frac{1}{2} \exp (-|x|), x \in R$$
+
+To obtain the moment generating function for this distribution we need to compute the  integral:
+$$\int_{-\infty}^{\infty} e^{t-|x|} d x$$
+
+Since  $e^{t-| x |}$  is an even function and the interval $(-\infty, \infty)$  is symmetric about  $0$, $$\int_{-\infty}^{\infty} e^{t-|x|} d x=2 \int_{0}^{\infty} e^{t-x} d x = 2e^t$$
+
+Then 
+
+$$\mu_2 = \frac{\partial^2 }{\partial t^2}M\big |_{t=0}= 2e^t  \big |_{t=0} = 1$$
+
+$$\mu_4 = \frac{\partial^4 }{\partial t^4}M\big |_{t=0}= 2e^t \big |_{t=0} = 1$$
+
+
+Therefore:
+
+$$\boxed{\alpha_4 = \frac{\mu_4}{\mu_2^2}=1}$$
+
+\end{proof}
+
+\bibliography{references.bib}
+
+\end{document}

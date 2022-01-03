@@ -1,0 +1,324 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\documentclass[12pt]{article}
+%\usepackage[left=3cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}e}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{apacite}
+\usepackage[round]{natbib}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{svg}
+\usepackage[margin = 1in, top=2cm]{geometry}% Margins
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.2em}
+\usepackage{setspace} % Setting the spacing between lines
+\usepackage{amsthm, amsmath, amsfonts, mathtools, amssymb, bm} % Math packages 
+\usepackage{svg}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{epstopdf}
+\usepackage{subfig} % Manipulation and reference of small or sub figures and tables
+\usepackage{hyperref} % To create hyperlinks within the document
+\spacing{1.15}
+\usepackage{appendix}
+\usepackage{xcolor}
+\usepackage{cancel}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+
+
+\usepackage[round]{natbib}
+%\bibliographystyle{plainnat}
+\bibliographystyle{apacite}
+
+
+\newtheorem{defin}{Definition.}
+\newtheorem{teo}{Theorem. }
+\newtheorem{lema}{Lemma. }
+\newtheorem{coro}{Corolary. }
+\newtheorem{prop}{Proposition. }
+\theoremstyle{definition}
+\newtheorem{examp}{Example. }
+\newtheorem{problem}{Problem}
+\newtheorem{subproblem}{}[problem]
+% \numberwithin{problem}{subsection} 
+
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\qiq}{\qquad \implies \qquad}
+\newcommand{\qiffq}{\qquad \iff \qquad}
+\newcommand{\qaq}{\qquad \textbf{and} \qquad}
+\newcommand{\qoq}{\qquad \textbf{or} \qquad}
+\newcommand{\settf}{\text{ \emph{:} }}
+\newcommand{\chbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{.9em}}}
+\newcommand{\cchbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\checkmark$}}
+
+\title{Problem Set 4}
+\author{Mitchell Valdés-Bobes}
+\date{September 30, 2020}
+
+\begin{document}
+
+\maketitle
+\begin{problem}
+Consider the following overlapping generations problem. Each period $t=1,2,3, \ldots$ a
+new generation of 2 period lived households are born. The measure of identical households
+born in any period grows by $1+n .$ That is, we assume population growth of rate $n \geq 0$.
+There is a unit measure of initial old who are endowed with $\bar{M}_{1}$ units of fiat money as
+well as $w_{2}$ units of consumption goods. Instead of a fixed money supply, now assume that
+the money supply increases at the rate $z \geq 0 .$ The increase in money supply is handed out
+each period to old agents in direct proportion to the amount of money that they chose when
+young. In other words, if a young agent chooses $M_{t+1}^{t} \geq 0,$ they will receive $(1+z) M_{t+1}^{t}$
+units of money when old.
+
+Each generation is endowed with $w_{1}$ in youth and $w_{2}$ in old age of nonstorable con-
+sumption goods where $w_{1}>w_{2}$. The utility function of a household of generation $t \geq 1$
+is
+$$
+U\left(c_{t}^{t}, c_{t+1}^{t}\right)=\ln \left(c_{t}^{t}\right)+\ln \left(c_{t+1}^{t}\right)
+$$
+where $\left(c_{t}^{t}, c_{t+1}^{t}\right)$ is consumption of a household of generation $t$ in youth (i.e. in period $t$ ) and
+old age (i.e in period $t+1$ ). The preferences of the initial old are given by $U\left(c_{1}^{0}\right)=\ln \left(c_{1}^{0}\right)$,
+where $c_{1}^{0}$ is consumption by a household of the initial old.
+\end{problem}
+
+\begin{subproblem}
+State and solve the planner's problem under the assumption of equal weights on
+each generation (i.e., on representative agents from each generation) so that the
+the objective of the social planner is to maximize $U\left(c_{1}^{0}\right)+\sum_{t=1}^{\infty} U\left(c_{t}^{t}, c_{t+1}^{t}\right) .$ since
+this objective may not be well defined (i.e. add up to infinity), we can apply the "overtaking" criterion to determine optimality. $^{1}$ Hence just go ahead and maximize
+away as usual.
+\end{subproblem}
+
+\begin{proof}[Answer]
+Call $N_0$ the measure of the initial generation. In each period $t$ the resource constraint that the social planer faces is
+\begin{align*}
+    (1+n)^{t-1}N_0c_{t}^{t-1}+(1+n)^{t}N_0c_{t}^{t}&\leq(1+n)^{t-1}N_0w_2+(1+n)^{t}N_0w_1\\
+    (1+n)c_t^t +c_{t}^{t-1}&\leq (1+n)w_1 + w_2
+\end{align*}
+
+By the overtaking criterion, the social planner can maximize consumption of every ``alive'' agent in time $t$ subject to the resource constraint which we can assume that binds since utilities are increasing in consumption. Therefore the social planner's problem is
+
+\begin{align}
+    \max_{(c_{t}^{t-1},c_{t}^t)\in \mathbb{R}_+^2}&\quad \ln{c_{t}^{t-1}} + \ln{c_{t}^t}\\
+    \text{subject to:} &\quad (1+n)c_t^t +c_{t}^{t-1} = (1+n)w_1 + w_2 \tag{RC}
+\end{align*}
+
+From \textbf{(RC)} we get that
+
+\begin{equation}\label{ct}
+c_{t}^{t-1}=(1+n)(w_1)-c_t^t) - w_2    
+\end{equation}
+
+The the problem becomes a problem in one variable:
+
+$$\max_{c_{t}^t\in \mathbb{R}_+}\quad \ln{(1+n)(w_1)-c_t^t) - w_2} + \ln{c_{t}^t}$$
+
+First order condition give us:
+
+\begin{equation}\label{ctstar}
+\frac{1}{c_t^t} -\frac{n+1}{(n+1)(w_1+c_t^t) + w_2} \qiq \boxed{c_t^t=\frac{(1+n)w_1+w_2}{2(1+n)}}    
+\end{equation}
+
+Plugging \eqref{ctstar} in \eqref{ct} we get:
+
+\begin{equation}\label{ct}
+    \boxed{c_t^{t-1}=\frac{(1+n)w_1+w_2}{2}} 
+\end{equation}
+\end{proof}
+
+\begin{subproblem}
+Let $p_{t}$ be the price of consumption goods in terms of money at time $t .$ Define a competitive
+equilibrium.
+\end{subproblem}
+
+\begin{proof}[Answer]
+
+First we define the optimization problem for the initial old:
+
+\begin{align}\label{initoldprob}
+    \max_{c_1^0\in\mathbb{R}_+}&\quad \ln{c^0_1} \\
+    \text{subject to:}&\quad p_1c^0_1 \leq \overline{M}_1 + p_1w_2
+\end{align}
+
+and every subsequent generation:
+
+\begin{align}\label{subseqgen}
+    \max_{(c_t^t,c_t^{t+1}, M^{t}_{t+1})\in\mathbb{R}_+^3}&\quad \ln{c_t^t} + \ln{c_t^{t+1}}\\
+    \text{subject to:}&\quad p_tc^t_t + M^{t}_{t+1} \leq p_t w_1\\
+    &\quad p_{t+1}c^t_{t+1} \leq p_{t+1} w_2 +  (1+z)M^{t}_{t+1}
+\end{align}
+
+Then we can define the competitive equilibrium as a sequence of consumption allocations $\{c^{t-1}_t, c_t^t\}_{t=1}^\infty$ a sequence of money holdings $\{\overline{M}_{t+1}^t\}$ and a sequence of prices $\{p_t\}_{t=1}^\infty$ such that the initial old solve their optimization problem, all subsequent generations solve theirs and markets clear.
+
+Market for money:
+$$(1+n)^tM_t^{t+1} = \overline{M}_t \qquad \forall t\geq 1$$ 
+Market for goods:
+$$c_t^{t-1}+(1+n)c_{t}^t = (1+n)w_1 + w_2$$
+\end{proof}
+
+\begin{subproblem}
+Solve for an autarkic equilibrium.
+\end{subproblem}
+
+\begin{proof}[Answer]
+We want an allocation $\{c_t^t, c_t^{t-1},M_{t+1}^t \}_{t=1}^\infty$ and prices $\{p_t \}_{t=1}^\infty$, such that 
+ agents of every generation choose to consume their endowments in each period $t$, i.e., 
+        $$c_t^{t} = w_1
+        \qquad c_{t+1}^{t} = w_2 $$
+for all $t\leq1$, and market clears.
+
+Using the market clearing condition of the money market we solve for $M_{t+1}^t$:
+\begin{equation}
+   {M_{t+1}^t} = \frac{(1+z)^{t-1} \bar{M}_1 }{(1+n)^{t} }
+\end{equation}
+
+We also know that at the optimum $MRS(c_t^t, c^{t}_{t+1})=(1+z)p_{t}/p_{t+1}$. This implies
+\begin{equation}
+    \frac{(1+z)p_{t}}{p_{t+1}} = \frac{w_2}{w_1} 
+\end{equation}
+
+Now, using the budgets constrains we get
+\begin{align*}
+w_2 = \frac{\bar{M}_1}{p_{1}} +  w_2 \quad &\Rightarrow \quad 0 = \frac{1}{p_{t}} \qquad \forall t\geq 0
+\end{align*}
+We can interpret this situation like this: The only price system that can sustain an autarkic equilibrium is when prices are so high that money has no value, therefore there is no gains from iner-generational trade.
+
+\end{proof}
+
+\begin{subproblem}
+Solve for a steady state (non-autarkic) monetary equilibrium. As $w_{1}>w_{2},$ we know this
+corresponds to the Samuelson case with $\beta=1 .$ Verify the non-negativity constraint on
+money is not binding in the equilibrium. What is the rate of return on money in the monetary
+equilibrium? Give intuition why the rate of return is at the level you find.
+\end{subproblem}
+
+\begin{proof}[Answer]
+Remember that the initial old solve their maximization problem in $t=1$ subject to their budget constraint (problem in \eqref{initoldprob}):
+
+Since the utility function is increasing in consumption the initial old will consume all their endowment and the worth of the fiat money in consumption therefore:
+
+\begin{equation}
+\boxed{c^0_1 = \frac{\bar{M}_1}{p_1}+w_2}
+\end{equation}
+
+To solve the problem of the following generations we can transform both budget constraints and make them binding to get:
+
+\begin{align}\label{generalproblem}
+\max_{(c^t_t,c^t_{t+1}, M^{t}_{t+1})\in \mathbb{R}_+^3 }&\quad \ln c^t_t + \ln c^t_{t+1} \\
+\text{subject to} & \quad  c^t_t = w_1 - \frac{M^{t}_{t+1}}{p_t}\tag{BC}\\
+ & \quad c^t_{t+1} = w_2 + \frac{(1+z)M^{t}_{t+1}}{p_{t+1}}\tag{BC}
+\end{align}
+Plugging the budget constraint in to the objective function we get:
+\begin{align}\label{simprob}
+\max_{M^{t}_{t+1} \in\mathbb{R}_+ }&\quad \ln\left(w_1 - \frac{M^{t}_{t+1}}{p_t}\right) + \ln \left( w_2 + \frac{(1+z)M^{t}_{t+1}}{p_{t+1}} \right)
+\end{align}
+
+The FOC of this problem give us:
+
+\begin{equation}\label{money}
+-\frac{z+1}{p_{t+1} \left(w_2-\frac{M^{t}_{t+1} (z+1)}{p_{t+1}}\right)}-\frac{1}{p_t \left(w_1-\frac{M^{t}_{t+1}}{p_t}\right)} = 0 \qiq  M^{t}_{t+1} =  \frac{w_1  p_t(1+z) +w_2 p_{t+1}}{2 (z+1)}
+\end{equation}
+
+Plugin \eqref{money} in the budget constraint of \eqref{generalproblem} we obtain:
+
+\begin{equation}\label{ct1w20}
+   c^t_{t} =\frac{1}{2} \left(w_1+\frac{w_2 p_{t+1}}{(z+1) p_t}\right) \qquad c^t_{t+1} = \frac{1}{2} \left(w_2+\frac{w_1 (z+1) p_t}{p_{t+1}}\right)
+\end{equation}
+
+Denote 
+
+$$q_t = \frac{p_t}{p_{t+1}}$$
+
+Plugging in \eqref{ct1w20} we get
+
+\begin{equation}\label{ct1w21}
+   c^{t+1}_{t+1} =\frac{1}{2} \left(w_1+\frac{w_2}{(z+1) q_{t+1}}\right) \qquad c^t_{t+1} = \frac{1}{2} \left(w_2-w_1 (z+1) q_t\right)
+\end{equation}
+
+Market clearing condition is:
+
+$$c_{t+1}^{t}+(1+n)c_{t+1}^{t+1} = (1+n)w_1 + w_2$$
+
+Plugging in the values from \eqref{ct1w21} we get:
+
+$$\frac{1+n}{2} \left(w_1-\frac{w_2}{(z+1) q_{t+1}}\right) +  \frac{1}{2} \left(w_2-w_1 (z+1) q_t\right)=(1+n)w_1 + w_2$$
+
+Substituting the steady state $\overline{q})q_t = q_{t+1}$ and rearranging we get the quadratic equation:
+
+$$w_1(z+1)\overline{q}^2+(w_2-(1+n)w_1)\overline{q}+\frac{1+n}{1+z}w_2 = 0$$
+
+with discriminant:
+
+$$D = \left((n+1) w_1+w_2\right){}^2$$
+
+the two possible solution of the quadratic equation are:
+
+$$\overline{q}_{1,2} = \frac{(n+1) w_1-w_2 \pm\sqrt{D}}{2a} \qiq \overline{q}_{1} = \frac{n+1}{z+1} \qaq \overline{q}_{2}=  \frac{w_2}{w_1 z+w_1}$$
+
+Since the second solution relates to the autarkic equilibrium we will use the first solution in \eqref{ct1w20} to obtain:
+
+\begin{equation}\label{ct1w20}
+  \boxed{c_{t}^{t}=\frac{(1+n) w_{1}+w_{2}}{2(1+n)}} \qquad\boxed{ c^t_{t+1} =\frac{(1+n) w_{1}+w_{2}}{2}}
+\end{equation}
+
+Note that in this equilibrium agents do not consume all their endowment in time $t$, instead they use money to smooth their consumption from $t$ to $t+1$.
+
+From the solution of the initial old we have:
+
+$$\frac{\bar{M}_1}{p_1}+w_2} = \frac{(1+n) w_{1}+w_{2}}{2}$$
+
+Therefore we know that the initial price in this equilibrium must be:
+
+$$p_1 = \frac{2\bar{M}_1}{(1+n) w_{1}+w_{2}}$$
+
+Prices evolve according to:
+
+$$p_2 = \left(\frac{n+1}{z+1}\right)p_1 \quad p_3 = \left(\frac{n+1}{z+1}\right)p_2 = \left(\frac{n+1}{z+1}\right)^2 p_1 \quad \hdots \quad p_t = \left(\frac{n+1}{z+1}\right)^{t-1} p_1$$
+
+Which is:
+
+$$\boxed{p_t =\left(\frac{n+1}{z+1}\right)^{t-1} \frac{2\bar{M}_1}{(1+n) w_{1}+w_{2}}}$$
+
+The demand for money evolves according to:
+
+$$\boxed{M_t = \frac{(1+z)^{t-1}}{(n+1)^t}\bar{M}_1}$$
+\end{proof}
+
+
+\begin{subproblem}
+Does the stationary monetary equilibrium Pareto dominate autarky? Can you use your
+answer in part 1 to establish that? If so, how can the government implement it?
+\end{subproblem}
+
+\begin{proof}[Answer]
+We can compare consumption:
+
+\textbf{Social Planner:}
+$$c_t^t=\frac{(1+n)w_1+w_2}{2(1+n)} \qquad c^t_{t+1}=\frac{(1+n)w_1+w_2}{2}$$
+
+\textbf{Autarkic}
+
+$$c_t^{t} = w_1 \qquad c^t_{t+1} = w_2$$
+
+\textbf{Stationary Monetary Equilibrium}
+$$ c_{t}^{t}=\frac{(1+n) w_{1}+w_{2}}{2(1+n)} \qquad c^t_{t+1} =\frac{(1+n) w_{1}+w_{2}}{2} $$
+
+Note that in the consumption allocations in the Stationary Monetary Equilibrium are the same than in the Social Planner Problem and since the benevolent Social Planner achieves the first-best solution, any other allocation will be Pareto dominated by this one, in particular the Autarkic Equilibrium will.
+
+\end{proof}
+
+\begin{subproblem}
+Does money exhibit super-neutrality (i.e. the level of inflation does not change equilibrium
+consumption allocations)?
+\end{subproblem}
+
+\begin{proof}[Answer]
+From the 
+\end{proof}
+Checking the optimal consumption expressions::
+
+$$ c^t_{t} =\frac{1}{2} \left(w_1+\frac{w_2 p_{t+1}}{(z+1) p_t}\right) \qquad c^t_{t+1} = \frac{1}{2} \left(w_2+\frac{w_1 (z+1) p_t}{p_{t+1}}\right)$$
+
+We see that consumption does not depends on prices per se but on the gross real rate of return on money $(1+z)p_{t+1}/p_{t}$ which in turn does not depend on money growth. So the answers is yes, the level of inflation does not change equilibrium consumption allocations therefore money exhibit super-neutrality.
+\end{document}

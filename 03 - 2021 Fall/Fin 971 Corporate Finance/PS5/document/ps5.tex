@@ -1,0 +1,89 @@
+\documentclass[12pt]{amsart}
+\input{imports}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+
+{\scshape FIN-971} \hfill {\scshape \Large Problem Set \#5} \hfill {\scshape Fall 2021}\\
+{\scshape Author(s): \hfill Mitchell Valdes-Bobes\\
+{\scshape Date: \hfill \texttt{12/12/21}
+\medskip
+
+\hrule
+
+\bigskip
+
+\bigskip
+
+Following tables and figures are the result of computations using the code included in \href{https://github.com/mitchv34/FIN-971/tree/main/PS5/code}{this repository}.
+\begin{exercise}
+    Using the stationary distribution of the model $\mu(k, z)$, compute the aggregate and cross-sectional moments listed in the Table 2 and 3 in Gomes(2001).
+\end{exercise}
+\begin{answer}
+    The following tables contain the aggregate
+    \begin{table}[h]\caption{Aggregate Results}
+        \input{table_2.tex}
+    \end{table}
+    and cross-sectional moments of the model:
+    \begin{table}[h]\caption{Cross-Sectional Results}
+        \input{table_3.tex}
+    \end{table}
+\end{answer}
+
+\begin{exercise}
+    Divide the distribution of firms into those which have $d<0$ (those receiving seasoned equity), $d=0$ (call them constrained), and those issuing dividends $d>0$ (unconstrained) where $d(k, z)=\pi(k, z ; w)-$ $i\left(k^{\prime}, k\right)-\lambda\left(k, k^{\prime}, z ; w\right)$. What are the fractions of each type?
+\end{exercise}
+
+\begin{answer}
+The distribution of firms is the following:
+\begin{table}[h]\caption{Firms by Type}
+    \input{table_dist.tex}
+\end{table}
+\end{answer}
+
+\newpage
+
+\begin{exercise}
+    Plot decision rules for $k^{\prime}(k, z), i\left(k^{\prime}, k, z\right), x(k, z)=0, d(k, z)$ for the lowest $z$,median $z$, and the highest $z$ on the vertical axis against $k$ on the horizontal axis. Also plot cummulative distribution functions for those cases (truncate your plots at $k=5$ ).
+\end{exercise}
+\begin{answer}
+    Figures are bellow:
+    \begin{figure}\caption{Decision Rules}\label{fig:decision_rules}
+        \includegraphics[scale=0.61]{pol_funcs.pdf}
+    \end{figure}
+    \begin{figure}\caption{Cumulative Distribution Functions}\label{fig:cdfs}
+        \includegraphics[scale=0.55]{cdf.pdf}
+    \end{figure}
+\end{answer}
+
+\begin{exercise}
+    Simulate the model creating a panel of 1200 firms for 10 years (save the shock processes). Then estimate the following equation
+        $$
+        \frac{i_{i, t}}{k_{i, t-1}}=b_{0}+b_{1} Q_{i, t-1}+b_{2} \frac{\pi_{i, t-1}}{k_{i, t-1}}+f_{t}+d_{i}+\epsilon_{i, t}
+        $$
+        where $Q_{i, t}$ is the Tobin's average $\mathrm{Q}$, defined as
+        $$
+        Q_{i, t}=\frac{p_{i, t}}{k_{i, t}}
+        $$
+    and report the results. Does the model make the same predictions as the regressions you ran on problem set 1 ?
+\end{exercise}
+
+\begin{answer}
+    Regression results are bellow.
+\end{answer}
+
+\begin{exercise}
+    Run a counterfactual where $\lambda_{0}=\lambda_{1}=0$ so that there are no financing frictions and create the same panel as above (using the same shock process). Is there cash-flow sensitivity?
+\end{exercise}
+
+\begin{answer}
+    Regression results are bellow.
+    \begin{table}\caption{Counterfactual Results}
+        \input{regression_table.tex}
+    \end{table}
+
+\end{answer}
+
+\end{document}

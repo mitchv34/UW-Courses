@@ -1,0 +1,701 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\documentclass[12pt]{article}
+%\usepackage[left=3cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}e}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{apacite}
+\usepackage[round]{natbib}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{svg}
+\usepackage[margin = 1in, top=2cm]{geometry}% Margins
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.2em}
+\usepackage{setspace} % Setting the spacing between lines
+\usepackage{amsthm, amsmath, amsfonts, mathtools, amssymb, bm} % Math packages 
+\usepackage{svg}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{epstopdf}
+\usepackage{subfig} % Manipulation and reference of small or sub figures and tables
+\usepackage{hyperref} % To create hyperlinks within the document
+\spacing{1.15}
+\usepackage{appendix}
+\usepackage{xcolor}
+\usepackage{cancel}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{optidef}
+
+\usepackage[round]{natbib}
+%\bibliographystyle{plainnat}
+\bibliographystyle{apacite}
+
+
+\newtheorem{defin}{Definition.}
+\newtheorem{teo}{Theorem. }
+\newtheorem{lema}{Lemma. }
+\newtheorem{coro}{Corolary. }
+\newtheorem{prop}{Proposition. }
+\theoremstyle{definition}
+\newtheorem{examp}{Example. }
+\newtheorem{problem}{Problem}
+\newtheorem{subproblem}{}[problem]
+% \numberwithin{problem}{subsection} 
+
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\qiq}{\qquad \implies \qquad}
+\newcommand{\qiffq}{\qquad \iff \qquad}
+\newcommand{\qaq}{\qquad \textbf{and} \qquad}
+\newcommand{\qoq}{\qquad \textbf{or} \qquad}
+\newcommand{\settf}{\text{ \emph{:} }}
+\newcommand{\chbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{.9em}}}
+\newcommand{\cchbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\checkmark$}}
+
+\title{Problem Set 1}
+\author{Mitchell Valdés-Bobes}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{problem}
+Consider the following non-transferable utility matching problem of three men and three women. Unmatched payoff is zero for both men and women. Does the Gale-Shapley algorithm yield the same outcome if we let women propose to men instead of men propose to women?
+
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline & W1 & W2 & W3 \\
+\hline M1 & 10,5 & 8,3 & 6,12 \\
+\hline M2 & 4,10 & 5,2 & 3,20 \\
+\hline M3 & 6,15 & 7,1 & 8,16 \\
+\hline
+\end{tabular}    
+\end{center}
+
+
+What happens if now we switch utilities for women 1 to be (10,5,15) and for women 3 to be (12,16,20)
+\end{problem}
+
+\begin{proof}[Answer]
+Consider first the case where the men propose.
+
+The following diagram shows the first round of the algorithm. Green arrows represent engagements after this round concludes.
+\begin{center}
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+    %uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Circle [id:dp47404309902079866] 
+\draw   (4.25,20.88) .. controls (4.25,10.31) and (12.81,1.75) .. (23.38,1.75) .. controls (33.94,1.75) and (42.5,10.31) .. (42.5,20.88) .. controls (42.5,31.44) and (33.94,40) .. (23.38,40) .. controls (12.81,40) and (4.25,31.44) .. (4.25,20.88) -- cycle ;
+%Shape: Circle [id:dp7260357673975681] 
+\draw   (84.25,20.63) .. controls (84.25,10.06) and (92.81,1.5) .. (103.38,1.5) .. controls (113.94,1.5) and (122.5,10.06) .. (122.5,20.63) .. controls (122.5,31.19) and (113.94,39.75) .. (103.38,39.75) .. controls (92.81,39.75) and (84.25,31.19) .. (84.25,20.63) -- cycle ;
+%Straight Lines [id:da1549308253832593] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (42.5,20.88) -- (80.25,20.28) ;
+\draw [shift={(82.25,20.25)}, rotate = 539.1] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp7516854355152911] 
+\draw   (3.75,63.13) .. controls (3.75,52.56) and (12.31,44) .. (22.88,44) .. controls (33.44,44) and (42,52.56) .. (42,63.13) .. controls (42,73.69) and (33.44,82.25) .. (22.88,82.25) .. controls (12.31,82.25) and (3.75,73.69) .. (3.75,63.13) -- cycle ;
+%Shape: Circle [id:dp28648124292239174] 
+\draw   (83.75,62.88) .. controls (83.75,52.31) and (92.31,43.75) .. (102.88,43.75) .. controls (113.44,43.75) and (122,52.31) .. (122,62.88) .. controls (122,73.44) and (113.44,82) .. (102.88,82) .. controls (92.31,82) and (83.75,73.44) .. (83.75,62.88) -- cycle ;
+%Straight Lines [id:da8847398065384695] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (42.25,63.13) -- (80,62.53) ;
+\draw [shift={(82,62.5)}, rotate = 539.1] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp839059667114781] 
+\draw   (4.75,105.63) .. controls (4.75,95.06) and (13.31,86.5) .. (23.88,86.5) .. controls (34.44,86.5) and (43,95.06) .. (43,105.63) .. controls (43,116.19) and (34.44,124.75) .. (23.88,124.75) .. controls (13.31,124.75) and (4.75,116.19) .. (4.75,105.63) -- cycle ;
+%Shape: Circle [id:dp9563203543208514] 
+\draw   (84.75,105.38) .. controls (84.75,94.81) and (93.31,86.25) .. (103.88,86.25) .. controls (114.44,86.25) and (123,94.81) .. (123,105.38) .. controls (123,115.94) and (114.44,124.5) .. (103.88,124.5) .. controls (93.31,124.5) and (84.75,115.94) .. (84.75,105.38) -- cycle ;
+%Straight Lines [id:da8163987469277081] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (43.25,105.63) -- (81,105.03) ;
+\draw [shift={(83,105)}, rotate = 539.1] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (8.5,9) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M1$};
+% Text Node
+\draw (88.5,8.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W1$};
+% Text Node
+\draw (8,51.25) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M2$};
+% Text Node
+\draw (88,50.75) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W2$};
+% Text Node
+\draw (9,93.75) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M3$};
+% Text Node
+\draw (89,93.25) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W3$};
+\end{tikzpicture}
+
+\end{center}
+Since every man is engaged to a woman the algorithm ends yielding the following outcome:
+
+$$\{(M_1, W_1), (M_2, W_2), (M_3, W_3)\}$$
+
+Now consider what happens when women propose:
+
+\begin{center}
+    \begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Circle [id:dp47404309902079866] 
+\draw   (4.25,20.88) .. controls (4.25,10.31) and (12.81,1.75) .. (23.38,1.75) .. controls (33.94,1.75) and (42.5,10.31) .. (42.5,20.88) .. controls (42.5,31.44) and (33.94,40) .. (23.38,40) .. controls (12.81,40) and (4.25,31.44) .. (4.25,20.88) -- cycle ;
+%Shape: Circle [id:dp7260357673975681] 
+\draw   (84.25,20.63) .. controls (84.25,10.06) and (92.81,1.5) .. (103.38,1.5) .. controls (113.94,1.5) and (122.5,10.06) .. (122.5,20.63) .. controls (122.5,31.19) and (113.94,39.75) .. (103.38,39.75) .. controls (92.81,39.75) and (84.25,31.19) .. (84.25,20.63) -- cycle ;
+%Straight Lines [id:da1549308253832593] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (44.12,103.82) -- (84.25,20.63) ;
+\draw [shift={(43.25,105.63)}, rotate = 295.75] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp7516854355152911] 
+\draw   (3.75,63.13) .. controls (3.75,52.56) and (12.31,44) .. (22.88,44) .. controls (33.44,44) and (42,52.56) .. (42,63.13) .. controls (42,73.69) and (33.44,82.25) .. (22.88,82.25) .. controls (12.31,82.25) and (3.75,73.69) .. (3.75,63.13) -- cycle ;
+%Shape: Circle [id:dp28648124292239174] 
+\draw   (83.75,62.88) .. controls (83.75,52.31) and (92.31,43.75) .. (102.88,43.75) .. controls (113.44,43.75) and (122,52.31) .. (122,62.88) .. controls (122,73.44) and (113.44,82) .. (102.88,82) .. controls (92.31,82) and (83.75,73.44) .. (83.75,62.88) -- cycle ;
+%Straight Lines [id:da8847398065384695] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (45.6,21.47) -- (83.63,62.81) ;
+\draw [shift={(44.25,20)}, rotate = 47.4] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp839059667114781] 
+\draw   (4.75,105.63) .. controls (4.75,95.06) and (13.31,86.5) .. (23.88,86.5) .. controls (34.44,86.5) and (43,95.06) .. (43,105.63) .. controls (43,116.19) and (34.44,124.75) .. (23.88,124.75) .. controls (13.31,124.75) and (4.75,116.19) .. (4.75,105.63) -- cycle ;
+%Shape: Circle [id:dp9563203543208514] 
+\draw   (84.75,105.38) .. controls (84.75,94.81) and (93.31,86.25) .. (103.88,86.25) .. controls (114.44,86.25) and (123,94.81) .. (123,105.38) .. controls (123,115.94) and (114.44,124.5) .. (103.88,124.5) .. controls (93.31,124.5) and (84.75,115.94) .. (84.75,105.38) -- cycle ;
+%Straight Lines [id:da8163987469277081] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (45.27,64.87) -- (84.75,105.38) ;
+\draw [shift={(43.88,63.44)}, rotate = 45.74] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (8.5,9) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M1$};
+% Text Node
+\draw (88.75,8.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W1$};
+% Text Node
+\draw (7.75,51) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M2$};
+% Text Node
+\draw (88,50.75) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W2$};
+% Text Node
+\draw (9,93.75) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M3$};
+% Text Node
+\draw (89,93.25) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W3$};
+
+
+\end{tikzpicture}
+
+\end{center}
+
+Since every woman is engaged to a man the algorithm ends yielding the following outcome:
+
+$$\{(M_1, W_2), (M_2, W_3), (M_3, W_1)\}$$
+
+As we can observe which side proposes determined the stable matching that the Gale-Sapley algorithm yield.
+
+Now we consider the case where women preferences change. First note that since men preferences do no change, and being married to anyone beats remaining single for any woman, then the outcome is the same when men propose.
+
+
+Consider the case where woman propose, in the following diagram, red arrows are propositions that are rejected and blue arrows, engagements that are broken in each round:
+
+\begin{center}
+
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Circle [id:dp47404309902079866] 
+\draw   (30.25,41.88) .. controls (30.25,31.31) and (38.81,22.75) .. (49.38,22.75) .. controls (59.94,22.75) and (68.5,31.31) .. (68.5,41.88) .. controls (68.5,52.44) and (59.94,61) .. (49.38,61) .. controls (38.81,61) and (30.25,52.44) .. (30.25,41.88) -- cycle ;
+%Shape: Circle [id:dp7260357673975681] 
+\draw   (110.25,41.63) .. controls (110.25,31.06) and (118.81,22.5) .. (129.38,22.5) .. controls (139.94,22.5) and (148.5,31.06) .. (148.5,41.63) .. controls (148.5,52.19) and (139.94,60.75) .. (129.38,60.75) .. controls (118.81,60.75) and (110.25,52.19) .. (110.25,41.63) -- cycle ;
+%Straight Lines [id:da1549308253832593] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (69.87,124.83) -- (110.25,41.63) ;
+\draw [shift={(69,126.63)}, rotate = 295.89] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp7516854355152911] 
+\draw   (29.75,84.13) .. controls (29.75,73.56) and (38.31,65) .. (48.88,65) .. controls (59.44,65) and (68,73.56) .. (68,84.13) .. controls (68,94.69) and (59.44,103.25) .. (48.88,103.25) .. controls (38.31,103.25) and (29.75,94.69) .. (29.75,84.13) -- cycle ;
+%Shape: Circle [id:dp28648124292239174] 
+\draw   (109.75,83.88) .. controls (109.75,73.31) and (118.31,64.75) .. (128.88,64.75) .. controls (139.44,64.75) and (148,73.31) .. (148,83.88) .. controls (148,94.44) and (139.44,103) .. (128.88,103) .. controls (118.31,103) and (109.75,94.44) .. (109.75,83.88) -- cycle ;
+%Straight Lines [id:da8847398065384695] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (70.91,44.67) -- (109.75,83.88) ;
+\draw [shift={(69.5,43.25)}, rotate = 45.27] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp839059667114781] 
+\draw   (30.75,126.63) .. controls (30.75,116.06) and (39.31,107.5) .. (49.88,107.5) .. controls (60.44,107.5) and (69,116.06) .. (69,126.63) .. controls (69,137.19) and (60.44,145.75) .. (49.88,145.75) .. controls (39.31,145.75) and (30.75,137.19) .. (30.75,126.63) -- cycle ;
+%Shape: Circle [id:dp9563203543208514] 
+\draw   (110.75,126.38) .. controls (110.75,115.81) and (119.31,107.25) .. (129.88,107.25) .. controls (140.44,107.25) and (149,115.81) .. (149,126.38) .. controls (149,136.94) and (140.44,145.5) .. (129.88,145.5) .. controls (119.31,145.5) and (110.75,136.94) .. (110.75,126.38) -- cycle ;
+%Straight Lines [id:da8163987469277081] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (72.75,126.26) -- (110.75,126.38) ;
+\draw [shift={(70.75,126.25)}, rotate = 0.18] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp49277418617332014] 
+\draw   (190.25,41.88) .. controls (190.25,31.31) and (198.81,22.75) .. (209.38,22.75) .. controls (219.94,22.75) and (228.5,31.31) .. (228.5,41.88) .. controls (228.5,52.44) and (219.94,61) .. (209.38,61) .. controls (198.81,61) and (190.25,52.44) .. (190.25,41.88) -- cycle ;
+%Shape: Circle [id:dp9173701055499863] 
+\draw   (270.25,41.63) .. controls (270.25,31.06) and (278.81,22.5) .. (289.38,22.5) .. controls (299.94,22.5) and (308.5,31.06) .. (308.5,41.63) .. controls (308.5,52.19) and (299.94,60.75) .. (289.38,60.75) .. controls (278.81,60.75) and (270.25,52.19) .. (270.25,41.63) -- cycle ;
+%Straight Lines [id:da8859367920999559] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (230.5,41.86) -- (270.25,41.63) ;
+\draw [shift={(228.5,41.88)}, rotate = 359.66] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp20835009089647927] 
+\draw   (189.75,84.13) .. controls (189.75,73.56) and (198.31,65) .. (208.88,65) .. controls (219.44,65) and (228,73.56) .. (228,84.13) .. controls (228,94.69) and (219.44,103.25) .. (208.88,103.25) .. controls (198.31,103.25) and (189.75,94.69) .. (189.75,84.13) -- cycle ;
+%Shape: Circle [id:dp2407617467548171] 
+\draw   (269.75,83.88) .. controls (269.75,73.31) and (278.31,64.75) .. (288.88,64.75) .. controls (299.44,64.75) and (308,73.31) .. (308,83.88) .. controls (308,94.44) and (299.44,103) .. (288.88,103) .. controls (278.31,103) and (269.75,94.44) .. (269.75,83.88) -- cycle ;
+%Straight Lines [id:da2584747424689573] 
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ]   (230.91,44.67) -- (269.75,83.88) ;
+\draw [shift={(229.5,43.25)}, rotate = 45.27] [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp061494283479536005] 
+\draw   (190.75,126.63) .. controls (190.75,116.06) and (199.31,107.5) .. (209.88,107.5) .. controls (220.44,107.5) and (229,116.06) .. (229,126.63) .. controls (229,137.19) and (220.44,145.75) .. (209.88,145.75) .. controls (199.31,145.75) and (190.75,137.19) .. (190.75,126.63) -- cycle ;
+%Shape: Circle [id:dp44766953543727617] 
+\draw   (270.75,126.38) .. controls (270.75,115.81) and (279.31,107.25) .. (289.88,107.25) .. controls (300.44,107.25) and (309,115.81) .. (309,126.38) .. controls (309,136.94) and (300.44,145.5) .. (289.88,145.5) .. controls (279.31,145.5) and (270.75,136.94) .. (270.75,126.38) -- cycle ;
+%Straight Lines [id:da7147019858582944] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (232.75,126.26) -- (270.75,126.38) ;
+\draw [shift={(230.75,126.25)}, rotate = 0.18] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp15008726726790056] 
+\draw   (349.25,41.88) .. controls (349.25,31.31) and (357.81,22.75) .. (368.38,22.75) .. controls (378.94,22.75) and (387.5,31.31) .. (387.5,41.88) .. controls (387.5,52.44) and (378.94,61) .. (368.38,61) .. controls (357.81,61) and (349.25,52.44) .. (349.25,41.88) -- cycle ;
+%Shape: Circle [id:dp8232660427712566] 
+\draw   (429.25,41.63) .. controls (429.25,31.06) and (437.81,22.5) .. (448.38,22.5) .. controls (458.94,22.5) and (467.5,31.06) .. (467.5,41.63) .. controls (467.5,52.19) and (458.94,60.75) .. (448.38,60.75) .. controls (437.81,60.75) and (429.25,52.19) .. (429.25,41.63) -- cycle ;
+%Straight Lines [id:da12757060864080527] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (389.5,41.86) -- (429.25,41.63) ;
+\draw [shift={(387.5,41.88)}, rotate = 359.66] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp5669656262274885] 
+\draw   (348.75,84.13) .. controls (348.75,73.56) and (357.31,65) .. (367.88,65) .. controls (378.44,65) and (387,73.56) .. (387,84.13) .. controls (387,94.69) and (378.44,103.25) .. (367.88,103.25) .. controls (357.31,103.25) and (348.75,94.69) .. (348.75,84.13) -- cycle ;
+%Shape: Circle [id:dp8944323460837262] 
+\draw   (428.75,83.88) .. controls (428.75,73.31) and (437.31,64.75) .. (447.88,64.75) .. controls (458.44,64.75) and (467,73.31) .. (467,83.88) .. controls (467,94.44) and (458.44,103) .. (447.88,103) .. controls (437.31,103) and (428.75,94.44) .. (428.75,83.88) -- cycle ;
+%Straight Lines [id:da738147590851747] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (390.25,83.88) -- (428.75,83.88) ;
+\draw [shift={(388.25,83.88)}, rotate = 0] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp09225264916912246] 
+\draw   (349.75,126.63) .. controls (349.75,116.06) and (358.31,107.5) .. (368.88,107.5) .. controls (379.44,107.5) and (388,116.06) .. (388,126.63) .. controls (388,137.19) and (379.44,145.75) .. (368.88,145.75) .. controls (358.31,145.75) and (349.75,137.19) .. (349.75,126.63) -- cycle ;
+%Shape: Circle [id:dp9633447369405133] 
+\draw   (429.75,126.38) .. controls (429.75,115.81) and (438.31,107.25) .. (448.88,107.25) .. controls (459.44,107.25) and (468,115.81) .. (468,126.38) .. controls (468,136.94) and (459.44,145.5) .. (448.88,145.5) .. controls (438.31,145.5) and (429.75,136.94) .. (429.75,126.38) -- cycle ;
+%Straight Lines [id:da4135368507666153] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (391.75,126.26) -- (429.75,126.38) ;
+\draw [shift={(389.75,126.25)}, rotate = 0.18] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (34.5,30) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M1$};
+% Text Node
+\draw (114.75,29.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W1$};
+% Text Node
+\draw (33.75,72) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M2$};
+% Text Node
+\draw (114,71.75) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W2$};
+% Text Node
+\draw (35,114.75) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M3$};
+% Text Node
+\draw (115,114.25) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W3$};
+% Text Node
+\draw (194.5,30) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M1$};
+% Text Node
+\draw (274.75,29.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W1$};
+% Text Node
+\draw (193.75,72) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M2$};
+% Text Node
+\draw (274,71.75) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W2$};
+% Text Node
+\draw (195,114.75) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M3$};
+% Text Node
+\draw (275,114.25) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W3$};
+% Text Node
+\draw (353.5,30) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M1$};
+% Text Node
+\draw (433.75,29.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W1$};
+% Text Node
+\draw (352.75,72) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M2$};
+% Text Node
+\draw (433,71.75) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W2$};
+% Text Node
+\draw (354,114.75) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M3$};
+% Text Node
+\draw (434,114.25) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W3$};
+% Text Node
+\draw (-2.75,2) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle t=1$};
+% Text Node
+\draw (158.5,2.75) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle t=2$};
+% Text Node
+\draw (319.25,1.25) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle t=3$};
+
+
+\end{tikzpicture}
+\end{center}
+Since every woman is engaged to a man the algorithm ends yielding the following outcome:
+
+$$\{(M_1, W_1), (M_2, W_2), (M_3, W_3)\}$$
+
+With the new preferences, the outcome is the same regardless of which side proposes.
+
+\end{proof}
+
+\begin{problem}
+\textbf{Econ 711 - Fall $2010-$ Q.1} Consider a matching market with two distinct "sides", metaphorically called "men" and "women", but perhaps better thought of as a professional partnership, likes specialist neuro-surgeons and interns (one-on-one matches). All benefits of the match are as given below:
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline & $\mathrm{M} 1$ & $\mathrm{M} 2$ & $\mathrm{M} 3$ \\
+\hline $\mathrm{W} 1$ & 1,2 & 4,3 & 3,2 \\
+\hline $\mathrm{W} 2$ & 1,3 & 2,4 & 3,2 \\
+\hline $\mathrm{W} 3$ & 2,2 & 2,2 & 4,4 \\
+\hline
+\end{tabular}
+\end{center}
+Unmatched individuals earn nothing.
+\begin{subproblem}
+Assume that wages are not negotiable, and thus no side transfers are possible. Find all stable matchings. Carefully justify your answer.
+\end{subproblem}
+\begin{proof}[Answer]
+Consider the matches yielded by the \textit{DAA} algorithm when men propose:
+
+\begin{center}
+    
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Circle [id:dp7652489100342224] 
+\draw   (50.25,61.88) .. controls (50.25,51.31) and (58.81,42.75) .. (69.38,42.75) .. controls (79.94,42.75) and (88.5,51.31) .. (88.5,61.88) .. controls (88.5,72.44) and (79.94,81) .. (69.38,81) .. controls (58.81,81) and (50.25,72.44) .. (50.25,61.88) -- cycle ;
+%Shape: Circle [id:dp3346080770901485] 
+\draw   (130.25,61.63) .. controls (130.25,51.06) and (138.81,42.5) .. (149.38,42.5) .. controls (159.94,42.5) and (168.5,51.06) .. (168.5,61.63) .. controls (168.5,72.19) and (159.94,80.75) .. (149.38,80.75) .. controls (138.81,80.75) and (130.25,72.19) .. (130.25,61.63) -- cycle ;
+%Straight Lines [id:da08743304022537424] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (126,104.49) -- (88,104.13) ;
+\draw [shift={(128,104.51)}, rotate = 180.55] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp07470742655820373] 
+\draw   (49.75,104.13) .. controls (49.75,93.56) and (58.31,85) .. (68.88,85) .. controls (79.44,85) and (88,93.56) .. (88,104.13) .. controls (88,114.69) and (79.44,123.25) .. (68.88,123.25) .. controls (58.31,123.25) and (49.75,114.69) .. (49.75,104.13) -- cycle ;
+%Shape: Circle [id:dp4880056947876592] 
+\draw   (129.75,103.88) .. controls (129.75,93.31) and (138.31,84.75) .. (148.88,84.75) .. controls (159.44,84.75) and (168,93.31) .. (168,103.88) .. controls (168,114.44) and (159.44,123) .. (148.88,123) .. controls (138.31,123) and (129.75,114.44) .. (129.75,103.88) -- cycle ;
+%Straight Lines [id:da9778724413337763] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (89.5,63.25) -- (128.34,102.45) ;
+\draw [shift={(129.75,103.88)}, rotate = 225.27] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp6686983320828039] 
+\draw   (50.75,146.63) .. controls (50.75,136.06) and (59.31,127.5) .. (69.88,127.5) .. controls (80.44,127.5) and (89,136.06) .. (89,146.63) .. controls (89,157.19) and (80.44,165.75) .. (69.88,165.75) .. controls (59.31,165.75) and (50.75,157.19) .. (50.75,146.63) -- cycle ;
+%Shape: Circle [id:dp43508914024301926] 
+\draw   (130.75,146.38) .. controls (130.75,135.81) and (139.31,127.25) .. (149.88,127.25) .. controls (160.44,127.25) and (169,135.81) .. (169,146.38) .. controls (169,156.94) and (160.44,165.5) .. (149.88,165.5) .. controls (139.31,165.5) and (130.75,156.94) .. (130.75,146.38) -- cycle ;
+%Straight Lines [id:da18891810815215093] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (90.75,146.25) -- (128.75,146.37) ;
+\draw [shift={(130.75,146.38)}, rotate = 180.18] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp4778156454792699] 
+\draw   (210.25,61.88) .. controls (210.25,51.31) and (218.81,42.75) .. (229.38,42.75) .. controls (239.94,42.75) and (248.5,51.31) .. (248.5,61.88) .. controls (248.5,72.44) and (239.94,81) .. (229.38,81) .. controls (218.81,81) and (210.25,72.44) .. (210.25,61.88) -- cycle ;
+%Shape: Circle [id:dp6864622708910093] 
+\draw   (290.25,61.63) .. controls (290.25,51.06) and (298.81,42.5) .. (309.38,42.5) .. controls (319.94,42.5) and (328.5,51.06) .. (328.5,61.63) .. controls (328.5,72.19) and (319.94,80.75) .. (309.38,80.75) .. controls (298.81,80.75) and (290.25,72.19) .. (290.25,61.63) -- cycle ;
+%Straight Lines [id:da9069505025479367] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (248.5,61.88) -- (288.25,61.64) ;
+\draw [shift={(290.25,61.63)}, rotate = 539.6600000000001] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp953885281298235] 
+\draw   (209.75,104.13) .. controls (209.75,93.56) and (218.31,85) .. (228.88,85) .. controls (239.44,85) and (248,93.56) .. (248,104.13) .. controls (248,114.69) and (239.44,123.25) .. (228.88,123.25) .. controls (218.31,123.25) and (209.75,114.69) .. (209.75,104.13) -- cycle ;
+%Shape: Circle [id:dp2750777427414419] 
+\draw   (289.75,103.88) .. controls (289.75,93.31) and (298.31,84.75) .. (308.88,84.75) .. controls (319.44,84.75) and (328,93.31) .. (328,103.88) .. controls (328,114.44) and (319.44,123) .. (308.88,123) .. controls (298.31,123) and (289.75,114.44) .. (289.75,103.88) -- cycle ;
+%Straight Lines [id:da5948990779320036] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (248,104.13) -- (286.34,104.13) ;
+\draw [shift={(288.34,104.13)}, rotate = 180] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp617915302544001] 
+\draw   (210.75,146.63) .. controls (210.75,136.06) and (219.31,127.5) .. (229.88,127.5) .. controls (240.44,127.5) and (249,136.06) .. (249,146.63) .. controls (249,157.19) and (240.44,165.75) .. (229.88,165.75) .. controls (219.31,165.75) and (210.75,157.19) .. (210.75,146.63) -- cycle ;
+%Shape: Circle [id:dp005186918757443815] 
+\draw   (290.75,146.38) .. controls (290.75,135.81) and (299.31,127.25) .. (309.88,127.25) .. controls (320.44,127.25) and (329,135.81) .. (329,146.38) .. controls (329,156.94) and (320.44,165.5) .. (309.88,165.5) .. controls (299.31,165.5) and (290.75,156.94) .. (290.75,146.38) -- cycle ;
+%Straight Lines [id:da6825427048735073] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (250.75,146.25) -- (288.75,146.37) ;
+\draw [shift={(290.75,146.38)}, rotate = 180.18] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (54.5,50) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M1$};
+% Text Node
+\draw (134.75,49.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W1$};
+% Text Node
+\draw (53.75,92) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M2$};
+% Text Node
+\draw (134,91.75) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W2$};
+% Text Node
+\draw (55,134.75) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M3$};
+% Text Node
+\draw (135,134.25) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W3$};
+% Text Node
+\draw (214.5,50) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M1$};
+% Text Node
+\draw (294.75,49.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W1$};
+% Text Node
+\draw (213.75,92) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M2$};
+% Text Node
+\draw (294,91.75) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W2$};
+% Text Node
+\draw (215,134.75) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M3$};
+% Text Node
+\draw (295,134.25) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W3$};
+% Text Node
+\draw (17.25,22) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle t=1$};
+% Text Node
+\draw (178.5,22.75) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle t=2$};
+
+
+\end{tikzpicture}
+\end{center}
+
+\textbf{Note} that in $t=2$ $M1$ could have proposed to $W3$ since he is indifferent between the two but he would have been rejected because $W3$ strictly prefers $W3$ to him this means that the final matching would have been the same:
+
+$$\{(M_1, W_1), (M_2, W_2), (M_3, W_3)\}$$
+
+Now consider what happens when woman propose:
+
+\begin{center}
+    
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,149); %set diagram left start at 0, and has height of 149
+
+%Shape: Circle [id:dp8050982675906755] 
+\draw   (33.25,40.88) .. controls (33.25,30.31) and (41.81,21.75) .. (52.38,21.75) .. controls (62.94,21.75) and (71.5,30.31) .. (71.5,40.88) .. controls (71.5,51.44) and (62.94,60) .. (52.38,60) .. controls (41.81,60) and (33.25,51.44) .. (33.25,40.88) -- cycle ;
+%Shape: Circle [id:dp12075346690115296] 
+\draw   (113.25,40.63) .. controls (113.25,30.06) and (121.81,21.5) .. (132.38,21.5) .. controls (142.94,21.5) and (151.5,30.06) .. (151.5,40.63) .. controls (151.5,51.19) and (142.94,59.75) .. (132.38,59.75) .. controls (121.81,59.75) and (113.25,51.19) .. (113.25,40.63) -- cycle ;
+%Straight Lines [id:da5370206057725662] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (73.68,80.19) -- (113.25,40.63) ;
+\draw [shift={(72.27,81.61)}, rotate = 315] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp7650746499570646] 
+\draw   (32.75,83.13) .. controls (32.75,72.56) and (41.31,64) .. (51.88,64) .. controls (62.44,64) and (71,72.56) .. (71,83.13) .. controls (71,93.69) and (62.44,102.25) .. (51.88,102.25) .. controls (41.31,102.25) and (32.75,93.69) .. (32.75,83.13) -- cycle ;
+%Shape: Circle [id:dp21494108329265416] 
+\draw   (112.75,82.88) .. controls (112.75,72.31) and (121.31,63.75) .. (131.88,63.75) .. controls (142.44,63.75) and (151,72.31) .. (151,82.88) .. controls (151,93.44) and (142.44,102) .. (131.88,102) .. controls (121.31,102) and (112.75,93.44) .. (112.75,82.88) -- cycle ;
+%Straight Lines [id:da7203259825377917] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (74.1,121.53) -- (112.75,82.88) ;
+\draw [shift={(72.68,122.94)}, rotate = 315] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp9945602947753904] 
+\draw   (33.75,125.63) .. controls (33.75,115.06) and (42.31,106.5) .. (52.88,106.5) .. controls (63.44,106.5) and (72,115.06) .. (72,125.63) .. controls (72,136.19) and (63.44,144.75) .. (52.88,144.75) .. controls (42.31,144.75) and (33.75,136.19) .. (33.75,125.63) -- cycle ;
+%Shape: Circle [id:dp39222754658463166] 
+\draw   (113.75,125.38) .. controls (113.75,114.81) and (122.31,106.25) .. (132.88,106.25) .. controls (143.44,106.25) and (152,114.81) .. (152,125.38) .. controls (152,135.94) and (143.44,144.5) .. (132.88,144.5) .. controls (122.31,144.5) and (113.75,135.94) .. (113.75,125.38) -- cycle ;
+%Straight Lines [id:da9737639891578951] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (75.75,125.26) -- (113.75,125.38) ;
+\draw [shift={(73.75,125.25)}, rotate = 0.18] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp6420167952217521] 
+\draw   (193.25,40.88) .. controls (193.25,30.31) and (201.81,21.75) .. (212.38,21.75) .. controls (222.94,21.75) and (231.5,30.31) .. (231.5,40.88) .. controls (231.5,51.44) and (222.94,60) .. (212.38,60) .. controls (201.81,60) and (193.25,51.44) .. (193.25,40.88) -- cycle ;
+%Shape: Circle [id:dp2089895496971419] 
+\draw   (273.25,40.63) .. controls (273.25,30.06) and (281.81,21.5) .. (292.38,21.5) .. controls (302.94,21.5) and (311.5,30.06) .. (311.5,40.63) .. controls (311.5,51.19) and (302.94,59.75) .. (292.38,59.75) .. controls (281.81,59.75) and (273.25,51.19) .. (273.25,40.63) -- cycle ;
+%Shape: Circle [id:dp2670663024741893] 
+\draw   (192.75,83.13) .. controls (192.75,72.56) and (201.31,64) .. (211.88,64) .. controls (222.44,64) and (231,72.56) .. (231,83.13) .. controls (231,93.69) and (222.44,102.25) .. (211.88,102.25) .. controls (201.31,102.25) and (192.75,93.69) .. (192.75,83.13) -- cycle ;
+%Shape: Circle [id:dp39405260426802613] 
+\draw   (272.75,82.88) .. controls (272.75,72.31) and (281.31,63.75) .. (291.88,63.75) .. controls (302.44,63.75) and (311,72.31) .. (311,82.88) .. controls (311,93.44) and (302.44,102) .. (291.88,102) .. controls (281.31,102) and (272.75,93.44) .. (272.75,82.88) -- cycle ;
+%Straight Lines [id:da02387465845528891] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (234.67,82.88) -- (272.75,82.88) ;
+\draw [shift={(232.67,82.88)}, rotate = 0] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp2503876848593254] 
+\draw   (193.75,125.63) .. controls (193.75,115.06) and (202.31,106.5) .. (212.88,106.5) .. controls (223.44,106.5) and (232,115.06) .. (232,125.63) .. controls (232,136.19) and (223.44,144.75) .. (212.88,144.75) .. controls (202.31,144.75) and (193.75,136.19) .. (193.75,125.63) -- cycle ;
+%Shape: Circle [id:dp23357361452980197] 
+\draw   (273.75,125.38) .. controls (273.75,114.81) and (282.31,106.25) .. (292.88,106.25) .. controls (303.44,106.25) and (312,114.81) .. (312,125.38) .. controls (312,135.94) and (303.44,144.5) .. (292.88,144.5) .. controls (282.31,144.5) and (273.75,135.94) .. (273.75,125.38) -- cycle ;
+%Straight Lines [id:da8184871274760328] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (235.75,125.26) -- (273.75,125.38) ;
+\draw [shift={(233.75,125.25)}, rotate = 0.18] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp9081355343673942] 
+\draw   (352.25,40.88) .. controls (352.25,30.31) and (360.81,21.75) .. (371.38,21.75) .. controls (381.94,21.75) and (390.5,30.31) .. (390.5,40.88) .. controls (390.5,51.44) and (381.94,60) .. (371.38,60) .. controls (360.81,60) and (352.25,51.44) .. (352.25,40.88) -- cycle ;
+%Shape: Circle [id:dp935767512065725] 
+\draw   (432.25,40.63) .. controls (432.25,30.06) and (440.81,21.5) .. (451.38,21.5) .. controls (461.94,21.5) and (470.5,30.06) .. (470.5,40.63) .. controls (470.5,51.19) and (461.94,59.75) .. (451.38,59.75) .. controls (440.81,59.75) and (432.25,51.19) .. (432.25,40.63) -- cycle ;
+%Straight Lines [id:da10239161446897294] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (393.6,123.44) -- (432.25,40.63) ;
+\draw [shift={(392.75,125.25)}, rotate = 295.02] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp7408346273570021] 
+\draw   (351.75,83.13) .. controls (351.75,72.56) and (360.31,64) .. (370.88,64) .. controls (381.44,64) and (390,72.56) .. (390,83.13) .. controls (390,93.69) and (381.44,102.25) .. (370.88,102.25) .. controls (360.31,102.25) and (351.75,93.69) .. (351.75,83.13) -- cycle ;
+%Shape: Circle [id:dp12671798834665715] 
+\draw   (431.75,82.88) .. controls (431.75,72.31) and (440.31,63.75) .. (450.88,63.75) .. controls (461.44,63.75) and (470,72.31) .. (470,82.88) .. controls (470,93.44) and (461.44,102) .. (450.88,102) .. controls (440.31,102) and (431.75,93.44) .. (431.75,82.88) -- cycle ;
+%Straight Lines [id:da09701210493635726] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (393.25,82.88) -- (431.75,82.88) ;
+\draw [shift={(391.25,82.88)}, rotate = 0] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp6876743476280982] 
+\draw   (352.75,125.63) .. controls (352.75,115.06) and (361.31,106.5) .. (371.88,106.5) .. controls (382.44,106.5) and (391,115.06) .. (391,125.63) .. controls (391,136.19) and (382.44,144.75) .. (371.88,144.75) .. controls (361.31,144.75) and (352.75,136.19) .. (352.75,125.63) -- cycle ;
+%Shape: Circle [id:dp7911435823599688] 
+\draw   (432.75,125.38) .. controls (432.75,114.81) and (441.31,106.25) .. (451.88,106.25) .. controls (462.44,106.25) and (471,114.81) .. (471,125.38) .. controls (471,135.94) and (462.44,144.5) .. (451.88,144.5) .. controls (441.31,144.5) and (432.75,135.94) .. (432.75,125.38) -- cycle ;
+%Straight Lines [id:da1979204752312298] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (394.75,125.26) -- (432.75,125.38) ;
+\draw [shift={(392.75,125.25)}, rotate = 0.18] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da006022162795074282] 
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ]   (233.68,80.19) -- (273.25,40.63) ;
+\draw [shift={(232.27,81.61)}, rotate = 315] [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp6227414386335814] 
+\draw   (513.25,40.29) .. controls (513.25,29.73) and (521.81,21.17) .. (532.38,21.17) .. controls (542.94,21.17) and (551.5,29.73) .. (551.5,40.29) .. controls (551.5,50.85) and (542.94,59.42) .. (532.38,59.42) .. controls (521.81,59.42) and (513.25,50.85) .. (513.25,40.29) -- cycle ;
+%Shape: Circle [id:dp23779646841240099] 
+\draw   (593.25,40.04) .. controls (593.25,29.48) and (601.81,20.92) .. (612.38,20.92) .. controls (622.94,20.92) and (631.5,29.48) .. (631.5,40.04) .. controls (631.5,50.6) and (622.94,59.17) .. (612.38,59.17) .. controls (601.81,59.17) and (593.25,50.6) .. (593.25,40.04) -- cycle ;
+%Straight Lines [id:da2263360742849294] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (553.5,40.28) -- (593.25,40.04) ;
+\draw [shift={(551.5,40.29)}, rotate = 359.66] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp1238519028149756] 
+\draw   (512.75,82.54) .. controls (512.75,71.98) and (521.31,63.42) .. (531.88,63.42) .. controls (542.44,63.42) and (551,71.98) .. (551,82.54) .. controls (551,93.1) and (542.44,101.67) .. (531.88,101.67) .. controls (521.31,101.67) and (512.75,93.1) .. (512.75,82.54) -- cycle ;
+%Shape: Circle [id:dp08923942194144785] 
+\draw   (592.75,82.29) .. controls (592.75,71.73) and (601.31,63.17) .. (611.88,63.17) .. controls (622.44,63.17) and (631,71.73) .. (631,82.29) .. controls (631,92.85) and (622.44,101.42) .. (611.88,101.42) .. controls (601.31,101.42) and (592.75,92.85) .. (592.75,82.29) -- cycle ;
+%Straight Lines [id:da5303539702033824] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (554.25,82.29) -- (592.75,82.29) ;
+\draw [shift={(552.25,82.29)}, rotate = 0] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp22449644301005311] 
+\draw   (513.75,125.04) .. controls (513.75,114.48) and (522.31,105.92) .. (532.88,105.92) .. controls (543.44,105.92) and (552,114.48) .. (552,125.04) .. controls (552,135.6) and (543.44,144.17) .. (532.88,144.17) .. controls (522.31,144.17) and (513.75,135.6) .. (513.75,125.04) -- cycle ;
+%Shape: Circle [id:dp7022553745091713] 
+\draw   (593.75,124.79) .. controls (593.75,114.23) and (602.31,105.67) .. (612.88,105.67) .. controls (623.44,105.67) and (632,114.23) .. (632,124.79) .. controls (632,135.35) and (623.44,143.92) .. (612.88,143.92) .. controls (602.31,143.92) and (593.75,135.35) .. (593.75,124.79) -- cycle ;
+%Straight Lines [id:da9001541644381552] 
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (555.75,124.67) -- (593.75,124.79) ;
+\draw [shift={(553.75,124.67)}, rotate = 0.18] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (37.5,29) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M1$};
+% Text Node
+\draw (117.75,28.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W1$};
+% Text Node
+\draw (36.75,71) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M2$};
+% Text Node
+\draw (117,70.75) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W2$};
+% Text Node
+\draw (38,113.75) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M3$};
+% Text Node
+\draw (118,113.25) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W3$};
+% Text Node
+\draw (197.5,29) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M1$};
+% Text Node
+\draw (277.75,28.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W1$};
+% Text Node
+\draw (196.75,71) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M2$};
+% Text Node
+\draw (277,70.75) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W2$};
+% Text Node
+\draw (198,113.75) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M3$};
+% Text Node
+\draw (278,113.25) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W3$};
+% Text Node
+\draw (356.5,29) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M1$};
+% Text Node
+\draw (436.75,28.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W1$};
+% Text Node
+\draw (355.75,71) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M2$};
+% Text Node
+\draw (436,70.75) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W2$};
+% Text Node
+\draw (357,113.75) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M3$};
+% Text Node
+\draw (437,113.25) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W3$};
+% Text Node
+\draw (0.25,1) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle t=1$};
+% Text Node
+\draw (161.5,1.75) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle t=2$};
+% Text Node
+\draw (322.25,0.25) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle t=3$};
+% Text Node
+\draw (517.5,28.42) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M1$};
+% Text Node
+\draw (597.75,27.92) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W1$};
+% Text Node
+\draw (516.75,70.42) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M2$};
+% Text Node
+\draw (597,70.17) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W2$};
+% Text Node
+\draw (518,113.17) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle M3$};
+% Text Node
+\draw (598,112.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle W3$};
+% Text Node
+\draw (483.58,-0.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle  \begin{array}{{>{\displaystyle}l}}
+t=4\\
+\end{array}$};
+\end{tikzpicture}
+\end{center}
+
+The stable matching that \textit{DAA} produces when woman propose is:
+$$\{(M_1, W_1), (M_2, W_2), (M_3, W_3)\}$$
+
+Since \textit{DAA} yields a man-optimal match when men proposes and a man-pessimal match when women propose and both matchings are the same then we can conclude that this is the only stable matching possible.
+
+\end{proof}
+
+\begin{subproblem}
+From now on, assume side transfers are possible. Let payoffs be the sum of transfers. Find the efficient matching
+\end{subproblem}
+\begin{proof}[Answer]
+Consider the following table with the total payoff of each match ($h_{ij}$) :
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline & $\mathrm{M} 1$ & $\mathrm{M} 2$ & $\mathrm{M} 3$ \\
+\hline $\mathrm{W} 1$ & 3 & 7 & 5 \\
+\hline $\mathrm{W} 2$ & 4 & 6 & 5 \\
+\hline $\mathrm{W} 3$ & 4 & 4 & 8 \\
+\hline
+\end{tabular}
+\end{center}
+\end{proof}
+
+An efficient matching maximizes the sum of all match outputs, is easy to see that the only efficient matching is:
+$$\{(M1,W2), (M2, W1), (M3,W3)\}$$
+
+\begin{subproblem}
+Find with proof the minimum wage for the type 2 man. Hint: Let the wages of women be $w_{i}$ and wages of men be $v_{i} .$
+\end{subproblem}
+\begin{proof}[Answer]
+
+Let $(w_1,w_2,w_2)$ then wages of the women and $(v_1, v_2, v_3)$ the wages of the men. suppose that $v_2<2$ using free entry we have that:
+
+$$v_2 + w_2 \geq 6 \qiq w_2 > 4 \qiq v_1 + w_2 > 4$$
+
+this is a contradiction with free exit therefore the minimum wage for a type 2 man is 2.
+
+\textbf{Note} that the wages $w=(5,4,4)$ and $v=(0,2,4)$ are feasible with $v_2=2$.
+
+\end{proof}
+
+\end{problem}
+
+\begin{problem}
+Assume types are drawn uniformly from [0,1] . When a type $x$ matches with a type $y,$ type $x$ gets payoff $y+a x y,$ and the payoff to $y$ matching with $x$ is symmetrically $x+a x y .$ Assume $-1<a<0$
+
+\begin{subproblem}
+    If these are nontransferable payoffs, who matches with whom?
+\end{subproblem}
+
+
+\begin{proof}[Answer]
+
+Consider the utility of a type $x$ when matches with a type $y$:
+$$f(y|x) = y+a x y = y(1+a x)$$
+
+and alternatively for a type $y$
+
+$$g(x|y) = x+a y x = x(1+a y)$$ 
+
+Take any $x_2>x_1$ and $y_2>y_1$ then:
+
+$$[f(y_2|x)-f(y_1|x)][g(x_2|y)-g(x_1|y)] = (1-ax)(1-ay)(y_2-y_1)(x_2-x_1)>0 \qquad \forall x,y$$
+
+this implies that the functions are co-monotone therefore the only stable matching is PAM. Denote $U(x)=x$ the mass o men that lie bellow $x$ and analogous for $U(y)=y$, then any PAM matching have to meet:
+
+$$1 - U(x) = 1 - U(y) \qiq x = y $$
+
+Therefore the only stable matching is the one that pair $x$ and $y$ if and only if $x=y$.
+
+
+
+\end{proof}
+
+
+
+\begin{subproblem}
+Set up a matching market, with wage $w(x)$ for each type $x$. What wage can decentralize this market? (Can any other wage work?)
+\end{subproblem}
+\begin{proof}[Answer]
+
+Consider the production function for this problem:
+
+$$h(x,y)=f(y|x)+g(x|y) = x+y+2axy$$
+
+For any $x'>x$ and $y'>y$:
+
+$$h\left(x^{\prime}, y^{\prime}\right)+h(x, y) - h\left(x^{\prime}, y\right)+h\left(x, y^{\prime}\right) = 2a(x'y'+xy-x'y-xy') = 2a(x'-x)(y'+y)<0$$
+
+Therefore the production function is strictly submodular thus NAM is the  unique efficient matching. This is $x$ is matched with $1-x$ and vice-versa.
+
+Denote $v(x)$ and $w(y)$ the payoff functions for each type $x$ and $y$. If we maximize  of the profit function $\pi(x,y) = h(x,y)-v(x)-w(x)$ we get to the following optimality conditions:
+
+$$\frac{\partial}{\partial x}\pi(x,y) = \qiq v'(x) = 1+2a y$$
+$$\frac{\partial}{\partial y}\pi(x,y) = \qiq w'(y) = 1+2a x$$
+
+Imposing the condition that this optimum must be attained at the stable matching we get:
+
+$$v'(x) = 1+2a (1-x) \qiq v(x) = x + a(1-x)^2 + c$$
+$$w'(y) = 1+2a (1-y) \qiq w(y) = y + a(1-y)^2 + d$$
+
+Now to fully solve for $d$ and $c$ we need to assume that types $x$ and $y$ are on the same "side" of the market this is $v(x)=w(y)$; considering this we can use the fact that profits must be zero for the matched pairs to get:
+
+$$\pi(x,y) = \qiq c+d = -a$$
+
+In general the wages are not unique. If we assume a continuous market where there is no distinction between a type $x$ and $y$ then $w(y)=v(1-x)$ therefore $c=d$ which meas that the only wage that decentralize the market is:
+
+$$v(x) = x + a(1-x)^2 + c \qquad \text{where } c = -\frac{a}{2}$$
+
+\end{proof}
+\end{problem}
+
+\begin{problem}
+\textbf{Double Auctions} - The Borrowers There are 30 students numbered $1,2,3, \ldots, 30 .$ Even students are lenders and odd students are borrowers. The lenders each have 1000 to lend, and the return available to any lender is $3 \%$ plus $0.01 \%$ (known as a basis point) times twice his student number. The borrower has a return on a project equal to $3 \%$ plus $0.01 \%$ times his student number. So a borrower borrows if he can get an interest rate below his projectós return, and a lender lends if he can get an interest rate above the return he has available to him. What are all possible market clearing interest rates, and numbers of transactions?
+\end{problem}
+
+\begin{proof}[Answer]
+ 
+We know that the sorting is NAM therefore we can order the lenders such that their (opportunity) costs are decreasing and the borrowers increasing in their valuation. In this problem both costs and valuations are the interest rate. Note also that we can dispose the $3\%$ and the $0.01\%$ the doubles of even numbers and with odd numbers ordered decreasing. We know that there is going to be positive gains from trade up to the 5th comparison therefore there will be 5 transaction any interest rate $r\in[0.032, 0.033]$ will clear the market.
+
+\end{proof}
+
+\end{document}

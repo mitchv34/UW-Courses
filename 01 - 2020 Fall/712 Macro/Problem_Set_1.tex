@@ -1,0 +1,755 @@
+
+    
+
+
+
+
+    
+\documentclass[10pt,notitlepage,onecolumn,aps,pra]{revtex4-1}
+
+    
+    
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+% We will generate all images so they have a width \maxwidth. This means
+% that they will get their normal width if they fit onto the page, but
+% are scaled down if they would overflow the margins.
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+\else\Gin@nat@width\fi}
+\makeatother
+\let\Oldincludegraphics\includegraphics
+% Set max figure width to be 80% of text width, for now hardcoded.
+\renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+% Ensure that by default, figures have no caption (until we provide a
+% proper Figure object with a Caption API and a way to capture that
+% in the conversion process - todo).
+\usepackage{caption}
+\DeclareCaptionLabelFormat{nolabel}{}
+\captionsetup{labelformat=nolabel}
+
+\usepackage{adjustbox} % Used to constrain images to a maximum size
+\usepackage{xcolor} % Allow colors to be defined
+\usepackage{enumerate} % Needed for markdown enumerations to work
+\usepackage{geometry} % Used to adjust the document margins
+\usepackage{amsmath} % Equations
+\usepackage{amssymb} % Equations
+\usepackage{textcomp} % defines textquotesingle
+% Hack from http://tex.stackexchange.com/a/47451/13684:
+\AtBeginDocument{%
+    \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+}
+\usepackage{upquote} % Upright quotes for verbatim code
+\usepackage{eurosym} % defines \euro
+\usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+\usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+\usepackage{fancyvrb} % verbatim replacement that allows latex
+\usepackage{grffile} % extends the file name processing of package graphics
+                     % to support a larger range
+% The hyperref package gives us a pdf with properly built
+% internal navigation ('pdf bookmarks' for the table of contents,
+% internal cross-reference links, web links for URLs, etc.)
+\usepackage{hyperref}
+\usepackage{booktabs}  % table support for pandoc > 1.12.2
+\usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+\usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                            % normalem makes italics be italics, not underlines
+\usepackage{braket}
+
+
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    
+    
+    
+    
+% Pygments definitions
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % For linebreaks inside Verbatim environment from package fancyvrb. 
+    \makeatletter
+        \newbox\Wrappedcontinuationbox 
+        \newbox\Wrappedvisiblespacebox 
+        \newcommand*\Wrappedvisiblespace {\textcolor{red}{\textvisiblespace}} 
+        \newcommand*\Wrappedcontinuationsymbol {\textcolor{red}{\llap{\tiny$\m@th\hookrightarrow$}}} 
+        \newcommand*\Wrappedcontinuationindent {3ex } 
+        \newcommand*\Wrappedafterbreak {\kern\Wrappedcontinuationindent\copy\Wrappedcontinuationbox} 
+        % Take advantage of the already applied Pygments mark-up to insert 
+        % potential linebreaks for TeX processing. 
+        %        {, <, #, %, $, ' and ": go to next line. 
+        %        _, }, ^, &, >, - and ~: stay at end of broken line. 
+        % Use of \textquotesingle for straight quote. 
+        \newcommand*\Wrappedbreaksatspecials {% 
+            \def\PYGZus{\discretionary{\char`\_}{\Wrappedafterbreak}{\char`\_}}% 
+            \def\PYGZob{\discretionary{}{\Wrappedafterbreak\char`\{}{\char`\{}}% 
+            \def\PYGZcb{\discretionary{\char`\}}{\Wrappedafterbreak}{\char`\}}}% 
+            \def\PYGZca{\discretionary{\char`\^}{\Wrappedafterbreak}{\char`\^}}% 
+            \def\PYGZam{\discretionary{\char`\&}{\Wrappedafterbreak}{\char`\&}}% 
+            \def\PYGZlt{\discretionary{}{\Wrappedafterbreak\char`\<}{\char`\<}}% 
+            \def\PYGZgt{\discretionary{\char`\>}{\Wrappedafterbreak}{\char`\>}}% 
+            \def\PYGZsh{\discretionary{}{\Wrappedafterbreak\char`\#}{\char`\#}}% 
+            \def\PYGZpc{\discretionary{}{\Wrappedafterbreak\char`\%}{\char`\%}}% 
+            \def\PYGZdl{\discretionary{}{\Wrappedafterbreak\char`\$}{\char`\$}}% 
+            \def\PYGZhy{\discretionary{\char`\-}{\Wrappedafterbreak}{\char`\-}}% 
+            \def\PYGZsq{\discretionary{}{\Wrappedafterbreak\textquotesingle}{\textquotesingle}}% 
+            \def\PYGZdq{\discretionary{}{\Wrappedafterbreak\char`\"}{\char`\"}}% 
+            \def\PYGZti{\discretionary{\char`\~}{\Wrappedafterbreak}{\char`\~}}% 
+        } 
+        % Some characters . , ; ? ! / are not pygmentized. 
+        % This macro makes them "active" and they will insert potential linebreaks 
+        \newcommand*\Wrappedbreaksatpunct {% 
+            \lccode`\~`\.\lowercase{\def~}{\discretionary{\hbox{\char`\.}}{\Wrappedafterbreak}{\hbox{\char`\.}}}% 
+            \lccode`\~`\,\lowercase{\def~}{\discretionary{\hbox{\char`\,}}{\Wrappedafterbreak}{\hbox{\char`\,}}}% 
+            \lccode`\~`\;\lowercase{\def~}{\discretionary{\hbox{\char`\;}}{\Wrappedafterbreak}{\hbox{\char`\;}}}% 
+            \lccode`\~`\:\lowercase{\def~}{\discretionary{\hbox{\char`\:}}{\Wrappedafterbreak}{\hbox{\char`\:}}}% 
+            \lccode`\~`\?\lowercase{\def~}{\discretionary{\hbox{\char`\?}}{\Wrappedafterbreak}{\hbox{\char`\?}}}% 
+            \lccode`\~`\!\lowercase{\def~}{\discretionary{\hbox{\char`\!}}{\Wrappedafterbreak}{\hbox{\char`\!}}}% 
+            \lccode`\~`\/\lowercase{\def~}{\discretionary{\hbox{\char`\/}}{\Wrappedafterbreak}{\hbox{\char`\/}}}% 
+            \catcode`\.\active
+            \catcode`\,\active 
+            \catcode`\;\active
+            \catcode`\:\active
+            \catcode`\?\active
+            \catcode`\!\active
+            \catcode`\/\active 
+            \lccode`\~`\~ 	
+        }
+    \makeatother
+
+    \let\OriginalVerbatim=\Verbatim
+    \makeatletter
+    \renewcommand{\Verbatim}[1][1]{%
+        %\parskip\z@skip
+        \sbox\Wrappedcontinuationbox {\Wrappedcontinuationsymbol}%
+        \sbox\Wrappedvisiblespacebox {\FV@SetupFont\Wrappedvisiblespace}%
+        \def\FancyVerbFormatLine ##1{\hsize\linewidth
+            \vtop{\raggedright\hyphenpenalty\z@\exhyphenpenalty\z@
+                \doublehyphendemerits\z@\finalhyphendemerits\z@
+                \strut ##1\strut}%
+        }%
+        % If the linebreak is at a space, the latter will be displayed as visible
+        % space at end of first line, and a continuation symbol starts next line.
+        % Stretch/shrink are however usually zero for typewriter font.
+        \def\FV@Space {%
+            \nobreak\hskip\z@ plus\fontdimen3\font minus\fontdimen4\font
+            \discretionary{\copy\Wrappedvisiblespacebox}{\Wrappedafterbreak}
+            {\kern\fontdimen2\font}%
+        }%
+        
+        % Allow breaks at special characters using \PYG... macros.
+        \Wrappedbreaksatspecials
+        % Breaks at punctuation characters . , ; ? ! and / need catcode=\active 	
+        \OriginalVerbatim[#1,codes*=\Wrappedbreaksatpunct]%
+    }
+    \makeatother
+
+    % Exact colors from NB
+    \definecolor{incolor}{HTML}{303F9F}
+    \definecolor{outcolor}{HTML}{D84315}
+    \definecolor{cellborder}{HTML}{CFCFCF}
+    \definecolor{cellbackground}{HTML}{F7F7F7}
+    
+    % prompt
+    \newcommand{\prompt}[4]{
+        \llap{{\color{#2}[#3]: #4}}\vspace{-1.25em}
+    }
+    
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \title{Problem Set 1 - ECON 712}\author{Mitchell Valdés-Bobes}\affiliation{University of Wisconsin Madison}
+
+\date{\today}
+\maketitle
+
+
+    
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{addpath}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{./Utils\PYZsq{}}\PY{p}{)}
+        \PY{n}{format} \PY{l+s}{compact}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    Here we are interested in how the stock market may react to a future
+FOMC announcement of an increase in short term interest rates. To do so,
+consider the following simple perfect foresight model of stock price
+dynamics given by the following equation \[
+p_{t}=\frac{d+p_{t+1}}{(1+r)}
+\] where \(p_{t}\) is the price of a share at the beginning of period
+\(t\) before constant dividend \(d\) is paid out, and \(r\) is the short
+term risk free interest rate. The left hand side of (1) is the cost of
+buying a share while the right hand side is the benefit of buying the
+share (the owner receives a dividend and capital gain or loss from the
+sale of the share). Assume \(r>0\)
+
+    \hypertarget{problem-1}{%
+\section{Problem 1}\label{problem-1}}
+
+Solve for the steady state stock price \(p^{*}=p_{t}=p_{t+1}\).
+
+    \hypertarget{answer}{%
+\subsection{Answer}\label{answer}}
+
+The steady state is a solution in which prices don't change between
+periods:
+
+\begin{align*}
+    p^{*}=p_{t}=p_{t+1} &\quad \iff \quad  p^* = \frac{d + p^*}{1+r}\\
+    &\quad \iff \quad (1+r)p^* =d + p^*\\
+    &\quad \iff \quad rp^* =d\\
+    &\quad \iff \quad \boxed{p^* =\frac{d}{r}}\\
+\end{align*}
+
+    \hypertarget{problem-2}{%
+\section{Problem 2}\label{problem-2}}
+
+Assume the initial price, \(p_{0},\) is given. Solve the closed form
+solution to the first order linear difference equation in (1). Explain
+how price evolves over time (i.e.~what if \(p_{0}>p^{*}, p_{0}<p^{*}\),
+\(\left.p_{0}=p^{*}\right)\) using both a phase diagram (i.e \(p_{t+1}\)
+against \(p_{t}\) ) as well as a graph of \(p_{t}\) against time If the
+initial stock price is away from the steady state, does it converge or
+diverge from the steady state. Explain why.
+
+    \hypertarget{answer}{%
+\subsection{Answer}\label{answer}}
+
+Re-writing the difference equation we have:
+
+\[p_{t}=\frac{d+p_{t+1}}{(1+r)} \quad \implies \quad p_{t+1}=\underbrace{(1+r)}_{a}p_t - \underbrace{d}_{b} \]
+
+First we solve the homogenous equation:
+
+\[p_{t+1} = a p_{t} \quad \implies p^c_t = \mathbb{c} a^t \]
+
+as a particular solution we can use the steady state we found in
+\textbf{Problem 1}:
+
+\[p_t^{p} = p^* =\frac{d}{r}\]
+
+then the general solution (after we plug \(a\) back in) is:
+
+\[p^g_t = (1+r)^t \mathbb{c} + \frac{d}{r}\]
+
+using the initial condition \(p_0\) we can obtain the value of
+\(\mathbb{c}\):
+
+\[p_0 = (1+r)^0 \mathbb{c} + \frac{d}{r} \quad \implies \mathbb{c} = p_0 - \frac{d}{r}\]
+
+this gives us the general solution:
+
+\begin{equation}\label{eq:solution}\tag{1.1}
+p_t = (1+r)^t \left(  p_0 - \frac{d}{r} \right) + \frac{d}{r}
+\end{equation}
+
+    If we plot the phase diagram of this equation and initial price
+\(p_0>p^*\) we get:
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c}{\PYZpc{}plot inline \PYZhy{}f=svg}
+        \PY{n}{p1} \PY{p}{=} \PY{n}{figure}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+        
+        \PY{n}{r} \PY{p}{=} \PY{l+m+mf}{0.8}\PY{p}{;} \PY{c}{\PYZpc{} interest rate}
+        \PY{n}{d} \PY{p}{=} \PY{l+m+mi}{100}\PY{p}{;} \PY{c}{\PYZpc{} constant dividend}
+        
+        \PY{n}{p\PYZus{}star} \PY{p}{=} \PY{n}{d}\PY{o}{/}\PY{n}{r}\PY{p}{;} \PY{c}{\PYZpc{} steady state}
+        
+        \PY{n}{hold} \PY{l+s}{on}
+        \PY{n}{p} \PY{p}{=} \PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mf}{0.001}\PY{p}{:}\PY{l+m+mi}{300}\PY{p}{;}
+        \PY{n}{plot}\PY{p}{(}\PY{n}{p}\PY{p}{,} \PY{n}{p}\PY{p}{,} \PY{l+s}{\PYZdq{}LineWidth\PYZdq{}}\PY{p}{,} \PY{l+m+mf}{1.5}\PY{p}{)}
+        \PY{n}{plot}\PY{p}{(}\PY{n}{p}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{r}\PY{p}{)}\PY{o}{*}\PY{n}{p}\PY{o}{\PYZhy{}}\PY{n}{d}\PY{p}{,} \PY{l+s}{\PYZdq{}LineWidth\PYZdq{}}\PY{p}{,} \PY{l+m+mf}{1.5}\PY{p}{)}
+        
+        \PY{n}{scatter}\PY{p}{(}\PY{n}{p\PYZus{}star}\PY{p}{,} \PY{n}{p\PYZus{}star}\PY{p}{,} \PY{l+m+mi}{55}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{filled\PYZsq{}}\PY{p}{)}
+        
+        
+        \PY{n}{xticks}\PY{p}{(}\PY{p}{[}\PY{n}{p\PYZus{}star}\PY{p}{]}\PY{p}{)}\PY{p}{;} \PY{n}{xticklabels}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdl{}p\PYZca{}*\PYZdl{}\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{yticks}\PY{p}{(}\PY{p}{[}\PY{n}{p\PYZus{}star}\PY{p}{]}\PY{p}{)}\PY{p}{;} \PY{n}{yticklabels}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdl{}p\PYZca{}*\PYZdl{}\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{h} \PY{p}{=} \PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Phase Diagram\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{h}\PY{p}{.}\PY{n}{FontSize}\PY{p}{=}\PY{l+m+mi}{15}\PY{p}{;}
+        
+        \PY{n}{ax} \PY{p}{=} \PY{n}{gca}\PY{p}{;}
+        \PY{n}{ax}\PY{p}{.}\PY{n}{XAxisLocation} \PY{p}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{origin\PYZsq{}}\PY{p}{;}
+        \PY{n}{ax}\PY{p}{.}\PY{n}{YAxisLocation} \PY{p}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{origin\PYZsq{}}\PY{p}{;}
+        \PY{n}{pbaspect}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1} \PY{l+m+mi}{1} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{xh} \PY{p}{=} \PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdl{}p\PYZus{}t\PYZdl{}\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;} \PY{n}{xh}\PY{p}{.}\PY{n}{FontSize} \PY{p}{=} \PY{l+m+mi}{13}\PY{p}{;}
+        \PY{n}{yh} \PY{p}{=} \PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdl{}p\PYZus{}\PYZob{}t+1\PYZcb{}\PYZdl{}\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;} \PY{n}{yh}\PY{p}{.}\PY{n}{FontSize} \PY{p}{=} \PY{l+m+mi}{13}\PY{p}{;}
+        \PY{n}{yh}\PY{p}{.}\PY{n}{Position}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)} \PY{p}{=} \PY{n}{yh}\PY{p}{.}\PY{n}{Position}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{12}\PY{p}{;}
+        
+        \PY{n}{lgd} \PY{p}{=} \PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZdq{}\PYZdl{}p\PYZus{}t = p\PYZus{}\PYZob{}t+1\PYZcb{} = p\PYZca{}\PYZob{}*\PYZcb{}\PYZdl{}\PYZdq{}}\PY{p}{,} \PY{c}{...}
+                      \PY{l+s}{\PYZdq{}\PYZdl{}p\PYZus{}t = (1+r)\PYZca{}t \PYZbs{}left(  p\PYZus{}0 \PYZhy{} p\PYZca{}* \PYZbs{}right) + p\PYZca{}*\PYZdl{}\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{c}{...}
+                      \PY{l+s}{\PYZdq{}location\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}Northwest\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}interpreter\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}latex\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{lgd}\PY{p}{.}\PY{n}{FontSize} \PY{p}{=} \PY{l+m+mi}{12}\PY{p}{;}
+        
+        \PY{n}{set}\PY{p}{(}\PY{n}{gca}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{TickLabelInterpreter\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Problem_Set_1_files/Problem_Set_1_7_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We could also analyze the price dynamics to observe how prices evolve
+over time depending on the initial price \(p_0\).
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{figure}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+        
+        \PY{n}{r} \PY{p}{=} \PY{l+m+mf}{0.01}\PY{p}{;} \PY{c}{\PYZpc{} interest rate}
+        \PY{n}{d} \PY{p}{=} \PY{l+m+mi}{1}\PY{p}{;} \PY{c}{\PYZpc{} constant dividend}
+        
+        \PY{n}{p\PYZus{}star} \PY{p}{=} \PY{n}{d}\PY{o}{/}\PY{n}{r}\PY{p}{;} \PY{c}{\PYZpc{} steady state}
+        
+        \PY{n}{P0} \PY{p}{=} \PY{p}{[}\PY{n}{p\PYZus{}star} \PY{n}{p\PYZus{}star} \PY{n}{p\PYZus{}star}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{30}\PY{o}{*}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{l+m+mi}{0} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{;}
+        
+        \PY{n}{hold} \PY{l+s}{on}
+        
+        \PY{n}{t} \PY{p}{=} \PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{200}\PY{p}{;}
+        
+        \PY{n}{for} \PY{l+s}{p0} \PY{l+s}{=} \PY{l+s}{P0}
+            \PY{n}{plot}\PY{p}{(}\PY{n}{t}\PY{p}{,} \PY{p}{(}\PY{n}{p0} \PY{o}{\PYZhy{}} \PY{n}{p\PYZus{}star}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{r}\PY{p}{)}\PY{o}{.\PYZca{}}\PY{n}{t} \PY{o}{+} \PY{n}{p\PYZus{}star}\PY{p}{,} \PY{l+s}{\PYZdq{}LineWidth\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+        \PY{k}{end}
+        
+        \PY{n}{h} \PY{p}{=} \PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Price Dynamics\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{h}\PY{p}{.}\PY{n}{FontSize}\PY{p}{=}\PY{l+m+mi}{15}\PY{p}{;}
+        \PY{n}{xticks}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{25}\PY{p}{:}\PY{l+m+mi}{200}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+        \PY{n}{xticklabels}\PY{p}{(}\PY{n+nb}{repmat}\PY{p}{(}\PY{l+s}{\PYZdq{}\PYZdl{}t=\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{)} \PY{o}{+} \PY{n}{string}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{25}\PY{p}{:}\PY{l+m+mi}{200}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{n+nb}{repmat}\PY{p}{(}\PY{l+s}{\PYZdq{}\PYZdl{}\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{)}\PY{p}{)}
+        \PY{n}{yticks}\PY{p}{(}\PY{n}{P0}\PY{p}{)}\PY{p}{;} \PY{n}{yticklabels}\PY{p}{(}\PY{n+nb}{repmat}\PY{p}{(}\PY{l+s}{\PYZdq{}\PYZdl{}P\PYZus{}0=\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{o}{+} \PY{n}{P0}\PY{o}{+}\PY{l+s}{\PYZdq{}\PYZdl{}\PYZdq{}}\PY{p}{)}
+        \PY{n}{xh} \PY{p}{=} \PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Time \PYZdl{}t\PYZdl{}\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;} \PY{n}{xh}\PY{p}{.}\PY{n}{FontSize} \PY{p}{=} \PY{l+m+mi}{13}\PY{p}{;}
+        \PY{n}{yh} \PY{p}{=} \PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Price \PYZdl{}P\PYZus{}t\PYZdl{}\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;} \PY{n}{yh}\PY{p}{.}\PY{n}{FontSize} \PY{p}{=} \PY{l+m+mi}{13}\PY{p}{;}
+        \PY{n}{set}\PY{p}{(}\PY{n}{gca}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{TickLabelInterpreter\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Problem_Set_1_files/Problem_Set_1_9_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    To finally answer the question we can take a look at the solution of the
+difference equation that describes the dynamics of prices:
+
+\[p_t = (1+r)^t \left(  p_0 - p^* \right) + p^*\]
+
+If we start with \(p_0<p^*\) then:
+
+\[p_t = (1+r)^t  \underbrace{ \left(p_0 - p^*  \right)}_{<0} + p^* \qquad \implies p_t \to 0\]
+
+starting at \(p_0>p^*\)
+
+\[p_t = (1+r)^t  \underbrace{ \left(p_0 - p^*  \right)}_{>0} + p^* \qquad \implies p_t \to \infty\]
+
+and at \(p_0 = p^*\):
+
+\[p_t = (1+r)^t  \underbrace{ \left(p_0 - p^*  \right)}_{=0} + p^* \qquad \implies p_t = p^* \forall t\]
+
+    \hypertarget{problem-3}{%
+\section{Problem 3}\label{problem-3}}
+
+\textbf{Matlab} Suppose the risk free rate is \(r=1 \%\) and the stock
+pays constant dividend \(d=1\) per share per period. Open the Matlab
+code we provided. The code generates and plots the price dynamics given
+the first-order difference equation in part 2 given initial share price
+\(p_{0}=100\) at time \(t=0 .\) Modify the code (i.e.~simply replace
+\(\left.100\right)\) with three different initial prices which
+respectively are below, at, and above the stead
+
+    \hypertarget{answer}{%
+\subsection{Answer}\label{answer}}
+
+To show the price dynamics I modified the code that was provided to make
+a function that accepts a vector of initial prices and plot how prices
+evolve in each case. This is saved in the file \texttt{ps1\_func1.m}
+that is attached to this document.
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c}{\PYZpc{}\PYZpc{}file Utils/ps1\PYZus{}func1.m}
+        
+        \PY{k}{function}\PY{+w}{ }p \PY{p}{=}\PY{+w}{ }\PY{n+nf}{ps1\PYZus{}func1}\PY{p}{(}P0\PY{p}{)}
+        
+        \PY{+w}{    }\PY{c}{\PYZpc{} PARAMETERS}
+        
+            \PY{c}{\PYZpc{} If no P0 vector is provided use the default P = [70 100 130]}
+        
+            \PY{n}{r} \PY{p}{=} \PY{l+m+mf}{0.01}\PY{p}{;} \PY{c}{\PYZpc{} interest rate}
+            \PY{n}{d} \PY{p}{=} \PY{l+m+mi}{1}\PY{p}{;} \PY{c}{\PYZpc{} constant dividend}
+            \PY{n}{dim} \PY{p}{=} \PY{l+m+mi}{99}\PY{p}{;} \PY{c}{\PYZpc{} terminal period t = 99}
+        
+            \PY{n}{p\PYZus{}star} \PY{p}{=} \PY{n}{d}\PY{o}{/}\PY{n}{r}\PY{p}{;} \PY{c}{\PYZpc{} steady state}
+        
+            \PY{n}{if} \PY{l+s}{nargin} \PY{l+s}{==} \PY{l+s}{0}
+                \PY{n}{P0} \PY{p}{=} \PY{p}{[}\PY{n}{p\PYZus{}star} \PY{n}{p\PYZus{}star} \PY{n}{p\PYZus{}star}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{30}\PY{o}{*}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{l+m+mi}{0} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{;} \PY{c}{\PYZpc{} initial prices}
+            \PY{n}{end}
+        
+            \PY{l+s}{figure()}\PY{p}{;}
+            \PY{n}{hold} \PY{l+s}{on}
+            \PY{n}{legend\PYZus{}str} \PY{p}{=} \PY{n+nb}{repmat}\PY{p}{(}\PY{l+s}{\PYZdq{}\PYZdl{}P\PYZus{}0 = \PYZdq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{numel}\PY{p}{(}\PY{n}{P0}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+            \PY{n}{for} \PY{l+s}{i} \PY{l+s}{=} \PY{l+s}{1:numel(P0)}
+                \PY{n}{p0} \PY{p}{=} \PY{n}{P0}\PY{p}{(}\PY{n+nb}{i}\PY{p}{)}\PY{p}{;}
+                \PY{c}{\PYZpc{} INITIALIZATION}
+                \PY{c}{\PYZpc{} creating a vector of price from t=0 to t=99}
+                \PY{n}{pvector} \PY{p}{=} \PY{n+nb}{zeros}\PY{p}{(}\PY{n}{dim}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+                \PY{n}{tvector} \PY{p}{=} \PY{n+nb}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{dim}\PY{p}{,}\PY{n}{dim}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{\PYZsq{}}\PY{p}{;} \PY{c}{\PYZpc{} creating a vector for time from 0 to 99}
+                \PY{n}{pvector}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)} \PY{p}{=} \PY{n}{p0}\PY{p}{;} \PY{c}{\PYZpc{} giving value to the first element of the price vector}
+                                 \PY{c}{\PYZpc{} with the initial price}
+        
+        
+               \PY{c}{\PYZpc{} DYNAMICS}
+                \PY{n}{for} \PY{l+s}{n} \PY{l+s}{=} \PY{l+s}{2:dim+1} \PY{l+s}{\PYZpc{}} \PY{l+s}{starting} \PY{l+s}{from} \PY{l+s}{t} \PY{l+s}{=} \PY{l+s}{1} \PY{l+s}{to} \PY{l+s}{t} \PY{l+s}{=} \PY{l+s}{100}
+                   \PY{c}{\PYZpc{} updating the price in the next period}
+                   \PY{n}{pvector}\PY{p}{(}\PY{n}{n}\PY{p}{)} \PY{p}{=} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{r}\PY{p}{)}\PY{o}{*}\PY{n}{pvector}\PY{p}{(}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{d}\PY{p}{;}
+                                                   \PY{c}{\PYZpc{} with the first\PYZhy{}order difference}
+                                                   \PY{c}{\PYZpc{} equation}
+                \PY{n}{end}
+        
+        
+                \PY{l+s}{\PYZpc{}} \PY{l+s}{PLOTS}
+        
+                \PY{n}{plot}\PY{p}{(}\PY{n}{tvector}\PY{p}{(}\PY{p}{:}\PY{p}{)}\PY{p}{,}\PY{n}{pvector}\PY{p}{(}\PY{p}{:}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}LineWidth\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{;}
+                \PY{n}{legend\PYZus{}str}\PY{p}{(}\PY{n+nb}{i}\PY{p}{)} \PY{p}{=} \PY{n}{legend\PYZus{}str}\PY{p}{(}\PY{n+nb}{i}\PY{p}{)} \PY{o}{+} \PY{n}{p0} \PY{o}{+}\PY{l+s}{\PYZdq{}\PYZdl{}\PYZdq{}}\PY{p}{;}
+            \PY{n}{end}
+        
+            \PY{l+s}{h} \PY{l+s}{=} \PY{l+s}{title(}\PY{l+s}{\PYZsq{}Price Dynamics\PYZsq{}}\PY{l+s}{,} \PY{l+s}{\PYZsq{}interpreter\PYZsq{}}\PY{l+s}{,} \PY{l+s}{\PYZsq{}latex\PYZsq{}}\PY{l+s}{)}\PY{p}{;}
+            \PY{n}{h}\PY{p}{.}\PY{n}{FontSize}\PY{p}{=}\PY{l+m+mi}{15}\PY{p}{;}
+            \PY{n}{xh} \PY{p}{=} \PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Time \PYZdl{}t\PYZdl{}\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;} \PY{n}{xh}\PY{p}{.}\PY{n}{FontSize} \PY{p}{=} \PY{l+m+mi}{13}\PY{p}{;}
+            \PY{n}{yh} \PY{p}{=} \PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Price \PYZdl{}P\PYZus{}t\PYZdl{}\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;} \PY{n}{yh}\PY{p}{.}\PY{n}{FontSize} \PY{p}{=} \PY{l+m+mi}{13}\PY{p}{;}
+            \PY{n}{legend}\PY{p}{(}\PY{n}{legend\PYZus{}str}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Location\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Northeast\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}interpreter\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}latex\PYZdq{}}\PY{p}{)}\PY{p}{;}
+            \PY{n}{set}\PY{p}{(}\PY{n}{gca}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{TickLabelInterpreter\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}
+            \PY{n}{axis}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0} \PY{n}{dim} \PY{l+m+mi}{0} \PY{l+m+mi}{150}\PY{p}{]}\PY{p}{)}
+        \PY{k}{end}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Created file 'P:\textbackslash{}PHD\textbackslash{}Courses\textbackslash{}ECON 712 Macro\textbackslash{}Notebooks (Mathematica Jupyter
+Sage)\textbackslash{}Utils\textbackslash{}ps1\_func1.m'.
+
+    \end{Verbatim}
+
+    Starting with \(p^*=100\) which is the steady state price resulting from
+the parameters given we could plot the evolution of prices, using as the
+vector of initial prices the default \texttt{{[}70\ 100\ 130{]}}:
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{ps1\PYZus{}func1}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Problem_Set_1_files/Problem_Set_1_15_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{problem-4}{%
+\section{Problem 4}\label{problem-4}}
+
+Suppose the Federal Reserve announces at \(t=20\) to raise the federal
+funds rate from \(1 \%\) to \(2 \%\) at \(t=50\) and remain at the new
+level forever. Using ( 1\()\) with \(d=1,\) how does the price respond
+to the policy announcement and the interest rate change over time? Plot
+the price dynamics from \(t=0\) to \(t=99\). Please assume that we rule
+out rational bubbles (i.e., agents know and believe that prices will be
+at its fundamental value, the steady state, at \(t=50\) ).
+
+    \hypertarget{answer}{%
+\subsection{Answer}\label{answer}}
+
+We need to find how the market will respont at time \(t=20\) to the
+anouncement that the interest rate will change at time \(t=50\).
+
+We can define three disctinct time periods:
+
+\[t<20, \enspace\enspace\enspace 20\leq t < 50, \enspace\enspace\enspace  50 < t\]
+
+When \(t<20\) we asume that the market is in a steady state defined by:
+
+\[p_t = p^* = \frac{d}{r_0}\]
+
+where \(r_0=0.01\) is the initial value of the interest rate.
+
+Since we can rule out rational bubbles, that in the period \(t>50\) the
+prices will remain in the steady state defined at time \(t=50\). The
+prices will stay in the steady state if and only if:
+
+\[p_{50} = p^{**} = \frac{d}{r_1} \label{prob41}\tag{4.1}\]
+
+where \(r_1 = 0.02\) is the new interest rate.
+
+Finally, in \(t=20,...,50\) prices will update following the process
+described in \(\eqref{eq:solution}\) but the initial price will be the
+price of the stock at time \(t=20\) this is:
+
+\[p_{50} = (1+r_0)^{50-20}\left(p_{20} -\frac{d}{r_0} \right) + \frac{d}{r_0}\label{prob42}\tag{4.2}\]
+
+then by combining \(\eqref{prob41}\) and \(\eqref{prob42}\) we get:
+
+\[(1+r_0)^{30}\left(p_{20} -\frac{d}{r_0} \right) + \frac{d}{r_0} = \frac{d}{r_1} \qquad \implies P_{20}=\frac{(1+r_0)^{-30}d(r_0-r_1)}{r_1 r_0}+\frac{d}{r_0}\]
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{figure}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+        
+        \PY{n}{r\PYZus{}0} \PY{p}{=} \PY{l+m+mf}{0.01}\PY{p}{;} \PY{c}{\PYZpc{} old interest rate}
+        \PY{n}{r\PYZus{}1} \PY{p}{=} \PY{l+m+mf}{0.02}\PY{p}{;} \PY{c}{\PYZpc{} new interest rate}
+        \PY{n}{d} \PY{p}{=} \PY{l+m+mi}{1}\PY{p}{;} \PY{c}{\PYZpc{} constant dividend}
+        
+        \PY{n}{p\PYZus{}star} \PY{p}{=} \PY{n}{d}\PY{o}{/}\PY{n}{r\PYZus{}0}\PY{p}{;} \PY{c}{\PYZpc{} old steady state}
+        \PY{n}{p\PYZus{}sstar} \PY{p}{=} \PY{n}{d}\PY{o}{/}\PY{n}{r\PYZus{}1}\PY{p}{;} \PY{c}{\PYZpc{} new steady state}
+        
+        
+        \PY{n}{p\PYZus{}20} \PY{p}{=} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{r\PYZus{}0}\PY{p}{)}\PYZca{}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{30}\PY{p}{)}\PY{o}{*}\PY{n}{d}\PY{o}{*}\PY{p}{(}\PY{n}{r\PYZus{}0}\PY{o}{\PYZhy{}}\PY{n}{r\PYZus{}1}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{r\PYZus{}0}\PY{o}{*}\PY{n}{r\PYZus{}1}\PY{p}{)} \PY{o}{+} \PY{n}{d}\PY{o}{/}\PY{n}{r\PYZus{}0}\PY{p}{;}
+        
+        \PY{n}{hold} \PY{l+s}{on}
+        
+        \PY{n}{t\PYZus{}1} \PY{p}{=} \PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{19}\PY{p}{;}  \PY{n}{p\PYZus{}1} \PY{p}{=} \PY{n+nb}{repmat}\PY{p}{(}\PY{n}{p\PYZus{}star}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{numel}\PY{p}{(}\PY{n}{t\PYZus{}1}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+        \PY{n}{t\PYZus{}2} \PY{p}{=} \PY{l+m+mi}{20}\PY{p}{:}\PY{l+m+mi}{50}\PY{p}{;} \PY{n}{p\PYZus{}2} \PY{p}{=} \PY{p}{(}\PY{n}{p\PYZus{}20} \PY{o}{\PYZhy{}} \PY{n}{p\PYZus{}star}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{r\PYZus{}0}\PY{p}{)}\PY{o}{.\PYZca{}}\PY{p}{(}\PY{n}{t\PYZus{}2}\PY{o}{\PYZhy{}}\PY{l+m+mi}{20}\PY{p}{)} \PY{o}{+} \PY{n}{p\PYZus{}star}\PY{p}{;}
+        \PY{n}{t\PYZus{}3} \PY{p}{=} \PY{l+m+mi}{51}\PY{p}{:}\PY{l+m+mi}{99}\PY{p}{;} \PY{n}{p\PYZus{}3} \PY{p}{=} \PY{n+nb}{repmat}\PY{p}{(}\PY{n}{p\PYZus{}sstar}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{numel}\PY{p}{(}\PY{n}{t\PYZus{}3}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+        
+        \PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{n}{t\PYZus{}1} \PY{n}{t\PYZus{}2} \PY{n}{t\PYZus{}3}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{p\PYZus{}1} \PY{n}{p\PYZus{}2} \PY{n}{p\PYZus{}3}\PY{p}{]}\PY{p}{,} \PY{l+s}{\PYZdq{}LineWidth\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+        
+        \PY{n}{xticks}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{]}\PY{p}{)}\PY{p}{;} \PY{n}{xticklabels}\PY{p}{(}\PY{n+nb}{repmat}\PY{p}{(}\PY{l+s}{\PYZdq{}t=\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{)} \PY{o}{+} \PY{n}{string}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{]}\PY{p}{)} \PY{p}{)}
+        \PY{n}{yticks}\PY{p}{(}\PY{p}{[}\PY{n}{p\PYZus{}sstar} \PY{n+nb}{round}\PY{p}{(}\PY{n}{p\PYZus{}20}\PY{p}{)} \PY{n}{p\PYZus{}star}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+        \PY{n}{yticklabels}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZdq{}\PYZdl{}p\PYZca{}\PYZob{}**\PYZcb{}= \PYZdq{}} \PY{l+s}{\PYZdq{}\PYZdl{}p\PYZus{}\PYZob{}20\PYZcb{}= \PYZdq{}} \PY{l+s}{\PYZdq{}\PYZdl{}p\PYZca{}*= \PYZdq{}}\PY{p}{]} \PY{c}{...}
+                \PY{o}{+}\PY{p}{[}\PY{n}{p\PYZus{}sstar} \PY{n+nb}{round}\PY{p}{(}\PY{n}{p\PYZus{}20}\PY{p}{)} \PY{n}{p\PYZus{}star}\PY{p}{]}\PY{o}{+}\PY{p}{[}\PY{l+s}{\PYZdq{}\PYZdl{}\PYZdq{}} \PY{l+s}{\PYZdq{}\PYZdl{}\PYZdq{}} \PY{l+s}{\PYZdq{}\PYZdl{}\PYZdq{}}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{20} \PY{l+m+mi}{20}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0} \PY{n}{p\PYZus{}20}\PY{p}{]}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{:\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{color\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.8}\PY{p}{,}\PY{l+m+mf}{0.8}\PY{p}{,}\PY{l+m+mf}{0.8}\PY{p}{]}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{linewidth\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0} \PY{l+m+mi}{20}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{n}{p\PYZus{}20} \PY{n}{p\PYZus{}20}\PY{p}{]}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{:\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{color\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.8}\PY{p}{,}\PY{l+m+mf}{0.8}\PY{p}{,}\PY{l+m+mf}{0.8}\PY{p}{]}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{linewidth\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        
+        \PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{50} \PY{l+m+mi}{50}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0} \PY{n}{p\PYZus{}sstar}\PY{p}{]}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{:\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{color\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.8}\PY{p}{,}\PY{l+m+mf}{0.8}\PY{p}{,}\PY{l+m+mf}{0.8}\PY{p}{]}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{linewidth\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0} \PY{l+m+mi}{50}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{n}{p\PYZus{}sstar} \PY{n}{p\PYZus{}sstar}\PY{p}{]}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{:\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{color\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.8}\PY{p}{,}\PY{l+m+mf}{0.8}\PY{p}{,}\PY{l+m+mf}{0.8}\PY{p}{]}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{linewidth\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        
+        
+        \PY{n}{h} \PY{p}{=} \PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Price Dynamics\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{h}\PY{p}{.}\PY{n}{FontSize}\PY{p}{=}\PY{l+m+mi}{15}\PY{p}{;}
+        \PY{n}{xh} \PY{p}{=} \PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Time \PYZdl{}t\PYZdl{}\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;} \PY{n}{xh}\PY{p}{.}\PY{n}{FontSize} \PY{p}{=} \PY{l+m+mi}{13}\PY{p}{;}
+        \PY{n}{yh} \PY{p}{=} \PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Price \PYZdl{}P\PYZus{}t\PYZdl{}\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{interpreter\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}\PY{p}{;} \PY{n}{yh}\PY{p}{.}\PY{n}{FontSize} \PY{p}{=} \PY{l+m+mi}{13}\PY{p}{;}
+        \PY{n}{set}\PY{p}{(}\PY{n}{gca}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{TickLabelInterpreter\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{latex\PYZsq{}}\PY{p}{)}
+        \PY{n}{axis}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0} \PY{l+m+mi}{100} \PY{l+m+mi}{0} \PY{l+m+mi}{110}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Problem_Set_1_files/Problem_Set_1_18_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+\bibliography{references}
+
+    
+    \end{document}
