@@ -1,3 +1,5 @@
+using Distributions
+
 # Tauchen's method to generate Markov transition matrix from AR(1) process
 function tauchenMethod(μ::Float64, σ:: Float64, ρ::Float64, z_num::Int64; q::Int64=3, tauchenoptions=0, dshift=0) 
     
@@ -10,8 +12,8 @@ function tauchenMethod(μ::Float64, σ:: Float64, ρ::Float64, z_num::Int64; q::
     #   μ              - AR(1) process z'=μ+ρ*z+ε, ε~N(0,σ²)
     #   ρ              - AR(1) process z'=μ+ρ*z+ε, ε~N(0,σ²)
     #   σ²              - AR(1) process z'=μ+ρ*z+ε, ε~N(0,σ²)
-    #   q              - max number of std devs from mean (default=3)
     #   z_num           - number of z_vals in discretization of z (must be an odd number)
+    #   q              - max number of std devs from mean (default=3)
     # Optional Inputs
     # Outputs
     #   z_vals         - column vector containing the z_num states of the discrete approximation of z

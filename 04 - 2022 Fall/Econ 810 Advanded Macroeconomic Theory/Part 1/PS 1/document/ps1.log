@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.11.30)  2 FEB 2022 09:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.11.30)  2 FEB 2022 12:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -660,39 +660,27 @@ LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 27
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ppl.fd
 File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
 )
-No file ps1.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 39.
-[1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 39.
- (/home/mitch34/Work/UW Courses/04 - 2022 Fall/Econ 810 Advanded Macroeconomic Theory/Part 1/PS 1/document/ps1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 39.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 39.
+! LaTeX Error: File `04 - 2022 Fall/Econ 810 Advanded Macroeconomic Theory/Part 1/PS 1/document/desc_stat_1.tex' not found.
 
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: tex)
 
-Package rerunfilecheck Warning: File `ps1.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
+Enter file name: 
+/home/mitch34/Work/UW Courses/04 - 2022 Fall/Econ 810 Advanded Macroeconomic Theory/Part 1/PS 1/document/ps1.tex:33: Emergency stop.
+<read *> 
+         
+l.33 ...c Theory/Part 1/PS 1/document/desc_stat_1}
+                                                  ^^M
+*** (cannot \read from terminal in nonstop modes)
 
-Package rerunfilecheck Info: Checksums for `ps1.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  B977C97178FEBD87F2F5398DFCFB7551;131.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 39.
- ) 
+ 
 Here is how much of TeX's memory you used:
- 14250 strings out of 481239
- 207203 string characters out of 5920376
+ 14224 strings out of 481239
+ 206981 string characters out of 5920376
  474451 words of memory out of 5000000
  29229 multiletter control sequences out of 15000+600000
- 561144 words of font info for 100 fonts, out of 8000000 for 9000
+ 553056 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 44i,9n,51p,341b,361s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on "/home/mitch34/Work/UW Courses/04 - 2022 Fall/Econ 810 Advanded Macroeconomic Theory/Part 1/PS 1/document/ps1.pdf" (1 page, 71748 bytes).
-PDF statistics:
- 49 PDF objects out of 1000 (max. 8388607)
- 36 compressed objects within 1 object stream
- 4 named destinations out of 1000 (max. 500000)
- 5 words of extra memory for PDF output out of 10000 (max. 10000000)
-
+ 44i,9n,51p,341b,306s stack positions out of 5000i,500n,10000p,200000b,80000s
+/home/mitch34/Work/UW Courses/04 - 2022 Fall/Econ 810 Advanded Macroeconomic Theory/Part 1/PS 1/document/ps1.tex:33:  ==> Fatal error occurred, no output PDF file produced!
