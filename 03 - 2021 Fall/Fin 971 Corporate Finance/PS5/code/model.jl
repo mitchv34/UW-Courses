@@ -8,7 +8,7 @@ default(fontfamily="Computer Modern", framestyle=:box) # LaTex-style
     # Parameters of the model
     ## From the paper
     α_K                     ::Float64=0.3           # Share of capital
-    α_L                     ::Float64=0.65          # Share of labor
+    α_L                     Results::Float64=0.65          # Share of labor
     δ                       ::Float64=0.145         # Depreciation rate
     ρ                       ::Float64=0.762         # Persistence of productivity
     σ                       ::Float64=0.0352        # Standard deviation of productivity shocks
@@ -89,10 +89,7 @@ function tauchenMethod(μ::Float64, σ:: Float64, ρ::Float64, z_num::Int64; q::
     #   z_vals         - column vector containing the z_num states of the discrete approximation of z
     #   Π    - transition matrix of the discrete approximation of z;
     #                    Π(i,j) is the probability of transitioning from state i to state j
-    #
-    # Helpful info: Π
-    #   Var(z)=σ²/(1-ρ^2); note that if μ=0, then σ²z=σ²/(1-ρ^2).
-    ###############
+    #Results
     
     
     if z_num==1
