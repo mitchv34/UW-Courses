@@ -23,60 +23,47 @@ include("tauchen.jl")
     # transitory income shocks
     nε::Int64                 = 5                                 # Number states
     σ_ε::Float64              = sqrt(σ_ε)                         # std dev 
-    ε_proc                    = tauchenMethod(0.0, σ_ζ, ρ, nζ)    # transition matrix and states 
-    ε_states::Array{Float64,1}= ζ_proc[0]                         # transition states
-    ε_prob::Array{Float64,2}  = ζ_proc[1][1,:]                    # probabuilities of each state
-    Primitives8()
-    # Number of states
-    nΖ::Int64                 = 5                                # Number states
+    ε_proc                    = tauchenMethod(0.0, σ_ζ, ρ, nε)    # transition matrix and states 
+    ε_states::Array{Float64,1}= ε_proc[1]                         # transition states
+    ε_prob::Array{Float64,2}  = ε_proc[2][1,:]                    # probabuilities of each state
+
+    # persistent income shocks
+    nζ::Int64                 = 5                                 # Number of states
     ρ_ζ::Float64              = ρ                                 # Persistence 
     σ_ζ::Float64              = sqrt(σ_ζ)                         # std dev 
     ζ_proc                    = tauchenMethod(0.0, σ_ζ, ρ, nζ)    # transition matrix and states 
-    ζ_states::Array{Float64,1}= ζ_proc[0]                         # transition states
-    ζ_mat::Array{Float64,2}   = ζ_proc[1]                         # transition matrix
+    ζ_states::Array{Float64,1}= ζ_proc[1]                         # transition states
+    ζ_mat::Array{Float64,2}   = ζ_proc[2]                         # transition matrix
 
     r                         = 0.04                              # exogeneous interest rate
 end
 
 # Struct to hold the results of the model
-# mutable struct Results
-#     pol_fun ::Array{Float64, 4} # Policy function
-#     value_fun ::Array{Float64, 4} # Value function
-    
-#     P :tationary_disPrimitives8()
-tributions( MarkovChain(ε_mat))[1] :Array{Float64} # Transitory shock values
-#     ε_prob ::Array{Float64, 1} # Probability of the transitory shock
+mutable struct Results
+    pol_fun ::Array{Float64, 4} # Policy function
+    value_fun ::Array{Float64, 4} # Value function
+end
 
-#     Y       ::Array{Float64, 3}     #  Income 
-#     μ       ::Array{Float64, 3}     # Distribution of assets
+function initialize()
+    # Load primitives of the model
+    prim  = Primitives()
 
-# end
-
-# function initialize(ρ, σ_ζ, σ_ε)
-#     # Load primitives of the model
-#     prim  = Primitives()
-
-#     # Pre-allocate space for results
-#     pol_fun = zeros(prim.nA, prim.nP, prim.nε, nprim.T)
-#     value_fun = zeros(prim.nA, prim.nP, prim.nε, prim.T)
-#     μ = zeros(prim.nA, prim.nP, prim.T)
-
-#     # Generate Permanent income and  shock transition matrix and values
-#     P, P_mat = tauchenMethod(0.0, σ_ζ, ρ, prim.nP)
-#     ε, ε_mat = tauchenMethod(0.0, σ_ε, 0.0, prim.nε)
-#     ε_prob = ε_mat[1, :]# Probability otationary_distributions( MarkovChain(ε_mat))[1] 
+    # Pre-allocate space for results
+    pol_fun = zeros(prim.nA, prim.nP, prim.nε, nprim.T)
+    value_fun = zeros(prim.nA, prim.nP, prim.nε, prim.T)
 
     
-#     # And we can pre-compuite last period value and policy functions
-#     pol_fun[:, :, :, prim.T] .= 0 # Last period policy function is 0 since agents consume everything
-#     # Calculate C
-#     for i in 1:prim.nA
-#         for j in 1:prim.nε
-#             for k in 1:prim.nP
-#                 C = (1+prim.r)prim.A_grid[i] + Y[k, j,prim.T]
-#             end
-#         end 
-#     end
+    
+    # Pre-compuite last period value and pAnd we can policy functions
+    pol_fun[:, :, :, prim.T] .= 0 # Last period policy function is 0 since agents consume everything
+    # Calculate C
+    for i in 1:prim.nA
+        for j in 1:prim.nε
+            for k in 1:prim.nP
+                C = (1+prim.r)prim.A_grid[i] + Y[k, j,prim.T]
+            end
+        end 
+    end
     
 #     value_fun[:, :,  :,  prim.T] = prim.U.( C ) # Last period value function is the utility of the final state
     
@@ -96,7 +83,7 @@ tributions( MarkovChain(ε_mat))[1] :Array{Float64} # Transitory shock values
 #     @unpack nA, nP, nε, κ, T, U = prim
 #     @unpack pol_fun, value_fun, P, ε, Y, P_mat, ε_prob = res
 
-#     # Loop backwards over time
+#     # Loop backwards over timeζ_proc
 #     for t ∈ T-1:-1:1
 #         # Loop over all possible values of persistent income
 #         for p_i ∈ 1:nP
