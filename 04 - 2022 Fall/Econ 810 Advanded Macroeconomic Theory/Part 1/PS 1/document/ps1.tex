@@ -25,15 +25,31 @@ Suppose household $i$ receive after-tax income $Y_{i t}$, which takes the form:
 where:
 \begin{itemize}
     \item $P_{i t}=\rho P_{i, t-1}+\zeta_{i, t}$ , with $\rho<1$ governing the persistence of earnings. 
-    \item Persistent shocks, "std", "min", "max" $\zeta$ are such that $\zeta_{i, t} \sim N\left(0, \sigma_{\zeta}\right)$
+    \item Persistent shocks, $\zeta$ are such that $\zeta_{i, t} \sim N\left(0, \sigma_{\zeta}\right)$
     \item Temporary shocks $\epsilon$ are such that  $\epsilon_{i, t} \sim N\left(0, \sigma_{\epsilon}\right)$. 
     \item $\zeta_{i, t}$ and $\epsilon_{i, t}$ are independent over time and across households.
 \end{itemize}
 
+% \begin{center}
+\begin{table}[h!]\caption{Summary Statistics for Selected Years}
 \input{04 - 2022 Fall/Econ 810 Advanded Macroeconomic Theory/Part 1/PS 1/document/desc_stat_1}
+\end{table}
+% \end{center}
 
 \section{Model}
-Test two way sync.
+We want to solve the following model:
+
+\begin{align*}\label{810_ps1:seq_problem}
+\max_{C_{i,t}, A_{i,t+1}} \quad &\mathbb{E}_0 \sum_{t = 0}^{T}\beta^{t}u(C_{i,t})\\
+\text{s.t:} \quad & C_{i,t} + A_{i,t+1} = (1+r)A_{i,t}+Y_{i,t} \qquad \forall t=1,\ldots,T
+\end{align*}
+
+we can use the constraint to remove consumption and obtain the following recursive formulation:
+
+\begin{equation}\label{810_ps1:req_problem}
+    V^t(A, Y) = \max_{A'}\left\{u\left( (1+r)A+Y - A'\right) + \beta \mathbb{E}\left[ V^{t+1}(A', Y') \mid Y \right] \right\}
+\end{equation}
+
 \bibliographystyle{chicago}
 \bibliography{references}
 

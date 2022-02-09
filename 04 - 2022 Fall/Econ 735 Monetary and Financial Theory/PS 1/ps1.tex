@@ -1,0 +1,132 @@
+\documentclass[12pt]{amsart}
+\input{imports}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+
+{\scshape ECON-735} \hfill {\scshape \Large Problem Set \#1} \hfill {\scshape Spring 2022}\\
+{\scshape Author(s): \hfill Mitchell Valdes-Bobes\\
+{\scshape Date: \hfill \texttt{\today}
+\medskip
+
+\hrule
+\bigskip
+
+\bigskip
+In the following questions, we use the same notation as in the lecture.
+% Problem 1
+\begin{exercise}
+    Under autarky, there is no trade:
+    $$
+        V^{A}=0 .
+    $$
+    With barter, trade takes place if we have double coincidences:
+    $$
+        r V^{B}=\alpha \delta(u-c)
+    $$
+    With credit, trade takes place if we have double or single coincidences:
+    $$
+        r V^{C}=\alpha \delta(u-c)+\alpha \sigma u-\alpha \sigma c .
+    $$
+    For credit to be viable, we must have the incentive constraint:
+    $$
+        -c+V^{C} \geq \mu V^{D}+(1-\mu) V^{C}
+    $$
+    where $\mu$ is the probability that deviators are caught and punished and $V^{D}$ is the deviation payoff.
+\end{exercise}
+
+% Part a)
+\begin{subexercise}
+    Assume $V^{D}=V^{A}$. Compute the upper bound of $r$ such that credit is viable.
+\end{subexercise}
+
+% Answer 1.a)
+\begin{answer}
+ Substituting  $V^{D}=V^{A}=0$ we get that credit is viable if:
+ 
+ $$ -c+V^{C} \geq (1-\mu) V^{C}  \qiq c  \leq \mu V^C \qiq  r c  \leq r \mu V^C$$ 
+ 
+ multiplying the expression for $rV^C$ by $\mu$ we get:
+ 
+ $$ r \mu V^{C}= \mu (\alpha \delta(u-c)+\alpha \sigma u-\alpha \sigma c ) = \mu\alpha(u-c)(\delta -\sigma ) $$
+ 
+ Therefore the upper bound for $r$ such that credit is viable $(\tilde{r}_C)$ is  
+ 
+ $$r c \leq   \mu\alpha(u-c)(\delta -\sigma ) \qiq \boxed{\tilde{r}_C \equiv \frac{ \mu\alpha(u-c)(\delta -\sigma )}{c}}$$
+ 
+\end{answer}
+
+% Part b)
+\begin{subexercise}
+    Assume $V^{D}=V^{B}$. Redo part (a) and discuss the difference between parts (a) and (b).
+\end{subexercise}
+
+% Answer 1.b)
+\begin{answer}
+    Start by noting that $$V^C = V^B + \frac{\sigma}{\delta}V^B$$
+   therefore $$-c + \cancel{V^C} \geq \mu V^B + (\cancel{1}-\mu) V^C \qiq c\leq \mu\left(V^C - V^B\right)  \mu\left(\cancel{V^B} + \frac{\sigma}{\delta}V^B - \cancel{V^B}\right)$$
+   
+   Therefore 
+   $$ c\leq \frac{\sigma}{\delta}V^B = \frac{\sigma}{\delta} \frac{\alpha \delta(u-c)}{r} \qiq \boxed{\hat{r}_{C} \equiv \frac{\mu \alpha \sigma(u-c)}{c} }$$
+\end{answer}
+
+% Problem 2
+\begin{exercise}
+    Now, we introduce fiat money. The Bellman equations are
+    $$
+        r V_{0}=\alpha \delta(u-c)+\alpha \sigma M \max _{\tau} \tau\left(V_{1}-V_{0}-c\right)
+    $$
+    and
+    $$
+        r V_{1}=\alpha \delta(u-c)+\alpha \sigma(1-M) \bar{\tau}\left(u+V_{0}-V_{1}\right)
+    $$
+\end{exercise}
+
+% Part a)
+\begin{subexercise}
+    Characterize the Nash equilibria.
+\end{subexercise}
+
+% Answer 2.a)
+\begin{answer}
+    We will consider three cases:
+\begin{enumerate}
+    \item If $c < V_1 - V_0$ then $\tau = 1$ and everybody accepts money.
+    \item If $c > V_1 - V_0$ then $\tau = 0$ and no one accepts money.
+    \item If $c = V_1 - V_0$ then:
+    \begin{align*}
+        r V_0 &= \alpha \delta (u-c) \\
+        r V_1 &= \alpha \delta(u-c)+\alpha \sigma(1-M) \bar{\tau}\left(u-c\right)
+    \end{align*}
+    subtracting the two expressions:
+    $$r(V_1 - V_0) = r c = a(u-c)(\cancel{\delta} + \sigma(1-M)\bar{\tau} - \cancel{\delta})$$
+    solving for $\bar{\tau}$ we get that the only equilibrium in mixed strategies is:
+    $$\bar{\tau} \equiv \frac{r c}{\sigma (1-M)\alpha (u-c)}$$
+\end{enumerate}
+\end{answer}
+
+% Part b)
+\begin{subexercise}
+    Compute the upper bound of $r$ such that a monetary equilibrium exists and discuss the essentiality of money.
+\end{subexercise}
+
+% Answer 2.b)
+\begin{answer}
+    For a monetary equilibrium to exist we need:
+    $$\bar{\tau} =  \frac{r c}{\sigma (1-M)\alpha (u-c)} \leq 1 \qiq \boxed{\hat{r}_M \equiv \frac{\sigma (1-M) \alpha (u-c)}{c}}$$
+    
+    Then if $r<\hat{r}_M$ a monetary equilibrium exits, comparing $\hat{r}_M$ to $\hat{r}_C$ we obtain that 
+    $$\hat{r}_M > \hat{r}_M \qiffq \frac{\sigma (1-M) \alpha (u-c)}{c} > \frac{\mu \alpha \sigma(u-c)}{c} \qiffq (1-M) > \mu$$
+    
+    Therefore money is essential when $\mu < (1-M)$.
+\end{answer}
+
+
+
+
+
+
+
+\end{document}
