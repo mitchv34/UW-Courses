@@ -3,7 +3,7 @@ using DataFrames, CSV, Plots, QuantEcon, CategoricalArrays, GLM, Statistics, Sta
 
 # Plot style
 begin
-    theme(:juno); # :dark, :light, :plain, :grid, :tufte, :presentation, :none
+    theme(:vibrant); # :dark, :light, :plain, :grid, :tufte, :presentation, :none
     default(fontfamily="Computer Modern", framestyle=:box); # LaTex-style
     gr(size = (800, 600)); # default plot size
 end
@@ -37,8 +37,10 @@ data.κ = data.log_income - y;
 κ = [ mean(data[data.age .== a, :κ]) for a ∈ 25:(25+34) ];
 plot(levels(data.age)[2:end], exp.(κ));
 
-@df data violin(string.(:year), :income, linewidth=0)
+p1= @df data violin(string.(:year), :income, linewidth=0)
 @df data boxplot!(string.(:year), :income, fillalpha=0.4, linewidth=2)
+
+savefig(p1, "04 - 2022 Fall/Econ 810 Advanded Macroeconomic Theory/Part 1/PS 1/document/figures/fig_1.pdf");
 
 @df data violin(string.(:age), :income, linewidth=0)
 @df data boxplot!(string.(:age), :income, fillalpha=0.4, linewidth=2)
@@ -50,13 +52,15 @@ prim, res = initialize();
 Bellman_op(prim, res)
 
 plot(res.value_fun[:, :, 2, end-1], legend = false)
-plot(prim.A_grid, res.pol_fun[1:end, 1, 1, end-1], legend = false)
 
 
-sim_res = sim_data(2000, 0, prim, res)
+
+sim_res = sim_data(2000, 0.0, prim, res)
+
+@unpack C_agents, A_agents, Y_agents = sim_res;
 
 begin
-    plot(var( C_agents, dims=1)', label="Consumption", lw = 2)
-    plot!(var( A_agents, dims=1)', label="Assets", lw=2)
-    plot!(var( Y_agents, dims=1)', label="Income", lw=2)
+    plot(mean( C_agents, dims=1)', label="Consumption", lw = 2)
+    plot!(mean( A_agents, dims=1)', label="Assets", lw=2)
+    plot!(mean( Y_agents, dims=1)', label="Income", lw=2)
 end
