@@ -23,8 +23,8 @@ include("tauchen.jl")
 
     # transitory income shocks
     nε::Int64                 = 5                                # Number states
-    σ_ε::Float64              = σ_ε                              # std dev 
-    ε_proc                    = tauchenMethod(0.0, σ_ε, 0.0, nε)    # transition matrix and states 
+    σ_ε::Float64              = σ_ε                             # std dev 
+    ε_proc                    = tauchenMethod(0.0, sqrt(σ_ε), 0.0, nε)    # transition matrix and states 
     ε_states::Array{Float64}  = ε_proc[1]                         # transition states
     ε_prob::Array{Float64}    = ε_proc[2][1,:]                    # probabuilities of each state
 
@@ -32,7 +32,7 @@ include("tauchen.jl")
     nP::Int64                 = 5                                 # Number of states
     ρ_ζ::Float64              = ρ                                 # Persistence 
     σ_ζ::Float64              = σ_ζ                               # std dev 
-    P_proc                    = tauchenMethod(0.0, σ_ζ, ρ, nP)    # transition matrix and states 
+    P_proc                    = tauchenMethod(0.0, sqrt(σ_ζ), ρ, nP)    # transition matrix and states 
     P_states::Array{Float64}  = P_proc[1]                         # transition states
     P_mat::Array{Float64,2}   = P_proc[2]                         # transition matrix
 
@@ -74,17 +74,7 @@ function initialize()
     # Then pre-compute the income
     Y = exp.(M)
 
-    # Pre-compuite last period value and  and policy functions
-    # pol_fun[:, :, :, prim.T] .= 0 # Last period policy function is 0 since agents consume everything
-
-    # Calculate C[A, ε, P, T] = C[A, Y[ε, P. T], T] = (1+r)A + Y[ε, P, T]
-    # Repeat the matrix Y[ε, P, T] to create a 3D matrix of size (nA, nP, nε)
-    # C_last = repeat(Y, 1,1,prim.nA)
-    # for i in 1:prim.nA
-    #     # Add the interest rate to the matrix
-    #     C_last[:,:,i] .+= prim.A_grid[i] *(1 + prim.r)
-    # end 
-    
+    # Pre-compuite last period value 
     # We can pre-Calculate the value function for the last period
     for i in 1:prim.nA
         for j in 1:prim.nP
@@ -165,40 +155,63 @@ end
 
 function sim_data(nAgents::Int64, A_0::Float64, prim::Primitives, res::Results)
 
+    @unpack A_grid, T, P_states, nP, P_mat, ε_states, nε, ε_prob, r, κ = prim
 
-
-    A_0_i = findfirst(prim.A_grid .== A_0)
+    A_0_i = findfirst(A_grid .== A_0)
     σ_ζ0 = 0.2
     P_0 = rand(Normal(0, σ_ζ0), nAgents)
 
     # Pre-allocate space for results
-    C_agents = zeros(nAgents, prim.T+1) # Consumption
-    A_agents = zeros(nAgents, prim.T+1) # Assets
-    Y_agents = zeros(nAgents, prim.T+1) # Income
+    C_agents = zeros(nAgents, T) # Consumption
+    A_agents = zeros(nAgents, T) # Assets
+    Y_agents = zeros(nAgents, T) # Income
 
-    A_agents[:,1] .= A_0
+    # Initialize the assets last period
+    A_last = zeros(nAgents, 1)
+    A_last .= A_0
 
     # First I to convert P_0  to admisible values of P_state
-    P_last =  [ argmin(abs.(P_0[i] .- prim.P_states))[1] for i in 1:nAgents]
+    P_last =  [ argmin(abs.(P_0[i] .- P_states))[1] for i in 1:nAgents]
 
-    for t ∈ 2:prim.T-1
+    for t ∈ 1:T
         # Draw permanent income shock
-        P_now = [sample(1:prim.nP, Weights(prim.P_mat[P_last[i],:])) for i in 1:nAgents]
-        P_now_value = prim.P_states[P_now]
+        P_now = [sample(1:nP, Weights(P_mat[P_last[i],:])) for i in 1:nAgents]
+        P_now_value = P_states[P_now]
 
         # Draw transitory income shock
-        ε_now = sample(1:prim.nε, Weights(prim.ε_prob), nAgents) 
-        ε_now_value = prim.ε_states[ε_now]
-
-        Y_agents[:,t] = exp.(P_now_value + ε_now_value .+  κ[t] )
-
+        ε_now = sample(1:nε, Weights(ε_prob), nAgents) 
+        ε_now_value = ε_states[ε_now]
+        # Calculate income
+        Y_now = exp.(P_now_value + ε_now_value .+  κ[t] )
+        
         # Calculate asset holdings
-        A_agents_ind = [findfirst(prim.A_grid .== A_agents[i,t]) for i in 1:nAgents]
-        A_agents[:,t+1] = [res.pol_fun[A_agents_ind[i], P_now[i], ε_now[i], 1] for i in 1:nAgents]
+        A_agents_ind = [findfirst(A_grid .== A_agents[i,t]) for i in 1:nAgents]
 
+        if t < T
+            A_now = [res.pol_fun[A_agents_ind[i], P_now[i], ε_now[i], 1] for i in 1:nAgents]
+        else 
+            A_now = zeros(nAgents, 1)
+            A_now .= A_0
+        end 
+        
         # Calculate consumption
-        C_agents[:,t] = (1+prim.r) .* A_agents[:,t-1] .+ Y_agents[:,t] - A_agents[:,t+1]
+        C_now = (1+r) .* A_last .+ Y_now .- A_now
+
+        for i in 1:nAgents
+            c = C_now[i]
+            if c < 0
+                println("c = ", c, "y =  ", Y_now[i], "a_now = ", A_now[i], "a_last = ", A_last[i])
+            end
+        end
+
+        A_agents[:,t] = A_now
+        C_agents[:,t] = C_now
+        Y_agents[:,t] = Y_now
+
+        A_last = A_now       
+        P_last = P_now
+
     end
 
-    return Sim_results(C_agents[:, 2:end], A_agents[:, 2:end], Y_agents[:, 2:end])
+    return Sim_results(C_agents, A_agents, Y_agents)
 end
