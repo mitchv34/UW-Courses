@@ -1,5 +1,5 @@
 using DataFrames, CSV, Statistics, Distributions, Plots, StatsPlots
-using StatsModels, GLM, FixedEffectModels, CategoricalArrays
+using StatsModels, GLM, FixedEffectModels, CategoricalArrays, LinearAlgebra
 
 begin
     theme(:juno); # :dark, :light, :plain, :grid, :tufte, :presentation, :none
@@ -33,7 +33,7 @@ unemp_t = 5
 unemp_shock = -9000.0
 
 ### Simulation
-ε = rand(Normal(μ_ε, σ_ε), N_agents, T)
+ε = cumsum(rand(Normal(μ_ε, σ_ε), N_agents, T), dims=2)
 γ = γ_1 * ones(N_agents, T) + γ_t * repeat(0:10, 1, N_agents)'
 
 # Draw sample of unemployed agents
@@ -42,7 +42,7 @@ employed = setdiff(1:N_agents, unemployed)
 # Create dummy variables for employed and unemployed
 D = [zeros(N_agents, unemp_t) ones(N_agents, T - unemp_t)]
 D[employed, :] .= 0
-
+D
 data = γ + ε + unemp_shock * D
 
 begin
@@ -57,33 +57,53 @@ end
 
 # Store data in DataFrame
 begin
-    income = data[:]
-    year = repeat([i for i in 1:T], N)
-    id = repeat([i for i in 1:N], 1,T)'[:]
+    income = data'[:]
+    year = repeat([i for i in 1:T], N_agents)
+    id = repeat([i for i in 1:N_agents], 1,T)'[:]
 
     
     df = DataFrame([:id => id, :year => year, :income => income])
-    years_from_layoff = df.year .- 5
-    df.years_from_layoff = years_from_layoff
-    df[employed, :years_from_layoff] .= Inf
+    df[!, :year_fe] = categorical(df[!, :year])
+
+    # years_from_layoff = df.year .- 5
+    # df.years_from_layoff = years_from_layoff
+    # df[employed, :years_from_layoff] .= Inf
     
-    df.years_from_layoff = [(y  < 6 ) ? y : missing for y in df.years_from_layoff]
-    df[!, :years_from_layoff] = categorical(df[!, :years_from_layoff])
+    # df.years_from_layoff = [(y  < 6 ) ? y : missing for y in df.years_from_layoff]
     
-    # df.years_from_layoff = [(y != 6) ? y : missing for y in df.years_from_layoff]
+    # df[!, :years_from_layoff] = categorical(df[!, :years_from_layoff])
 end
+
+# Estimate regression
+## Manual approach (not recommended I do not like it)
+## Create Dummy variables D_T[i,t] = 1 if agent i is employed T periods from Unemployment
+
+var_names = [(t-6 < 0 ) ? "Dm$(abs(t-6))" : "Dp$(abs(t-6))" for t in 1:T]
+for t in 1:T
+    # Create dummy variable 
+    vect = Array{Float64}(I(T)[:,t])'
+    dummy = repeat(vect, N_agents, 1)
+    dummy[employed, t] .= 0
+    # Convert to vector
+    dummy = dummy'[:]
+    # Add column to dataframe
+    df[:, var_names[t]] = dummy
+end
+
+model = reg(
+    df, 
+    @formula(income~Dm5+Dm4+Dm3+Dm2+Dm1+Dp0+Dp1+Dp2+Dp3+Dp4+Dp5+fe(year)),
+    save=true,
+)
+
+model.fe.groupby('year')['fe_year'].mean()
+combine(groupby(model.fe, :year), :fe_year => mean)
 
 levels(df.years_from_layoff)
 
 @df df[df.year .== 11, :] density(:income, legend = false, lw= 3)
 
 
-# Estimate regression
-## Manual approach (not recommended I do not like it)
-## Create Dummy variables
-for i in 1:T
-    println(i-5)
-end
 
 ## Using R
 using RCall
@@ -96,7 +116,7 @@ lag_ols_reg
 
 fit(df,  @formula( income ~ years_from_layoff + year))
 
-
+a = [1,2,3]
 
 reg(df, @formula(income ~ fe(id) + fe(year) + years_from_layoff))
 
