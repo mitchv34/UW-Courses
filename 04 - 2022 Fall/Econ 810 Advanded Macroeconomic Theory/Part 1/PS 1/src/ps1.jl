@@ -69,39 +69,54 @@ Bellman_op(prim, res)
 
 plot(res.value_fun[:, :, 2, end-1], legend = false)
 
-sim_res = sim_data(2000, 0.0, prim, res)
+sim_res = sim_data(5000, 0.0, prim, res)
 
 # Plot average value of wealth by age
-nAgents = 2000
+nAgents = 5000
 agents = 1:nAgents
 ages = 25:25+prim.T-1
 
-C_agents[:, 1]
+@unpack C_sim, A_sim, Y_sim = sim_res;
+
+begin
+     plot(levels(data.age)[2:end],  mean( C_sim, dims=1)', c=1, label="Consumption", lw = 2)
+    plot!(levels(data.age)[2:end],  mean( A_sim, dims=1)', c=2, label="Assets", lw=2)
+    plot!(levels(data.age)[2:end],  mean( Y_sim, dims=1)', c=4, label="Income", lw=2)
+    xticks!(levels(data.age)[2:3:end])
+    savefig("04 - 2022 Fall/Econ 810 Advanded Macroeconomic Theory/Part 1/PS 1/document/figures/average_value_of_wealth_by_age.pdf")
+end
+
 
 data_sim = DataFrame([:agent_id => repeat(agents, prim.T),
                     :age => repeat(ages', nAgents)[:],
-                        :consumption => C_agents[:],
-                        :income => Y_agents[:],
-                        :assets => A_agents[:]])
+                        :consumption => C_sim[:],
+                        :income => Y_sim[:],
+                        :assets => A_sim[:]])
 
-
-begin
-    @unpack C_agents, A_agents, Y_agents = sim_res;
-    plot(mean( C_agents, dims=1)', c=1, label="Consumption", lw = 2)
-    plot!(mean( A_agents, dims=1)', c=2, label="Assets", lw=2)
-    plot!(mean( Y_agents, dims=1)', c=4, label="Income", lw=2)
-end
 
 # Plot variance of consumption by age
-plot(var( C_agents, dims=1)', c=1, lw = 2, legend=false)
+plot(var( C_sim, dims=1)', c=1, lw = 2, legend=false)
+savefig("04 - 2022 Fall/Econ 810 Advanded Macroeconomic Theory/Part 1/PS 1/document/figures/variance_of_consumption_by_age.pdf")
+# @df data_sim boxplot(string.(:age), :consumption, fillalpha=0.4, linewidth=2)
 
 # Insurance coefficients using the Blundell et al. (2008) method
-# ψ = 
-Δc = log.(C_agents[:, 2:end]) - log.(C_agents[:, 1:end-1]); 
+# Pass through of transitory shock:
+#   ψ = cov(Δc_t, Δy_t+1) / cov(Δy_t, Δy_t+1)
+c_sim = mean(log.(C_sim), dims=1) 
+y_sim = mean(log.(Y_sim), dims=1)  
 
-minimum(C_agents, dims=1)
+Δy = y_sim[2:end] - y_sim[1:end-1]
+Δc = c_sim[2:end] - c_sim[1:end-1]
+ψ = cov(c_sim[1:end-1], y_sim[2:end]) / cov(y_sim[1:end-1], y_sim[2:end])
 
-A_agents
+# Pass through of permanent shock: 
+#   ϕ = cov(Δc_t, Δy_t-1 + Δy_t + Δy_t+1) / cov(Δy_t, Δy_t-1 + Δy_t + Δy_t+1)
+ϕ = cov(c_sim[1:end-2], y_sim[1:end-2] + y_sim[2:end-1] + y_sim[3:end]) / cov(y_sim[1:end-2],y_sim[1:end-2] + y_sim[2:end-1] + y_sim[3:end])
+
+
+minimum(C_sim, dims=1)
+
+A_sim
 
 for t in prim.T, i in 1:prim.nA, j in prim.nP, k in prim.nε
     y = res.Y[j,k,t]
@@ -113,4 +128,4 @@ for t in prim.T, i in 1:prim.nA, j in prim.nP, k in prim.nε
     end
 end
 
-@df data_sim scatter(:age, :assets)
+@df data_sim scatter(:age, :assets)0
