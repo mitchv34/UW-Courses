@@ -9,14 +9,20 @@ begin
 end
 
 # Load data
-data = CSV.read("04 - 2022 Fall/Econ 810 Advanded Macroeconomic Theory/Part 1/PS 1/data/data_1.csv", DataFrame);
+data = CSV.read("04 - 2022 Fall/Econ 810 Advanded Macroeconomic Theory/Part 1/PS 1/data/data_1_alt.csv", DataFrame);
+dropmissing!(data);
 data.log_income  = log.(data.income);
 data.age = CategoricalArray(data.age);
 data.cohort = CategoricalArray(data.cohort);
 
+data
+
+p1= @df data violin(string.(:year), :income, linewidth=0)
+@df data boxplot!(string.(:year), :income, fillalpha=0.4, linewidth=2)
+savefig(p1, "04 - 2022 Fall/Econ 810 Advanded Macroeconomic Theory/Part 1/PS 1/document/figures/data_less_outliers.pdf");
+
 # Estimate regression
 ols_reg = lm(@formula(log_income ~ age + cohort), data);
-
 # Get age_profile and cohort_profile
 age_profile = coef(ols_reg)[2:36]
 cohort_profile = coef(ols_reg)[37:end];
@@ -37,10 +43,6 @@ data.κ = data.log_income - y;
 κ = [ mean(data[data.age .== a, :κ]) for a ∈ 25:(25+34) ];
 plot(levels(data.age)[2:end], exp.(κ));
 
-p1= @df data violin(string.(:year), :income, linewidth=0)
-@df data boxplot!(string.(:year), :income, fillalpha=0.4, linewidth=2)
-
-savefig(p1, "04 - 2022 Fall/Econ 810 Advanded Macroeconomic Theory/Part 1/PS 1/document/figures/fig_1.pdf");
 
 @df data violin(string.(:age), :income, linewidth=0)
 @df data boxplot!(string.(:age), :income, fillalpha=0.4, linewidth=2)
