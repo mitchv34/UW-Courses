@@ -77,7 +77,7 @@ $$\textcolor{red}{FORMULAS}$$
 
 \textcolor{red}{table} contains my estimates for different values of $\rho$.
 
-\begin{table}[]
+\begin{table}[h*]
     \centering
     \begin{tabular}{|c|c|c|}
         \hline
@@ -116,7 +116,27 @@ The we can re-write \eqref{810_ps1:req_problem_naive} in terms of the three stat
      V^t(A, P, \varepsilon) = \max_{A'}\left\{u\left( (1+r)A+ Y(P, \varepsilon) - A'\right) + \beta \mathbb{E}\left[ V^{t+1}(A', Y(P', \varepsilon')) \mid P' \right] \right\}
 \end{equation}
 
-\textbf{Note} I'm dropping the subscript $i$ but it is understood that the value function is for each individual agent.
+\subsection{Simulation}
+
+I simulated $5000$ agents over their full life cycle the results of the simulation are summarized in the following two figures:
+\begin{enumerate}
+    \item \textcolor{red}{figure} represents the average wealth by age,
+    \item \textcolor{red}{figure} represents the variance of consumption.
+\end{enumerate}
+
+\begin{figure}[h*]
+    \centering
+    \includegraphics[scale = .5]{04 - 2022 Fall/Econ 810 Advanded Macroeconomic Theory/Part 1/PS 1/document/figures/average_value_of_wealth_by_age.pdf}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{figure}[h*]
+    \centering
+    \includegraphics[scale = .5]{04 - 2022 Fall/Econ 810 Advanded Macroeconomic Theory/Part 1/PS 1/document/figures/variance_of_consumption_by_age.pdf}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
 
 
 
