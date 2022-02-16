@@ -46,9 +46,21 @@ We want to solve the following model:
 
 we can use the constraint to remove consumption and obtain the following recursive formulation:
 
-\begin{equation}\label{810_ps1:req_problem}
+\begin{equation}\label{810_ps1:req_problem_naive}
     V^t(A, Y) = \max_{A'}\left\{u\left( (1+r)A+Y - A'\right) + \beta \mathbb{E}\left[ V^{t+1}(A', Y') \mid Y \right] \right\}
 \end{equation}
+
+Since $Y_{it}$ depends on the deterministic age-income profile $\kappa_t$ and two stochastic shocks $P_[it]$, $\varepsilon_{it}$ we can write $$Y_{it} = Y(P_{it}, \varepsilon_{i,t}) = \exp{(\kappa_t + P_{it} + \varepsilon_{it})}$$
+
+The we can re-write \eqref{810_ps1:req_problem_naive} in terms of the three states $(A, P, \varepsilon)$ and the choice variable $A'$.
+
+\begin{equation}\label{810_ps1:req_problem}
+     V^t(A, P, \varepsilon) = \max_{A'}\left\{u\left( (1+r)A+ Y(P, \varepsilon) - A'\right) + \beta \mathbb{E}\left[ V^{t+1}(A', Y(P', \varepsilon')) \mid P' \right] \right\}
+\end{equation}
+
+\textbf{Note} I'm dropping the subscript $i$ but it is understood that the value function is for each individual agent.
+
+
 
 \bibliographystyle{chicago}
 \bibliography{references}
