@@ -31,17 +31,31 @@ cohort_profile = coef(ols_reg)[37:end];
 scatter(levels(data.age)[2:end], age_profile, xlab = "Age", ylab = "Coefficient", legend=false);
 scatter(levels(data.cohort)[2:end], cohort_profile, xlab = "Cohort", ylab = "Coefficient", legend=false);
 
-# Estimate shock variances
-y = residuals(ols_reg);
-ρ = 0.97;
-Δy_t = y[2:end] - ρ*y[1:end-1];
-σ_ε = -(1/ρ)*cov(Δy_t[1:end-1], Δy_t[2:end])
-σ_ζ =(1/ρ)*cov(Δy_t[2:end-1],  ρ^2*Δy_t[1:end-2] + ρ*Δy_t[2:end-1] + Δy_t[3:end])
-
 # Calculate the age-income profiles
 data.κ = data.log_income - y;
 κ = [ mean(data[data.age .== a, :κ]) for a ∈ 25:(25+34) ];
-plot(levels(data.age)[2:end], exp.(κ));
+plot(levels(data.age)[2:end], exp.(κ), xticks = levels(data.age)[2:3:end], xlab = "Age", ylab = "Income")
+savefig("04 - 2022 Fall/Econ 810 Advanded Macroeconomic Theory/Part 1/PS 1/document/figures/age_income_profile.pdf")
+
+# Estimate shock variances
+y = residuals(ols_reg);
+ρ = 0.97;
+function estimate_variance(ρ::Float64, y::Array{Float64})
+    Δy_t = y[2:end] - ρ*y[1:end-1];
+    σ_ε = -(1/ρ)*cov(Δy_t[1:end-1], Δy_t[2:end])
+    σ_ζ =(1/ρ)*cov(Δy_t[2:end-1],  ρ^2*Δy_t[1:end-2] + ρ*Δy_t[2:end-1] + Δy_t[3:end])
+    return σ_ε, σ_ζ
+end
+
+σ_ε, σ_ζ = estimate_variance(ρ, y)
+
+rhos = [0.90, 0.95, 0.97, 0.99];
+vars = round.(hcat(collect.(estimate_variance.(rhos, Ref(y)))...), digits=3)
+
+using LaTeXStrings, TexTables, Latexify
+copy_to_clipboard(true)
+latex_table = latexify(DataFrame([L"\rho"=>rhos, L"\sigma_\varepsilon^2"=>vars[1,:], L"\sigma_\zeta^2"=>vars[2,:]]), env = :table)
+
 
 
 @df data violin(string.(:age), :income, linewidth=0)
