@@ -37,9 +37,19 @@ After this transformation the distribution of income looked like
     \includegraphics[scale = .5]{04 - 2022 Fall/Econ 810 Advanded Macroeconomic Theory/Part 1/PS 1/document/figures/data_outliers.pdf}
     \caption{Caption}
     \label{fig:my_label}
+
+\end{figure}
+After the second transformation the distribution of income looked like 
+\begin{figure}[h*]
+    \centering
+    \includegraphics[scale = .5]{04 - 2022 Fall/Econ 810 Advanded Macroeconomic Theory/Part 1/PS 1/document/figures/data_less_outliers.pdf}
+    \caption{Caption}
+    \label{fig:my_label}
 \end{figure}
 
-Suppose household $i$ receive after-tax income $Y_{i t}$, which takes the form:
+
+
+Assuming that households $i$ receive after-tax income $Y_{i t}$, which takes the form:
 \begin{align*}
     \log \left(Y_{i t}\right) &=\kappa_{t}+y_{i t} \\
     y_{i t} &=P_{i t}+\epsilon_{i t}
@@ -51,6 +61,37 @@ where:
     \item Temporary shocks $\epsilon$ are such that  $\epsilon_{i, t} \sim N\left(0, \sigma_{\epsilon}\right)$. 
     \item $\zeta_{i, t}$ and $\epsilon_{i, t}$ are independent over time and across households.
 \end{itemize}
+
+We can remove the life-cycle component of the income by doing \textcolor{red}{SOMETHING} and we get an age-income profile that looks like:
+
+\begin{figure}[h*]
+    \centering
+    \includegraphics[scale = .5]{04 - 2022 Fall/Econ 810 Advanded Macroeconomic Theory/Part 1/PS 1/document/figures/age_income_profile.pdf}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
+
+To complete the Data part of this assignment I estimate $\sigma_\varepsilon^2$ and $\sigma_\zeta^2$ using:
+
+$$\textcolor{red}{FORMULAS}$$
+
+\textcolor{red}{table} contains my estimates for different values of $\rho$.
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        $\rho$ & $\sigma_{\varepsilon}^2$ & $\sigma_{\zeta}^2$\\
+        \hline
+        $0.9$ & $0.079$ & $0.019$\\
+        $0.95$ & $0.08$ & $0.018$\\
+        $0.97$ & $0.08$ & $0.017$\\
+        $0.99$ & $0.08$ & $0.018$\\
+        \hline
+    \end{tabular}
+    \caption{Caption}
+    \label{tab:my_label}
+\end{table}
 
 
 \section{Model}
