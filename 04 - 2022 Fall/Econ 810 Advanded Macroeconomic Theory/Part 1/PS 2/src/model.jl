@@ -168,6 +168,7 @@ df = DataFrame([:time => repeat(1:nAgents, 1, prim.T)'[:],
                 ])
 
 @df df[df.time .==  200, :] density(:h_agents, group = (:emp_status), legend = :topleft)
+xlims!(1,2)
 
 h_mean_unemp = [mean(data.h_agents) for data in groupby(df[df.emp_status .==  0, :], :time)]
 h_mean_emp = [mean(data.h_agents) for data in groupby(df[df.emp_status .==  1, :], :time)]
