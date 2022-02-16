@@ -30,13 +30,20 @@ To remove possible outliers I removed all individuals that earned less than $\te
 \input{04 - 2022 Fall/Econ 810 Advanded Macroeconomic Theory/Part 1/PS 1/document/desc_stat_1}
 \end{table}
 \end{center}
-Suppose household $i$ receive after-tax income $Y_{i t}$, which takes the form:
 
+After this transformation the distribution of income looked like 
+\begin{figure}[h*]
+    \centering
+    \includegraphics[scale = .5]{04 - 2022 Fall/Econ 810 Advanded Macroeconomic Theory/Part 1/PS 1/document/figures/data_outliers.pdf}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
+
+Suppose household $i$ receive after-tax income $Y_{i t}$, which takes the form:
 \begin{align*}
     \log \left(Y_{i t}\right) &=\kappa_{t}+y_{i t} \\
     y_{i t} &=P_{i t}+\epsilon_{i t}
 \end{align*}
-
 where:
 \begin{itemize}
     \item $P_{i t}=\rho P_{i, t-1}+\zeta_{i, t}$ , with $\rho<1$ governing the persistence of earnings. 
