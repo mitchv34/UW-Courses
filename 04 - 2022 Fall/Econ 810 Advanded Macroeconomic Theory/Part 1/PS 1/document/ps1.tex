@@ -15,6 +15,21 @@
 
 
 \section{Data}
+
+For this section I started by selecting a sub-sample of the data that meet the following criteria:
+\begin{itemize}
+    \item Observation is from the \textbf{Main Sample} not from the \textbf{SEO oversample}.
+    \item Year is between \textbf{1978} and \textbf{1997}.
+    \item Age is between $\textbf{25}$ and $\textbf{25+35}$.
+\end{itemize}
+
+To remove possible outliers I removed all individuals that earned less than $\textbf{\$2000}$ or more than $\textbf{\$170000}$ for three straight years. 
+
+\begin{center}
+\begin{table}[h!]\caption{Summary Statistics for Selected Years}
+\input{04 - 2022 Fall/Econ 810 Advanded Macroeconomic Theory/Part 1/PS 1/document/desc_stat_1}
+\end{table}
+\end{center}
 Suppose household $i$ receive after-tax income $Y_{i t}$, which takes the form:
 
 \begin{align*}
@@ -30,11 +45,6 @@ where:
     \item $\zeta_{i, t}$ and $\epsilon_{i, t}$ are independent over time and across households.
 \end{itemize}
 
-% \begin{center}
-\begin{table}[h!]\caption{Summary Statistics for Selected Years}
-\input{04 - 2022 Fall/Econ 810 Advanded Macroeconomic Theory/Part 1/PS 1/document/desc_stat_1}
-\end{table}
-% \end{center}
 
 \section{Model}
 We want to solve the following model:
