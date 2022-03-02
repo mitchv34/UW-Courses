@@ -148,9 +148,9 @@ end
 
 # structure to hold simulation results:
 mutable struct Sim_results
-    C_agents ::Array{Float64, 2} # Consumption
-    A_agents ::Array{Float64, 2} # Assets
-    Y_agents::Array{Float64, 2} # Income
+    C_sim ::Array{Float64, 2} # Consumption
+    A_sim ::Array{Float64, 2} # Assets
+    Y_sim ::Array{Float64, 2} # Income
 end
 
 function sim_data(nAgents::Int64, A_0::Float64, prim::Primitives, res::Results)
