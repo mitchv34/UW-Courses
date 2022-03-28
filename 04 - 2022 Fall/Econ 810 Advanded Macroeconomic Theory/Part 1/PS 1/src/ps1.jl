@@ -1,5 +1,5 @@
 # Load libraries
-using DataFrames, CSV, Plots, QuantEcon, CategoricalArrays, GLM, Statistics, StatsPlots
+using DataFrames, CSV, Plots, QuantEcon, CategoricalArrays, GLM, Statistics, StatsPlots, DelimitedFiles
 
 # Plot style
 begin
@@ -32,13 +32,15 @@ scatter(levels(data.age)[2:end], age_profile, xlab = "Age", ylab = "Coefficient"
 scatter(levels(data.cohort)[2:end], cohort_profile, xlab = "Cohort", ylab = "Coefficient", legend=false);
 
 # Calculate the age-income profiles
+y = residuals(ols_reg);
 data.κ = data.log_income - y;
 κ = [ mean(data[data.age .== a, :κ]) for a ∈ 25:(25+34) ];
 plot(levels(data.age)[2:end], exp.(κ), xticks = levels(data.age)[2:3:end], xlab = "Age", ylab = "Income")
 savefig("04 - 2022 Fall/Econ 810 Advanded Macroeconomic Theory/Part 1/PS 1/document/figures/age_income_profile.pdf")
 
+writedlm( "./04 - 2022 Fall/Econ 810 Advanded Macroeconomic Theory/Part 1/PS 1/data/age_income_profile.csv", κ , ',')
+
 # Estimate shock variances
-y = residuals(ols_reg);
 ρ = 0.97;
 function estimate_variance(ρ::Float64, y::Array{Float64})
     Δy_t = y[2:end] - ρ*y[1:end-1];

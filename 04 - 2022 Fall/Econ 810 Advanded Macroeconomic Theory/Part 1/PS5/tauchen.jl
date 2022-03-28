@@ -1,7 +1,8 @@
 using Distributions
 
 # Tauchen's method to generate Markov transition matrix from AR(1) process
-function tauchenMethod(μ::Float64, σ:: Float64, ρ::Float64, z_num::Int64; q::Int64=3, tauchenoptions=0, dshift=0)  
+function tauchenMethod(μ::Float64, σ:: Float64, ρ::Float64, z_num::Int64; q::Int64=3, tauchenoptions=0, dshift=0) 
+    
     # Tauchen's method for generating Markov chains. 
     # This is based on TauchenMethod.m from the VFIToolkit-matlab toolbox by Robert Kirkby
     # https://github.com/vfitoolkit/VFIToolkit-matlab
