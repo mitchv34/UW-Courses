@@ -1,0 +1,64 @@
+% ------------------------------------------------------------------------------
+% Packages
+% ------------------------------------------------------------------------------
+\usepackage[utf8]{inputenc} % input encoding
+\usepackage{framed} % for \framebox
+\usepackage[english]{babel} % language support 
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue, anchorcolor=blue]{hyperref} % hyperref package
+\usepackage{amsthm, amsmath, amsfonts, mathtools, amssymb, bm} % Math packages
+\usepackage{xcolor} % Color package
+\usepackage[shortlabels]{enumitem} % Enumeration package
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{cancel}
+\usepackage{empheq}
+
+% ------------------------------------------------------------------------------
+% Document Style
+% ------------------------------------------------------------------------------
+
+% Header ----------------------------------------------------------------------
+\addtolength{\hoffset}{-2.25cm}
+\addtolength{\textwidth}{4.5cm}
+\addtolength{\voffset}{-2.5cm}
+\addtolength{\textheight}{5cm}
+\setlength{\parskip}{0pt}
+\setlength{\parindent}{15pt}
+
+\pagestyle{myheadings}
+
+\setlength{\parindent}{0in}
+
+\pagestyle{empty}
+\makeatletter
+\def\fps@figure{H}
+\def\fps@table{H}
+% ------------------------------------------------------------------------------
+
+% ------------------------------------------------------------------------------
+% New commands
+% ------------------------------------------------------------------------------
+\newcommand{\qiq}{\qquad \implies \qquad}
+\newcommand{\qiffq}{\qquad \iff \qquad}
+\newcommand{\qaq}{\qquad \textbf{and} \qquad}
+\newcommand{\qoq}{\qquad \textbf{or} \qquad}
+
+% ------------------------------------------------------------------------------
+% New environments
+% ------------------------------------------------------------------------------
+\newtheorem*{theorem}{\color{red!60!black}Theorem}
+\newtheorem{corollary}{\color{blue}Corollary}
+\counterwithin*{corollary}{subsection}
+\newtheorem{lemma}{\color{blue}Lemma}
+\counterwithin*{lemma}{subsection}
+\newtheorem{proposition}{\color{blue}Proposition}
+\counterwithin*{proposition}{subsection} 
+\theoremstyle{definition}
+\newtheorem*{definition}{\color{green!60!black}Definition}
+\newtheorem{example}{\color{orange!80!black}Example}
+\newtheorem*{Obs}{\color{purple!80!white}Observation}
+\newtheorem*{As}{\color{red!80!white}Assumptions}
+\newtheorem*{answer}{\color{red!60!white}Answer}
+\newtheorem*{Cor}{\color{blue!60!white}Corollary}
+\newtheorem{exercise}{\color{blue!60!white}Exercise}
+\newtheorem{subexercise}{ \color{blue!40!white}  }[exercise]

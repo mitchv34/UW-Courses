@@ -1,0 +1,295 @@
+\documentclass[12pt]{amsart}
+\input{imports}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+
+{\scshape ECON-735} \hfill {\scshape \Large Problem Set \#4} \hfill {\scshape Spring 2022}\\
+{\scshape Author(s): \hfill Mitchell Valdes-Bobes\\
+{\scshape Date: \hfill \texttt{\today}
+\medskip
+
+\hrule
+\bigskip
+
+\bigskip
+% In the following questions, we use the same notation as in the lecture.
+% Problem 1
+\begin{exercise}[Centralized Market]
+Consider the model by Lagos and Wright. (2005), where both money and goods are divisible. Time is discrete and continues forever. Each period is divided into two subperiods: in the first, agents interact in a decentralized market (DM); in the second, they interact in a frictionless centralized market (CM). DM consumption is still $q$, while CM consumption is a different good $x$. For simplicity, $x$ is produced one-for-one using labor $\ell$, and hence the CM real wage is 1 . In the DM, agents can be buyers or sellers depending on who they meet.
+
+First, we focus on the CM. Let $V$ and $W$ be DM and CM value functions, respectively. The CM value function satisfies
+$$
+\begin{aligned}
+W(m)=& \max _{x, \hat{\ell}, \hat{m}}\{U(x)-\ell+\beta V(\hat{m})\} \\
+& \text { subject to } x=\ell+\phi(m-\hat{m})-T,
+\end{aligned}
+$$
+where $m$ and $\hat{m}$ are money holdings when trading opens and closes, $\phi$ is the price of $m$ in terms of $x$, and $T$ is tax.
+\end{exercise}
+
+% Part 1.1
+\begin{subexercise}
+ Assume that there exists an interior solution to the CM problem. Derive the first-order and envelope conditions.
+\end{subexercise}
+
+% Answer 1.1
+\begin{answer}
+ From budget constraint we can write
+ $$\ell = x - \phi(m - \hat{m})+T$$
+ and substitute in the CM value function:
+
+
+\begin{align*}
+    W(m)&=\max_{x, \hat{m}} \left\{u(x) - x + \phi(m - \hat{m})+T + \beta V(\hat{m})\right\}\\
+     &=\phi m - T + \max_{x, \hat{m}} \left\{u(x) - x - \phi \hat{m} + \beta V(\hat{m})\right\}
+\end{align*}
+
+ 
+\textbf{FOC:}
+\begin{empheq}[box=\fbox]{align*}
+    [x] &: \quad u'(x) - 1=0\\
+    [\hat{m}] &: \quad \beta V'(\hat{m}) - \phi=0
+ \end{empheq}
+To obtain the envelope condition it suffices to note that the term inside the maximization does not depends on $m$ therefore $W(m)$ is a linear function of $m$, therefore the change in $W(m)$ is just the slope, therefore the envelope condition is:
+
+$$\boxed{W'(m) = \phi}$$
+
+\end{answer}
+
+% Part 1.2
+\begin{subexercise}
+In general, it is hard to study analytically models with divisible money. Discuss why it is hard and how Lagos and Wright make their model analytically tractable using the CM and quasi-linear utility function.
+\end{subexercise}
+
+% Answer 1.2
+\begin{answer}
+What complicates the analysis is the endogenous distribution of money holdings. Assuming quasi-linear preferences and giving agents periodic access to centralized markets in addition to the decentralized markets that make money essential makes the distribution of money holdings degenerate. Quasi linearity means that there are no wealth effects in the demand for money, so all agents in the centralized markets choose the same $m$. Hence $F(m)$ is degenerate across agents in the decentralized market.
+\end{answer}
+
+% Part 1.3
+\begin{subexercise}
+Lagos and Wright employ a quasi-linear utility function in the CM, but the model is analytically tractable for a larger class of utility functions. Provide a utility function that is not quasi-linear and show that with the utility function, we have the key condition for the model to be analytically tractable.
+\end{subexercise}
+
+% Answer 1.3
+\begin{answer}
+We need that the demand for money does not the depend on wealth, i.e. $m$ and $\hat{m}$ are independent. 
+$$
+\begin{array}{r}
+W(m)=\max _{x, \ell, \hat{m}}\left\{x^{\theta}(1-\ell)^{1-\theta}+\beta V(\hat{m})\right\} \\
+\text { subject to } 1 - \ell = 1 - x  + \phi(m-\hat{m})-T
+\end{array}
+$$
+\textbf{FOC} wrt $x$ is
+$$
+\theta x^{\theta-1}(1-x+\phi(m-\hat{m})-T)^{1-\theta}=(1-\theta) x^{\theta}(1-x+\phi(m-\hat{m})-T)^{-\theta}
+$$
+Let $A=(1-x+\phi(m-\hat{m})-T)^{-\theta}$, then we have
+
+\begin{align*}
+ A\left[\theta x^{\theta-1}&(1-x+\phi(m-\hat{m})-T)-(1-a) x^{\theta}\right]=0 \\
+\qiq & A x^{\theta-1}[a(1-x+\phi(m-\hat{m})-T)-(1-\theta) x]=0\\
+\qiq & \theta(1-x+\phi(m-\hat{m})-T)=(1-\theta) x
+\end{align*}
+
+Either $A x^{\theta-1}=0$ or
+$$
+\theta(1-x+\phi(m-\hat{m})-T)=(1-\theta) x
+$$
+Let $B=(1-x+\phi(m-\hat{m})-T)$, so we have
+$$
+B=\frac{1-\theta}{\theta} x
+$$
+
+\textbf{FOC} wrt $\hat{m}$ is
+$$
+x^{\theta}(1-\theta)(1-x+\phi(m-\hat{m})-T)^{1-\theta} \cdot-\phi+\beta V^{\prime}(\hat{m})=0
+$$
+If we substitute foe the value of in $B$, we obtain:
+
+\begin{equation}\label{735:PS4:eq_3}
+\beta V^{\prime}(\hat{m})=\phi(1-\theta) x^{\theta} B^{-\theta}=\phi(1-\theta)^{1-\theta} \theta^{\theta}
+\end{equation}
+
+Envelope condition:
+
+\begin{align*}
+W^{\prime}(m) &=(1-\theta) x^{\theta}(1-x+\phi(m-\hat{m})-T)^{-\theta} \phi \\
+\qiq & W^{\prime}(m)=(1-\theta) x^{\theta}\left[\frac{1-\theta}{\theta} x\right]^{-\theta} \phi \\
+\end{align*}
+
+Therefore 
+
+\begin{equation}\label{735:PS4:eq_4}
+W^{\prime}(m)=\phi(1-\theta)^{1-\theta} \theta^{\theta}
+\end{equation}
+
+From \eqref{735:PS4:eq_3} and \eqref{735:PS4:eq_4}, we can see that $\hat{m}$ does not depends on  $m$.
+
+\end{answer}
+
+\begin{exercise}[Decentralized Market]
+Now we focus on the DM. The DM value function satisfies
+$$
+\begin{aligned}
+V(m)=&(1-2 \alpha \sigma) W(m)+\alpha \sigma[u(q)+W(m-d)] \\
+&+\alpha \sigma[-c(q)+W(m+d)]
+\end{aligned}
+$$
+
+where $q$ is the quantity of DM goods traded and $d$ is the amount of money traded. Since $W$ is linear with slope $\phi$, this equation becomes
+$$
+V(m)=W(m)+\alpha \sigma[u(q)-\phi d]+\alpha \sigma[-c(q)+\phi d]
+$$
+For simplicity, to determine the terms of trade, we employ the take-it-or-leave-it offer by buyers, that is, they are the solutions to the following problem:
+$$
+\begin{aligned}
+&\max _{q, d}\{u(q)-\phi d\} \\
+&\text { subject to } d \leq m \text { and }-c(q)+\phi d \geq 0 .
+\end{aligned}
+$$
+In words, buyers maximize their surplus from trade subject to the feasibility constraint that they cannot hand over a larger amount of money than they have and the incentive constraint that sellers' surplus from trade cannot be negative.
+
+Let $M_{t}$ be supply of money in period $t$ and assume that it increases at a constant rate $\mu \geq \beta-1$, that is, $M_{t+1}=(1+\mu) M_{t}$. Assume also that $u(0)=c(0)=0, u^{\prime}(q)>0, u^{\prime \prime}(q)<0, c^{\prime}(q)>0$, and $c^{\prime \prime}(q) \geq 0$ for each $q>0$, and there exists $\bar{q}>0$ such that $u(\bar{q})=c(\bar{q})$.
+\end{exercise}
+
+% Part 2.1
+\begin{subexercise}
+Solve the problem for the terms of trade.
+\end{subexercise}
+
+% Answer 2.1
+\begin{answer}
+Note that the objective function $u(q)-\phi d$ is increasing in $q$ and decreasing in $d$ therefore the optimal solution will try to set the highest possible $q$ and the lowest possible $d$. 
+
+First we ignore the constraint $d\leq m$ then
+
+$$c(q) \leq \phi d \qiq c(q) = \phi d$$
+
+Then the optimum  $q^*$ is such that $$c'(q^*) = u'(q^*)$$ note that this will be the solution if $$d^* = \frac{c(q^*)}{\phi} = m^* \leq m $$.
+
+Suppose that $m^*>m$ the previous point is not feasible, in that case $d^* = m$ therefore the optimal $q$, say $\tilde{q}$ is such that $c(\tilde{q}) = \phi m$ thus the solution is:
+
+$$
+\boxed{
+q(m, m^*) = \left\{
+\begin{array}{cc}
+    q^* &  \text{ if } m\leq m^* \\
+    \tilde{q} & \text{ if } m>m^*
+\end{array}
+\right.
+}
+$$
+
+$$
+\boxed{
+d(m, m^*) = \left\{
+\begin{array}{cc}
+    m^* &  \text{ if } m\leq m^* \\
+    m & \text{ if } m>m^*
+\end{array}
+\right.
+}
+$$
+\end{answer}
+
+% Part 2.2
+\begin{subexercise}
+From the Bellman equations, derive the difference equation of $z_{t} \equiv \phi_{t} M_{t}$.
+\end{subexercise}
+
+% Answer 2.2
+\begin{answer}
+We can write the Bellman equation as
+$$V(m) = W(m) + \alpha\sigma (u(q(m)) - c(q(m)))$$
+where $q(m)$ is the optimal solution of the bargaining problem for a given value of $m$. We can take derivatives w.r.t $m$ to get:
+
+$$V'(m) = W'(m) + \alpha\sigma (c'(q) - c(q))q'(m)$$
+
+Using the envelope condition we get:
+
+\begin{equation}\label{735:PS4:eq_1}
+V'(m) = \phi + \alpha\sigma (c'(q) - c(q))q'(m)
+\end{equation}
+
+Note that  if $m>m^*$
+\begin{align*}
+    c(q(m)) = \phi m \qiq c'(q)q'(m) = \phi \qiq q'(m) = \frac{\phi}{c(q)}
+\end{align*}
+If $m^* \leq m$ then $q'(m) = 0$.
+
+Therefore we can define 
+
+$$
+\lambda(q) = \left\{
+\begin{array}{cc}
+    0 &  \text{ if } m\leq m^* \\
+    \frac{u'(q) - c'(q)}{c'(q)} & \text{ if } m>m^*
+\end{array}
+\right.
+$$
+
+And re-write \eqref{735:PS4:eq_1} as:
+
+\begin{equation}\label{735:PS4:eq_2}
+V^{\prime}(m)=\phi(1 + \sigma \alpha \lambda(q(m)))
+\end{equation}
+
+Define $$L(\phi m) = \lambda \circ c^{-1}(\phi m)$$
+
+and combine \eqref{735:PS4:eq_2} and first order condition form problem 1:
+
+\begin{align*}
+    V'(m_{t+1}) &= \phi_{t+1}(1+\sigma \alpha L(\phi_t m_t))\\
+    \beta V'(m_{t+1}) &= \phi_t
+\end{align*}
+
+To get:
+$$ \phi_t =  \phi_{t+1}(1+\sigma \alpha  L (\phi_t m_t)) \qiq \phi_{t+1} = \frac{\phi_t}{\beta(1+ \sigma \alpha L(\phi_t m_t))} $$
+
+
+Also note that $$z_t=\phi_t M_t \qaq z_{t+1} = \phi_{t+1} M_{t+1} = \phi_{t+1} M_{t}(1+\mu)$$
+
+Therefore:
+
+$$
+\underbrace{M_{t+1}\phi_{t+1}}}_{z_{t+1}} = \frac{\phi_t M_t (1+\mu)}{\beta(1+ \sigma \alpha L(\phi_t M_t))} 
+$$
+
+So we get the difference equation for $z$:
+
+$$
+\boxed{
+z_{t+1} =  z_t \frac{ (1+\mu)}{\beta(1+ \sigma \alpha L(z_t))} 
+}
+$$
+
+\end{answer}
+
+% Part 2.3
+\begin{subexercise}
+Derive a necessary and sufficient condition for a stationary monetary equilibrium to exist. Discuss its uniqueness.
+\end{subexercise}
+
+% Answer 2.3
+\begin{answer}
+If a stationary monetary equilibrium exists then $z_t = z_{t+1} = z$ therefore 
+
+$$L(z) = \underbrace{\frac{1}{\sigma \alpha} \left(\frac{1+\mu}{\beta} -1 \right)}_{K}$$
+
+This is equivalent to 
+
+$$\lambda(q) = \frac{u'(q)}{c'(q)} - 1 = K > 0$$
+
+Therefore the necessary and sufficient condition for a stationary monetary equilibrium is
+
+$$\boxed{ K + 1 \in [1, \infty) }$$
+
+and is allways unique.
+
+\end{answer}
+
+\end{document}
