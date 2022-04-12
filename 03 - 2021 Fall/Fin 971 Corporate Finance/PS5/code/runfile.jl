@@ -32,4 +32,5 @@ labels = Dict("tobinq" => "\$Q_{t-1}\$",
                 "firm" => "FE Firm" ,
                 "investment" => "\$i_{t}$")
 number_regressions_decoration(s) = (s == 1) ? "Finantial Frictions ($s)" : "No Finantial Frictions // ($s)"
-regtable(reg_friction, reg_no_friction, labels  = labels, number_regressions_decoration = number_regressions_decoration, renderSettings = latexOutput("PS5/document/regression_table.tex"))
+regtable(reg_friction, reg_no_friction, labels  = labels, number_regressions_decoration = number_regressions_decoration, 
+            renderSettings = latexOutput("PS5/document/regression_table.tex"))
