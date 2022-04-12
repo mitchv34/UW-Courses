@@ -1,0 +1,139 @@
+\documentclass[12pt]{amsart}
+\input{imports}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+
+{\scshape ECON-735} \hfill {\scshape \Large Problem Set \#4} \hfill {\scshape Spring 2022}\\
+{\scshape Author(s): \hfill Mitchell Valdes-Bobes\\
+{\scshape Date: \hfill \texttt{\today}
+\medskip
+
+\hrule
+\bigskip
+
+\bigskip
+% In the following questions, we use the same notation as in the lecture.
+% Problem 1
+\begin{exercise}
+We continue to consider the model by Lagos and Wright (2005), but instead of fiat money, study credit. The CM value function satisfies
+$$
+\begin{aligned}
+W(d)=& \max _{x, \ell}\{U(x)-\ell+\beta V\} \\
+& \text { subject to } x=\ell-d
+\end{aligned}
+$$
+The DM value function satisfies
+$$
+\begin{aligned}
+V=&(1-2 \alpha \sigma) W(0)+\alpha \sigma[u(q)+W(d)] \\
+&+\alpha \sigma[-c(q)+W(-d)]
+\end{aligned}
+$$
+Let $D \geq 0$ be the exogenous debt limit that each agent faces in the DM. For simplicity, to determine the terms of trade, we employ the take-it-or-leave-it offer by buyers.
+Assume that there exists an interior solution to the CM problem. Derive the first-order and envelope conditions.
+\end{exercise}
+
+\begin{answer}
+From the constraint, we have $\ell = x + d$ therefore:
+\begin{equation*}
+    W(d) = \max _{x}\{U(x)-x-d+\beta V\} = \max _{x}\{U(x)- x+\beta V\}  - d
+\end{equation*}
+Taking the derivatives, we get:
+\begin{empheq}[box=\fbox]{align*}
+    \textbf{[FOC:]} &\quad u'(x) - 1 = 0\\
+    \textbf{[Env:]} &\quad w'(d) + 1 = 0
+\end{empheq}
+\end{answer}
+
+% Problem 2
+\begin{exercise}
+Derive the terms of trade in the DM.
+\end{exercise}
+
+\begin{answer}
+
+In the decentralized market, we have the following:
+
+\begin{align*}
+    \max_{q}&\: \left\{u(q) - w(d)\right\} \\
+    \text{subject to:}&\: -c(q) + w(-d) \geq 0\\
+    &d\leq D
+\end{align*}
+Note that $$w(d) - w(0) = - d = -(w(-d) -w(0)) \qiq w(d) = -w(-d) + 2 w(0)$$
+there fore the optimization problem become:
+\begin{align*}
+    \max_{q}&\: \left\{u(q) + w(-d) - 2w(0)\right\} \\
+    \text{subject to:}&\: -c(q) + w(-d) \geq 0\\
+    &d\leq D
+\end{align*}
+Since the term $2w(0)$ is constant, we can ignore it. First we solve a relaxed version of the problem without the constraint $d\leq D$:
+
+$$c(q) = w(-d)$$
+
+and the solution is $q^*$ such that:
+
+$$c'(q^*) = w'(q^*)$$
+
+This would be the optimal solution if feasible, if not then the usual assumptions on $w(\cdot)$ and $c(\cdot)$ guarantee that $d=D$. Therefore, the solution is as follows:
+\begin{empheq}[box=\fbox]{align*}
+    q &= \min\left\{ c^{-1}(w(D)), q^* \right\} \\
+    d &= \min\left\{ D,  w^{-1}(c( q^*)) \right\}
+\end{empheq}
+\end{answer}
+
+
+
+\end{answer}
+
+% Problem 3
+\begin{exercise}
+
+Now, we consider a situation where agents are punished with probability $\mu$ if they renege on their debt. Once they are punished, they cannot trade in the DM anymore. Hence we impose the following incentive constraint:
+$$
+W(d) \geq \mu W^{D}+(1-\mu) W(0)
+$$
+where
+$$
+W^{D}=\frac{1}{1-\beta}\left[U\left(x^{*}\right)-x^{*}\right]
+$$
+By this constraint, endogenize the debt limit $D$.
+\end{exercise}
+
+\begin{answer}
+We can substitute $W(d)=-W(-d) + 2W(0)$ and cancel terms to get:
+
+$$V  = W(0) + \alpha \sigma (u(q) - c(q))$$
+
+Note that $$W(0) =  \max _{x}\{U(x)- x+\beta V\}$$ substituting in the above expression we get:
+
+\begin{align*}
+V  &= \max _{x}\{U(x)- x\}  +\beta V + \alpha \sigma (u(q) - c(q)) \\ &\qiq  (1-\beta)V  = \max _{x}\{U(x)- x\}  + \alpha \sigma (u(q) - c(q)) \\
+&\qiq \frac{(1-\beta)}{\beta}(W(0) -  \max_{x}\{U(x)- x\})  = \max_{x}\{U(x)- x\}  + \alpha \sigma (u(q) - c(q)) \\
+&\qiq \frac{(1-\beta)}{\beta} W(0) = \frac{1}{\beta} \max_{x}\{U(x)- x\}  + \alpha \sigma (u(q) - c(q)) \\
+&\qiq W(0) = \frac{1}{1 - \beta} \max_{x}\{U(x)- x\}  + \alpha \sigma \frac{\beta}{1 - \beta} (u(q) - c(q)) 
+\end{align*}
+
+Note that from the definition of $W^D$:
+\begin{align*}
+    W^D &= W(0) - \alpha \sigma \frac{1}{1 - \beta} (u(q) - c(q)) \\
+\end{align*}
+
+Define $$\theta =  \alpha \sigma \frac{1}{1 - \beta} (u(q) - c(q))$$
+then 
+$$ \mu W^{D}+(1-\mu) W(0) = W(0) - \frac{\mu \beta \theta}{1 - \beta}  $$
+
+Note also that $$W(d) = \max _{x}\{U(x)- x\}  - d +\beta V = \max _{x}\{U(x)- x\}  - d +\beta W(0) + \beta \theta $$
+
+Then the new constraint becomes
+
+$$-d \geq \frac{\beta \theta}{1-\beta}(1-\beta -\mu)$$
+or 
+
+$$\boxed{d \leq \underbrace{-\frac{\beta  \alpha \sigma \frac{1}{1 - \beta} (u(q) - c(q))}{1-\beta}(1-\beta -\mu)}_{D}}$$
+
+\end{answer}
+
+\end{document}
